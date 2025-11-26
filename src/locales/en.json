@@ -1,0 +1,71 @@
+{
+  "app": {
+    "brand": {"title": "Brand", "description": "This label is for Brand Description"},
+    "features": {"title": "Features", "description": "Apps Feature"},
+    "howToUse": {
+      "title": "How To Use",
+      "description": "All tutorial to use this website",
+      "registration": {"title":  "registration", "description": "How to Register video tutorial"},
+      "email": {"title":  "Email Setting", "description": "How to setup email organization and SMTP"},
+      "oauth": {"title":  "Oauth Setting", "description": "How to setup Oauth Setting for your organization"}
+    },
+    "comingSoon": { "title": "Coming Soon", "description": "Coming soon features available"},
+    "copyright":  {"title": "Copyright", "description": "Copyright"}
+  },
+  "button" : {
+    "login": "Login",
+    "signup": "Sign up",
+    "register": "Register",
+    "delete": "Delete",
+    "edit": "Edit",
+    "search": "Search",
+    "enable": "Enable",
+    "disable": "Disable",
+    "save": "Save",
+    "close": "Close",
+    "password": "Password"
+  },
+  "textLabel": {
+    "organization": "Organization",
+    "company": "Company | Companies",
+    "department": "Department | Departments",
+    "manager": "Manager | Managers",
+    "employee": "Employee | Employees",
+    "asset": "Asset | Assets",
+    "action": "Action",
+    "dashboard": "Dashboard",
+    "home": "Home",
+    "status": "Status",
+    "alert": "Alert | Alerts",
+    "message": "Message",
+    "profile": "Profile",
+    "activity": "Activity | Activities",
+    "logout": "Logout",
+    "setting": "Setting | Settings",
+    "user": "User | Users",
+    "email": "Email",
+    "emailSetting": "Email Setting",
+    "oauthSetting": "Oauth Settings",
+    "number": "No",
+    "location": "Location",
+    "name": "Name",
+    "departmentEdit": "Department Edit",
+    "departmentDelete": "Department Delete",
+    "departmentDeleteConfirmation": "Confirm Delete Department ?",
+    "role": "Role"
+  },
+  "textField": {
+    "email": "Email",
+    "username": "Username",
+    "password": "Password",
+    "passwordConfirmation": "Password Confirmation",
+    "company": "Company"
+  },
+  "language": {
+    "english": "English",
+    "indonesia": "Bahasa Indonesia"
+  },
+  "messages": {
+    "hello": "Hello, {name}!"
+  }
+}

@@ -1,0 +1,71 @@
+{
+  "app": {
+    "brand": {"title": "Merk", "description": "Deskripsi untuk menjelaskan Merk" },
+    "features": {"title": "Fitur", "description": "Fitur Aplikasi"},
+    "howToUse": {
+      "title": "Cara Pemakaian",
+      "description": "Semua petunjuk pemakaian website",
+      "registration": {"title":  "Daftar", "description": "Video tutorial cara daftar"},
+      "email": {"title":  "Pengaturan Email", "description": "Tutorial Bagaimana melakukan pengaturan email dan SMTP untuk organisasi"},
+      "oauth": {"title":  "Pengaturan Oauth", "description": "Tutorial bagaimana melakukan pengaturan Oauth untuk organisasi"}
+    },
+    "comingSoon": { "title": "Segera Hadir", "description": "Deskripsi fitur yang akan segera hadir" },
+    "copyright":  {"title": "Hak Cipta", "description": "Hak Cipta"}
+  },
+  "button" : {
+    "login": "Masuk",
+    "signup": "Daftar",
+    "register": "Daftar",
+    "delete": "Hapus",
+    "edit": "Ubah",
+    "search": "Cari",
+    "enable": "Aktifkan",
+    "disable": "Nonaktifkan",
+    "save": "Simpan",
+    "close": "Tutup",
+    "password": "Sandi"
+  },
+  "textLabel": {
+    "organization": "Organisasi",
+    "company": "Perusahaan",
+    "department": "Departemen",
+    "manager": "Manager",
+    "employee": "Karyawan",
+    "asset": "Asset",
+    "action": "Aksi",
+    "dashboard": "Dasbor",
+    "home": "Beranda",
+    "status": "Status",
+    "alerts": "Peringatan",
+    "message": "Pesan",
+    "profile": "Profil",
+    "activity": "Aktifitas",
+    "logout": "Keluar",
+    "setting": "Pengaturan",
+    "user": "Pengguna",
+    "email": "Surel",
+    "emailSetting": "Pengaturan Surel",
+    "oauthSetting": "Pengaturan Oauth",
+    "number": "No",
+    "location": "Lokasi",
+    "name": "Nama",
+    "departmentEdit": "Ubah Departemen",
+    "departmentDelete": "Hapus Departemen",
+    "departmentDeleteConfirmation": "Apakah yakin menghapus departemen ?",
+    "role": "Tugas"
+  },
+  "textField": {
+    "email": "Surel",
+    "username": "Identitas",
+    "password": "Kata Kunci",
+    "passwordConfirmation": "Konfirmasi Kata Kunci",
+    "company": "Perusahaan"
+  },
+  "language": {
+    "english": "Inggris",
+    "indonesia": "Bahasa Indonesia"
+  },
+  "messages": {
+    "hello": "Hello, {name}!"
+  }
+}
