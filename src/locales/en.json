@@ -52,7 +52,8 @@
     "departmentEdit": "Department Edit",
     "departmentDelete": "Department Delete",
     "departmentDeleteConfirmation": "Confirm Delete Department ?",
-    "role": "Role"
+    "role": "Role",
+    "register": "Register"
   },
   "textField": {
     "email": "Email",

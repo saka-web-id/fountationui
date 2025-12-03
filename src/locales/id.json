@@ -52,7 +52,8 @@
     "departmentEdit": "Ubah Departemen",
     "departmentDelete": "Hapus Departemen",
     "departmentDeleteConfirmation": "Apakah yakin menghapus departemen ?",
-    "role": "Tugas"
+    "role": "Tugas",
+    "register": "Daftar"
   },
   "textField": {
     "email": "Surel",
