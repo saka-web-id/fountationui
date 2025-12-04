@@ -62,6 +62,21 @@
     "passwordConfirmation": "Konfirmasi Kata Kunci",
     "company": "Perusahaan"
   },
+  "textError": {
+    "formatError": {
+      "username": "Format salah, minimal 8 karakter dan ada karakter spesial",
+      "email": "Format email salah",
+      "password": {
+        "size": "Minimun 8 character",
+        "uppercase": "Paling sedikit 1 huruf besar",
+        "lowercase": "Paling sedikit 1 huruf kecil",
+        "specialCharacter": "Harus ada karakter special",
+        "number": "Paling sedikit ada 1 angka",
+        "general": "Format Password salah"
+      },
+      "passwordConfirmation": "Konfirmasi Password harus sama"
+    }
+  },
   "language": {
     "english": "Inggris",
     "indonesia": "Bahasa Indonesia"

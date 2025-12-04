@@ -62,6 +62,21 @@
     "passwordConfirmation": "Password Confirmation",
     "company": "Company"
   },
+  "textError": {
+    "formatError": {
+      "username": "Wrong username format, need minimum 8 character and no special character",
+      "email": "Wrong email format",
+      "password": {
+          "size": "need minimum 8 character",
+          "uppercase": "at least 1 character for Uppercase",
+          "lowercase": "at least 1 character for Lowercase",
+          "specialCharacter": "at least 1 Special Character",
+          "number": "at least 1 Number",
+          "general": "Wrong password format"
+      },
+      "passwordConfirmation": "Password must match"
+    }
+  },
   "language": {
     "english": "English",
     "indonesia": "Bahasa Indonesia"
