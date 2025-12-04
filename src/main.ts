@@ -9,6 +9,7 @@ import id from './locales/id.json';
 const i18n = createI18n({
     legacy: false,
     locale: 'en',
+    globalInjection: true,
     fallbackLocale: 'en',
     messages: { en, id }
 })
