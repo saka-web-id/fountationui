@@ -31,7 +31,7 @@ const submit = handleSubmit(async (values: RegisterPayload) => {
           <div class="p-lg-4 py-3">
             <div class="row gy-4 gy-md-0 mx-auto">
               <div class="col-12 col-md-6 col-lg-5">
-                <img class="rounded img-fluid aspect-ratio-1x1 object-fit-cover shadow w-100" width="1024" height="1024" src="/src/assets/img/notepad.jpeg">
+                <img class="rounded img-fluid aspect-ratio-1x1 object-fit-cover shadow w-100" alt="" width="1024" height="1024" src="/src/assets/img/notepad.jpeg">
               </div>
               <Form :validation-schema="registerSchema" class="col d-flex align-items-md-center" v-slot="{ meta }" >
                 <form @submit="submit" >
