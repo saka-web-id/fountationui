@@ -1,8 +1,8 @@
 import * as yup from 'yup';
-/*import { useI18n } from "vue-i18n";*/
+import { useI18n } from 'vue-i18n';
 
-export function useLoginSchema(t: any) {
-    /*const { t } = useI18n();*/
+export function useRegisterSchema() {
+    const { t } = useI18n();
 
     return yup.object({
         company: yup.string()
