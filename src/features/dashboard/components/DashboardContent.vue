@@ -1,5 +1,34 @@
 <script setup lang="ts">
+import { ref, onMounted } from 'vue';
 
+const user = ref(null);
+const isAuthenticated = ref(false);
+
+onMounted(async () => {
+  /*const auth0 = getAuth0();
+
+  const claims = await auth0.getIdTokenClaims();
+  const idToken = claims.__raw;  // <-- this is the JWT ID Token*/
+
+  const res = await fetch("http://localhost:8080/user/detail", {
+    headers: {
+      /*Authorization: `Bearer ${idToken}`*/
+    },
+    credentials: "include" // important: send cookies
+  });
+
+  console.log("HELLO WORLD");
+
+  if (res.ok) {
+
+    const data = await res.json();
+    isAuthenticated.value = data.authenticated;
+    console.log("BODY = " + data.authenticated);
+    if (data.authenticated) user.value = data;
+  } else {
+    isAuthenticated.value = false;
+  }
+});
 </script>
 
 <template>

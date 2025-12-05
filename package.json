@@ -17,6 +17,7 @@
     "@unhead/addons": "^2.0.17",
     "@unhead/vue": "^2.0.17",
     "@vueuse/core": "^13.9.0",
+    "auth0": "^5.1.0",
     "bootstrap": "^5.3.8",
     "unhead": "^2.0.17",
     "vee-validate": "^4.15.1",

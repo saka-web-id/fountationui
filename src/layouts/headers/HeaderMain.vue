@@ -38,7 +38,8 @@ import HeaderDropdownLocale from "../../components/dropdown/HeaderDropdownLocale
             <li class="nav-item"><router-link to="/" class="nav-link">{{ $t('app.features.title') }}</router-link></li>
             <li class="nav-item"><router-link to="/howtouse" class="nav-link" >{{ $t('app.howToUse.title') }}</router-link></li>
           </ul>
-            <router-link to="/login" tag="button" class="btn bg-white bg-opacity-10 bg-gradient me-2">{{ $t('button.login') }}</router-link>
+            <!--<router-link to="/login" tag="button" class="btn bg-white bg-opacity-10 bg-gradient me-2">{{ $t('button.login') }}</router-link>-->
+            <a href="http://localhost:8080/user/login/success" tag="button" class="btn bg-white bg-opacity-10 bg-gradient me-2">{{ $t('button.login') }}</a>
             <router-link to="/registration" tag="button" class="btn bg-white bg-opacity-10 bg-gradient me-2">{{ $t('button.signup') }}</router-link>
         </div>
       </div>
