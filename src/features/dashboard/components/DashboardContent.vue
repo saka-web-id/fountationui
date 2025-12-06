@@ -1,33 +1,38 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
+import axios from 'axios';
 
-const user = ref(null);
-const isAuthenticated = ref(false);
+/*const user = ref(null);
+const isAuthenticated = ref(false);*/
 
 onMounted(async () => {
-  /*const auth0 = getAuth0();
 
-  const claims = await auth0.getIdTokenClaims();
-  const idToken = claims.__raw;  // <-- this is the JWT ID Token*/
-
-  const res = await fetch("http://localhost:8080/user/detail", {
-    headers: {
-      /*Authorization: `Bearer ${idToken}`*/
-    },
+ /* const res = await fetch("http://www.myproject.local:8080/user/detail", {
     credentials: "include" // important: send cookies
+  });*/
+
+  axios.get('http://www.myproject.local:8080/user/detail', { withCredentials: true })
+  .then(response => {
+    console.log(response.data);
+  })
+  .catch(error => {
+    console.error(error);
   });
 
   console.log("HELLO WORLD");
 
-  if (res.ok) {
+  /*if (res.ok) {
 
     const data = await res.json();
     isAuthenticated.value = data.authenticated;
     console.log("BODY = " + data.authenticated);
-    if (data.authenticated) user.value = data;
+    if (data.authenticated) {
+      user.value = data;
+      console.log("User = " + user.value);
+    }
   } else {
     isAuthenticated.value = false;
-  }
+  }*/
 });
 </script>
 

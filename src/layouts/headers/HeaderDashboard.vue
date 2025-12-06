@@ -34,7 +34,7 @@ import HeaderDropdownLocale from "../../components/dropdown/HeaderDropdownLocale
                 <div class="dropdown-menu dropdown-menu-dark ms-0 ps-0 me-0 pe-0 mt-0 pt-0 mb-0 pb-0 dropdown-menu-end">
                   <div class="card bg-gradient border-primary ms-0 ps-0 me-0 pe-0 mt-0 mb-0">
                     <div class="card-body text-center ms-0 ps-0 me-0 pe-0 mt-0 pt-0 mb-0 pb-0 card-header" style="background: var(--bs-primary);color: var(--bs-secondary-bg-subtle);">
-                      <h6 class="ps-6 pe-6 mt-1 mb-1 card-subtitle">{{ $t('textLabel.alerts') }}</h6>
+                      <h6 class="ps-6 pe-6 mt-1 mb-1 card-subtitle">Example</h6>
                     </div>
                     <div class="card-body border ms-0 ps-0 me-0 pe-0 mt-0 pt-0 pb-0 flex-1">
                       <h6 class="text-danger ms-2 me-4 mt-0 card-subtitle h7">Danger</h6>
