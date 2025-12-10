@@ -32,7 +32,7 @@ const routes: RouteRecordRaw[] = [
         },
         beforeEnter: async (_to, _from, next) => {
             if (!auth.user) await fetchUser()
-            if (hasRole('ROLE_ADMIN')) next()
+            if (hasRole('ADMIN')) next()
             else next('/unauthorized')
         }
     },
@@ -54,9 +54,12 @@ const routes: RouteRecordRaw[] = [
             roleAccess: "administrator,finance,warehouse,offline,vendor"
         },
         beforeEnter: async (_to, _from, next) => {
-            if (!auth.user) await fetchUser()
-            if (hasRole('ROLE_ADMIN')) next()
-            else next('/unauthorized')
+            if (!auth.user) {
+                await fetchUser(); next(); // ✅ continue navigation
+            } else {
+                next("/unauthorized");
+            }
+
         }
     },
     {
@@ -68,9 +71,11 @@ const routes: RouteRecordRaw[] = [
             roleAccess: "administrator,finance,warehouse,offline,vendor"
         },
         beforeEnter: async (_to, _from, next) => {
-            if (!auth.user) await fetchUser()
-            if (hasRole('ROLE_ADMIN')) next()
-            else next('/unauthorized')
+            if (!auth.user) {
+                await fetchUser(); next(); // ✅ continue navigation
+            } else {
+                next("/unauthorized");
+            }
         }
     },
     {
@@ -83,7 +88,7 @@ const routes: RouteRecordRaw[] = [
         },
         beforeEnter: async (_to, _from, next) => {
             if (!auth.user) await fetchUser()
-            if (hasRole('ROLE_ADMIN')) next()
+            if (hasRole('ADMIN')) next()
             else next('/unauthorized')
         }
     },
@@ -96,9 +101,11 @@ const routes: RouteRecordRaw[] = [
             roleAccess: "administrator,finance,warehouse,offline,vendor"
         },
         beforeEnter: async (_to, _from, next) => {
-            if (!auth.user) await fetchUser()
-            if (hasRole('ROLE_ADMIN')) next()
-            else next('/unauthorized')
+            if (!auth.user) {
+                await fetchUser(); next(); // ✅ continue navigation
+            } else {
+                next("/unauthorized");
+            }
         }
     },
     {
@@ -111,7 +118,7 @@ const routes: RouteRecordRaw[] = [
         },
         beforeEnter: async (_to, _from, next) => {
             if (!auth.user) await fetchUser()
-            if (hasRole('ROLE_ADMIN')) next()
+            if (hasRole('ADMIN')) next()
             else next('/unauthorized')
         }
     },
@@ -124,9 +131,11 @@ const routes: RouteRecordRaw[] = [
             roleAccess: "administrator,finance,warehouse,offline,vendor"
         },
         beforeEnter: async (_to, _from, next) => {
-            if (!auth.user) await fetchUser()
-            if (hasRole('ROLE_ADMIN')) next()
-            else next('/unauthorized')
+            if (!auth.user) {
+                await fetchUser(); next(); // ✅ continue navigation
+            } else {
+                next("/unauthorized");
+            }
         }
     },
     {
@@ -138,9 +147,11 @@ const routes: RouteRecordRaw[] = [
             roleAccess: "administrator,finance,warehouse,offline,vendor"
         },
         beforeEnter: async (_to, _from, next) => {
-            if (!auth.user) await fetchUser()
-            if (hasRole('ROLE_ADMIN')) next()
-            else next('/unauthorized')
+            if (!auth.user) {
+                await fetchUser(); next(); // ✅ continue navigation
+            } else {
+                next("/unauthorized");
+            }
         }
     },
     {
@@ -152,9 +163,11 @@ const routes: RouteRecordRaw[] = [
             roleAccess: "administrator,finance,warehouse,offline,vendor"
         },
         beforeEnter: async (_to, _from, next) => {
-            if (!auth.user) await fetchUser()
-            if (hasRole('ROLE_ADMIN')) next()
-            else next('/unauthorized')
+            if (!auth.user) {
+                await fetchUser(); next(); // ✅ continue navigation
+            } else {
+                next("/unauthorized");
+            }
         }
     },
     {
@@ -167,7 +180,7 @@ const routes: RouteRecordRaw[] = [
         },
         beforeEnter: async (_to, _from, next) => {
             if (!auth.user) await fetchUser()
-            if (hasRole('ROLE_ADMIN')) next()
+            if (hasRole('ADMIN')) next()
             else next('/unauthorized')
         }
     },
@@ -181,7 +194,7 @@ const routes: RouteRecordRaw[] = [
         },
         beforeEnter: async (_to, _from, next) => {
             if (!auth.user) await fetchUser()
-            if (hasRole('ROLE_ADMIN')) next()
+            if (hasRole('ADMIN')) next()
             else next('/unauthorized')
         }
     },
@@ -195,7 +208,7 @@ const routes: RouteRecordRaw[] = [
         },
         beforeEnter: async (_to, _from, next) => {
             if (!auth.user) await fetchUser()
-            if (hasRole('ROLE_ADMIN')) next()
+            if (hasRole('ADMIN')) next()
             else next('/unauthorized')
         }
     },
@@ -209,7 +222,7 @@ const routes: RouteRecordRaw[] = [
         },
         beforeEnter: async (_to, _from, next) => {
             if (!auth.user) await fetchUser()
-            if (hasRole('ROLE_ADMIN')) next()
+            if (hasRole('ADMIN')) next()
             else next('/unauthorized')
         }
     },
@@ -223,7 +236,7 @@ const routes: RouteRecordRaw[] = [
         },
         beforeEnter: async (_to, _from, next) => {
             if (!auth.user) await fetchUser()
-            if (hasRole('ROLE_ADMIN')) next()
+            if (hasRole('ADMIN')) next()
             else next('/unauthorized')
         }
     },
@@ -237,7 +250,7 @@ const routes: RouteRecordRaw[] = [
         },
         beforeEnter: async (_to, _from, next) => {
             if (!auth.user) await fetchUser()
-            if (hasRole('ROLE_ADMIN')) next()
+            if (hasRole('ADMIN')) next()
             else next('/unauthorized')
         }
     }

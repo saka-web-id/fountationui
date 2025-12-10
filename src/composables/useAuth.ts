@@ -16,5 +16,5 @@ export const fetchUser = async () => {
 
 export const hasRole = (role: string): boolean => {
     if (!auth.user || !auth.user.role) return false;
-    return auth.user.role.includes(role);
+    return auth.user.role.toLowerCase().includes(role.toLowerCase());
 };
