@@ -1,38 +1,9 @@
 <script setup lang="ts">
-import { ref, onMounted } from 'vue';
-import axios from 'axios';
-
-/*const user = ref(null);
-const isAuthenticated = ref(false);*/
+import { onMounted } from 'vue';
+import { fetchUser } from '../../../composables/useAuth';
 
 onMounted(async () => {
-
- /* const res = await fetch("http://www.myproject.local:8080/user/detail", {
-    credentials: "include" // important: send cookies
-  });*/
-
-  axios.get('http://www.myproject.local:8080/user/detail', { withCredentials: true })
-  .then(response => {
-    console.log(response.data);
-  })
-  .catch(error => {
-    console.error(error);
-  });
-
-  console.log("HELLO WORLD");
-
-  /*if (res.ok) {
-
-    const data = await res.json();
-    isAuthenticated.value = data.authenticated;
-    console.log("BODY = " + data.authenticated);
-    if (data.authenticated) {
-      user.value = data;
-      console.log("User = " + user.value);
-    }
-  } else {
-    isAuthenticated.value = false;
-  }*/
+  fetchUser();
 });
 </script>
 
