@@ -1,0 +1,38 @@
+<script setup lang="ts">
+defineProps<{
+  show: boolean
+}>()
+</script>
+
+
+<template>
+  <div v-if="show" class="loading-backdrop">
+    <div class="spinner"></div>
+  </div>
+</template>
+
+
+<style scoped>
+.loading-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.spinner {
+  width: 60px;
+  height: 60px;
+  border: 6px solid #ddd;
+  border-top-color: #3498db;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+</style>

@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import {auth} from "~/stores/auth.ts";
 
 </script>
 
@@ -30,8 +31,7 @@
                   <div class="card-body ms-0 ps-0 me-0 pe-0 mt-0 pt-0 pb-0">
                     <div class="text-center py-4" id="idform">
                       <h4 class="text-start ms-2">Change Password</h4>
-                      <div class="input-group mb-2"><span class="d-flex w-25 ms-2 input-group-text" style="font-size: calc(0.6em + 0.5vw);">First Name</span><input class="form-control d-flex ms-0 ps-2 me-2 pe-4" type="text"></div>
-                      <div class="input-group mb-2"><span class="w-25 ms-2 input-group-text" style="font-size: calc(0.6em + 0.5vw);">Last Name</span><input class="form-control me-2 pe-2" type="email" inputmode="email"></div>
+                      <div class="input-group mb-2"><span class="d-flex w-25 ms-2 input-group-text" style="font-size: calc(0.6em + 0.5vw);">Name</span><input class="form-control d-flex ms-0 ps-2 me-2 pe-4" type="text" :value="auth.user?.name" ></div>
                       <div class="input-group mb-2"><span class="w-25 ms-2 input-group-text" style="font-size: calc(0.6em + 0.5vw);">Email</span><input class="form-control me-2 pe-2" type="number"></div>
                       <div class="input-group mb-2"><span class="w-25 ms-2 input-group-text" style="font-size: calc(0.6em + 0.5vw);">Phone</span><input class="form-control me-2 pe-2" type="number"></div>
                       <div class="input-group mb-2"><span class="w-25 ms-2 input-group-text" style="font-size: calc(0.6em + 0.5vw);">Company</span><input class="form-control me-2 pe-2" type="number"></div><button class="btn btn-outline-primary btn-sm ms-2 me-2" type="button">Save</button>

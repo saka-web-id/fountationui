@@ -1,12 +1,12 @@
-import axios from 'axios';
+import { useApi } from "~/composables/useApi.ts";
 import { auth } from '../stores/auth';
+
+const { data, get } = useApi();
 
 export const fetchUser = async () => {
     try {
-        const response = await axios.get('http://www.myproject.local:8080/user/detail', {
-            withCredentials: true
-        });
-        auth.user = response.data;
+        await get('/api/v0/user/detail');
+        auth.user = data.value;
         auth.isAuthenticated = !!auth.user;
     } catch (err) {
         auth.user = null;

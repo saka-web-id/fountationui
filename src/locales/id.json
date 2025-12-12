@@ -39,6 +39,7 @@
     "alerts": "Peringatan",
     "message": "Pesan",
     "profile": "Profil",
+    "type": "Tipe",
     "activity": "Aktifitas",
     "logout": "Keluar",
     "setting": "Pengaturan",
@@ -49,6 +50,9 @@
     "number": "No",
     "location": "Lokasi",
     "name": "Nama",
+    "phone": "Telepon",
+    "website": "Website",
+    "logo": "Logo",
     "departmentEdit": "Ubah Departemen",
     "departmentDelete": "Hapus Departemen",
     "departmentDeleteConfirmation": "Apakah yakin menghapus departemen ?",
@@ -75,7 +79,8 @@
         "general": "Format Password salah"
       },
       "passwordConfirmation": "Konfirmasi Password harus sama"
-    }
+    },
+    "unauthorized": "Akses tidak terauthorisasi"
   },
   "language": {
     "english": "Inggris",

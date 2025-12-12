@@ -1,5 +1,20 @@
 <script setup lang="ts">
+import { onMounted } from 'vue';
+import { useApi } from "~/composables/useApi.ts";
 
+const { data, get } = useApi();
+
+data.value = [
+  { companyId: 0, companyName: "None", companyAddress: "None", companyPhone: "None", companyEmail: "None", companyWebsite: "None", companyDescription: "None", companyLogoUrl:"None",  companyTaxId:"None", companyRegistrationId:"None", companyStatus:"None", companyIndustry:"None", companyType:"None", companyCreatedAt:"None", companyUpdatedAt:"None" },
+]
+
+onMounted(async () => {
+
+  await get('/api/v0/user/companies')
+
+  console.log("DATA = " + data);
+
+});
 </script>
 
 <template>
@@ -25,35 +40,26 @@
                   <th>{{ $t('textLabel.number') }}</th>
                   <th>{{ $t('textLabel.company', 2) }}</th>
                   <th>{{ $t('textField.email') }}</th>
+                  <!--
                   <th>{{ $t('textLabel.employee', 2) }}</th>
                   <th>{{ $t('textLabel.asset', 2) }}</th>
+                  -->
                   <th class="text-center">{{ $t('textLabel.action') }}</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                  <td>1</td>
-                  <td>ABS Corp.</td>
-                  <td>xxx@x.com</td>
+                <tr v-for="d in data" :key="d.companyId">
+                  <td>{{ d.companyId  }}</td>
+                  <td>{{  d.companyName }}</td>
+                  <td>{{  d.companyEmail }}</td>
+                  <!--
                   <td>50</td>
                   <td>50</td>
+                  -->
                   <td class="text-center">
                     <div class="btn-group" role="group">
                       <router-link to="/companyedit" class="btn btn-primary" tag="button">{{ $t('button.edit') }}</router-link>
                       <button class="btn btn-danger" type="button" data-bs-target="#myModal" data-bs-toggle="modal">{{ $t('button.delete') }}</button></div>
-                  </td>
-                </tr>
-                <tr>
-                  <td>2</td>
-                  <td>ABD Corp.</td>
-                  <td>yyy@y.com</td>
-                  <td>5</td>
-                  <td>5</td>
-                  <td class="text-center">
-                    <div class="btn-group" role="group">
-                      <router-link to="/companyedit" class="btn btn-primary" tag="button">{{ $t('button.edit') }}</router-link>
-                      <button class="btn btn-danger" type="button" data-bs-target="#myModal" data-bs-toggle="modal">{{ $t('button.delete') }}</button>
-                    </div>
                   </td>
                 </tr>
                 </tbody>

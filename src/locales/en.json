@@ -39,6 +39,7 @@
     "alert": "Alert | Alerts",
     "message": "Message",
     "profile": "Profile",
+    "type": "Type",
     "activity": "Activity | Activities",
     "logout": "Logout",
     "setting": "Setting | Settings",
@@ -49,6 +50,9 @@
     "number": "No",
     "location": "Location",
     "name": "Name",
+    "phone": "Phone",
+    "website": "Website",
+    "logo": "Logo",
     "departmentEdit": "Department Edit",
     "departmentDelete": "Department Delete",
     "departmentDeleteConfirmation": "Confirm Delete Department ?",
@@ -75,7 +79,8 @@
           "general": "Wrong password format"
       },
       "passwordConfirmation": "Password must match"
-    }
+    },
+    "unauthorized": "Unauthorized Access"
   },
   "language": {
     "english": "English",
