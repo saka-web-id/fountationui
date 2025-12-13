@@ -22,6 +22,7 @@
     "enable": "Aktifkan",
     "disable": "Nonaktifkan",
     "save": "Simpan",
+    "saving": "Menyimpan",
     "close": "Tutup",
     "password": "Sandi"
   },
@@ -33,6 +34,7 @@
     "employee": "Karyawan",
     "asset": "Asset",
     "action": "Aksi",
+    "description": "Deskripsi",
     "dashboard": "Dasbor",
     "home": "Beranda",
     "status": "Status",
@@ -56,6 +58,10 @@
     "departmentEdit": "Ubah Departemen",
     "departmentDelete": "Hapus Departemen",
     "departmentDeleteConfirmation": "Apakah yakin menghapus departemen ?",
+    "companyEdit": "Ubah Perusahaan",
+    "industry": "industri",
+    "taxId": "ID Pajak",
+    "registrationNumber": "Nomor Registrasi",
     "role": "Tugas",
     "register": "Daftar"
   },

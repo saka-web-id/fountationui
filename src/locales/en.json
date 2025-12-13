@@ -22,6 +22,7 @@
     "enable": "Enable",
     "disable": "Disable",
     "save": "Save",
+    "saving": "Saving",
     "close": "Close",
     "password": "Password"
   },
@@ -33,6 +34,7 @@
     "employee": "Employee | Employees",
     "asset": "Asset | Assets",
     "action": "Action",
+    "description": "Description",
     "dashboard": "Dashboard",
     "home": "Home",
     "status": "Status",
@@ -56,6 +58,10 @@
     "departmentEdit": "Department Edit",
     "departmentDelete": "Department Delete",
     "departmentDeleteConfirmation": "Confirm Delete Department ?",
+    "companyEdit": "Company Edit",
+    "industry": "industry",
+    "taxId": "Tax ID",
+    "registrationNumber": "Registration Number",
     "role": "Role",
     "register": "Register"
   },
