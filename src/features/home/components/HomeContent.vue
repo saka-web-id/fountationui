@@ -1,5 +1,7 @@
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n';
 
+const { t } = useI18n();
 </script>
 
 <template>
@@ -8,20 +10,20 @@
             <div class="row row-cols-2 row-cols-md-3 mx-auto">
               <div class="mb-4">
                 <div class="text-center"><img class="rounded object-fit-cover mb-3" width="150" height="150" src="/src/assets/img/Coming%20soon%20logo.webp">
-                  <h5 class="fw-bold mb-0"><strong>{{ $t('app.comingSoon.title') }}</strong></h5>
-                  <p class="text-muted mb-2">{{ $t('app.comingSoon.description') }}</p>
+                  <h5 class="fw-bold mb-0"><strong>{{ t('app.comingSoon.title') }}</strong></h5>
+                  <p class="text-muted mb-2">{{ t('app.comingSoon.description') }}</p>
                 </div>
               </div>
               <div class="mb-4">
                 <div class="text-center"><img class="rounded object-fit-cover mb-3" width="150" height="150" src="/src/assets/img/Coming%20soon%20logo.webp">
-                  <h5 class="fw-bold mb-0"><strong>{{ $t('app.comingSoon.title') }}</strong></h5>
-                  <p class="text-muted mb-2">{{ $t('app.comingSoon.description') }}</p>
+                  <h5 class="fw-bold mb-0"><strong>{{ t('app.comingSoon.title') }}</strong></h5>
+                  <p class="text-muted mb-2">{{ t('app.comingSoon.description') }}</p>
                 </div>
               </div>
               <div class="mb-4">
                 <div class="text-center"><img class="rounded object-fit-cover mb-3" width="150" height="150" src="/src/assets/img/Coming%20soon%20logo.webp">
-                  <h5 class="fw-bold mb-0"><strong>{{ $t('app.comingSoon.title') }}</strong></h5>
-                  <p class="text-muted mb-2">{{ $t('app.comingSoon.description') }}</p>
+                  <h5 class="fw-bold mb-0"><strong>{{ t('app.comingSoon.title') }}</strong></h5>
+                  <p class="text-muted mb-2">{{ t('app.comingSoon.description') }}</p>
                 </div>
               </div>
             </div>
@@ -31,7 +33,7 @@
           <div class="container py-4">
             <div class="row mb-4">
               <div class="col-md-8 col-xl-6 text-center mx-auto">
-                <h3 class="text-uppercase fw-bold heading">{{ $t('app.features.title') }}</h3>
+                <h3 class="text-uppercase fw-bold heading">{{ t('app.features.title') }}</h3>
               </div>
             </div>
             <div class="row">
@@ -46,8 +48,8 @@
                           </svg></div>
                         </div>
                         <div>
-                          <h5 class="fw-bold">{{ $t('app.comingSoon.title') }}</h5>
-                          <p class="text-muted mb-0">{{ $t('app.comingSoon.description') }}</p>
+                          <h5 class="fw-bold">{{ t('app.comingSoon.title') }}</h5>
+                          <p class="text-muted mb-0">{{ t('app.comingSoon.description') }}</p>
                         </div>
                       </div>
                     </div>
@@ -61,8 +63,8 @@
                           </svg></div>
                         </div>
                         <div>
-                          <h5 class="fw-bold">{{ $t('app.comingSoon.title') }}</h5>
-                          <p class="text-muted mb-0">{{ $t('app.comingSoon.description') }}</p>
+                          <h5 class="fw-bold">{{ t('app.comingSoon.title') }}</h5>
+                          <p class="text-muted mb-0">{{ t('app.comingSoon.description') }}</p>
                         </div>
                       </div>
                     </div>
@@ -78,8 +80,8 @@
                           </svg></div>
                         </div>
                         <div>
-                          <h5 class="fw-bold">{{ $t('app.comingSoon.title') }}</h5>
-                          <p class="text-muted mb-0">{{ $t('app.comingSoon.description') }}</p>
+                          <h5 class="fw-bold">{{ t('app.comingSoon.title') }}</h5>
+                          <p class="text-muted mb-0">{{ t('app.comingSoon.description') }}</p>
                         </div>
                       </div>
                     </div>
@@ -94,8 +96,8 @@
                           </svg></div>
                         </div>
                         <div>
-                          <h5 class="fw-bold">{{ $t('app.comingSoon.title') }}</h5>
-                          <p class="text-muted mb-0">{{ $t('app.comingSoon.description') }}</p>
+                          <h5 class="fw-bold">{{ t('app.comingSoon.title') }}</h5>
+                          <p class="text-muted mb-0">{{ t('app.comingSoon.description') }}</p>
                         </div>
                       </div>
                     </div>

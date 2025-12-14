@@ -1,5 +1,7 @@
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n';
 
+const { t } = useI18n();
 </script>
 
 <template>
@@ -7,27 +9,27 @@
 
     <div class="container">
       <ol class="breadcrumb ms-4 me-4">
-        <li class="breadcrumb-item"><router-link to="/dashboard"><span>{{ $t('textLabel.dashboard') }}</span></router-link></li>
-        <li class="breadcrumb-item active"><span class="active">{{ $t('textLabel.department', 2) }}</span></li>
+        <li class="breadcrumb-item"><router-link to="/dashboard"><span>{{ t('textLabel.dashboard') }}</span></router-link></li>
+        <li class="breadcrumb-item active"><span class="active">{{ t('textLabel.department', 2) }}</span></li>
       </ol>
       <div class="card mb-3 bg-gradient-dark">
         <div class="card-body ms-0 ps-0 me-0 pe-0 mt-0 pt-0 pb-0">
           <div class="text-center py-4" id="idform">
-            <div class="input-group mb-2"><span class="d-flex w-25 ms-2 input-group-text">{{ $t('textLabel.department', 1) }}</span><input class="form-control d-flex ms-0 ps-2 me-2 pe-2" type="text"></div>
-            <div class="input-group mb-2"><span class="w-25 ms-2 input-group-text">{{ $t('textLabel.status') }}</span><input class="form-control w-25 ms-0 ps-2 me-2 pe-2" type="text"></div>
-            <div class="text-end"><button class="btn btn-outline-primary btn-sm ms-2 me-2" type="button">{{ $t('button.search') }}</button></div>
+            <div class="input-group mb-2"><span class="d-flex w-25 ms-2 input-group-text">{{ t('textLabel.department', 1) }}</span><input class="form-control d-flex ms-0 ps-2 me-2 pe-2" type="text"></div>
+            <div class="input-group mb-2"><span class="w-25 ms-2 input-group-text">{{ t('textLabel.status') }}</span><input class="form-control w-25 ms-0 ps-2 me-2 pe-2" type="text"></div>
+            <div class="text-end"><button class="btn btn-outline-primary btn-sm ms-2 me-2" type="button">{{ t('button.search') }}</button></div>
           </div>
           <div class="text-end">
             <div class="table-responsive ms-2 me-2 mt-2 mb-2">
               <table class="table">
                 <thead>
                 <tr>
-                  <th>{{ $t('textLabel.number') }}</th>
-                  <th>{{ $t('textLabel.company', 1) }}</th>
-                  <th>{{ $t('textLabel.department', 2) }}</th>
-                  <th>{{ $t('textLabel.employee', 2) }}</th>
-                  <th>{{ $t('textLabel.asset', 2) }}</th>
-                  <th class="text-center">{{ $t('textLabel.action') }}</th>
+                  <th>{{ t('textLabel.number') }}</th>
+                  <th>{{ t('textLabel.company', 1) }}</th>
+                  <th>{{ t('textLabel.department', 2) }}</th>
+                  <th>{{ t('textLabel.employee', 2) }}</th>
+                  <th>{{ t('textLabel.asset', 2) }}</th>
+                  <th class="text-center">{{ t('textLabel.action') }}</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -39,8 +41,8 @@
                   <td>50</td>
                   <td class="text-center">
                     <div class="btn-group" role="group">
-                      <router-link to="/departmentedit" class="btn btn-primary" tag="button">{{ $t('button.edit') }}</router-link>
-                      <button class="btn btn-danger" type="button" data-bs-target="#myModal" data-bs-toggle="modal">{{ $t('button.delete') }}</button>
+                      <router-link to="/departmentedit" class="btn btn-primary" tag="button">{{ t('button.edit') }}</router-link>
+                      <button class="btn btn-danger" type="button" data-bs-target="#myModal" data-bs-toggle="modal">{{ t('button.delete') }}</button>
                     </div>
                   </td>
                 </tr>
@@ -52,8 +54,8 @@
                   <td>5</td>
                   <td class="text-center">
                     <div class="btn-group" role="group">
-                      <router-link to="/departmentedit" class="btn btn-primary" tag="button">{{ $t('button.edit') }}</router-link>
-                      <button class="btn btn-danger" type="button" data-bs-target="#myModal" data-bs-toggle="modal">{{ $t('button.delete') }}</button>
+                      <router-link to="/departmentedit" class="btn btn-primary" tag="button">{{ t('button.edit') }}</router-link>
+                      <button class="btn btn-danger" type="button" data-bs-target="#myModal" data-bs-toggle="modal">{{ t('button.delete') }}</button>
                     </div>
                   </td>
                 </tr>

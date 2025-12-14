@@ -1,5 +1,7 @@
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n';
 
+const { t } = useI18n();
 </script>
 
 <template>
@@ -21,10 +23,10 @@
                       <span style="color: rgb(230, 232, 240); background-color: rgb(31, 31, 31);">ERROR 401</span>
                     </h5>
                     <h5 class="text-uppercase fw-bold text-center d-block mx-auto heading"><br />
-                      <span style="color: rgb(230, 232, 240); background-color: rgb(31, 31, 31);">{{ $t('textError.unauthorized') }}</span>
+                      <span style="color: rgb(230, 232, 240); background-color: rgb(31, 31, 31);">{{ t('textError.unauthorized') }}</span>
                     </h5>
                     <button class="btn btn-primary text-center d-flex flex-fill justify-content-center align-items-center align-content-center mx-auto" type="button" style="text-align: justify;">
-                      {{ $t('textLabel.home') }}
+                      {{ t('textLabel.home') }}
                     </button>
                   </div>
                 </div>

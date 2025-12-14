@@ -1,12 +1,14 @@
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n';
 
+const { t } = useI18n();
 </script>
 
 <template>
   <footer class="bg-body-secondary bg-opacity-25 bg-gradient mt-5 py-5">
     <div class="container d-flex flex-column justify-content-between align-items-center flex-lg-row">
-      <div class="text-center text-lg-start mb-5 mb-lg-0"><a class="fs-4 fw-bold link-light" href="/public"><img class="img-fluid me-2" width="40" height="40" src="/src/assets/img/logos/logo.svg"><span><a href="/public"><strong><span style="color: RGBA(247, 248, 249, var(--bs-link-opacity, 1));">{{ $t('app.brand.title') }}</span></strong></a></span></a>
-        <p class="mt-1 mb-4">{{ $t('app.brand.description') }}</p>
+      <div class="text-center text-lg-start mb-5 mb-lg-0"><a class="fs-4 fw-bold link-light" href="/public"><img class="img-fluid me-2" width="40" height="40" src="/src/assets/img/logos/logo.svg"><span><a href="/public"><strong><span style="color: RGBA(247, 248, 249, var(--bs-link-opacity, 1));">{{ t('app.brand.title') }}</span></strong></a></span></a>
+        <p class="mt-1 mb-4">{{ t('app.brand.description') }}</p>
       </div>
       <div class="text-center text-lg-end">
         <div class="mb-lg-2"><a class="link-light me-2" href="#"><svg xmlns="http://www.w3.org/2000/svg" viewBox="-32 0 512 512" width="1em" height="1em" fill="currentColor" class="fs-5">
@@ -22,10 +24,10 @@
         <ul class="nav d-flex justify-content-center mb-1">
 <!--          <li class="nav-item"><a class="nav-link active fw-bold link-light" href="/home.html">Home</a></li>
           <li class="nav-item"><a class="nav-link fw-bold link-light" href="/howto.html">How to</a></li>-->
-          <li class="nav-item"><router-link id="idfooterhome" to="/" class="nav-link fw-bold link-light">{{ $t('app.features.title') }}</router-link></li>
-          <li class="nav-item"><router-link id="idfooterhowtouse" to="/howtouse" class="nav-link fw-bold link-light">{{ $t('app.howToUse.title') }}</router-link></li>
+          <li class="nav-item"><router-link id="idfooterhome" to="/" class="nav-link fw-bold link-light">{{ t('app.features.title') }}</router-link></li>
+          <li class="nav-item"><router-link id="idfooterhowtouse" to="/howtouse" class="nav-link fw-bold link-light">{{ t('app.howToUse.title') }}</router-link></li>
         </ul>
-        <p class="text-muted mb-2">{{ $t('app.copyright.title') }} © {{ $t('app.brand.title') }}</p>
+        <p class="text-muted mb-2">{{ t('app.copyright.title') }} © {{ t('app.brand.title') }}</p>
       </div>
     </div>
   </footer>

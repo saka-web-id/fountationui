@@ -7,7 +7,7 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "~/*": ["src/*"],   // or "@/composables/*": ["src/composables/*"]
+      "~/*": ["src/*"]   // or "@/composables/*": ["src/composables/*"]
     }
   }
 }

@@ -3,6 +3,9 @@
 // @ts-ignore
 import SvgButtonOpenSideBar from "../../components/button/svg/SvgButtonOpenSideBar.vue";
 import HeaderDropdownLocale from "../../components/dropdown/HeaderDropdownLocale.vue";
+import { useI18n } from 'vue-i18n';
+
+const { t } = useI18n();
 </script>
 
 <template>
@@ -15,7 +18,7 @@ import HeaderDropdownLocale from "../../components/dropdown/HeaderDropdownLocale
             <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"></path>
           </svg>-->
           <router-link to="#" class="navbar-brand d-flex align-items-center">
-            <span class="d-none d-md-inline pe-0">{{ $t('app.brand.title') }}</span>
+            <span class="d-none d-md-inline pe-0">{{ t('app.brand.title') }}</span>
           </router-link>
 <!--          <a class="navbar-brand d-flex align-items-center" href="#">
             <span class="d-none d-md-inline pe-0">Brand</span>
@@ -57,7 +60,7 @@ import HeaderDropdownLocale from "../../components/dropdown/HeaderDropdownLocale
                 <div class="dropdown-menu dropdown-menu-dark mt-0 pt-0 mb-0 pb-0 dropdown-menu-end">
                   <div class="card bg-gradient border-primary ms-0 ps-0 me-0 pe-0 mt-0 mb-0">
                     <div class="card-body text-center ms-0 ps-0 me-0 pe-0 mt-0 pt-0 mb-0 pb-0 card-header" style="background: var(--bs-primary);color: var(--bs-secondary-bg-subtle);">
-                      <h6 class="ps-7 pe-7 mt-1 mb-1 card-subtitle">{{ $t('textLabel.message') }}</h6>
+                      <h6 class="ps-7 pe-7 mt-1 mb-1 card-subtitle">{{ t('textLabel.message') }}</h6>
                     </div>
                     <div class="card-body border ms-0 ps-0 me-0 pe-0 mt-0 pt-0 pb-0 flex-1">
                       <h6 class="text-info ms-2 me-4 mt-0 card-subtitle h7">Subject :  replay ASAP</h6>
@@ -81,9 +84,9 @@ import HeaderDropdownLocale from "../../components/dropdown/HeaderDropdownLocale
                 <img class="rounded-circle ms-2 me-2" alt="closeup photo of gray rabbit" width="40" height="40" src="/src/assets/img/photo-1529040181623-e04ebc611e25.jpg" />
               </a>
               <div class="dropdown-menu dropdown-menu-dark dropdown-menu-end">
-                <router-link to="/profileinformation" class="dropdown-item">{{ $t('textLabel.profile') }}</router-link>
-                <router-link to="/activity" class="dropdown-item">{{ $t('textLabel.activity') }}</router-link>
-                <router-link to="/" class="dropdown-item" style="color: var(--bs-danger);border-top-style: solid;">{{ $t('textLabel.logout') }}</router-link>
+                <router-link to="/profileinformation" class="dropdown-item">{{ t('textLabel.profile') }}</router-link>
+                <router-link to="/activity" class="dropdown-item">{{ t('textLabel.activity') }}</router-link>
+                <router-link to="/" class="dropdown-item" style="color: var(--bs-danger);border-top-style: solid;">{{ t('textLabel.logout') }}</router-link>
               </div>
             </div>
           </div>

@@ -3,7 +3,9 @@ import { Form, Field, ErrorMessage } from 'vee-validate';
 import { useRegisterSchema } from '../hooks/schemas/register.schema';
 import {type RegisterPayload, useRegisterApi} from '../api/useRegisterApi';
 import { useRegisterForm} from "../hooks/forms/useRegisterForm";
+import { useI18n } from 'vue-i18n';
 
+const { t } = useI18n();
 
 const registerSchema = useRegisterSchema();
 const { register, loading, error } = useRegisterApi();
@@ -38,27 +40,27 @@ const submit = handleSubmit(async (values: RegisterPayload) => {
                   <div class="text-center text-sm-center text-md-center text-lg-start text-xl-start text-xxl-start w-100 ms-0 ps-1 me-0 pe-1">
                     <h5 class="text-uppercase fw-bold heading">Register</h5>
                     <div class="w-100 ps-0 me-0 pe-0 mt-0 pt-0 mb-0 pb-2 form-control" style="background: rgba(255,255,255,0);">
-                      <Field type="text" :placeholder="$t('textField.company')" name="company" v-model="company" v-bind="companyAttrs" class="border d-block w-100 me-0 pe-4 mt-2 mb-0 pb-0" ></Field>
+                      <Field type="text" :placeholder="t('textField.company')" name="company" v-model="company" v-bind="companyAttrs" class="border d-block w-100 me-0 pe-4 mt-2 mb-0 pb-0" ></Field>
                       <ErrorMessage name="company" class="text-start text-danger d-block w-100 me-0 pe-0 mt-0 mb-0 pb-0" />
                     </div>
                     <div class="w-100 ps-0 me-0 pe-0 mt-0 pt-0 mb-0 pb-2 form-control" style="background: rgba(255,255,255,0);">
-                      <Field type="email" :placeholder="$t('textField.email')"  name="email" v-model="email" v-bind="emailAttrs" inputmode="email" class="border d-block w-100 me-0 pe-4 mt-2 mb-0 pb-0"></Field>
+                      <Field type="email" :placeholder="t('textField.email')"  name="email" v-model="email" v-bind="emailAttrs" inputmode="email" class="border d-block w-100 me-0 pe-4 mt-2 mb-0 pb-0"></Field>
                       <ErrorMessage name="email" class="text-start text-danger d-block w-100 me-0 pe-0 mt-0 mb-0 pb-0" />
                     </div>
                     <div class="w-100 ps-0 me-0 pe-0 mt-0 pt-0 mb-0 pb-2 form-control" style="background: rgba(255,255,255,0);">
-                      <Field type="text" :placeholder="$t('textField.username')" name="username" v-model="username" v-bind="usernameAttrs" class="border d-block w-100 me-0 pe-4 mt-2 mb-0 pb-0"></Field>
+                      <Field type="text" :placeholder="t('textField.username')" name="username" v-model="username" v-bind="usernameAttrs" class="border d-block w-100 me-0 pe-4 mt-2 mb-0 pb-0"></Field>
                       <ErrorMessage name="username" class="text-start text-danger d-block w-100 me-0 pe-0 mt-0 mb-0 pb-0" />
                     </div>
                     <div class="w-100 ps-0 me-0 pe-0 mt-0 pt-0 mb-0 pb-2 form-control" style="background: rgba(255,255,255,0);">
-                      <Field type="password" :placeholder="$t('textField.password')" name="password" v-model="password" v-bind="passwordAttrs"  class="border d-block w-100 me-0 pe-4 mt-2 mb-0 pb-0"></Field>
+                      <Field type="password" :placeholder="t('textField.password')" name="password" v-model="password" v-bind="passwordAttrs"  class="border d-block w-100 me-0 pe-4 mt-2 mb-0 pb-0"></Field>
                       <ErrorMessage name="password" class="text-start text-danger d-block w-100 me-0 pe-0 mt-0 mb-0 pb-0" />
                     </div>
                     <div class="w-100 ps-0 me-0 pe-0 mt-0 pt-0 mb-0 pb-4 form-control" style="background: rgba(255,255,255,0);">
-                      <Field type="password" :placeholder="$t('textField.passwordConfirmation')" name="passwordConfirmation" class="border d-block w-100 me-0 pe-4 mt-2 mb-0 pb-0"></Field>
+                      <Field type="password" :placeholder="t('textField.passwordConfirmation')" name="passwordConfirmation" class="border d-block w-100 me-0 pe-4 mt-2 mb-0 pb-0"></Field>
                       <ErrorMessage name="passwordConfirmation" class="text-start text-danger d-block w-100 me-0 pe-0 mt-0 mb-0 pb-0" />
                     </div>
                     <button :disabled="!meta.valid" class="btn btn-success shadow ms-0 ps-6 me-0 pe-6 w-100 d-block" >
-                      {{ loading ? 'Loading' : $t('button.register') }}
+                      {{ loading ? 'Loading' : t('button.register') }}
                     </button>
                     <div></div>
                   </div>

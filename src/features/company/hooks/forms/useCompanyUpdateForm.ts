@@ -2,11 +2,28 @@
 import { useForm } from 'vee-validate'
 import { useCompanyUpdateSchema } from '../schemas/companyUpdate.schema';
 
+export interface CompanyUpdatePayload {
+    companyId: number;
+    companyName: string;
+    companyAddress: string;
+    companyPhone: string;
+    companyEmail: string;
+    companyWebsite: string;
+    companyDescription: string;
+    companyLogoUrl: string;
+    companyTaxId: string;
+    companyRegistrationId: string;
+    companyStatus: string;
+    companyIndustry: string;
+    companyType: string;
+    companyCreatedAt: string;
+    companyUpdatedAt: string;
+}
 
 
 export function useRegisterForm() {
     // useForm with schema
-    const {  defineField, handleSubmit } = useForm<>({
+    const {  defineField, handleSubmit } = useForm<CompanyUpdatePayload>({
         validationSchema: useCompanyUpdateSchema,
         initialValues: {companyId: 0, companyName: "", companyAddress: "", companyPhone: "", companyEmail: "", companyWebsite: "", companyDescription: "", companyLogoUrl:"",  companyTaxId:"", companyRegistrationId:"", companyStatus:"", companyIndustry:"", companyType:"", companyCreatedAt:"", companyUpdatedAt:""}
     })

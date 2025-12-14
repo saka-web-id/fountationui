@@ -1,5 +1,8 @@
 <script setup lang="ts">
 import HeaderDropdownLocale from "../../components/dropdown/HeaderDropdownLocale.vue";
+import { useI18n } from 'vue-i18n';
+
+const { t } = useI18n();
 </script>
 
 <template>
@@ -35,12 +38,12 @@ import HeaderDropdownLocale from "../../components/dropdown/HeaderDropdownLocale
       <div class="container"><a class="navbar-brand d-flex align-items-center" href="#"><img class="img-fluid me-3" width="40" height="40" src="/src/assets/img/logos/logo.svg" /><span class="fs-3 fw-bold">Brand</span></a><button class="navbar-toggler me-0" data-bs-toggle="collapse" data-bs-target="#navcol-3"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
         <div id="navcol-3" class="collapse navbar-collapse">
           <ul class="navbar-nav mb-4 mb-lg-0 mx-auto">
-            <li class="nav-item"><router-link to="/" class="nav-link">{{ $t('app.features.title') }}</router-link></li>
-            <li class="nav-item"><router-link to="/howtouse" class="nav-link" >{{ $t('app.howToUse.title') }}</router-link></li>
+            <li class="nav-item"><router-link to="/" class="nav-link">{{ t('app.features.title') }}</router-link></li>
+            <li class="nav-item"><router-link to="/howtouse" class="nav-link" >{{ t('app.howToUse.title') }}</router-link></li>
           </ul>
-            <!--<router-link to="/login" tag="button" class="btn bg-white bg-opacity-10 bg-gradient me-2">{{ $t('button.login') }}</router-link>-->
-            <a href="http://www.myproject.local:8080/api/v0/user/login" tag="button" class="btn bg-white bg-opacity-10 bg-gradient me-2">{{ $t('button.login') }}</a>
-            <router-link to="/registration" tag="button" class="btn bg-white bg-opacity-10 bg-gradient me-2">{{ $t('button.signup') }}</router-link>
+            <!--<router-link to="/login" tag="button" class="btn bg-white bg-opacity-10 bg-gradient me-2">{{ t('button.login') }}</router-link>-->
+            <a href="http://www.myproject.local:8080/api/v0/user/login" tag="button" class="btn bg-white bg-opacity-10 bg-gradient me-2">{{ t('button.login') }}</a>
+            <router-link to="/registration" tag="button" class="btn bg-white bg-opacity-10 bg-gradient me-2">{{ t('button.signup') }}</router-link>
         </div>
       </div>
     </nav>
