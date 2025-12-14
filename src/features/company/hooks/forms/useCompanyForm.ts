@@ -1,8 +1,8 @@
 // hooks/useRegisterForm.ts
 import { useForm } from 'vee-validate'
-import { useCompanyUpdateSchema } from '../schemas/companyUpdate.schema';
+import { useCompanySchema } from '../schemas/company.schema.ts';
 
-export interface CompanyUpdatePayload {
+export interface CompanyPayload {
     companyId: number;
     companyName: string;
     companyAddress: string;
@@ -20,11 +20,29 @@ export interface CompanyUpdatePayload {
     companyUpdatedAt: string;
 }
 
+export const mapCompanyFromApi = (apiData: any): CompanyPayload => ({
+    companyId: apiData.companyId,
+    companyName: apiData.companyName,
+    companyAddress: apiData.companyAddress,
+    companyPhone: apiData.companyPhone,
+    companyEmail: apiData.companyEmail,
+    companyWebsite: apiData.companyWebsite,
+    companyDescription: apiData.companyDescription,
+    companyLogoUrl: apiData.companyLogoUrl,
+    companyTaxId: apiData.companyTaxId,
+    companyRegistrationId: apiData.companyRegistrationId,
+    companyStatus: apiData.companyStatus,
+    companyIndustry: apiData.companyIndustry,
+    companyType: apiData.companyType,
+    companyCreatedAt: apiData.companyCreatedAt,
+    companyUpdatedAt: apiData.companyUpdatedAt,
+});
 
-export function useRegisterForm() {
+
+export function useCompanyForm() {
     // useForm with schema
-    const {  defineField, handleSubmit } = useForm<CompanyUpdatePayload>({
-        validationSchema: useCompanyUpdateSchema,
+    const {  defineField, handleSubmit, setValues } = useForm<CompanyPayload>({
+        validationSchema: useCompanySchema,
         initialValues: {companyId: 0, companyName: "", companyAddress: "", companyPhone: "", companyEmail: "", companyWebsite: "", companyDescription: "", companyLogoUrl:"",  companyTaxId:"", companyRegistrationId:"", companyStatus:"", companyIndustry:"", companyType:"", companyCreatedAt:"", companyUpdatedAt:""}
     })
 
@@ -47,6 +65,7 @@ export function useRegisterForm() {
 
     return {
         handleSubmit,
+        setValues,
         companyId,
         companyIdAttrs,
         companyName,

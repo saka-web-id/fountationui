@@ -34,6 +34,7 @@
     "employee": "Employee | Employees",
     "asset": "Asset | Assets",
     "action": "Action",
+    "address": "Address",
     "description": "Description",
     "dashboard": "Dashboard",
     "home": "Home",

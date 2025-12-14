@@ -1,20 +1,12 @@
 <script setup lang="ts">
 import { onMounted } from 'vue';
-import { useApi } from "~/composables/useApi.ts";
+import { useApi } from "~/composables/useApi";
 import {useRouter} from "vue-router";
-/*import { useCompanyStore } from '~/stores/companyStore';
-import type {CompanyUpdatePayload} from "~/features/company/hooks/forms/useCompanyUpdateForm.ts";*/
 import { useI18n } from 'vue-i18n';
 
 const { t } = useI18n();
 const { data, get } = useApi();
-/*const companyStore = useCompanyStore();*/
 const router = useRouter();
-
-
-data.value = [
-  { companyId: 0, companyName: "None", companyAddress: "None", companyPhone: "None", companyEmail: "None", companyWebsite: "None", companyDescription: "None", companyLogoUrl:"None",  companyTaxId:"None", companyRegistrationId:"None", companyStatus:"None", companyIndustry:"None", companyType:"None", companyCreatedAt:"None", companyUpdatedAt:"None" },
-]
 
 onMounted(async () => {
 
@@ -22,13 +14,9 @@ onMounted(async () => {
 
 });
 
-
-/*const goToEdit = (company: CompanyUpdatePayload) => {
-  companyStore.setUpdatePayload(company);
-  router.push({ name: 'EditCompany' });
-};*/
-
-
+const goToEdit = (id: number) => {
+  router.push({ name: '/companyedit', params: { id } });
+};
 
 </script>
 
@@ -65,16 +53,16 @@ onMounted(async () => {
                 <tbody>
                 <tr v-for="d in data" :key="d.companyId">
                   <td>{{ d.companyId  }}</td>
-                  <td>{{  d.companyName }}</td>
-                  <td>{{  d.companyEmail }}</td>
+                  <td>{{ d.companyName }}</td>
+                  <td>{{ d.companyEmail }}</td>
                   <!--
                   <td>50</td>
                   <td>50</td>
                   -->
                   <td class="text-center">
                     <div class="btn-group" role="group">
-                      <router-link to="/companyedit" class="btn btn-primary" tag="button">{{ t('button.edit') }}</router-link>
-                      <button class="btn btn-danger" type="button" data-bs-target="#myModal" data-bs-toggle="modal">{{ t('button.delete') }}</button></div>
+                      <button class="btn btn-primary" @click="goToEdit(d.companyId)">{{ t('button.edit') }}</button>
+                    </div>
                   </td>
                 </tr>
                 </tbody>

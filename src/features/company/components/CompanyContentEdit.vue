@@ -1,35 +1,35 @@
 <script setup lang="ts">
-import { Form } from 'vee-validate';
+import { Form, Field, ErrorMessage } from 'vee-validate';
 import {useApi} from "~/composables/useApi.ts";
-import { useCompanyStore } from '~/stores/companyStore';
-import {computed, reactive} from "vue";
-import type {CompanyUpdatePayload} from "~/features/company/hooks/forms/useCompanyUpdateForm.ts";
+import { onMounted } from "vue";
+import { useRegisterSchema  } from "~/features/registration/hooks/schemas/register.schema";
+import {type CompanyPayload, mapCompanyFromApi, useCompanyForm} from "~/features/company/hooks/forms/useCompanyForm";
 import { useI18n } from 'vue-i18n';
+import { useRoute, useRouter } from 'vue-router';
 
+const { data, get } = useApi();
+const route = useRoute();
+const router = useRouter();
 const { t } = useI18n();
+const useCompanySchema = useRegisterSchema();
+const { handleSubmit, setValues, companyId, companyIdAttrs, companyName, companyNameAttrs, companyAddress, companyAddressAttrs, companyPhone, companyPhoneAttrs, companyEmail, companyEmailAttrs, companyWebsite, companyWebsiteAttrs, companyDescription, companyDescriptionAttrs, companyLogoUrl, companyLogoUrlAttrs, companyTaxId, companyTaxIdAttrs, companyRegistrationId, companyRegistrationIdAttrs, companyStatus, companyStatusAttrs, companyIndustry, companyIndustryAttrs, companyType, companyTypeAttrs } = useCompanyForm();
 
 
 const { loading, post } = useApi();
-const companyStore = useCompanyStore();
 
-const payload = computed(() => companyStore.updatePayload);
+onMounted(async () => {
+  const { id } = route.params;
+  get("/users/company/getCompanyById" + id);
 
-// Optional: redirect if user refreshes and store is empty
-if (!payload.value) {
-  // e.g. router.push('/company')
-}
+  if (!data.value) { router.push('/company') }
 
-
-form = { companyId: 0, companyName: "None", companyAddress: "None", companyPhone: "None", companyEmail: "None", companyWebsite: "None", companyDescription: "None", companyLogoUrl:"None",  companyTaxId:"None", companyRegistrationId:"None", companyStatus:"None", companyIndustry:"None", companyType:"None", companyCreatedAt:"None", companyUpdatedAt:"None" }
-// ✅ Use your interface directly for the form
-const form = reactive<CompanyUpdatePayload>({
-  ...companyStore.updatePayload!
+  setValues(mapCompanyFromApi(data));
 });
 
-const submitForm = async () => {
-  post("/user/company/update", form)
-}
-
+const submitForm = handleSubmit( async (values: CompanyPayload) => {
+      post("/user/company/update", values)
+    }
+)
 
 </script>
 
@@ -44,53 +44,88 @@ const submitForm = async () => {
       </ol>
       <div class="card mb-3 bg-gradient-dark">
         <div class="card-body ms-0 ps-0 me-0 pe-0 mt-0 pt-0 pb-0">
-          <Form class="text-center py-4" id="idform">
-            <h4 class="text-start ms-2">{{ t('textLabel.companyEdit') }}</h4>
-            <input type="hidden" v-model="form.companyId">
-            <div class="input-group mb-2"><span class="d-flex w-25 ms-2 input-group-text" style="font-size: calc(0.6em + 0.5vw);">{{ t('textLabel.name') }}</span><input class="form-control d-flex ms-0 ps-2 me-2 pe-4" v-model="form.companyName" type="text"></div>
-            <div class="input-group mb-2"><span class="w-25 ms-2 input-group-text" style="font-size: calc(0.6em + 0.5vw);">{{ t('textLabel.email') }}</span><input class="form-control me-2 pe-2" type="email" v-model="form.companyEmail" inputmode="email"></div>
-            <div class="input-group mb-2"><span class="w-25 ms-2 input-group-text" style="font-size: calc(0.6em + 0.5vw);">{{ t('textLabel.phone') }}</span><input class="form-control me-2 pe-2" v-model="form.companyPhone" type="tel"></div>
-            <div class="input-group mb-2"><span class="w-25 ms-2 input-group-text" style="font-size: calc(0.6em + 0.5vw);">{{ t('textLabel.website') }}</span><input class="form-control me-2 pe-2" v-model="form.companyWebsite" type="url"></div>
-            <div class="input-group mb-2"><span class="w-25 ms-2 input-group-text" style="font-size: calc(0.6em + 0.5vw);">{{ t('textLabel.logo') }} URL</span><input class="form-control me-2 pe-2" v-model="form.companyLogoUrl" type="url"></div>
-            <div class="input-group mb-2"><span class="w-25 ms-2 input-group-text" style="font-size: calc(0.6em + 0.5vw);">{{ t('textLabel.type') }}</span><input class="form-control me-2 pe-2" v-model="form.companyType" type="text"></div>
-            <div class="input-group mb-2"><span class="w-25 ms-2 input-group-text" style="font-size: calc(0.6em + 0.5vw);">{{ t('textLabel.industry') }}</span><input class="form-control me-2 pe-2" v-model="form.companyIndustry" type="text"></div>
-            <div class="input-group mb-2"><span class="w-25 ms-2 input-group-text" style="font-size: calc(0.6em + 0.5vw);">{{ t('textLabel.taxId') }}</span><input class="form-control me-2 pe-2" v-model="form.companyTaxId" type="text"></div>
-            <div class="input-group mb-2"><span class="w-25 ms-2 input-group-text" style="font-size: calc(0.6em + 0.5vw);">{{ t('textLabel.registrationNumber') }}</span><input class="form-control me-2 pe-2" v-model="form.companyRegistrationId" type="text"></div>
-            <div class="text-start">
-              <div class="input-group mb-2"></div>
-              <div class="text-start d-flex"><span class="d-flex w-25 ms-2 ps-3 me-2 mb-2 input-group-text" style="font-size: calc(0.6em + 0.5vw);">Status</span>
-                <div class="form-check form-check-inline">
-                  <input
-                      class="form-check-input"
-                      type="radio"
-                      id="statusEnabled"
-                      value="enabled"
-                      v-model="form.companyStatus"
-                  />
-                  <label class="form-check-label" for="statusEnabled">
-                    {{ t('button.enable') }}
-                  </label>
-                </div>
-
-                <div class="form-check form-check-inline">
-                  <input
-                      class="form-check-input"
-                      type="radio"
-                      id="statusDisabled"
-                      value="disabled"
-                      v-model="form.companyStatus"
-                  />
-                  <label class="form-check-label" for="statusDisabled">
-                    {{ t('button.disable') }}
-                  </label>
-                </div>
+          <Form :validationSchema="useCompanySchema" class="text-center py-4" id="idform" v-slot="{ meta }" >
+            <form @submit="submitForm" >
+              <h4 class="text-start ms-2">{{ t('textLabel.companyEdit') }}</h4>
+              <input type="hidden" v-model="companyId" v-bind="companyIdAttrs" >
+              <div class="input-group mb-2">
+                <span class="d-flex w-25 ms-2 input-group-text" style="font-size: calc(0.6em + 0.5vw);">{{ t('textLabel.name') }}</span>
+                <Field as="input" type="text" name="companyName" v-model="companyName" v-bind="companyNameAttrs"  class="form-control d-flex ms-0 ps-2 me-2 pe-4" ></Field>
+                <ErrorMessage name="companyName" class="text-start text-danger d-flex ms-0 ps-2 me-2 pe-4" />
               </div>
               <div class="input-group mb-2">
-                <span class="w-25 ms-2 input-group-text" style="font-size: calc(0.6em + 0.5vw);">{{ t('textLabel.description') }}</span>
-                <textarea class="form-control" aria-label="With textarea" v-model="form.companyDescription"></textarea>
+                <span class="w-25 ms-2 input-group-text" style="font-size: calc(0.6em + 0.5vw);">{{ t('textLabel.email') }}</span>
+                <Field as="input" type="email" name="companyEmail" v-model="companyEmail" v-bind="companyEmailAttrs" class="form-control me-2 pe-2" ></Field>
+                <ErrorMessage name="companyEmail" class="text-start text-danger d-flex ms-0 ps-2 me-2 pe-4" />
               </div>
-              <button class="btn btn-outline-primary ms-2 me-2" :disabled="loading" @click="submitForm" type="button">{{ loading ? t('button.saving') : t('button.save') }}</button>
-            </div>
+              <div class="input-group mb-2">
+                <span class="w-25 ms-2 input-group-text" style="font-size: calc(0.6em + 0.5vw);">{{ t('textLabel.phone') }}</span>
+                <Field as="input" type="tel" name="companyPhone" v-model="companyPhone" v-bind="companyPhoneAttrs" class="form-control me-2 pe-2" ></Field>
+                <ErrorMessage name="companyPhone" class="text-start text-danger d-flex ms-0 ps-2 me-2 pe-4" />
+              </div>
+              <div class="input-group mb-2">
+                <span class="w-25 ms-2 input-group-text" style="font-size: calc(0.6em + 0.5vw);">{{ t('textLabel.website') }}</span>
+                <Field as="input" type="url" name="companyWebsite" v-model="companyWebsite" v-bind="companyWebsiteAttrs" class="form-control me-2 pe-2" ></Field>
+                <ErrorMessage name="companyWebsite" class="text-start text-danger d-flex ms-0 ps-2 me-2 pe-4" />
+              </div>
+              <div class="input-group mb-2">
+                <span class="w-25 ms-2 input-group-text" style="font-size: calc(0.6em + 0.5vw);">{{ t('textLabel.logo') }} URL</span>
+                <Field as="input" type="url" name="companyLogoUrl" v-model="companyLogoUrl" v-bind="companyLogoUrlAttrs" class="form-control me-2 pe-2" ></Field>
+                <ErrorMessage name="companyLogoUrl" class="text-start text-danger d-flex ms-0 ps-2 me-2 pe-4" />
+              </div>
+              <div class="input-group mb-2">
+                <span class="w-25 ms-2 input-group-text" style="font-size: calc(0.6em + 0.5vw);">{{ t('textLabel.type') }}</span>
+                <Field as="input" type="text" name="companyType" v-model="companyType" v-bind="companyTypeAttrs" class="form-control me-2 pe-2" ></Field>
+                <ErrorMessage name="companyType" class="text-start text-danger d-flex ms-0 ps-2 me-2 pe-4" />
+              </div>
+              <div class="input-group mb-2">
+                <span class="w-25 ms-2 input-group-text" style="font-size: calc(0.6em + 0.5vw);">{{ t('textLabel.industry') }}</span>
+                <Field as="input" type="text" name="companyIndustry" v-model="companyIndustry" v-bind="companyIndustryAttrs" class="form-control me-2 pe-2" ></Field>
+                <ErrorMessage name="companyIndustry" class="text-start text-danger d-flex ms-0 ps-2 me-2 pe-4" />
+              </div>
+              <div class="input-group mb-2">
+                <span class="w-25 ms-2 input-group-text" style="font-size: calc(0.6em + 0.5vw);">{{ t('textLabel.taxId') }}</span>
+                <Field as="input" type="text" name="companyTaxId" v-model="companyTaxId" v-bind="companyTaxIdAttrs" class="form-control me-2 pe-2" ></Field>
+                <ErrorMessage name="companyTaxId" class="text-start text-danger d-flex ms-0 ps-2 me-2 pe-4" />
+              </div>
+              <div class="input-group mb-2">
+                <span class="w-25 ms-2 input-group-text" style="font-size: calc(0.6em + 0.5vw);">{{ t('textLabel.registrationNumber') }}</span>
+                <Field as="input" type="text" name="companyRegistrationId" v-model="companyRegistrationId" v-bind="companyRegistrationIdAttrs" class="form-control me-2 pe-2" ></Field>
+                <ErrorMessage name="companyRegistrationId" class="text-start text-danger d-flex ms-0 ps-2 me-2 pe-4" />
+              </div>
+              <div class="text-start">
+                <div class="input-group mb-2"></div>
+                <div class="text-start d-flex">
+                  <span class="d-flex w-25 ms-2 ps-3 me-2 mb-2 input-group-text" style="font-size: calc(0.6em + 0.5vw);">Status</span>
+                  <div class="form-check form-check-inline">
+                    <!--<input class="form-check-input" type="radio" id="statusEnabled" value="enabled" v-model="companyStatus" v-bind="companyStatusAttrs"  />-->
+                    <Field  type="radio" name="companyStatus" v-model="companyStatus" v-bind="companyStatusAttrs" class="form-check-input" ></Field>
+                    <label class="form-check-label" for="statusEnabled">{{ t('button.enable') }}</label>
+                  </div>
+
+                  <div class="form-check form-check-inline">
+                    <!-- <input class="form-check-input" type="radio" id="statusDisabled" value="disabled" v-model="companyStatus" />-->
+                    <Field type="radio" name="companyStatus" v-model="companyStatus" v-bind="companyStatusAttrs" class="form-check-input" ></Field>
+                    <label class="form-check-label" for="statusDisabled"> {{ t('button.disable') }} </label>
+                  </div>
+
+                  <ErrorMessage name="companyStatus" class="text-start text-danger" />
+                </div>
+                <div class="input-group mb-2">
+                  <span class="w-25 ms-2 input-group-text" style="font-size: calc(0.6em + 0.5vw);">{{ t('textLabel.address') }}</span>
+                  <!--<textarea class="form-control" aria-label="With textarea" v-model="companyAddress" v-bind="companyAddressAttrs"></textarea>-->
+                  <Field as="textarea" name="companyAddress" class="form-control" aria-label="With textarea" v-model="companyAddress" v-bind="companyAddressAttrs"></Field>
+                  <ErrorMessage name="companyAddress" class="text-start text-danger" />
+                </div>
+                <div class="input-group mb-2">
+                  <span class="w-25 ms-2 input-group-text" style="font-size: calc(0.6em + 0.5vw);">{{ t('textLabel.description') }}</span>
+                  <!--<textarea class="form-control" aria-label="With textarea" v-model="companyDescription" v-bind="companyDescriptionAttrs"></textarea>-->
+                  <Field as="textarea" name="companyDescription" class="form-control" aria-label="With textarea" v-model="companyDescription" v-bind="companyDescriptionAttrs"></Field>
+                  <ErrorMessage name="companyDescription" class="text-start text-danger" />
+                </div>
+                <button :disabled="!meta.valid || loading"  class="btn btn-outline-primary ms-2 me-2" @click="submitForm" type="button">{{ loading ? t('button.saving') : t('button.save') }}</button>
+              </div>
+            </form>
           </Form>
         </div>
       </div>

@@ -1,13 +1,13 @@
 import { defineStore } from 'pinia';
-import type { CompanyUpdatePayload } from '~/features/company/hooks/forms/useCompanyUpdateForm';
+import type { CompanyPayload } from '~/features/company/hooks/forms/useCompanyForm.ts';
 
 export const useCompanyStore = defineStore('company', {
     state: () => ({
-        updatePayload: null as CompanyUpdatePayload | null
+        updatePayload: null as CompanyPayload | null
     }),
 
     actions: {
-        setUpdatePayload(payload: CompanyUpdatePayload) {
+        setUpdatePayload(payload: CompanyPayload) {
             this.updatePayload = payload;
         },
 
