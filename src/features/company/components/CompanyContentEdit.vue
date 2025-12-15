@@ -2,16 +2,16 @@
 import { Form, Field, ErrorMessage } from 'vee-validate';
 import {useApi} from "~/composables/useApi.ts";
 import { onMounted } from "vue";
-import { useRegisterSchema  } from "~/features/registration/hooks/schemas/register.schema";
+import { useCompanySchema  } from "~/features/company/hooks/schemas/company.schema";
 import {type CompanyPayload, mapCompanyFromApi, useCompanyForm} from "~/features/company/hooks/forms/useCompanyForm";
 import { useI18n } from 'vue-i18n';
-import { useRoute, useRouter } from 'vue-router';
+import { useRoute } from 'vue-router';
 
 const { data, get } = useApi();
 const route = useRoute();
-const router = useRouter();
+/*const router = useRouter();*/
 const { t } = useI18n();
-const useCompanySchema = useRegisterSchema();
+const companySchema = useCompanySchema();
 const { handleSubmit, setValues, companyId, companyIdAttrs, companyName, companyNameAttrs, companyAddress, companyAddressAttrs, companyPhone, companyPhoneAttrs, companyEmail, companyEmailAttrs, companyWebsite, companyWebsiteAttrs, companyDescription, companyDescriptionAttrs, companyLogoUrl, companyLogoUrlAttrs, companyTaxId, companyTaxIdAttrs, companyRegistrationId, companyRegistrationIdAttrs, companyStatus, companyStatusAttrs, companyIndustry, companyIndustryAttrs, companyType, companyTypeAttrs } = useCompanyForm();
 
 
@@ -19,15 +19,17 @@ const { loading, post } = useApi();
 
 onMounted(async () => {
   const { id } = route.params;
-  get("/users/company/getCompanyById" + id);
 
-  if (!data.value) { router.push('/company') }
+  await get("/api/v0/user/organization/company/getCompanyById/" + id);
 
-  setValues(mapCompanyFromApi(data));
+  console.log("Data =", data.value);
+
+  setValues(mapCompanyFromApi(data.value));
 });
 
+
 const submitForm = handleSubmit( async (values: CompanyPayload) => {
-      post("/user/company/update", values)
+      post("/api/v0/user/organization/company/update", values)
     }
 )
 
@@ -44,7 +46,7 @@ const submitForm = handleSubmit( async (values: CompanyPayload) => {
       </ol>
       <div class="card mb-3 bg-gradient-dark">
         <div class="card-body ms-0 ps-0 me-0 pe-0 mt-0 pt-0 pb-0">
-          <Form :validationSchema="useCompanySchema" class="text-center py-4" id="idform" v-slot="{ meta }" >
+          <Form :validationSchema="companySchema" class="text-center py-4" id="idform" v-slot="{ meta }" >
             <form @submit="submitForm" >
               <h4 class="text-start ms-2">{{ t('textLabel.companyEdit') }}</h4>
               <input type="hidden" v-model="companyId" v-bind="companyIdAttrs" >

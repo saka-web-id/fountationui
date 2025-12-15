@@ -27,8 +27,7 @@ export function useCompanySchema() {
             .min(8),
         companyRegistrationId: yup.string()
             .min(8),
-        companyStatus: yup.string()
-            .min(8),
+        companyStatus: yup.string().required("Please select a gender."),
         companyIndustry: yup.string()
             .min(8),
         companyType: yup.string()

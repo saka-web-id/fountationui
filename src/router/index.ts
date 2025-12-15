@@ -74,7 +74,7 @@ const routes: RouteRecordRaw[] = [
         }
     },
     {
-        path: '/companyedit',
+        path: '/companyedit/:id',
         name: 'companyedit',
         component: () => import("../views/company/CompanyEditView.vue"),
         meta: {

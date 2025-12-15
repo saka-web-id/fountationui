@@ -15,7 +15,7 @@ onMounted(async () => {
 });
 
 const goToEdit = (id: number) => {
-  router.push({ name: '/companyedit', params: { id } });
+  router.push({ name: 'companyedit', params: { id } });
 };
 
 </script>

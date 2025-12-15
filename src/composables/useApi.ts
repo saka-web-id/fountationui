@@ -1,5 +1,6 @@
 import { ref } from "vue";
 import api from "~/services/api";
+import { setGlobalSuccess } from "~/stores/globalSuccess";
 import { setGlobalError } from "~/stores/globalError";
 import { setGlobalLoading } from "~/stores/globalLoading";
 
@@ -16,6 +17,9 @@ export function useApi<T = any>() {
         loading.value = true;
         setGlobalLoading(true);
         error.value = null;
+        setGlobalError(null);
+        setGlobalSuccess(null);
+
 
         try {
             const response = await api.request<R>({
@@ -25,6 +29,12 @@ export function useApi<T = any>() {
             });
 
             data.value = response.data as unknown as T;
+
+            // ✅ Set global success
+            if (method === "POST") {
+                setGlobalSuccess("Operation completed successfully");
+            }
+
             return response.data;
 
         } catch (err: any) {
