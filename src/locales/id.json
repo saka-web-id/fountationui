@@ -24,7 +24,8 @@
     "save": "Simpan",
     "saving": "Menyimpan",
     "close": "Tutup",
-    "password": "Sandi"
+    "password": "Sandi",
+    "add": "Tambah"
   },
   "textLabel": {
     "organization": "Organisasi",
@@ -60,6 +61,7 @@
     "departmentDelete": "Hapus Departemen",
     "departmentDeleteConfirmation": "Apakah yakin menghapus departemen ?",
     "companyEdit": "Ubah Perusahaan",
+    "companyAdd": "Tambah Perusahaan",
     "industry": "industri",
     "taxId": "ID Pajak",
     "registrationNumber": "No.Register",

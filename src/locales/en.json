@@ -24,7 +24,8 @@
     "save": "Save",
     "saving": "Saving",
     "close": "Close",
-    "password": "Password"
+    "password": "Password",
+    "add": "Add"
   },
   "textLabel": {
     "organization": "Organization",
@@ -60,6 +61,7 @@
     "departmentDelete": "Department Delete",
     "departmentDeleteConfirmation": "Confirm Delete Department ?",
     "companyEdit": "Company Edit",
+    "companyAdd": "Company Add",
     "industry": "industry",
     "taxId": "Tax ID",
     "registrationNumber": "Register No.",

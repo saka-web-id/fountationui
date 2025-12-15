@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { Form, Field, ErrorMessage } from 'vee-validate';
 import {useApi} from "~/composables/useApi.ts";
-import { onMounted } from "vue";
+import { onMounted, computed } from "vue";
 import { useCompanySchema  } from "~/features/company/hooks/schemas/company.schema";
 import {type CompanyPayload, mapCompanyFromApi, useCompanyForm} from "~/features/company/hooks/forms/useCompanyForm";
 import { useI18n } from 'vue-i18n';
@@ -9,7 +9,6 @@ import { useRoute } from 'vue-router';
 
 const { data, get } = useApi();
 const route = useRoute();
-/*const router = useRouter();*/
 const { t } = useI18n();
 const companySchema = useCompanySchema();
 const { handleSubmit, setValues, companyId, companyIdAttrs, companyName, companyNameAttrs, companyAddress, companyAddressAttrs, companyPhone, companyPhoneAttrs, companyEmail, companyEmailAttrs, companyWebsite, companyWebsiteAttrs, companyDescription, companyDescriptionAttrs, companyLogoUrl, companyLogoUrlAttrs, companyTaxId, companyTaxIdAttrs, companyRegistrationId, companyRegistrationIdAttrs, companyStatus, companyStatusAttrs, companyIndustry, companyIndustryAttrs, companyType, companyTypeAttrs } = useCompanyForm();
@@ -17,19 +16,29 @@ const { handleSubmit, setValues, companyId, companyIdAttrs, companyName, company
 
 const { loading, post } = useApi();
 
+const isEdit = computed(() => !!route.params.id)
+
 onMounted(async () => {
-  const { id } = route.params;
+  if (isEdit.value) {
+    const { id } = route.params;
 
-  await get("/api/v0/user/organization/company/getCompanyById/" + id);
+    await get("/api/v0/user/organization/company/getCompanyById/" + id);
 
-  console.log("Data =", data.value);
+    console.log("Data =", data.value);
 
-  setValues(mapCompanyFromApi(data.value));
+    setValues(mapCompanyFromApi(data.value));
+  }
 });
 
 
 const submitForm = handleSubmit( async (values: CompanyPayload) => {
-      post("/api/v0/user/organization/company/update", values)
+        if (isEdit.value) {
+          post("/api/v0/user/organization/company/update", values)
+        } else {
+          console.log("RUNNING ADD" + values);
+
+          post("/api/v0/user/organization/company/add", values)
+        }
     }
 )
 
@@ -42,13 +51,13 @@ const submitForm = handleSubmit( async (values: CompanyPayload) => {
       <ol class="breadcrumb ms-4 me-4">
         <li class="breadcrumb-item"><router-link to="/dashboard"><span>{{ t('textLabel.home') }}</span></router-link></li>
         <li class="breadcrumb-item"><router-link to="/company"><span>{{ t('textLabel.company', 2) }}</span></router-link></li>
-        <li class="breadcrumb-item active"><span>{{ t('button.edit') }}</span></li>
+        <li class="breadcrumb-item active"><span>{{ isEdit ? t('button.edit') : t('button.add') }}</span></li>
       </ol>
       <div class="card mb-3 bg-gradient-dark">
         <div class="card-body ms-0 ps-0 me-0 pe-0 mt-0 pt-0 pb-0">
           <Form :validationSchema="companySchema" class="text-center py-4" id="idform" v-slot="{ meta }" >
             <form @submit="submitForm" >
-              <h4 class="text-start ms-2">{{ t('textLabel.companyEdit') }}</h4>
+              <h4 class="text-start ms-2">{{ isEdit ? t('textLabel.companyEdit') : t('textLabel.companyAdd')  }}</h4>
               <input type="hidden" v-model="companyId" v-bind="companyIdAttrs" >
               <div class="input-group mb-2">
                 <span class="d-flex w-25 ms-2 input-group-text" style="font-size: calc(0.6em + 0.5vw);">{{ t('textLabel.name') }}</span>
