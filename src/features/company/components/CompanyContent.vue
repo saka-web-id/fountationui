@@ -42,7 +42,7 @@ const goToEdit = (id: number) => {
                 <h3 class="ps-3">Companies</h3>
               </div>
               <div class="col-auto">
-                <button @click="$router.push({ name: 'companyadd' })" class="btn btn-outline-primary" type="button">Add New</button>
+                <button @click="router.push({ name: 'companyadd' })" class="btn btn-outline-primary" type="button">Add New</button>
               </div>
             </div>
             <div class="ms-2 me-2 mt-2 mb-2">

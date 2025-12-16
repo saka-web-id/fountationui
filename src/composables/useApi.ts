@@ -38,8 +38,18 @@ export function useApi<T = any>() {
             return response.data;
 
         } catch (err: any) {
-            error.value = err.message;
-            setGlobalError(err.message);
+            console.error("FULL ERROR:", JSON.stringify(err, null, 2));
+
+            const parts = [];
+
+            if (err?.response?.data?.message) parts.push(err.response.data.message);
+            if (err?.response?.data?.error) parts.push(err.response.data.error);
+            if (err?.message) parts.push(err.message);
+
+            const message = parts.join(" | ");
+
+            error.value = message;
+            setGlobalError(message);
             return null;
 
         } finally {

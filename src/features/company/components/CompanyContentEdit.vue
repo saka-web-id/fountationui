@@ -110,13 +110,13 @@ const submitForm = handleSubmit( async (values: CompanyPayload) => {
                   <span class="d-flex w-25 ms-2 ps-3 me-2 mb-2 input-group-text" style="font-size: calc(0.6em + 0.5vw);">Status</span>
                   <div class="form-check form-check-inline">
                     <!--<input class="form-check-input" type="radio" id="statusEnabled" value="enabled" v-model="companyStatus" v-bind="companyStatusAttrs"  />-->
-                    <Field  type="radio" name="companyStatus" v-model="companyStatus" v-bind="companyStatusAttrs" class="form-check-input" ></Field>
+                    <Field  type="radio" name="companyStatus" v-model="companyStatus" v-bind="companyStatusAttrs" value="ENABLED" class="form-check-input" ></Field>
                     <label class="form-check-label" for="statusEnabled">{{ t('button.enable') }}</label>
                   </div>
 
                   <div class="form-check form-check-inline">
                     <!-- <input class="form-check-input" type="radio" id="statusDisabled" value="disabled" v-model="companyStatus" />-->
-                    <Field type="radio" name="companyStatus" v-model="companyStatus" v-bind="companyStatusAttrs" class="form-check-input" ></Field>
+                    <Field type="radio" name="companyStatus" v-model="companyStatus" v-bind="companyStatusAttrs" value="DISABLED"  class="form-check-input" ></Field>
                     <label class="form-check-label" for="statusDisabled"> {{ t('button.disable') }} </label>
                   </div>
 
