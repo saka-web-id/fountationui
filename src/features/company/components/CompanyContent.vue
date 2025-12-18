@@ -18,6 +18,10 @@ const goToEdit = (id: number) => {
   router.push({ name: 'companyedit', params: { id } });
 };
 
+const goToDepartment = (id: number) => {
+  router.push({ name: 'companydepartment', params: { id } });
+}
+
 </script>
 
 <template>
@@ -71,6 +75,7 @@ const goToEdit = (id: number) => {
                   <td class="text-center">
                     <div class="btn-group" role="group">
                       <button class="btn btn-primary" @click="goToEdit(d.companyId)">{{ t('button.edit') }}</button>
+                      <button class="btn btn-info" @click="goToDepartment(d.companyId)">{{ t('button.department') }}</button>
                     </div>
                   </td>
                 </tr>

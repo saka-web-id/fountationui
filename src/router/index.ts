@@ -70,13 +70,9 @@ const routes: RouteRecordRaw[] = [
         }
     },
     {
-        path: '/department',
-        name: 'department',
+        path: '/companydepartment/:id',
+        name: 'companydepartment',
         component: () => import("../views/department/DepartmentView.vue"),
-        meta: {
-            requiresAuth: true, // Add meta field to indicate protected route
-            roleAccess: "administrator,finance,warehouse,offline,vendor"
-        },
         beforeEnter: async (_to, _from, next) => {
             if (!auth.user) await fetchUser()
             if (hasRole('ADMIN')) next()

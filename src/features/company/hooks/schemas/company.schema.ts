@@ -8,29 +8,21 @@ export function useCompanySchema() {
         companyName: yup.string()
             .min(8)
             .required(),
-        companyAddress: yup.string()
-            .min(8),
+        companyAddress: yup.string(),
         companyPhone: yup.number()
             .min(8),
         companyEmail: yup.string()
             .email()
             .required(t('textError.formatError.email')),
         companyWebsite: yup.string()
-            .url()
-            .min(8),
-        companyDescription: yup.string()
-            .min(8),
+            .url(),
+        companyDescription: yup.string(),
         companyLogoUrl: yup.string()
-            .url()
-            .min(8),
-        companyTaxId: yup.string()
-            .min(8),
-        companyRegistrationId: yup.string()
-            .min(8),
-        companyStatus: yup.string().required("Please select a gender."),
-        companyIndustry: yup.string()
-            .min(8),
+            .url(),
+        companyTaxId: yup.string(),
+        companyRegistrationId: yup.string(),
+        companyStatus: yup.string().required("Please select a status."),
+        companyIndustry: yup.string(),
         companyType: yup.string()
-            .min(8)
     });
 }

@@ -1,7 +1,17 @@
 <script setup lang="ts">
+import { onMounted } from 'vue';
+import { useApi } from "~/composables/useApi";
 import { useI18n } from 'vue-i18n';
 
 const { t } = useI18n();
+const { data, get } = useApi();
+
+onMounted(async () => {
+
+  await get('/api/v0/user/companies')
+
+});
+
 </script>
 
 <template>
@@ -25,33 +35,16 @@ const { t } = useI18n();
                 <thead>
                 <tr>
                   <th>{{ t('textLabel.number') }}</th>
-                  <th>{{ t('textLabel.company', 1) }}</th>
                   <th>{{ t('textLabel.department', 2) }}</th>
-                  <th>{{ t('textLabel.employee', 2) }}</th>
-                  <th>{{ t('textLabel.asset', 2) }}</th>
+                  <th>{{ t('textLabel.description') }}</th>
                   <th class="text-center">{{ t('textLabel.action') }}</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                  <td>1</td>
-                  <td>ABS Corp.</td>
-                  <td>xxx@x.com</td>
-                  <td>50</td>
-                  <td>50</td>
-                  <td class="text-center">
-                    <div class="btn-group" role="group">
-                      <router-link to="/departmentedit" class="btn btn-primary" tag="button">{{ t('button.edit') }}</router-link>
-                      <button class="btn btn-danger" type="button" data-bs-target="#myModal" data-bs-toggle="modal">{{ t('button.delete') }}</button>
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td>2</td>
-                  <td>ABD Corp.</td>
-                  <td>yyy@y.com</td>
-                  <td>5</td>
-                  <td>5</td>
+                <tr v-for="d in data" :key="d.departmentId">
+                  <td>{{ d.departmentId  }}</td>
+                  <td>{{ d.departmentName  }}</td>
+                  <td>{{ d.departmentDescription  }}</td>
                   <td class="text-center">
                     <div class="btn-group" role="group">
                       <router-link to="/departmentedit" class="btn btn-primary" tag="button">{{ t('button.edit') }}</router-link>
