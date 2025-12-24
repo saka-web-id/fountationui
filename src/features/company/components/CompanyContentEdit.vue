@@ -7,14 +7,11 @@ import {type CompanyPayload, mapCompanyFromApi, useCompanyForm} from "~/features
 import { useI18n } from 'vue-i18n';
 import { useRoute } from 'vue-router';
 
-const { data, get } = useApi();
+const { data, loading, get, post } = useApi();
 const route = useRoute();
 const { t } = useI18n();
 const companySchema = useCompanySchema();
 const { handleSubmit, setValues, companyId, companyIdAttrs, companyName, companyNameAttrs, companyAddress, companyAddressAttrs, companyPhone, companyPhoneAttrs, companyEmail, companyEmailAttrs, companyWebsite, companyWebsiteAttrs, companyDescription, companyDescriptionAttrs, companyLogoUrl, companyLogoUrlAttrs, companyTaxId, companyTaxIdAttrs, companyRegistrationId, companyRegistrationIdAttrs, companyStatus, companyStatusAttrs, companyIndustry, companyIndustryAttrs, companyType, companyTypeAttrs } = useCompanyForm();
-
-
-const { loading, post } = useApi();
 
 const isEdit = computed(() => !!route.params.id)
 
@@ -22,9 +19,7 @@ onMounted(async () => {
   if (isEdit.value) {
     const { id } = route.params;
 
-    await get("/api/v0/user/organization/company/getCompanyById/" + id);
-
-    console.log("Data =", data.value);
+    await get("/api/v0/user/organization/company/list/" + id);
 
     setValues(mapCompanyFromApi(data.value));
   }
@@ -35,8 +30,6 @@ const submitForm = handleSubmit( async (values: CompanyPayload) => {
         if (isEdit.value) {
           post("/api/v0/user/organization/company/update", values)
         } else {
-          console.log("RUNNING ADD" + values);
-
           post("/api/v0/user/organization/company/add", values)
         }
     }

@@ -6,7 +6,7 @@ export function useDepartmentSchema() {
         departmentName: yup.string()
             .min(8)
             .required(),
-        departmentDescription: yup.string(),
-        departmentCreatedAt: yup.date()
+        departmentStatus: yup.string().required("Please select a status."),
+        departmentDescription: yup.string()
     });
 }

@@ -70,7 +70,7 @@ const routes: RouteRecordRaw[] = [
         }
     },
     {
-        path: '/companydepartment/:id',
+        path: '/companydepartment/:companyId',
         name: 'companydepartment',
         component: () => import("../views/department/DepartmentView.vue"),
         beforeEnter: async (_to, _from, next) => {
@@ -80,13 +80,29 @@ const routes: RouteRecordRaw[] = [
         }
     },
     {
-        path: '/departmentedit',
+        path: '/departmentedit/:paramCompanyId/:paramDepartmentId',
         name: 'departmentedit',
         component: () => import("../views/department/DepartmentEditView.vue"),
-        meta: {
-            requiresAuth: true, // Add meta field to indicate protected route
-            roleAccess: "administrator,finance,warehouse,offline,vendor"
-        },
+        beforeEnter: async (_to, _from, next) => {
+            if (!auth.user) await fetchUser()
+            if (hasRole('ADMIN')) next()
+            else next('/unauthorized')
+        }
+    },
+    {
+        path: '/departmentadd/',
+        name: 'departmentadd',
+        component: () => import("../views/department/DepartmentEditView.vue"),
+        beforeEnter: async (_to, _from, next) => {
+            if (!auth.user) await fetchUser()
+            if (hasRole('ADMIN')) next()
+            else next('/unauthorized')
+        }
+    },
+    {
+        path: '/departmentusers/:companyIdParam/:departmentIdParam',
+        name: 'departmentusers',
+        component: () => import("../views/user/UserView.vue"),
         beforeEnter: async (_to, _from, next) => {
             if (!auth.user) await fetchUser()
             if (hasRole('ADMIN')) next()
@@ -97,10 +113,6 @@ const routes: RouteRecordRaw[] = [
         path: '/user',
         name: 'user',
         component: () => import("../views/user/UserView.vue"),
-        meta: {
-            requiresAuth: true, // Add meta field to indicate protected route
-            roleAccess: "administrator,finance,warehouse,offline,vendor"
-        },
         beforeEnter: async (_to, _from, next) => {
             if (!auth.user) await fetchUser()
             if (hasRole('ADMIN')) next()
@@ -108,13 +120,19 @@ const routes: RouteRecordRaw[] = [
         }
     },
     {
-        path: '/useredit',
+        path: '/useradd/:companyIdParam/:departmentIdParam',
+        name: 'useradd',
+        component: () => import("../views/user/UserEditView.vue"),
+        beforeEnter: async (_to, _from, next) => {
+            if (!auth.user) await fetchUser()
+            if (hasRole('ADMIN')) next()
+            else next('/unauthorized')
+        }
+    },
+    {
+        path: '/useredit/:id/:companyIdParam/:departmentIdParam',
         name: 'useredit',
         component: () => import("../views/user/UserEditView.vue"),
-        meta: {
-            requiresAuth: true, // Add meta field to indicate protected route
-            roleAccess: "administrator,finance,warehouse,offline,vendor"
-        },
         beforeEnter: async (_to, _from, next) => {
             if (!auth.user) await fetchUser()
             if (hasRole('ADMIN')) next()

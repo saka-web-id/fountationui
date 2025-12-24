@@ -43,6 +43,7 @@ const { t } = useI18n();
           </svg>
           {{ t('textLabel.company', 2) }}
         </router-link>
+        <!--
         <router-link to="/department" class="dropdown-item" id="iddepartment">
           <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-building-down me-1 mb-1">
             <path d="M12.5 9a3.5 3.5 0 1 1 0 7 3.5 3.5 0 0 1 0-7m.354 5.854 1.5-1.5a.5.5 0 0 0-.708-.708l-.646.647V10.5a.5.5 0 0 0-1 0v2.793l-.646-.647a.5.5 0 0 0-.708.708l1.5 1.5a.5.5 0 0 0 .708 0Z"></path>
@@ -57,6 +58,7 @@ const { t } = useI18n();
           </svg>
           {{ t('textLabel.user', 2) }}
         </router-link>
+        -->
       </div>
     </li>
     <li class="nav-item dropdown show" id="idsetting">
