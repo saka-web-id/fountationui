@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { onMounted } from 'vue';
 import { useApi } from "~/composables/useApi";
-import {useRouter} from "vue-router";
+import { useRouter } from "vue-router";
 import { useI18n } from 'vue-i18n';
 
 const { t } = useI18n();
@@ -43,8 +43,8 @@ const goToDepartment = (companyId: number) => {
             <div class="text-end"><button class="btn btn-outline-primary btn-sm ms-2 me-2" type="button">{{ t('button.search') }}</button></div>
           </div>-->
 
-          <div class="table-responsive">
-            <div class="row d-flex justify-content-between align-items-center ms-2 me-2 mt-2 mb-2">
+          <div class="table-responsive pt-2">
+            <div class="row d-flex justify-content-between align-items-center me-2 mt-2 mb-2">
               <div class="col-auto">
                 <h4 class="ps-3">Companies</h4>
               </div>

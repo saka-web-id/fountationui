@@ -24,7 +24,7 @@ api.interceptors.response.use(
             if (router.currentRoute.value.name !== "home") {
                 setTimeout(() => {
                     router.replace({name: "home"});
-                }, 1500);
+                }, 3000);
             }
         }
 

@@ -28,7 +28,11 @@ onMounted(async () => {
 
   await getCompany("/api/v0/user/organization/company/list/" + companyIdParam );
 
-  await getDepartment('/api/v0/user/organization/department/list/' + departmentIdParam);
+  console.log("Department ID Param : " + departmentIdParam);
+
+  await getDepartment('/api/v0/user/organization/department/list/' + companyIdParam);
+
+  setValues({ departmentId: Number(departmentIdParam), companyId: Number(companyIdParam)  });
 
 });
 
@@ -36,7 +40,7 @@ const submitForm = handleSubmit( async (values: UserPayload) => {
         if (isEdit.value) {
           post("/api/v0/user/update", values)
         } else {
-          post("/api/v0/user/add", values)
+          post("/api/v0/user/add/"+companyIdParam+"/"+departmentIdParam, values)
         }
 
     }

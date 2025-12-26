@@ -90,7 +90,7 @@ const routes: RouteRecordRaw[] = [
         }
     },
     {
-        path: '/departmentadd/',
+        path: '/departmentadd/:paramCompanyId',
         name: 'departmentadd',
         component: () => import("../views/department/DepartmentEditView.vue"),
         beforeEnter: async (_to, _from, next) => {

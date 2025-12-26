@@ -19,7 +19,7 @@ onMounted(async () => {
   if (isEdit.value) {
     const { id } = route.params;
 
-    await get("/api/v0/user/organization/company/list/" + id);
+    await get("/api/v0/user/organization/company/detail/" + id);
 
     setValues(mapCompanyFromApi(data.value));
   }

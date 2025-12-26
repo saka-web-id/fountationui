@@ -49,6 +49,7 @@ const goToEdit = (id: number) => {
       <div class="card mb-3 bg-gradient-dark">
         <div class="card-body ms-0 ps-0 me-0 pe-0 mt-0 pt-0 pb-0">
 
+          <!--
           <div class="text-center py-4" id="idform">
             <div class="input-group mb-2">
               <span class="d-flex w-25 ms-2 input-group-text" style="font-size: calc(0.6em + 0.5vw);">{{ t('textLabel.company', 1) }}</span>
@@ -64,9 +65,10 @@ const goToEdit = (id: number) => {
               </select>
             </div>
           </div>
+          -->
 
-          <div class="table-responsive">
-            <div class="row d-flex justify-content-between align-items-center">
+          <div class="table-responsive pt-2">
+            <div class="row d-flex justify-content-between align-items-center me-2 mt-2 mb-2">
               <div class="col-auto">
                 <h3 class="ps-3">Users</h3>
               </div>

@@ -14,7 +14,7 @@ const route = useRoute();
 const departmentScheme = useDepartmentSchema();
 const { handleSubmit, setValues, departmentId, departmentIdAttrs, companyId, companyIdAttrs, departmentName, departmentNameAttrs, departmentStatus, departmentStatusAttrs, departmentDescription, departmentDescriptionAttrs } = useDepartmentForm();
 
-const isEdit = computed(() => !!route.params.paramCompanyId);
+const isEdit = computed(() => !!route.params.paramDepartmentId);
 const { paramCompanyId, paramDepartmentId } = route.params;
 
 onMounted(async () => {
@@ -29,6 +29,8 @@ onMounted(async () => {
   await getCompany("/api/v0/user/organization/company/list/" + paramCompanyId);
 
   console.log("Data =", companyData.value);
+
+  setValues({ companyId: Number(paramCompanyId) })
 
 });
 
