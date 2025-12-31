@@ -25,7 +25,8 @@
     "saving": "Saving",
     "close": "Close",
     "password": "Password",
-    "add": "Add"
+    "add": "Add",
+    "view": "View"
   },
   "textLabel": {
     "organization": "Organization",
@@ -65,12 +66,15 @@
     "industry": "industry",
     "taxId": "Tax ID",
     "registrationNumber": "Register No.",
-    "role": "Role",
+    "role": "Role | Roles",
     "register": "Register",
     "createdAt": "Created At",
     "note": "Note",
     "true": "True",
-    "false": "False"
+    "false": "False",
+    "dateCreated": "Date Created",
+    "permission": "Permission | Permissions",
+    "isAssigned": "Is Assigned"
   },
   "textField": {
     "email": "Email",

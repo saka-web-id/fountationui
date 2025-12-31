@@ -25,7 +25,8 @@
     "saving": "Menyimpan",
     "close": "Tutup",
     "password": "Sandi",
-    "add": "Tambah"
+    "add": "Tambah",
+    "view": "Lihat"
   },
   "textLabel": {
     "organization": "Organisasi",
@@ -65,12 +66,15 @@
     "industry": "industri",
     "taxId": "ID Pajak",
     "registrationNumber": "No.Register",
-    "role": "Tugas",
+    "role": "Tugas | Peranan",
     "register": "Daftar",
     "createdAt": "Dibuat tgl.",
     "note": "Catatan",
     "true": "Benar",
-    "false": "Salah"
+    "false": "Salah",
+    "dateCreated": "Tanggal Dibuat",
+    "permission": "Ijin | Ijin",
+    "isAssigned": "Apakah ditugaskan"
   },
   "textField": {
     "email": "Surel",

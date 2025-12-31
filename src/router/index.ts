@@ -154,6 +154,36 @@ const routes: RouteRecordRaw[] = [
         }
     },
     {
+        path: '/roles/:companyIdParam',
+        name: 'roles',
+        component: () => import("../views/role/RoleView.vue"),
+        beforeEnter: async (_to, _from, next) => {
+            if (!auth.user) await fetchUser()
+            if (hasRole('ADMIN')) next()
+            else next('/unauthorized')
+        }
+    },
+    {
+        path: '/roleedit/:roleIdParam/:companyIdParam',
+        name: 'roleedit',
+        component: () => import("../views/role/RoleEditView.vue"),
+        beforeEnter: async (_to, _from, next) => {
+            if (!auth.user) await fetchUser()
+            if (hasRole('ADMIN')) next()
+            else next('/unauthorized')
+        }
+    },
+    {
+        path: '/roleadd/:companyIdParam',
+        name: 'roleadd',
+        component: () => import("../views/role/RoleEditView.vue"),
+        beforeEnter: async (_to, _from, next) => {
+            if (!auth.user) await fetchUser()
+            if (hasRole('ADMIN')) next()
+            else next('/unauthorized')
+        }
+    },
+    {
         path: '/email',
         name: 'email',
         component: () => import("../views/email/EmailView.vue"),

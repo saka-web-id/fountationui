@@ -17,6 +17,14 @@ export interface UserPayload {
     companyId: number;
 }
 
+export interface UserCompanyPayLoad {
+    userId: number;
+    userName: string;
+    companyId: number;
+    companyName: string;
+    isDefault: boolean;
+}
+
 
 export const mapUserFromApi = (apiData: any): UserPayload => ({
     userId: apiData.userId,
@@ -32,6 +40,14 @@ export const mapUserFromApi = (apiData: any): UserPayload => ({
     userNote: apiData.userNote,
     departmentId: 0,
     companyId: 0,
+});
+
+export const mapUserCompanyFromAPi = (apiData: any) : UserCompanyPayLoad => ({
+   userId: apiData.userId,
+   userName: apiData.userName,
+   companyId: apiData.companyId,
+   companyName: apiData.companyName,
+   isDefault: apiData.isDefault
 });
 
 export function useUserForm() {

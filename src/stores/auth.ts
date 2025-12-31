@@ -4,33 +4,26 @@ interface User {
     id: number;
     name: string;
     email: string;
-    status: string;
-    locale: string;
-    role: string;
-    department: string;
-    organization: string;
-    createdAt: string
-    membershipStatus: string;
+    accountNumber: string;
+    accountStatus: string;
     membershipType: string;
-    membershipStartDate: string;
-    membershipEndDate: string;
+    membershipStatus: string;
+    createdAt: string;              // ISO date string
+    membershipStartDate: string;    // ISO date string
+    membershipEndDate: string;      // ISO date string
+    authority: Authority;
 }
 
-/*
-accountNumber  :    "JIP00010"
-name    :    "sakoen"
-email    :    "sakoen_not_death@yahoo.com"
-accountStatus    :    "ACTIVE"
-locale    :    null
-role    :    null
-department    :    null
-organization    :    null
-createdAt    :    "2025-12-08T16:38:40.10737Z"
-membershipStatus    :    null
-membershipType    :    "VIP"
-membershipEndDate    :    "2025-12-08T12:32:41.945484Z"
-membershipStartDate    :    "2025-12-08T12:32:41.945484Z"
-*/
+interface Authority {
+    roleId: number;
+    roleName: string;
+    roleDescription: string;
+    permissions: Permission[];
+}
+
+interface Permission {
+    permissionName: string;
+}
 
 interface AuthState {
     user: User | null;
