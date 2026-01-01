@@ -25,17 +25,54 @@ export interface PermissionPayload {
     isAssigned: boolean;
 }
 
+export const mapRoleFormFromApi = (apiData: RolePayload): RoleForm => ({
+    roleId: Number(apiData.roleId),
+    roleName: apiData.roleName,
+    roleDescription: apiData.roleDescription,
+    permissionIds: apiData.permissions.filter(p => p.isAssigned).map(p => p.permissionId)
+})
+
 export const mapUserFromApi = (apiData: any): RolePayload => ({
-    roleId: apiData.roleId,
+    roleId: Number(apiData.roleId),
     roleName: apiData.roleName,
     roleDescription: apiData.roleDescription,
     permissions: apiData.permissions
 });
 
+export function useRoleForm() {
+  const { defineField, handleSubmit, setValues } = useForm<RoleForm> ({
+      validationSchema: useRoleSchema,
+      initialValues: {
+          roleId: 0,
+          roleName: "",
+          roleDescription:"",
+          permissionIds:[]
+      }
+  })
+
+    const [roleId, roleIdAttrs] = defineField('roleId');
+    const [roleName, roleNameAttrs] = defineField('roleName');
+    const [roleDescription, roleDescriptionAttrs] = defineField('roleDescription');
+    const [permissionIds, permissionIdsAttrs] = defineField('permissionIds');
+
+    return {
+        handleSubmit,
+        setValues,
+        roleId,
+        roleIdAttrs,
+        roleName,
+        roleNameAttrs,
+        roleDescription,
+        roleDescriptionAttrs,
+        permissionIds,
+        permissionIdsAttrs
+    }
+}
+
 export function useRolePayload() {
     // useForm with schema
     const {  defineField, handleSubmit, setValues } = useForm<RolePayload>({
-        validationSchema: useRoleSchema(),
+        validationSchema: useRoleSchema,
         initialValues: {
             roleId: 0,
             roleName: "",

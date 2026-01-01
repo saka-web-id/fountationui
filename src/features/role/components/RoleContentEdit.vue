@@ -1,12 +1,18 @@
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n';
 import { useApi } from "~/composables/useApi";
-import { computed, onMounted } from "vue";
+import { computed, onMounted, ref } from "vue";
 import { useRoute } from 'vue-router';
 import { ErrorMessage, Field, Form } from "vee-validate";
 import { useRoleSchema } from '../hooks/schemas/role.schema';
-import {type RolePayload, useRolePayload, mapUserFromApi} from "~/features/role/hooks/forms/useRolePayload.ts";
-const { handleSubmit, setValues, roleId, roleIdAttrs, roleName, roleNameAttrs, roleDescription, roleDescriptionAttrs, permissions } = useRolePayload();
+import {
+  useRoleForm,
+  type PermissionPayload,
+  type RoleForm,
+  type RolePayload,
+  mapRoleFormFromApi
+} from "~/features/role/hooks/forms/useRolePayload";
+const { setValues: setValuesRoleForm, handleSubmit, roleName, roleDescription, permissionIds } = useRoleForm();
 
 const { t } = useI18n();
 const route = useRoute();
@@ -14,23 +20,47 @@ const { roleIdParam, companyIdParam } = route.params;
 const isEdit = computed(() => !!route.params.roleIdParam);
 
 const { data, loading, get, post } = useApi();
+const { data: dataPermissions, get: getPermissions } = useApi();
 const roleSchema = useRoleSchema();
+const permissionsForm = ref<PermissionPayload[]>([]);
 
 onMounted(async () => {
-  await get(`/api/v0/authorization/role/permission/detail/` + companyIdParam + "/" + roleIdParam);
 
-  setValues(mapUserFromApi(data.value));
+  await getPermissions('/api/v0/authorization/permission/list')
+  permissionsForm.value = dataPermissions.value;
+
+  if (isEdit.value) {
+    await get(`/api/v0/authorization/role/permission/detail/` + companyIdParam + "/" + roleIdParam);
+
+    setValuesRoleForm(mapRoleFormFromApi(data.value));
+
+    permissionsForm.value = permissionsForm.value.map(p => ({
+      ...p,
+      isAssigned: permissionIds.value.includes(p.permissionId)
+    }));
+
+  }
 
 });
 
-const submitForm = handleSubmit(async ( payload: RolePayload) => {
+const submitForm = handleSubmit(async ( roleForm: RoleForm) => {
 
-  console.log("Values POST:", payload);
+  permissionsForm.value = permissionsForm.value.map(p => ({
+    ...p,
+    isAssigned: permissionIds.value.includes(p.permissionId)
+  }));
+
+  const finalPayload:RolePayload = {
+    roleId: roleForm.roleId,
+    roleName: roleForm.roleName,
+    roleDescription: roleForm.roleDescription,
+    permissions: permissionsForm.value
+  };
 
   if (isEdit.value) {
-    await post(`/api/v0/authorization/role/permission/update/${roleIdParam}`, payload);
+    await post(`/api/v0/authorization/role/permission/update/${roleIdParam}`, finalPayload);
   } else {
-    await post(`/api/v0/authorization/role/permission/add/${companyIdParam}`, payload);
+    await post(`/api/v0/authorization/role/permission/add/${companyIdParam}`, finalPayload);
   }
 });
 </script>
@@ -52,15 +82,15 @@ const submitForm = handleSubmit(async ( payload: RolePayload) => {
           <Form :validation-schema="roleSchema" id="idform" v-slot="{ meta }" class="text-center py-4" >
             <div class="text-center py-4" id="idform">
               <h4 class="text-start ms-2">Role Edit</h4>
-              <input type="hidden" v-model="roleId" v-bind="roleIdAttrs" >
               <div class="input-group mb-2">
                 <span class="d-flex w-25 ms-2 input-group-text">Name</span>
-                <Field name="roleName" v-model="roleName" v-bind="roleNameAttrs" as="input" type="text" class="form-control d-flex ms-0 ps-2 me-2 pe-4" />
+<!--                <Field name="roleName" v-model="roleName" v-bind="roleNameAttrs" as="input" type="text" class="form-control d-flex ms-0 ps-2 me-2 pe-4" />-->
+                <Field name="roleName" v-model="roleName" as="input" class="form-control d-flex ms-0 ps-2 me-2 pe-4" />
                 <ErrorMessage name="roleName" class="text-start text-danger d-flex ms-0 ps-2 me-2 pe-4" />
               </div>
               <div class="input-group mb-2">
                 <span class="w-25 ms-2 input-group-text">Description</span>
-                <Field name="roleDescription" v-model="roleDescription" v-bind="roleDescriptionAttrs" as="input" type="text" class="form-control d-flex ms-0 ps-2 me-2 pe-4" />
+                <Field name="roleDescription" v-model="roleDescription" as="input" type="text" class="form-control d-flex ms-0 ps-2 me-2 pe-4" />
                 <ErrorMessage name="roleDescription" class="text-start text-danger d-flex ms-0 ps-2 me-2 pe-4" />
               </div>
 
@@ -74,16 +104,11 @@ const submitForm = handleSubmit(async ( payload: RolePayload) => {
                   </tr>
                   </thead>
                   <tbody>
-                  <tr v-for="permission in permissions" :key="permission.permissionId">
+                  <tr v-for="permission in permissionsForm" :key="permission.permissionId">
                     <td class="text-left">{{ permission.permissionName }}</td>
                     <td class="text-left">{{ permission.permissionDescription }}</td>
                     <td class="text-center">
-                      <Field
-                          type="checkbox"
-                          name="permissions"
-                          :value="permission.permissionId"
-                          :checked="permission.isAssigned"
-                      />
+                      <Field type="checkbox" name="permissionIds" v-model="permissionIds" :checked="permission.isAssigned" :value="permission.permissionId" />
                     </td>
                   </tr>
                   </tbody>
