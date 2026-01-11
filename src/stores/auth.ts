@@ -1,4 +1,6 @@
-import { reactive } from 'vue';
+
+import { defineStore } from 'pinia'
+
 
 interface User {
     id: number;
@@ -12,6 +14,8 @@ interface User {
     membershipStartDate: string;    // ISO date string
     membershipEndDate: string;      // ISO date string
     authority: Authority;
+    company: Company;
+    department: Department;
 }
 
 interface Authority {
@@ -19,6 +23,31 @@ interface Authority {
     roleName: string;
     roleDescription: string;
     permissions: Permission[];
+}
+
+interface Company {
+    companyId: number;
+    companyName: string;
+    companyAddress: string;
+    companyPhone: string;
+    companyEmail: string;
+    companyWebsite: string;
+    companyDescription: string;
+    companyLogoUrl: string;
+    companyTaxId: string;
+    companyRegistrationId: string;
+    companyStatus: string;
+    companyIndustry: string;
+    companyType: string;
+}
+
+interface Department {
+    departmentId: number;
+    departmentName: string;
+    departmentStatus: string;
+    departmentDescription: string;
+    departmentCreatedAt: string;
+    departmentUpdatedAt: string;
 }
 
 interface Permission {
@@ -30,7 +59,11 @@ interface AuthState {
     isAuthenticated: boolean;
 }
 
-export const auth = reactive<AuthState>({
-    user: null,
-    isAuthenticated: false,
-});
+export const useAuthStore = defineStore('auth', {
+    state: (): AuthState => ({
+        user: null,
+        isAuthenticated: false,
+    }),
+    persist: true, // 👈 requires pinia-plugin-persistedstate
+})
+

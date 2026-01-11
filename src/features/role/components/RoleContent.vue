@@ -4,7 +4,9 @@ import { useApi } from "~/composables/useApi";
 import {onMounted, ref} from "vue";
 import { type UserCompanyPayLoad } from "~/features/user/hooks/forms/useUserForm.ts";
 import {useRoute, useRouter} from "vue-router";
+import { useAuthStore } from '~/stores/auth'
 
+const auth = useAuthStore()
 const { data, get } = useApi();
 const { data: userCompanyData, get: getUserCompany } = useApi();
 const { t } = useI18n();
@@ -22,11 +24,11 @@ const selectedCompanyId = ref<number | null>(
 
 onMounted(async () => {
 
-  await getUserCompany('/api/v0/user/organization/company/list/0' );
+  await getUserCompany('/api/v0/user/organization/company/list/companyId/' + auth.user?.company.companyId + "/userId/" + auth.user?.id + "/valueCompanyId/0" );
 
-  console.log(userCompanyData.value);
+  console.log("List Company : ", userCompanyData.value);
 
-  console.log(userCompanyData.value.find((c: any) : UserCompanyPayLoad => c.companyIsDefault));
+  console.log("Default user company : ", userCompanyData.value.find((c: any) : UserCompanyPayLoad => c.companyIsDefault));
 
   const defaultCompany = userCompanyData.value.find((c: any) : UserCompanyPayLoad => c.companyIsDefault)
   if (defaultCompany) { //Get is defaultCompany True
@@ -35,7 +37,7 @@ onMounted(async () => {
     }
   }
 
-  await get('/api/v0/authorization/company/role/list/' + selectedCompanyId.value );
+  await get('/api/v0/authorization/company/role/list/companyId/' + auth.user?.company.companyId + "/userId/" + auth.user?.id + "/valueCompanyId/" + selectedCompanyId.value );
 
 });
 
@@ -48,7 +50,7 @@ async function onCompanyChange() {
     });
 
     // Then trigger the API call and wait for it to complete
-    await get('/api/v0/authorization/company/role/list/' + selectedCompanyId.value);
+    await get('/api/v0/authorization/company/role/list/companyId/' + auth.user?.company.companyId + "/userId/" + auth.user?.id + "/valueCompanyId/" + selectedCompanyId.value);
   }
 }
 

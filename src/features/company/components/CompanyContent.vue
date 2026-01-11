@@ -3,19 +3,23 @@ import { onMounted } from 'vue';
 import { useApi } from "~/composables/useApi";
 import { useRouter } from "vue-router";
 import { useI18n } from 'vue-i18n';
+import { useAuthStore } from '~/stores/auth'
 
+const auth = useAuthStore()
 const { t } = useI18n();
 const { data, get } = useApi();
 const router = useRouter();
 
 onMounted(async () => {
 
-  await get('/api/v0/user/companies')
+  console.log("URL :", '/api/v0/user/companies/list/companyId/'+auth.user?.company.companyId + "/userId/" + auth.user?.id);
+
+  await get('/api/v0/user/companies/list/companyId/'+auth.user?.company.companyId + "/userId/" + auth.user?.id)
 
 });
 
-const goToEdit = (id: number) => {
-  router.push({ name: 'companyedit', params: { id } });
+const goToEdit = (companyIdParam: number) => {
+  router.push({ name: 'companyedit', params: { companyIdParam } });
 };
 
 const goToDepartment = (companyId: number) => {

@@ -1,4 +1,5 @@
 <script setup lang="ts">
+
 import { useI18n } from 'vue-i18n';
 import { useApi } from "~/composables/useApi";
 import { computed, onMounted, ref } from "vue";
@@ -12,6 +13,9 @@ import {
   type RolePayload,
   mapRoleFormFromApi
 } from "~/features/role/hooks/forms/useRolePayload";
+import { useAuthStore } from '~/stores/auth'
+
+const auth = useAuthStore()
 const { setValues: setValuesRoleForm, handleSubmit, roleName, roleDescription, permissionIds } = useRoleForm();
 
 const { t } = useI18n();
@@ -26,11 +30,11 @@ const permissionsForm = ref<PermissionPayload[]>([]);
 
 onMounted(async () => {
 
-  await getPermissions('/api/v0/authorization/permission/list')
+  await getPermissions('/api/v0/authorization/permission/list/companyId/' + auth.user?.company.companyId + "/userId/" + auth.user?.id);
   permissionsForm.value = dataPermissions.value;
 
   if (isEdit.value) {
-    await get(`/api/v0/authorization/role/permission/detail/` + companyIdParam + "/" + roleIdParam);
+    await get(`/api/v0/authorization/role/permission/detail/companyId/` + auth.user?.company.companyId + "/userId/" + auth.user?.id + "/valueCompanyId/" + companyIdParam + "/valueRoleId/" + roleIdParam);
 
     setValuesRoleForm(mapRoleFormFromApi(data.value));
 
@@ -58,9 +62,9 @@ const submitForm = handleSubmit(async ( roleForm: RoleForm) => {
   };
 
   if (isEdit.value) {
-    await post(`/api/v0/authorization/role/permission/update/${roleIdParam}`, finalPayload);
+    await post(`/api/v0/authorization/role/permission/update/companyId/` + auth.user?.company.companyId + "/userId/" + auth.user?.id + "/valueRoleId/" + roleIdParam, finalPayload);
   } else {
-    await post(`/api/v0/authorization/role/permission/add/${companyIdParam}`, finalPayload);
+    await post(`/api/v0/authorization/role/permission/add/companyId/` + auth.user?.company.companyId + "/userId/" + auth.user?.id + "/valueCompanyId/" + companyIdParam, finalPayload);
   }
 });
 </script>

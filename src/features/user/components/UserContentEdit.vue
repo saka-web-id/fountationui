@@ -6,7 +6,9 @@ import {mapUserFromApi, useUserForm, type UserPayload} from "~/features/user/hoo
 import {useRoute} from "vue-router";
 import { useUserSchema } from "~/features/user/hooks/schemas/user.schemas";
 import {ErrorMessage, Field, Form} from "vee-validate";
+import { useAuthStore } from '~/stores/auth'
 
+const auth = useAuthStore()
 const { t } = useI18n();
 const { data, loading, get, post } = useApi();
 const { data: companyData, get: getCompany } = useApi();
@@ -21,16 +23,16 @@ const { id, companyIdParam, departmentIdParam } = route.params;
 onMounted(async () => {
   if (isEdit.value) {
 
-    await get("/api/v0/user/detail/" + id);
+    await get("/api/v0/user/detail/companyId/" + auth.user?.company.companyId + "/userId/" + auth.user?.id + "/valueId/" + + id);
 
     setValues(mapUserFromApi(data.value));
   }
 
-  await getCompany("/api/v0/user/organization/company/list/" + companyIdParam );
+  await getCompany("/api/v0/user/organization/company/list/companyId/" + auth.user?.company.companyId + "/userId/" + auth.user?.id + "/valueCompanyId/" + companyIdParam);
 
   console.log("Department ID Param : " + departmentIdParam);
 
-  await getDepartment('/api/v0/user/organization/department/list/' + companyIdParam);
+  await getDepartment('/api/v0/user/organization/department/list/companyId/' + companyIdParam + "/userId/" + auth.user?.id);
 
   setValues({ departmentId: Number(departmentIdParam), companyId: Number(companyIdParam)  });
 
@@ -38,9 +40,9 @@ onMounted(async () => {
 
 const submitForm = handleSubmit( async (values: UserPayload) => {
         if (isEdit.value) {
-          post("/api/v0/user/update", values)
+          post("/api/v0/user/update/companyId/" + auth.user?.company.companyId + "/userId/" + auth.user?.id, values)
         } else {
-          post("/api/v0/user/add/"+companyIdParam+"/"+departmentIdParam, values)
+          post("/api/v0/user/add/companyId/" + auth.user?.company.companyId + "/userId/" + auth.user?.id , values)
         }
 
     }

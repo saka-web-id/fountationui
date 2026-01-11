@@ -1,8 +1,9 @@
-import {createRouter, createWebHistory } from 'vue-router'
+import { createRouter, createWebHistory } from 'vue-router'
 import type { RouteRecordRaw } from 'vue-router'
-import { fetchUser, hasRole } from '../composables/useAuth'
-import { auth } from '../stores/auth';
+import { fetchUser } from '../composables/useAuth'
+import { useAuthStore } from '~/stores/auth'
 
+// Define your routes
 const routes: RouteRecordRaw[] = [
     {
         path: '/',
@@ -18,11 +19,7 @@ const routes: RouteRecordRaw[] = [
         path: '/registration',
         name: 'registration',
         component: () => import("../views/registration/RegistrationView.vue"),
-        beforeEnter: async (_to, _from, next) => {
-            if (!auth.user) await fetchUser()
-            if (hasRole('ADMIN')) next()
-            else next('/unauthorized')
-        }
+        meta: { requiresAuth: true, roleAccess: "ADMIN" }
     },
     {
         path: '/login',
@@ -33,239 +30,127 @@ const routes: RouteRecordRaw[] = [
         path: '/dashboard',
         name: 'dashboard',
         component: () => import("../views/dashboard/DashboardView.vue"),
-        beforeEnter: async (_to, _from, next) => {
-            if (!auth.user) await fetchUser()
-            if (hasRole('ADMIN')) next()
-            else next('/unauthorized')
-        }
+        meta: { requiresAuth: true, roleAccess: "ADMIN" }
     },
     {
         path: '/company',
         name: 'company',
         component: () => import("../views/company/CompanyView.vue"),
-        beforeEnter: async (_to, _from, next) => {
-            if (!auth.user) await fetchUser()
-            if (hasRole('ADMIN')) next()
-            else next('/unauthorized')
-        }
+        meta: { requiresAuth: true, roleAccess: "ADMIN" }
     },
     {
         path: '/companyadd/new',
         name: 'companyadd',
         component: () => import("../views/company/CompanyEditView.vue"),
-        beforeEnter: async (_to, _from, next) => {
-            if (!auth.user) await fetchUser()
-            if (hasRole('ADMIN')) next()
-            else next('/unauthorized')
-        }
+        meta: { requiresAuth: true, roleAccess: "ADMIN" }
     },
     {
-        path: '/companyedit/:id',
+        path: '/companyedit/:companyIdParam',
         name: 'companyedit',
         component: () => import("../views/company/CompanyEditView.vue"),
-        beforeEnter: async (_to, _from, next) => {
-            if (!auth.user) await fetchUser()
-            if (hasRole('ADMIN')) next()
-            else next('/unauthorized')
-        }
+        meta: { requiresAuth: true, roleAccess: "ADMIN" }
     },
     {
         path: '/companydepartment/:companyId',
         name: 'companydepartment',
         component: () => import("../views/department/DepartmentView.vue"),
-        beforeEnter: async (_to, _from, next) => {
-            if (!auth.user) await fetchUser()
-            if (hasRole('ADMIN')) next()
-            else next('/unauthorized')
-        }
+        meta: { requiresAuth: true, roleAccess: "ADMIN" }
     },
     {
         path: '/departmentedit/:paramCompanyId/:paramDepartmentId',
         name: 'departmentedit',
         component: () => import("../views/department/DepartmentEditView.vue"),
-        beforeEnter: async (_to, _from, next) => {
-            if (!auth.user) await fetchUser()
-            if (hasRole('ADMIN')) next()
-            else next('/unauthorized')
-        }
+        meta: { requiresAuth: true, roleAccess: "ADMIN" }
     },
     {
         path: '/departmentadd/:paramCompanyId',
         name: 'departmentadd',
         component: () => import("../views/department/DepartmentEditView.vue"),
-        beforeEnter: async (_to, _from, next) => {
-            if (!auth.user) await fetchUser()
-            if (hasRole('ADMIN')) next()
-            else next('/unauthorized')
-        }
+        meta: { requiresAuth: true, roleAccess: "ADMIN" }
     },
     {
         path: '/departmentusers/:companyIdParam/:departmentIdParam',
         name: 'departmentusers',
         component: () => import("../views/user/UserView.vue"),
-        beforeEnter: async (_to, _from, next) => {
-            if (!auth.user) await fetchUser()
-            if (hasRole('ADMIN')) next()
-            else next('/unauthorized')
-        }
+        meta: { requiresAuth: true, roleAccess: "ADMIN" }
     },
     {
         path: '/user',
         name: 'user',
         component: () => import("../views/user/UserView.vue"),
-        beforeEnter: async (_to, _from, next) => {
-            if (!auth.user) await fetchUser()
-            if (hasRole('ADMIN')) next()
-            else next('/unauthorized')
-        }
+        meta: { requiresAuth: true, roleAccess: "ADMIN" }
     },
     {
         path: '/useradd/:companyIdParam/:departmentIdParam',
         name: 'useradd',
         component: () => import("../views/user/UserEditView.vue"),
-        beforeEnter: async (_to, _from, next) => {
-            if (!auth.user) await fetchUser()
-            if (hasRole('ADMIN')) next()
-            else next('/unauthorized')
-        }
+        meta: { requiresAuth: true, roleAccess: "ADMIN" }
     },
     {
         path: '/useredit/:id/:companyIdParam/:departmentIdParam',
         name: 'useredit',
         component: () => import("../views/user/UserEditView.vue"),
-        beforeEnter: async (_to, _from, next) => {
-            if (!auth.user) await fetchUser()
-            if (hasRole('ADMIN')) next()
-            else next('/unauthorized')
-        }
+        meta: { requiresAuth: true, roleAccess: "ADMIN" }
     },
     {
         path: '/userpassword',
         name: 'userpassword',
         component: () => import("../views/user/UserPasswordEditView.vue"),
-        meta: {
-            requiresAuth: true, // Add meta field to indicate protected route
-            roleAccess: "administrator,finance,warehouse,offline,vendor"
-        },
-        beforeEnter: async (_to, _from, next) => {
-            if (!auth.user) await fetchUser()
-            if (hasRole('ADMIN')) next()
-            else next('/unauthorized')
-        }
+        meta: { requiresAuth: true, roleAccess: "ADMIN,FINANCE,WAREHOUSE,OFFLINE,VENDOR" }
     },
     {
         path: '/roles/:companyIdParam',
         name: 'roles',
         component: () => import("../views/role/RoleView.vue"),
-        beforeEnter: async (_to, _from, next) => {
-            if (!auth.user) await fetchUser()
-            if (hasRole('ADMIN')) next()
-            else next('/unauthorized')
-        }
+        meta: { requiresAuth: true, roleAccess: "ADMIN" }
     },
     {
         path: '/roleedit/:roleIdParam/:companyIdParam',
         name: 'roleedit',
         component: () => import("../views/role/RoleEditView.vue"),
-        beforeEnter: async (_to, _from, next) => {
-            if (!auth.user) await fetchUser()
-            if (hasRole('ADMIN')) next()
-            else next('/unauthorized')
-        }
+        meta: { requiresAuth: true, roleAccess: "ADMIN" }
     },
     {
         path: '/roleadd/:companyIdParam',
         name: 'roleadd',
         component: () => import("../views/role/RoleEditView.vue"),
-        beforeEnter: async (_to, _from, next) => {
-            if (!auth.user) await fetchUser()
-            if (hasRole('ADMIN')) next()
-            else next('/unauthorized')
-        }
+        meta: { requiresAuth: true, roleAccess: "ADMIN" }
     },
     {
         path: '/email',
         name: 'email',
         component: () => import("../views/email/EmailView.vue"),
-        meta: {
-            requiresAuth: true, // Add meta field to indicate protected route
-            roleAccess: "administrator,finance,warehouse,offline,vendor"
-        },
-        beforeEnter: async (_to, _from, next) => {
-            if (!auth.user) await fetchUser()
-            if (hasRole('ADMIN')) next()
-            else next('/unauthorized')
-        }
+        meta: { requiresAuth: true, roleAccess: "ADMIN,FINANCE,WAREHOUSE,OFFLINE,VENDOR" }
     },
     {
         path: '/oauth',
         name: 'oauth',
         component: () => import("../views/oauth/OauthView.vue"),
-        meta: {
-            requiresAuth: true, // Add meta field to indicate protected route
-            roleAccess: "administrator,finance,warehouse,offline,vendor"
-        },
-        beforeEnter: async (_to, _from, next) => {
-            if (!auth.user) await fetchUser()
-            if (hasRole('ADMIN')) next()
-            else next('/unauthorized')
-        }
+        meta: { requiresAuth: true, roleAccess: "ADMIN,FINANCE,WAREHOUSE,OFFLINE,VENDOR" }
     },
     {
         path: '/profileinformation',
         name: 'profileinformation',
         component: () => import("../views/profile/ProfileInformationView.vue"),
-        meta: {
-            requiresAuth: true, // Add meta field to indicate protected route
-            roleAccess: "administrator,finance,warehouse,offline,vendor"
-        },
-        beforeEnter: async (_to, _from, next) => {
-            if (!auth.user) await fetchUser()
-            if (hasRole('ADMIN')) next()
-            else next('/unauthorized')
-        }
+        meta: { requiresAuth: true, roleAccess: "ADMIN,FINANCE,WAREHOUSE,OFFLINE,VENDOR" }
     },
     {
         path: '/profilepassword',
         name: 'profilepassword',
         component: () => import("../views/profile/ProfilePasswordView.vue"),
-        meta: {
-            requiresAuth: true, // Add meta field to indicate protected route
-            roleAccess: "administrator,finance,warehouse,offline,vendor"
-        },
-        beforeEnter: async (_to, _from, next) => {
-            if (!auth.user) await fetchUser()
-            if (hasRole('ADMIN')) next()
-            else next('/unauthorized')
-        }
+        meta: { requiresAuth: true, roleAccess: "ADMIN,FINANCE,WAREHOUSE,OFFLINE,VENDOR" }
     },
     {
         path: '/profile2fa',
         name: 'profile2fa',
         component: () => import("../views/profile/Profile2FAView.vue"),
-        meta: {
-            requiresAuth: true, // Add meta field to indicate protected route
-            roleAccess: "administrator,finance,warehouse,offline,vendor"
-        },
-        beforeEnter: async (_to, _from, next) => {
-            if (!auth.user) await fetchUser()
-            if (hasRole('ADMIN')) next()
-            else next('/unauthorized')
-        }
+        meta: { requiresAuth: true, roleAccess: "ADMIN,FINANCE,WAREHOUSE,OFFLINE,VENDOR" }
     },
     {
         path: '/activity',
         name: 'activity',
         component: () => import("../views/activity/ActivityView.vue"),
-        meta: {
-            requiresAuth: true, // Add meta field to indicate protected route
-            roleAccess: "administrator,finance,warehouse,offline,vendor"
-        },
-        beforeEnter: async (_to, _from, next) => {
-            if (!auth.user) await fetchUser()
-            if (hasRole('ADMIN')) next()
-            else next('/unauthorized')
-        }
+        meta: { requiresAuth: true, roleAccess: "ADMIN,FINANCE,WAREHOUSE,OFFLINE,VENDOR" }
     },
     {
         path: '/unauthorized',
@@ -274,10 +159,36 @@ const routes: RouteRecordRaw[] = [
     }
 ]
 
+// Create router
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
     routes,
-    linkExactActiveClass: 'active', /*https://stackoverflow.com/questions/71254099/vue-js-change-navbar-button-class-when-on-that-page*/
-});
+    linkExactActiveClass: 'active',
+})
+
+// Global guard
+router.beforeEach(async (to, _from, next) => {
+    const auth = useAuthStore()
+
+    if (to.meta.requiresAuth) {
+        if (!auth.user) {
+            await fetchUser()
+        }
+
+        const allowedRoles = to.meta.roleAccess
+            ? (to.meta.roleAccess as string).split(',').map(r => r.trim().toUpperCase())
+            : []
+
+        const userRole = auth.user?.authority?.roleName?.toUpperCase()
+
+        if (userRole && allowedRoles.includes(userRole)) {
+            return next()
+        } else {
+            return next('/unauthorized')
+        }
+    }
+
+    next()
+})
 
 export default router

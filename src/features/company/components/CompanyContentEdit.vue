@@ -6,20 +6,22 @@ import { useCompanySchema  } from "~/features/company/hooks/schemas/company.sche
 import {type CompanyPayload, mapCompanyFromApi, useCompanyForm} from "~/features/company/hooks/forms/useCompanyForm";
 import { useI18n } from 'vue-i18n';
 import { useRoute } from 'vue-router';
+import { useAuthStore } from '~/stores/auth'
 
+const auth = useAuthStore()
 const { data, loading, get, post } = useApi();
 const route = useRoute();
 const { t } = useI18n();
 const companySchema = useCompanySchema();
 const { handleSubmit, setValues, companyId, companyIdAttrs, companyName, companyNameAttrs, companyAddress, companyAddressAttrs, companyPhone, companyPhoneAttrs, companyEmail, companyEmailAttrs, companyWebsite, companyWebsiteAttrs, companyDescription, companyDescriptionAttrs, companyLogoUrl, companyLogoUrlAttrs, companyTaxId, companyTaxIdAttrs, companyRegistrationId, companyRegistrationIdAttrs, companyStatus, companyStatusAttrs, companyIndustry, companyIndustryAttrs, companyType, companyTypeAttrs } = useCompanyForm();
 
-const isEdit = computed(() => !!route.params.id)
+const isEdit = computed(() => !!route.params.companyIdParam)
 
 onMounted(async () => {
   if (isEdit.value) {
-    const { id } = route.params;
+    const { companyIdParam } = route.params;
 
-    await get("/api/v0/user/organization/company/detail/" + id);
+    await get("/api/v0/user/organization/company/detail/companyId/" + companyIdParam + "/userId/" + auth.user?.id);
 
     setValues(mapCompanyFromApi(data.value));
   }
@@ -28,9 +30,9 @@ onMounted(async () => {
 
 const submitForm = handleSubmit( async (values: CompanyPayload) => {
         if (isEdit.value) {
-          post("/api/v0/user/organization/company/update", values)
+          post("/api/v0/user/organization/company/update/companyId/" + auth.user?.company.companyId + "/userId/" + auth.user?.id , values)
         } else {
-          post("/api/v0/user/organization/company/add", values)
+          post("/api/v0/user/organization/company/add/companyId/" + auth.user?.company.companyId + "/userId/" + auth.user?.id, values)
         }
     }
 )

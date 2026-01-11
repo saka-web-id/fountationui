@@ -6,7 +6,9 @@ import {useRoute} from "vue-router";
 import {computed, onMounted} from "vue";
 import {  useDepartmentForm,  mapDepartmentFromApi,  type DepartmentPayload } from "~/features/department/hooks/forms/useDepartmentForm"
 import {ErrorMessage, Field, Form} from "vee-validate";
+import { useAuthStore } from '~/stores/auth'
 
+const auth = useAuthStore()
 const { t } = useI18n();
 const { data: companyData, get: getCompany } = useApi();
 const { data, loading, get, post } = useApi();
@@ -19,14 +21,14 @@ const { paramCompanyId, paramDepartmentId } = route.params;
 
 onMounted(async () => {
   if (isEdit.value) {
-    await get("/api/v0/user/organization/department/detail/" + paramDepartmentId);
+    await get("/api/v0/user/organization/department/detail/companyId/" + paramCompanyId + "/userId/" + auth.user?.id + "/" + paramDepartmentId);
 
     console.log("Data =", data.value);
 
     setValues(mapDepartmentFromApi(data.value));
   }
 
-  await getCompany("/api/v0/user/organization/company/list/" + paramCompanyId);
+  await getCompany("/api/v0/user/organization/company/list/companyId/" + auth.user?.company.companyId + "/userId/" + auth.user?.id + "/valueCompanyId/" + paramCompanyId);
 
   console.log("Data =", companyData.value);
 
@@ -38,11 +40,11 @@ const submitForm = handleSubmit( async (values: DepartmentPayload) => {
       if (isEdit.value) {
         console.log("RUNNING EDIT" + values.departmentStatus);
 
-        post("/api/v0/user/organization/department/update", values)
+        post("/api/v0/user/organization/department/update/companyId/" + auth.user?.company.companyId + "/userId/" + auth.user?.id, values)
       } else {
         console.log("RUNNING ADD" + values);
 
-        post("/api/v0/user/organization/department/add", values)
+        post("/api/v0/user/organization/department/add/companyId/" + auth.user?.company.companyId + "/userId/" + auth.user?.id, values)
       }
     }
 )

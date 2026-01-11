@@ -3,7 +3,9 @@ import { useI18n } from 'vue-i18n';
 import { useApi } from "~/composables/useApi";
 import {onMounted} from "vue";
 import { useRoute, useRouter } from 'vue-router';
+import { useAuthStore } from '~/stores/auth'
 
+const auth = useAuthStore()
 const { data, get } = useApi();
 const { data: companyData, get: getCompany } = useApi();
 const { data: departmentData, get: getDepartment } = useApi();
@@ -14,13 +16,13 @@ const { companyIdParam, departmentIdParam } = route.params;
 
 onMounted(async () => {
 
-  await get('/api/v0/user/organization/department/users/' + companyIdParam + "/" + departmentIdParam);
+  await get('/api/v0/user/organization/department/users/companyId/' + companyIdParam + "/userId/" + auth.user?.id + "/" + departmentIdParam);
 
-  await getCompany('/api/v0/user/organization/company/detail/' + companyIdParam );
+  await getCompany('/api/v0/user/organization/company/detail/companyId/' + companyIdParam + "/userId/" + auth.user?.id);
 
   console.log(companyData.value);
 
-  await getDepartment('/api/v0/user/organization/department/detail/' + departmentIdParam);
+  await getDepartment('/api/v0/user/organization/department/detail/companyId/' + companyIdParam + "/userId/" + auth.user?.id + "/" + departmentIdParam);
 
   console.log(departmentData.value);
 
