@@ -13,6 +13,7 @@ const { t } = useI18n();
 const { data, loading, get, post } = useApi();
 const { data: companyData, get: getCompany } = useApi();
 const { data: departmentData, get: getDepartment } = useApi();
+const { data: rolesData, get: getRoles } = useApi();
 const route = useRoute();
 const userScheme = useUserSchema();
 const { handleSubmit, setValues, userName, userNameAttrs, userEmail, userEmailAttrs, userPhone, userPhoneAttrs, userStatus, userStatusAttrs, userIsVerified, userIsVerifiedAttrs, userNote, userNoteAttrs, companyId, companyIdAttrs, departmentId, departmentIdAttrs } = useUserForm();
@@ -23,7 +24,7 @@ const { id, companyIdParam, departmentIdParam } = route.params;
 onMounted(async () => {
   if (isEdit.value) {
 
-    await get("/api/v0/user/detail/companyId/" + auth.user?.company.companyId + "/userId/" + auth.user?.id + "/valueId/" + + id);
+    await get("/api/v0/user/detail/" + id);
 
     setValues(mapUserFromApi(data.value));
   }
@@ -35,6 +36,8 @@ onMounted(async () => {
   await getDepartment('/api/v0/user/organization/department/list/companyId/' + companyIdParam + "/userId/" + auth.user?.id);
 
   setValues({ departmentId: Number(departmentIdParam), companyId: Number(companyIdParam)  });
+
+  await getRoles('/authorization/company/role/list/companyId/' + auth.user?.company.companyId + '/userId/'+ auth.user?.id +'/valueCompanyId/'+ companyIdParam)
 
 });
 
@@ -110,7 +113,7 @@ const submitForm = handleSubmit( async (values: UserPayload) => {
                   <label class="form-check-label" for="formCheck-4">{{ t('button.disable') }}</label>
                 </div>
               </div>
-              <div class="text-start d-flex"><span class="d-flex w-25 ms-2 ps-3 me-2 mb-2 input-group-text" style="font-size: calc(0.6em + 0.5vw);">{{ t('textLabel.status') }}</span>
+              <div class="text-start d-flex"><span class="d-flex w-25 ms-2 ps-3 me-2 mb-2 input-group-text" style="font-size: calc(0.6em + 0.5vw);">{{ t('textLabel.verified') }}</span>
                 <div class="form-check form-check-inline text-start">
                   <Field  type="radio" name="userIsVerified" v-model="userIsVerified" v-bind="userIsVerifiedAttrs" :value="true" class="form-check-input" ></Field>
                   <label class="form-check-label" for="formCheck-4">{{ t('textLabel.true').toUpperCase() }}</label>

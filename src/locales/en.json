@@ -74,7 +74,16 @@
     "false": "False",
     "dateCreated": "Date Created",
     "permission": "Permission | Permissions",
-    "isAssigned": "Is Assigned"
+    "isAssigned": "Is Assigned",
+    "verified": "Verified",
+    "active": "Active",
+    "inactive": "Inactive",
+    "membership": "Membership",
+    "membershipStatus": "Membership Status",
+    "membershipType": "Membership Type",
+    "accountStatus": "Account Status",
+    "userStatus": "User Status",
+    "userVerification": "User Verification"
   },
   "textField": {
     "email": "Email",

@@ -19,7 +19,7 @@ const routes: RouteRecordRaw[] = [
         path: '/registration',
         name: 'registration',
         component: () => import("../views/registration/RegistrationView.vue"),
-        meta: { requiresAuth: true, roleAccess: "ADMIN" }
+        meta: { requiresAuth: true, roleAccess: "SUPER_ADMIN, ADMIN, MANAGER, USER, GUEST" }
     },
     {
         path: '/login',
@@ -30,127 +30,127 @@ const routes: RouteRecordRaw[] = [
         path: '/dashboard',
         name: 'dashboard',
         component: () => import("../views/dashboard/DashboardView.vue"),
-        meta: { requiresAuth: true, roleAccess: "ADMIN" }
+        meta: { requiresAuth: true, roleAccess: "SUPER_ADMIN, ADMIN, MANAGER, USER, GUEST" }
     },
     {
         path: '/company',
         name: 'company',
         component: () => import("../views/company/CompanyView.vue"),
-        meta: { requiresAuth: true, roleAccess: "ADMIN" }
+        meta: { requiresAuth: true, roleAccess: "SUPER_ADMIN, ADMIN, MANAGER, USER, GUEST" }
     },
     {
         path: '/companyadd/new',
         name: 'companyadd',
         component: () => import("../views/company/CompanyEditView.vue"),
-        meta: { requiresAuth: true, roleAccess: "ADMIN" }
+        meta: { requiresAuth: true, roleAccess: "SUPER_ADMIN, ADMIN" }
     },
     {
         path: '/companyedit/:companyIdParam',
         name: 'companyedit',
         component: () => import("../views/company/CompanyEditView.vue"),
-        meta: { requiresAuth: true, roleAccess: "ADMIN" }
+        meta: { requiresAuth: true, roleAccess: "SUPER_ADMIN, ADMIN" }
     },
     {
         path: '/companydepartment/:companyId',
         name: 'companydepartment',
         component: () => import("../views/department/DepartmentView.vue"),
-        meta: { requiresAuth: true, roleAccess: "ADMIN" }
+        meta: { requiresAuth: true, roleAccess: "SUPER_ADMIN, ADMIN, MANAGER, USER, GUEST" }
     },
     {
         path: '/departmentedit/:paramCompanyId/:paramDepartmentId',
         name: 'departmentedit',
         component: () => import("../views/department/DepartmentEditView.vue"),
-        meta: { requiresAuth: true, roleAccess: "ADMIN" }
+        meta: { requiresAuth: true, roleAccess: "SUPER_ADMIN, ADMIN" }
     },
     {
         path: '/departmentadd/:paramCompanyId',
         name: 'departmentadd',
         component: () => import("../views/department/DepartmentEditView.vue"),
-        meta: { requiresAuth: true, roleAccess: "ADMIN" }
+        meta: { requiresAuth: true, roleAccess: "SUPER_ADMIN, ADMIN" }
     },
     {
         path: '/departmentusers/:companyIdParam/:departmentIdParam',
         name: 'departmentusers',
         component: () => import("../views/user/UserView.vue"),
-        meta: { requiresAuth: true, roleAccess: "ADMIN" }
+        meta: { requiresAuth: true, roleAccess: "SUPER_ADMIN, ADMIN" }
     },
     {
         path: '/user',
         name: 'user',
         component: () => import("../views/user/UserView.vue"),
-        meta: { requiresAuth: true, roleAccess: "ADMIN" }
+        meta: { requiresAuth: true, roleAccess: "SUPER_ADMIN, ADMIN, MANAGER, USER, GUEST" }
     },
     {
         path: '/useradd/:companyIdParam/:departmentIdParam',
         name: 'useradd',
-        component: () => import("../views/user/UserEditView.vue"),
-        meta: { requiresAuth: true, roleAccess: "ADMIN" }
+        component: () => import("../views/user/account/UserAccountEditView.vue"),
+        meta: { requiresAuth: true, roleAccess: "SUPER_ADMIN, ADMIN" }
     },
     {
-        path: '/useredit/:id/:companyIdParam/:departmentIdParam',
+        path: '/useredit/:userId/:companyIdParam/:departmentIdParam',
         name: 'useredit',
-        component: () => import("../views/user/UserEditView.vue"),
-        meta: { requiresAuth: true, roleAccess: "ADMIN" }
+        component: () => import("../views/user/account/UserAccountEditView.vue"),
+        meta: { requiresAuth: true, roleAccess: "SUPER_ADMIN, ADMIN" }
     },
     {
         path: '/userpassword',
         name: 'userpassword',
         component: () => import("../views/user/UserPasswordEditView.vue"),
-        meta: { requiresAuth: true, roleAccess: "ADMIN,FINANCE,WAREHOUSE,OFFLINE,VENDOR" }
+        meta: { requiresAuth: true, roleAccess: "SUPER_ADMIN, ADMIN, MANAGER, USER, GUEST" }
     },
     {
         path: '/roles/:companyIdParam',
         name: 'roles',
         component: () => import("../views/role/RoleView.vue"),
-        meta: { requiresAuth: true, roleAccess: "ADMIN" }
+        meta: { requiresAuth: true, roleAccess: "SUPER_ADMIN, ADMIN, MANAGER, USER, GUEST" }
     },
     {
         path: '/roleedit/:roleIdParam/:companyIdParam',
         name: 'roleedit',
         component: () => import("../views/role/RoleEditView.vue"),
-        meta: { requiresAuth: true, roleAccess: "ADMIN" }
+        meta: { requiresAuth: true, roleAccess: "SUPER_ADMIN, ADMIN" }
     },
     {
         path: '/roleadd/:companyIdParam',
         name: 'roleadd',
         component: () => import("../views/role/RoleEditView.vue"),
-        meta: { requiresAuth: true, roleAccess: "ADMIN" }
+        meta: { requiresAuth: true, roleAccess: "SUPER_ADMIN, ADMIN" }
     },
     {
         path: '/email',
         name: 'email',
         component: () => import("../views/email/EmailView.vue"),
-        meta: { requiresAuth: true, roleAccess: "ADMIN,FINANCE,WAREHOUSE,OFFLINE,VENDOR" }
+        meta: { requiresAuth: true, roleAccess: "SUPER_ADMIN, ADMIN, MANAGER, USER, GUEST" }
     },
     {
         path: '/oauth',
         name: 'oauth',
         component: () => import("../views/oauth/OauthView.vue"),
-        meta: { requiresAuth: true, roleAccess: "ADMIN,FINANCE,WAREHOUSE,OFFLINE,VENDOR" }
+        meta: { requiresAuth: true, roleAccess: "SUPER_ADMIN, ADMIN, MANAGER, USER, GUEST" }
     },
     {
         path: '/profileinformation',
         name: 'profileinformation',
         component: () => import("../views/profile/ProfileInformationView.vue"),
-        meta: { requiresAuth: true, roleAccess: "ADMIN,FINANCE,WAREHOUSE,OFFLINE,VENDOR" }
+        meta: { requiresAuth: true, roleAccess: "SUPER_ADMIN, ADMIN, MANAGER, USER, GUEST" }
     },
     {
         path: '/profilepassword',
         name: 'profilepassword',
         component: () => import("../views/profile/ProfilePasswordView.vue"),
-        meta: { requiresAuth: true, roleAccess: "ADMIN,FINANCE,WAREHOUSE,OFFLINE,VENDOR" }
+        meta: { requiresAuth: true, roleAccess: "SUPER_ADMIN, ADMIN, MANAGER, USER, GUEST" }
     },
     {
         path: '/profile2fa',
         name: 'profile2fa',
         component: () => import("../views/profile/Profile2FAView.vue"),
-        meta: { requiresAuth: true, roleAccess: "ADMIN,FINANCE,WAREHOUSE,OFFLINE,VENDOR" }
+        meta: { requiresAuth: true, roleAccess: "SUPER_ADMIN, ADMIN, MANAGER, USER, GUEST" }
     },
     {
         path: '/activity',
         name: 'activity',
         component: () => import("../views/activity/ActivityView.vue"),
-        meta: { requiresAuth: true, roleAccess: "ADMIN,FINANCE,WAREHOUSE,OFFLINE,VENDOR" }
+        meta: { requiresAuth: true, roleAccess: "SUPER_ADMIN, ADMIN, MANAGER, USER, GUEST" }
     },
     {
         path: '/unauthorized',

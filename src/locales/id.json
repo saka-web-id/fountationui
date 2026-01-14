@@ -74,7 +74,16 @@
     "false": "Salah",
     "dateCreated": "Tanggal Dibuat",
     "permission": "Ijin | Ijin",
-    "isAssigned": "Apakah ditugaskan"
+    "isAssigned": "Apakah ditugaskan",
+    "verified": "Terverifikasi",
+    "active": "Aktif",
+    "inactive": "Tidak Aktif",
+    "membership": "Member",
+    "membershipStatus": "Status Member",
+    "membershipType": "Tipe Members",
+    "accountStatus": "Status Akun",
+    "userStatus": "Status Pengguna",
+    "userVerification": "Verifikasi Pengguna"
   },
   "textField": {
     "email": "Surel",

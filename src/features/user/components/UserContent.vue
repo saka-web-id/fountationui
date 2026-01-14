@@ -16,7 +16,7 @@ const { companyIdParam, departmentIdParam } = route.params;
 
 onMounted(async () => {
 
-  await get('/api/v0/user/organization/department/users/companyId/' + companyIdParam + "/userId/" + auth.user?.id + "/" + departmentIdParam);
+  await get('/api/v0/user/organization/department/users/companyId/' + companyIdParam + "/userId/" + auth.user?.id + "/valueDepartmentId/" + departmentIdParam);
 
   await getCompany('/api/v0/user/organization/company/detail/companyId/' + companyIdParam + "/userId/" + auth.user?.id);
 
@@ -28,9 +28,9 @@ onMounted(async () => {
 
 });
 
-const goToEdit = (id: number) => {
+const goToEdit = (userId: number) => {
 
-  router.push({ name: 'useredit', params: { id, companyIdParam, departmentIdParam } });
+  router.push({ name: 'useredit', params: { userId, companyIdParam, departmentIdParam } });
 };
 
 </script>
