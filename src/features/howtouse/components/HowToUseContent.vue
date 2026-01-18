@@ -17,26 +17,29 @@ const { t } = useI18n();
             </div>
             <div class="row gy-4 row-cols-1 row-cols-sm-2 row-cols-md-3">
               <div>
-                <div class="card border-0 project-item"><img class="img-fluid aspect-ratio-1x1 object-fit-cover card-img w-100 d-block" width="1024" height="1024" src="/src/assets/img/logos/How%20to%20Register%20Logo.svg">
+                <div class="card border-0 project-item bg-transparent">
+                  <img class="img-fluid aspect-ratio-1x1 object-fit-cover card-img d-block" src="/src/assets/img/howto/howto-use-fountation.svg">
                   <div class="card-img-overlay">
-                    <h4 class="fs-6 fw-bold mb-1"><a href="#">{{ t('app.howToUse.registration.title') }}</a></h4>
-                    <p class="mb-0">{{ t('app.howToUse.registration.description') }}</p>
+                    <h4 class="fs-6 fw-bold mb-1"><a href="#">{{ t('app.howToUse.tutorial.title') }}</a></h4>
+                    <p class="mb-0">{{ t('app.howToUse.tutorial.description') }}</p>
                   </div>
                 </div>
               </div>
               <div>
-                <div class="card border-0 project-item"><img class="img-fluid aspect-ratio-1x1 object-fit-cover card-img w-100 d-block" width="3200" height="3200" src="/src/assets/img/logos/How%20to%20Register%20Logo.svg">
+                <div class="card border-0 project-item bg-transparent">
+                  <img class="img-fluid aspect-ratio-1x1 object-fit-cover card-img d-block" src="/src/assets/img/howto/howto-install-fountation.svg">
                   <div class="card-img-overlay">
-                    <h4 class="fs-6 fw-bold mb-1"><a href="#">{{ t('app.howToUse.email.title') }}</a></h4>
-                    <p class="mb-0">{{ t('app.howToUse.email.description') }}</p>
+                    <h4 class="fs-6 fw-bold mb-1"><a href="#">{{ t('app.howToUse.install.title') }}</a></h4>
+                    <p class="mb-0">{{ t('app.howToUse.install.description') }}</p>
                   </div>
                 </div>
               </div>
               <div>
-                <div class="card border-0 project-item"><img class="img-fluid aspect-ratio-1x1 object-fit-cover card-img w-100 d-block" width="3200" height="3200" src="/src/assets/img/logos/How%20to%20Register%20Logo.svg">
+                <div class="card border-0 project-item bg-transparent">
+                  <img class="img-fluid aspect-ratio-1x1 object-fit-cover card-img d-block" src="/src/assets/img/howto/framework-information-fountation.svg">
                   <div class="card-img-overlay">
-                    <h4 class="fs-6 fw-bold mb-1"><a href="#">{{ t('app.howToUse.oauth.title') }}</a></h4>
-                    <p class="mb-0">{{ t('app.howToUse.oauth.description') }}</p>
+                    <h4 class="fs-6 fw-bold mb-1"><a href="#">{{ t('app.howToUse.frameworkInformation.title') }}</a></h4>
+                    <p class="mb-0">{{ t('app.howToUse.frameworkInformation.description') }}</p>
                   </div>
                 </div>
               </div>
@@ -49,5 +52,4 @@ const { t } = useI18n();
 </template>
 
 <style scoped>
-
 </style>

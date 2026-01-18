@@ -1,16 +1,30 @@
 {
   "app": {
-    "brand": {"title": "Brand", "description": "This label is for Brand Description"},
-    "features": {"title": "Features", "description": "Apps Feature"},
+    "brand": {"title": "Fountation", "description": "Foundation to Build Any Enterprise Application"},
+    "features": {
+      "title": "Features",
+      "description": "Apps Feature",
+      "userMgmt": {"title": "User Management", "description": "Microservice to manage User"},
+      "accountMgmt": {"title": "Account Management", "description": "Microservice to manage Account"},
+      "orgMgmt": {"title": "Organization Management", "description": "Microservice to manage Multi-tenant (Company and Department)"},
+      "roleMgmt": {"title": "Role Management", "description": "Microservice to manage Role"},
+      "memberMgmt": {"title": "Membership Management", "description": "Microservice to manage Membership"},
+      "activityMgmt": {"title": "Activity Management", "description": "Microservice to record any activity in service"},
+      "microservice": {"title": "Microservice Framework", "description": "a lightweight, cloud‑ready way to build enterprise apps by breaking them into small, independent services that scale easily, run reliably, and let you deliver new features faster."},
+      "reactive": {"title": "Reactive-MVC Programming", "description": "Respond instantly to data and events, making them faster, more efficient, and able to handle many users at once without slowing down compare with traditional MVC framework."},
+      "spring": {"title": "Spring Framework", "description": "Proven enterprise framework that helps organizations accelerate digital transformation by reducing development time, lowering operational costs, and ensuring scalability."},
+      "agnostic": {"title": "Agnostic Oriented", "description": "Agnostic to any Business Model, so you can build any application business model use this framework"}
+    },
     "howToUse": {
       "title": "How To Use",
-      "description": "All tutorial to use this website",
-      "registration": {"title":  "registration", "description": "How to Register video tutorial"},
-      "email": {"title":  "Email Setting", "description": "How to setup email organization and SMTP"},
-      "oauth": {"title":  "Oauth Setting", "description": "How to setup Oauth Setting for your organization"}
+      "description": "Video tutorial and information about Fountation",
+      "install": {"title":  "Installation", "description": "How to Install on premise server"},
+      "tutorial": {"title":  "Usage Tutorial", "description": "How to use Fountation tutorial"},
+      "frameworkInformation": {"title":  "Framework Information", "description": "Fountation Framework information"}
     },
     "comingSoon": { "title": "Coming Soon", "description": "Coming soon features available"},
-    "copyright":  {"title": "Copyright", "description": "Copyright"}
+    "copyright":  {"title": "Copyright", "description": "Copyright"},
+    "completeDescription": "Fountation is a powerful open-source platform designed to accelerate enterprise application development.\nBuilt as a ready-to-use enterprise framework, it leverages modern microservice architecture for effortless scalability and Reactive Programming to eliminate blocking issues, ensuring high performance and resilience.\nWith Fountation, you can innovate faster, scale seamlessly, and deliver enterprise-grade solutions with confidence"
   },
   "button" : {
     "login": "Login",

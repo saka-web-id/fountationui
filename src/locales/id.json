@@ -1,16 +1,30 @@
 {
   "app": {
-    "brand": {"title": "Merk", "description": "Deskripsi untuk menjelaskan Merk" },
-    "features": {"title": "Fitur", "description": "Fitur Aplikasi"},
+    "brand": {"title": "Fountation", "description": "Fondasi untuk membangun Aplikasi enterprise apa saja" },
+    "features": {
+      "title": "Fitur",
+      "description": "Fitur Aplikasi",
+      "userMgmt": {"title": "Managemen Pengguna", "description": "Microservice untuk mengelola pengguna"},
+      "accountMgmt": {"title": "Managemen Akun", "description": "Microservice untuk mengelola akun"},
+      "orgMgmt": {"title": "Managemen Organisasi", "description": "Microservice untuk mengelola organisasi (Perusahaan dan departemen)"},
+      "roleMgmt": {"title": "Managemen Peran", "description": "Microservice untuk mengelola peran pengguna"},
+      "memberMgmt": {"title": "Managemen Member", "description": "Microservice untuk mengelola Member"},
+      "activityMgmt": {"title": "Managemen aktivitas", "description": "Microservice menyimpan transaksi aktivitas"},
+      "microservice": {"title": "Microservice Framework", "description": "Cara ringan dan siap cloud untuk membangun aplikasi enterprise dengan memecahnya menjadi layanan-layanan kecil yang mandiri, mudah diskalakan, berjalan andal, dan memungkinkan Anda menghadirkan fitur baru lebih cepat."},
+      "reactive": {"title": "Reactive-MVC Programming", "description": "Merespons data dan peristiwa secara instan, sehingga sistem menjadi lebih cepat, lebih efisien, dan mampu menangani banyak pengguna secara bersamaan tanpa mengalami penurunan kinerja dibandingkan dengan framework MVC tradisional."},
+      "spring": {"title": "Spring Framework", "description": "Framework enterprise yang telah terbukti, membantu organisasi mempercepat transformasi digital dengan mengurangi waktu pengembangan, menekan biaya operasional, dan memastikan skalabilitas sistem."},
+      "agnostic": {"title": "Agnostic Oriented", "description": "Bersifat agnostik terhadap model bisnis apa pun, sehingga framework ini dapat digunakan untuk membangun aplikasi dengan berbagai jenis model bisnis."}
+    },
     "howToUse": {
       "title": "Cara Pemakaian",
-      "description": "Semua petunjuk pemakaian website",
-      "registration": {"title":  "Daftar", "description": "Video tutorial cara daftar"},
-      "email": {"title":  "Pengaturan Email", "description": "Tutorial Bagaimana melakukan pengaturan email dan SMTP untuk organisasi"},
-      "oauth": {"title":  "Pengaturan Oauth", "description": "Tutorial bagaimana melakukan pengaturan Oauth untuk organisasi"}
+      "description": "Video petunjuk pemakaian Fountation",
+      "install": {"title":  "Instalasi", "description": "Cara instal di server lokal / premise"},
+      "tutorial": {"title":  "Pemakaian", "description": "Tutorial pemakaian Fountation"},
+      "frameworkInformation": {"title":  "Informasi Framework", "description": "Informasi framework dari Fountation"}
     },
     "comingSoon": { "title": "Segera Hadir", "description": "Deskripsi fitur yang akan segera hadir" },
-    "copyright":  {"title": "Hak Cipta", "description": "Hak Cipta"}
+    "copyright":  {"title": "Hak Cipta", "description": "Hak Cipta"},
+    "completeDescription": "Fountation adalah platform open-source yang kuat, dirancang untuk mempercepat pengembangan aplikasi perusahaan. Dibangun sebagai kerangka kerja perusahaan siap pakai, platform ini memanfaatkan arsitektur microservice modern untuk skalabilitas yang mudah, serta Reactive Programming untuk menghilangkan masalah blocking, sehingga menjamin kinerja tinggi dan ketahanan sistem. Dengan Fountation, Anda dapat berinovasi lebih cepat, meningkatkan skala dengan mulus, dan menghadirkan solusi tingkat perusahaan dengan penuh percaya diri."
   },
   "button" : {
     "login": "Masuk",

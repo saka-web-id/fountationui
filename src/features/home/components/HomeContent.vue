@@ -7,23 +7,47 @@ const { t } = useI18n();
 <template>
         <div class="row">
           <div class="col col-xl-7 mx-auto">
+            <div class="text-center mb-5 py-3 py-lg-1">
+              <h3 class="text-uppercase fs-4 fw-bold mb-3 heading">{{ t('app.brand.description') }}</h3>
+              <p class="text-muted">
+                {{ t('app.completeDescription') }}
+              </p>
+            </div>
             <div class="row row-cols-2 row-cols-md-3 mx-auto">
               <div class="mb-4">
-                <div class="text-center"><img class="rounded object-fit-cover mb-3" width="150" height="150" src="/src/assets/img/Coming%20soon%20logo.webp">
-                  <h5 class="fw-bold mb-0"><strong>{{ t('app.comingSoon.title') }}</strong></h5>
-                  <p class="text-muted mb-2">{{ t('app.comingSoon.description') }}</p>
+                <div class="text-center"><img class="rounded object-fit-cover mb-3" width="150" height="150" src="/src/assets/img/mgmt/user-management-fountation.svg">
+                  <h5 class="fw-bold mb-0"><strong>{{ t('app.features.userMgmt.title') }}</strong></h5>
+                  <p class="text-muted mb-2">{{ t('app.features.userMgmt.description') }}</p>
                 </div>
               </div>
               <div class="mb-4">
-                <div class="text-center"><img class="rounded object-fit-cover mb-3" width="150" height="150" src="/src/assets/img/Coming%20soon%20logo.webp">
-                  <h5 class="fw-bold mb-0"><strong>{{ t('app.comingSoon.title') }}</strong></h5>
-                  <p class="text-muted mb-2">{{ t('app.comingSoon.description') }}</p>
+                <div class="text-center"><img class="rounded object-fit-cover mb-3" width="150" height="150" src="/src/assets/img/mgmt/account-management-fountation.svg">
+                  <h5 class="fw-bold mb-0"><strong>{{ t('app.features.accountMgmt.title') }}</strong></h5>
+                  <p class="text-muted mb-2">{{ t('app.features.accountMgmt.description') }}</p>
                 </div>
               </div>
               <div class="mb-4">
-                <div class="text-center"><img class="rounded object-fit-cover mb-3" width="150" height="150" src="/src/assets/img/Coming%20soon%20logo.webp">
-                  <h5 class="fw-bold mb-0"><strong>{{ t('app.comingSoon.title') }}</strong></h5>
-                  <p class="text-muted mb-2">{{ t('app.comingSoon.description') }}</p>
+                <div class="text-center"><img class="rounded object-fit-cover mb-3" width="150" height="150" src="/src/assets/img/mgmt/organization-management-fountation.svg">
+                  <h5 class="fw-bold mb-0"><strong>{{ t('app.features.orgMgmt.title') }}</strong></h5>
+                  <p class="text-muted mb-2">{{ t('app.features.orgMgmt.description') }}</p>
+                </div>
+              </div>
+              <div class="mb-4">
+                <div class="text-center"><img class="rounded object-fit-cover mb-3" width="150" height="150" src="/src/assets/img/mgmt/role-management-fountation.svg">
+                  <h5 class="fw-bold mb-0"><strong>{{ t('app.features.roleMgmt.title') }}</strong></h5>
+                  <p class="text-muted mb-2">{{ t('app.features.roleMgmt.description') }}</p>
+                </div>
+              </div>
+              <div class="mb-4">
+                <div class="text-center"><img class="rounded object-fit-cover mb-3" width="150" height="150" src="/src/assets/img/mgmt/membership-management-fountation.svg">
+                  <h5 class="fw-bold mb-0"><strong>{{ t('app.features.memberMgmt.title') }}</strong></h5>
+                  <p class="text-muted mb-2">{{ t('app.features.memberMgmt.description') }}</p>
+                </div>
+              </div>
+              <div class="mb-4">
+                <div class="text-center"><img class="rounded object-fit-cover mb-3" width="150" height="150" src="/src/assets/img/mgmt/activity-management-fountation.svg">
+                  <h5 class="fw-bold mb-0"><strong>{{ t('app.features.activityMgmt.title') }}</strong></h5>
+                  <p class="text-muted mb-2">{{ t('app.features.activityMgmt.description') }}</p>
                 </div>
               </div>
             </div>
@@ -48,8 +72,10 @@ const { t } = useI18n();
                           </svg></div>
                         </div>
                         <div>
-                          <h5 class="fw-bold">{{ t('app.comingSoon.title') }}</h5>
-                          <p class="text-muted mb-0">{{ t('app.comingSoon.description') }}</p>
+                          <h5 class="fw-bold">{{ t('app.features.microservice.title') }}</h5>
+                          <p class="text-muted mb-0">
+                            {{ t('app.features.microservice.description') }}
+                          </p>
                         </div>
                       </div>
                     </div>
@@ -63,8 +89,10 @@ const { t } = useI18n();
                           </svg></div>
                         </div>
                         <div>
-                          <h5 class="fw-bold">{{ t('app.comingSoon.title') }}</h5>
-                          <p class="text-muted mb-0">{{ t('app.comingSoon.description') }}</p>
+                          <h5 class="fw-bold">{{ t('app.features.reactive.title') }}</h5>
+                          <p class="text-muted mb-0">
+                            {{ t('app.features.reactive.description') }}
+                          </p>
                         </div>
                       </div>
                     </div>
@@ -80,8 +108,10 @@ const { t } = useI18n();
                           </svg></div>
                         </div>
                         <div>
-                          <h5 class="fw-bold">{{ t('app.comingSoon.title') }}</h5>
-                          <p class="text-muted mb-0">{{ t('app.comingSoon.description') }}</p>
+                          <h5 class="fw-bold">{{ t('app.features.spring.title') }}</h5>
+                          <p class="text-muted mb-0">
+                            {{ t('app.features.spring.description') }}
+                          </p>
                         </div>
                       </div>
                     </div>
@@ -96,8 +126,8 @@ const { t } = useI18n();
                           </svg></div>
                         </div>
                         <div>
-                          <h5 class="fw-bold">{{ t('app.comingSoon.title') }}</h5>
-                          <p class="text-muted mb-0">{{ t('app.comingSoon.description') }}</p>
+                          <h5 class="fw-bold">{{ t('app.features.agnostic.title') }}</h5>
+                          <p class="text-muted mb-0">{{ t('app.features.agnostic.description') }}</p>
                         </div>
                       </div>
                     </div>

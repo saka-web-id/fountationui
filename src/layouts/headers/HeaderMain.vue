@@ -35,7 +35,11 @@ const { t } = useI18n();
       <HeaderDropdownLocale class="text-end float-end w-25" />
     </div>
     <nav class="navbar navbar-expand-lg py-3" data-bs-theme="dark">
-      <div class="container"><a class="navbar-brand d-flex align-items-center" href="#"><img class="img-fluid me-3" width="40" height="40" src="/src/assets/img/logos/logo.svg" /><span class="fs-3 fw-bold">Brand</span></a><button class="navbar-toggler me-0" data-bs-toggle="collapse" data-bs-target="#navcol-3"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+      <div class="container">
+        <a class="navbar-brand d-flex align-items-center" href="#">
+        <img class="img-fluid me-3" width="40" height="40" src="/src/assets/img/logos/logo.svg" />
+        <span class="fs-3 fw-bold">{{ t('app.brand.title') }}</span>
+        </a><button class="navbar-toggler me-0" data-bs-toggle="collapse" data-bs-target="#navcol-3"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
         <div id="navcol-3" class="collapse navbar-collapse">
           <ul class="navbar-nav mb-4 mb-lg-0 mx-auto">
             <li class="nav-item"><router-link to="/" class="nav-link">{{ t('app.features.title') }}</router-link></li>
