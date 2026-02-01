@@ -92,12 +92,16 @@
     "verified": "Verified",
     "active": "Active",
     "inactive": "Inactive",
-    "membership": "Membership",
+    "membership": "Membership | Memberships",
     "membershipStatus": "Membership Status",
     "membershipType": "Membership Type",
     "accountStatus": "Account Status",
     "userStatus": "User Status",
-    "userVerification": "User Verification"
+    "userVerification": "User Verification",
+    "billingCycle": "Billing Cycle",
+    "feature": "Feature | Features",
+    "duration": "Duration",
+    "billing": "Billing"
   },
   "textField": {
     "email": "Email",

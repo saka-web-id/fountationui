@@ -50,7 +50,7 @@ const goToDepartment = (companyId: number) => {
           <div class="table-responsive pt-2">
             <div class="row d-flex justify-content-between align-items-center me-2 mt-2 mb-2">
               <div class="col-auto">
-                <h4 class="ps-3">Companies</h4>
+                <h4 class="ps-3">{{ t('textLabel.company', 2) }}</h4>
               </div>
               <div class="col-auto">
                 <button @click="router.push({ name: 'companyadd' })" class="btn btn-outline-primary" type="button">{{ t('button.add') }}</button>

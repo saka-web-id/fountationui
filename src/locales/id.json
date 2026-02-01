@@ -92,12 +92,16 @@
     "verified": "Terverifikasi",
     "active": "Aktif",
     "inactive": "Tidak Aktif",
-    "membership": "Member",
+    "membership": "Member | Keanggotaan",
     "membershipStatus": "Status Member",
     "membershipType": "Tipe Members",
     "accountStatus": "Status Akun",
     "userStatus": "Status Pengguna",
-    "userVerification": "Verifikasi Pengguna"
+    "userVerification": "Verifikasi Pengguna",
+    "billingCycle": "Siklus Penagihan",
+    "feature": "Fitur | Fitur",
+    "duration": "Durasi",
+    "billing": "Penagihan"
   },
   "textField": {
     "email": "Surel",

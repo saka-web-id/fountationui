@@ -117,6 +117,36 @@ const routes: RouteRecordRaw[] = [
         meta: { requiresAuth: true, roleAccess: "SUPER_ADMIN, ADMIN" }
     },
     {
+        path: '/membership/:companyIdParam',
+        name: 'membership',
+        component: () => import("../views/membership/MembershipView.vue"),
+        meta: { requiresAuth: true, roleAccess: "SUPER_ADMIN, ADMIN, MANAGER" }
+    },
+    {
+        path: '/membershipedit/:companyIdParam/:membershipIdParam',
+        name: 'membershipedit',
+        component: () => import("../views/membership/MembershipEditView.vue"),
+        meta: { requiresAuth: true, roleAccess: "SUPER_ADMIN, ADMIN, MANAGER" }
+    },
+    {
+        path: '/membershipadd/:companyIdParam',
+        name: 'membershipadd',
+        component: () => import("../views/membership/MembershipEditView.vue"),
+        meta: { requiresAuth: true, roleAccess: "SUPER_ADMIN, ADMIN, MANAGER" }
+    },
+    {
+        path: '/billingcycleadd/:companyIdParam',
+        name: 'billingcycleadd',
+        component: () => import("../views/membership/billing/BillingCycleEditView.vue"),
+        meta: { requiresAuth: true, roleAccess: "SUPER_ADMIN, ADMIN, MANAGER" }
+    },
+    {
+        path: '/billingcycleedit/:companyIdParam/:billingCycleId',
+        name: 'billingcycleedit',
+        component: () => import("../views/membership/billing/BillingCycleEditView.vue"),
+        meta: { requiresAuth: true, roleAccess: "SUPER_ADMIN, ADMIN, MANAGER" }
+    },
+    {
         path: '/email',
         name: 'email',
         component: () => import("../views/email/EmailView.vue"),
