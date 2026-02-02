@@ -22,6 +22,12 @@
       "tutorial": {"title":  "Pemakaian", "description": "Tutorial pemakaian Fountation"},
       "frameworkInformation": {"title":  "Informasi Framework", "description": "Informasi framework dari Fountation"}
     },
+    "demo": {
+      "title": "Demo",
+      "description": "Pada halaman demo ini, Anda bisa langsung mencoba Login atau Register.",
+      "signup": {"title": "Demo Sign up", "description": "Untuk mencoba proses masuk, klik tombol di bawah. Anda akan masuk menggunakan email Anda." },
+      "login": {"title": "Demo Log in", "description": "Jika Anda ingin langsung melihat halaman Dashboard, gunakan tombol di bawah dengan akun demo yang tersedia." }
+    },
     "comingSoon": { "title": "Segera Hadir", "description": "Deskripsi fitur yang akan segera hadir" },
     "copyright":  {"title": "Hak Cipta", "description": "Hak Cipta"},
     "completeDescription": "Fountation adalah platform open-source yang kuat, dirancang untuk mempercepat pengembangan aplikasi perusahaan. Dibangun sebagai kerangka kerja perusahaan siap pakai, platform ini memanfaatkan arsitektur microservice modern untuk skalabilitas yang mudah, serta Reactive Programming untuk menghilangkan masalah blocking, sehingga menjamin kinerja tinggi dan ketahanan sistem. Dengan Fountation, Anda dapat berinovasi lebih cepat, meningkatkan skala dengan mulus, dan menghadirkan solusi tingkat perusahaan dengan penuh percaya diri."

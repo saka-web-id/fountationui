@@ -33,6 +33,7 @@ const { t } = useI18n();
           <li class="nav-item"><a class="nav-link fw-bold link-light" href="/howto.html">How to</a></li>-->
           <li class="nav-item"><router-link id="idfooterhome" to="/" class="nav-link fw-bold link-light">{{ t('app.features.title') }}</router-link></li>
           <li class="nav-item"><router-link id="idfooterhowtouse" to="/howtouse" class="nav-link fw-bold link-light">{{ t('app.howToUse.title') }}</router-link></li>
+          <li class="nav-item"><router-link id="idfooterdemo" to="/demo" class="nav-link fw-bold link-light">{{ t('app.demo.title') }}</router-link></li>
         </ul>
         <p class="text-muted mb-2">{{ t('app.copyright.title') }} © {{ t('app.brand.title') }}</p>
       </div>

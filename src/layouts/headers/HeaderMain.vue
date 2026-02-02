@@ -46,8 +46,8 @@ const { t } = useI18n();
             <li class="nav-item"><router-link to="/howtouse" class="nav-link" >{{ t('app.howToUse.title') }}</router-link></li>
           </ul>
             <!--<router-link to="/login" tag="button" class="btn bg-white bg-opacity-10 bg-gradient me-2">{{ t('button.login') }}</router-link>-->
-            <a href="http://www.myproject.local:8080/api/v0/user/login" tag="button" class="btn bg-white bg-opacity-10 bg-gradient me-2">{{ t('button.login') }}</a>
-            <router-link to="/registration" tag="button" class="btn bg-white bg-opacity-10 bg-gradient me-2">{{ t('button.signup') }}</router-link>
+<!--            <a href="http://www.myproject.local:8080/api/v0/user/login" tag="button" class="btn bg-white bg-opacity-10 bg-gradient me-2">{{ t('button.login') }}</a>-->
+            <router-link to="/demo" tag="button" class="btn bg-white bg-opacity-10 bg-gradient me-2">{{ t('app.demo.title') }}</router-link>
         </div>
       </div>
     </nav>

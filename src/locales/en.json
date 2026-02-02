@@ -22,6 +22,12 @@
       "tutorial": {"title":  "Usage Tutorial", "description": "How to use Fountation tutorial"},
       "frameworkInformation": {"title":  "Framework Information", "description": "Fountation Framework information"}
     },
+    "demo": {
+      "title": "Demo",
+      "description": "In this demo page you can try to Direct to Login or Register :",
+      "signup": {"title": "Demo Sign up", "description": "If you want try process Sign In Through below button, you will Sign In with your email." },
+      "login": {"title": "Demo Log in", "description": "If you want direct see Dashboard page, through below button with account demo below :" }
+    },
     "comingSoon": { "title": "Coming Soon", "description": "Coming soon features available"},
     "copyright":  {"title": "Copyright", "description": "Copyright"},
     "completeDescription": "Fountation is a powerful open-source platform designed to accelerate enterprise application development.\nBuilt as a ready-to-use enterprise framework, it leverages modern microservice architecture for effortless scalability and Reactive Programming to eliminate blocking issues, ensuring high performance and resilience.\nWith Fountation, you can innovate faster, scale seamlessly, and deliver enterprise-grade solutions with confidence"
