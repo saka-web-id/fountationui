@@ -23,6 +23,7 @@ const selectOption = (option:string) => {
         <div class="dropdown-menu dropdown-menu-end">
           <a class="dropdown-item" @click="selectOption('en')" href="#">{{ t('language.english') }}</a>
           <a class="dropdown-item" @click="selectOption('id')" href="#">{{ t('language.indonesia') }}</a>
+          <a class="dropdown-item" @click="selectOption('cn')" href="#">{{ t('language.china') }}</a>
         </div>
       </li>
     </ul>

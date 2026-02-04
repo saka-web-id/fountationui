@@ -7,13 +7,14 @@ import App from './App.vue'
 import router from './router'
 import en from './locales/en.json';
 import id from './locales/id.json';
+import cn from './locales/cn.json';
 
 const i18n = createI18n({
     legacy: false,
     locale: 'en',
     globalInjection: false,
     fallbackLocale: 'en',
-    messages: { en, id }
+    messages: { en, id, cn }
 })
 
 const app = createApp(App);

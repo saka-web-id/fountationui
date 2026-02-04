@@ -1,0 +1,197 @@
+{
+  "app": {
+    "brand": {
+      "title": "Fountation",
+      "description": "用于构建任何企业级应用的基础框架"
+    },
+    "features": {
+      "title": "功能",
+      "description": "应用功能",
+      "userMgmt": {
+        "title": "用户管理",
+        "description": "用于管理用户的微服务"
+      },
+      "accountMgmt": {
+        "title": "账户管理",
+        "description": "用于管理账户的微服务"
+      },
+      "orgMgmt": {
+        "title": "组织管理",
+        "description": "用于管理多租户（公司和部门）的微服务"
+      },
+      "roleMgmt": {
+        "title": "角色管理",
+        "description": "用于管理角色的微服务"
+      },
+      "memberMgmt": {
+        "title": "成员管理",
+        "description": "用于管理成员关系的微服务"
+      },
+      "activityMgmt": {
+        "title": "活动管理",
+        "description": "用于记录服务中任何活动的微服务"
+      },
+      "microservice": {
+        "title": "微服务框架",
+        "description": "一种轻量级、云就绪的企业应用构建方式，通过将应用拆分为小型、独立的服务，实现轻松扩展、稳定运行，并更快交付新功能。"
+      },
+      "reactive": {
+        "title": "响应式 MVC 编程",
+        "description": "即时响应数据和事件，使系统更快、更高效，并且相比传统 MVC 框架能够同时处理更多用户而不降低性能。"
+      },
+      "spring": {
+        "title": "Spring 框架",
+        "description": "经过验证的企业级框架，通过减少开发时间、降低运营成本并确保可扩展性，帮助组织加速数字化转型。"
+      },
+      "agnostic": {
+        "title": "业务无关设计",
+        "description": "不依赖任何业务模型，因此你可以使用该框架构建任何类型的应用业务模型。"
+      }
+    },
+    "howToUse": {
+      "title": "使用方法",
+      "description": "关于 Fountation 的视频教程和相关信息",
+      "install": {
+        "title": "安装",
+        "description": "如何在本地服务器上安装"
+      },
+      "tutorial": {
+        "title": "使用教程",
+        "description": "如何使用 Fountation 的教程"
+      },
+      "frameworkInformation": {
+        "title": "框架信息",
+        "description": "Fountation 框架相关信息"
+      }
+    },
+    "demo": {
+      "title": "演示",
+      "description": "在此演示页面中，你可以直接跳转到登录或注册：",
+      "signup": {
+        "title": "演示注册",
+        "description": "如果你想体验登录流程，可点击下方按钮，并使用你的邮箱登录。"
+      },
+      "login": {
+        "title": "演示登录",
+        "description": "如果你想直接查看仪表盘页面，可通过下方按钮并使用下面的演示账户登录："
+      }
+    },
+    "comingSoon": {
+      "title": "即将推出",
+      "description": "即将上线的新功能"
+    },
+    "copyright": {
+      "title": "版权",
+      "description": "版权"
+    },
+    "completeDescription": "Fountation 是一个强大的开源平台，旨在加速企业级应用的开发。\n作为一个即用型企业框架，它利用现代微服务架构实现轻松扩展，并通过响应式编程消除阻塞问题，确保高性能和高可靠性。\n使用 Fountation，你可以更快地创新、无缝扩展，并自信地交付企业级解决方案。"
+  },
+  "button": {
+    "login": "登录",
+    "signup": "注册",
+    "register": "注册",
+    "delete": "删除",
+    "edit": "编辑",
+    "search": "搜索",
+    "enable": "启用",
+    "disable": "禁用",
+    "save": "保存",
+    "saving": "保存中",
+    "close": "关闭",
+    "password": "密码",
+    "add": "新增",
+    "view": "查看"
+  },
+  "textLabel": {
+    "organization": "组织",
+    "company": "公司 | 公司列表",
+    "department": "部门 | 部门列表",
+    "manager": "经理 | 经理列表",
+    "employee": "员工 | 员工列表",
+    "asset": "资产 | 资产列表",
+    "action": "操作",
+    "address": "地址",
+    "description": "描述",
+    "dashboard": "仪表盘",
+    "home": "首页",
+    "status": "状态",
+    "alert": "警告 | 警告列表",
+    "message": "消息",
+    "profile": "个人资料",
+    "type": "类型",
+    "activity": "活动 | 活动列表",
+    "logout": "退出登录",
+    "setting": "设置 | 设置项",
+    "user": "用户 | 用户列表",
+    "email": "邮箱",
+    "emailSetting": "邮箱设置",
+    "oauthSetting": "OAuth 设置",
+    "number": "编号",
+    "location": "位置",
+    "name": "名称",
+    "phone": "电话",
+    "website": "网站",
+    "logo": "标志",
+    "departmentEdit": "编辑部门",
+    "departmentDelete": "删除部门",
+    "departmentDeleteConfirmation": "确认删除该部门？",
+    "companyEdit": "编辑公司",
+    "companyAdd": "新增公司",
+    "industry": "行业",
+    "taxId": "税号",
+    "registrationNumber": "注册号",
+    "role": "角色 | 角色列表",
+    "register": "注册",
+    "createdAt": "创建时间",
+    "note": "备注",
+    "true": "是",
+    "false": "否",
+    "dateCreated": "创建日期",
+    "permission": "权限 | 权限列表",
+    "isAssigned": "是否已分配",
+    "verified": "已验证",
+    "active": "启用",
+    "inactive": "停用",
+    "membership": "会员 | 会员列表",
+    "membershipStatus": "会员状态",
+    "membershipType": "会员类型",
+    "accountStatus": "账户状态",
+    "userStatus": "用户状态",
+    "userVerification": "用户验证",
+    "billingCycle": "计费周期",
+    "feature": "功能 | 功能列表",
+    "duration": "时长",
+    "billing": "计费"
+  },
+  "textField": {
+    "email": "邮箱",
+    "username": "用户名",
+    "password": "密码",
+    "passwordConfirmation": "确认密码",
+    "company": "公司"
+  },
+  "textError": {
+    "formatError": {
+      "username": "用户名格式错误，至少需要 8 个字符且不能包含特殊字符",
+      "email": "邮箱格式错误",
+      "password": {
+        "size": "至少需要 8 个字符",
+        "uppercase": "至少包含 1 个大写字母",
+        "lowercase": "至少包含 1 个小写字母",
+        "specialCharacter": "至少包含 1 个特殊字符",
+        "number": "至少包含 1 个数字",
+        "general": "密码格式错误"
+      },
+      "passwordConfirmation": "两次输入的密码必须一致"
+    },
+    "unauthorized": "未授权访问"
+  },
+  "language": {
+    "english": "English",
+    "indonesia": "Bahasa Indonesia",
+    "china": "中文（中国）"
+  },
+  "messages": {
+    "hello": "你好，{name}！"
+  }
+}

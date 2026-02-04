@@ -134,7 +134,8 @@
   },
   "language": {
     "english": "English",
-    "indonesia": "Bahasa Indonesia"
+    "indonesia": "Bahasa Indonesia",
+    "china": "中文（中国）"
   },
   "messages": {
     "hello": "Hello, {name}!"

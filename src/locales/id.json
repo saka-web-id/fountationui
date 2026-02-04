@@ -133,8 +133,9 @@
     "unauthorized": "Akses tidak terauthorisasi"
   },
   "language": {
-    "english": "Inggris",
-    "indonesia": "Bahasa Indonesia"
+    "english": "English",
+    "indonesia": "Bahasa Indonesia",
+    "china": "中文（中国）"
   },
   "messages": {
     "hello": "Hello, {name}!"
