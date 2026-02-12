@@ -18,8 +18,7 @@ const routes: RouteRecordRaw[] = [
     {
         path: '/registration',
         name: 'registration',
-        component: () => import("../views/registration/RegistrationView.vue"),
-        meta: { requiresAuth: true, roleAccess: "SUPER_ADMIN, ADMIN, MANAGER, USER, GUEST" }
+        component: () => import("../views/registration/RegistrationView.vue")
     },
     {
         path: '/login',

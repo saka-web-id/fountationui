@@ -46,7 +46,9 @@
     "close": "Tutup",
     "password": "Sandi",
     "add": "Tambah",
-    "view": "Lihat"
+    "view": "Lihat",
+    "next": "Next",
+    "back": "Back"
   },
   "textLabel": {
     "organization": "Organisasi",
@@ -104,17 +106,25 @@
     "accountStatus": "Status Akun",
     "userStatus": "Status Pengguna",
     "userVerification": "Verifikasi Pengguna",
+    "userProfile":"Profile Pengguna",
     "billingCycle": "Siklus Penagihan",
     "feature": "Fitur | Fitur",
     "duration": "Durasi",
-    "billing": "Penagihan"
+    "billing": "Penagihan",
+    "companyProfile": "Profil Perusahaan"
   },
   "textField": {
     "email": "Surel",
+    "account": "Akun",
+    "fullName": "Nama Lengkap",
     "username": "Identitas",
     "password": "Kata Kunci",
     "passwordConfirmation": "Konfirmasi Kata Kunci",
-    "company": "Perusahaan"
+    "company": "Perusahaan",
+    "department": "Departemen",
+    "phone": "Telephone",
+    "website": "Website",
+    "address": "Alamat"
   },
   "textError": {
     "formatError": {
@@ -128,7 +138,9 @@
         "number": "Paling sedikit ada 1 angka",
         "general": "Format Password salah"
       },
-      "passwordConfirmation": "Konfirmasi Password harus sama"
+      "passwordConfirmation": "Konfirmasi Password harus sama",
+      "company": "Format Nama Perusahaan Salah",
+      "department": "Format Nama Department Salah"
     },
     "unauthorized": "Akses tidak terauthorisasi"
   },

@@ -82,9 +82,11 @@ async function onCompanyChange() {
             <div class="col-auto">
               <h3 class="ps-3">Roles</h3>
             </div>
+            <!--
             <div class="col-auto">
               <button @click="router.push({ name: 'roleadd', params: { companyIdParam: selectedCompanyId } })" class="btn btn-outline-primary" type="button">{{ t('button.add') }}</button>
             </div>
+            -->
           </div>
           <div class="table-responsive ms-2 me-2 mt-2 mb-2">
             <table class="table">

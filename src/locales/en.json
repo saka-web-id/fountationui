@@ -46,7 +46,9 @@
     "close": "Close",
     "password": "Password",
     "add": "Add",
-    "view": "View"
+    "view": "View",
+    "next": "Next",
+    "back": "Back"
   },
   "textLabel": {
     "organization": "Organization",
@@ -104,17 +106,25 @@
     "accountStatus": "Account Status",
     "userStatus": "User Status",
     "userVerification": "User Verification",
+    "userProfile":"User Profile",
     "billingCycle": "Billing Cycle",
     "feature": "Feature | Features",
     "duration": "Duration",
-    "billing": "Billing"
+    "billing": "Billing",
+    "companyProfile": "Company Profile"
   },
   "textField": {
     "email": "Email",
+    "account": "Account",
+    "fullName": "Fullname",
     "username": "Username",
     "password": "Password",
     "passwordConfirmation": "Password Confirmation",
-    "company": "Company"
+    "company": "Company",
+    "department": "Department",
+    "phone": "Phone",
+    "website": "Website",
+    "address": "Address"
   },
   "textError": {
     "formatError": {
@@ -128,7 +138,9 @@
           "number": "at least 1 Number",
           "general": "Wrong password format"
       },
-      "passwordConfirmation": "Password must match"
+      "passwordConfirmation": "Password must match",
+      "company": "Wrong Company Format Name",
+      "department": "Wrong Department Format Name"
     },
     "unauthorized": "Unauthorized Access"
   },

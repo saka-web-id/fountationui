@@ -19,7 +19,7 @@
 }
 
 #msform fieldset {
-  background: white;
+  background: var(--bs-dark);
   border: 0 none;
   border-radius: 0.5rem;
   box-sizing: border-box;
@@ -110,7 +110,7 @@
 }
 
 #progressMSForm .active {
-  color: #000000;
+  color: var(--bs-primary);
 }
 
 #progressMSForm li {
@@ -125,12 +125,13 @@
 
 #progressMSForm #account:before {
   font-family: FontAwesome;
-  content: "\f023";
+  content: "\f2bb";
 }
 
 #progressMSForm #personal:before {
   font-family: FontAwesome;
   content: "\f007";
+  z-index: 100;
 }
 
 #progressMSForm #payment:before {
@@ -168,7 +169,7 @@
   background: lightgray;
   position: absolute;
   left: 0;
-  top: 25px;
+  /*top: 25px;*/
   z-index: 0;
 }
 
@@ -208,4 +209,3 @@
 #progressMSForm .list-dt:focus {
   border-bottom: 2px solid skyblue;
 }
-

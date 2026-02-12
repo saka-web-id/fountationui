@@ -1,27 +1,44 @@
 <script setup lang="ts">
-import { Form, Field, ErrorMessage } from 'vee-validate';
-import { useRegisterSchema } from '../hooks/schemas/register.schema';
-import {type RegisterPayload, useRegisterApi} from '../api/useRegisterApi';
-import { useRegisterForm} from "../hooks/forms/useRegisterForm";
+import {onMounted} from "vue";
 import { useI18n } from 'vue-i18n';
+import { useMultiStepForm } from '../hooks/useMultistepForm';
+import { useUserRegisterForm, UserRegisterPayload } from "../hooks/forms/useUserRegisterForm"
+import {useApi} from "~/composables/useApi.ts";
 
+const {  loading, post } = useApi();
+const { next, previous, init } = useMultiStepForm();
 const { t } = useI18n();
+const {
+  handleSubmit,
+  meta,
+  userEmail, userEmailAttrs,
+  userName, userNameAttrs,
+  userPhone, userPhoneAttrs,
+  companyName, companyNameAttrs,
+  companyEmail, companyEmailAttrs,
+  companyWebsite, companyWebsiteAttrs,
+  companyAddress, companyAddressAttrs,
+  companyPhone, companyPhoneAttrs,
+  departmentName, departmentNameAttrs,
+} = useUserRegisterForm()
 
-const registerSchema = useRegisterSchema();
-const { register, loading, error } = useRegisterApi();
-const { handleSubmit, company, companyAttrs, username, usernameAttrs, email, emailAttrs, password, passwordAttrs } = useRegisterForm();
-// onSubmit
-// Wrap handleSubmit with your async submit logic
-const submit = handleSubmit(async (values: RegisterPayload) => {
-  try {
-    // simulate network delay
-    await new Promise(resolve => setTimeout(resolve, 1500))
-    await register( values );
-    console.log('Success', values);
-  } catch (err) {
-    console.error(err);
-  }
+
+
+onMounted(() => {
+  init();
 });
+
+const onSubmit = handleSubmit(values => {
+  console.log("Form submitted:", values)
+})
+
+const submitForm = handleSubmit( async (values: UserRegisterPayload) => {
+        console.log("RUNNING ADD" + values);
+
+        post("/api/v0/user/registration" , values)
+    }
+)
+
 
 </script>
 
@@ -32,42 +49,127 @@ const submit = handleSubmit(async (values: RegisterPayload) => {
         <div class="card-body">
           <div class="p-lg-4 py-3">
             <div class="row gy-4 gy-md-0 mx-auto">
-              <div class="col-12 col-md-6 col-lg-5">
+              <div class="col-12 col-md-6 col-lg-5 align-self-center">
                 <img class="rounded img-fluid aspect-ratio-1x1 object-fit-cover shadow w-100" alt="" width="1024" height="1024" src="/src/assets/img/notepad.jpeg">
               </div>
-              <Form :validation-schema="registerSchema" class="col d-flex align-items-md-center" v-slot="{ meta }" >
-                <form @submit="submit" >
-                  <div class="text-center text-sm-center text-md-center text-lg-start text-xl-start text-xxl-start w-100 ms-0 ps-1 me-0 pe-1">
-                    <h5 class="text-uppercase fw-bold heading">Register</h5>
-                    <div class="w-100 ps-0 me-0 pe-0 mt-0 pt-0 mb-0 pb-2 form-control" style="background: rgba(255,255,255,0);">
-                      <Field type="text" :placeholder="t('textField.company')" name="company" v-model="company" v-bind="companyAttrs" class="border d-block w-100 me-0 pe-4 mt-2 mb-0 pb-0" ></Field>
-                      <ErrorMessage name="company" class="text-start text-danger d-block w-100 me-0 pe-0 mt-0 mb-0 pb-0" />
-                    </div>
-                    <div class="w-100 ps-0 me-0 pe-0 mt-0 pt-0 mb-0 pb-2 form-control" style="background: rgba(255,255,255,0);">
-                      <Field type="email" :placeholder="t('textField.email')"  name="email" v-model="email" v-bind="emailAttrs" inputmode="email" class="border d-block w-100 me-0 pe-4 mt-2 mb-0 pb-0"></Field>
-                      <ErrorMessage name="email" class="text-start text-danger d-block w-100 me-0 pe-0 mt-0 mb-0 pb-0" />
-                    </div>
-                    <div class="w-100 ps-0 me-0 pe-0 mt-0 pt-0 mb-0 pb-2 form-control" style="background: rgba(255,255,255,0);">
-                      <Field type="text" :placeholder="t('textField.username')" name="username" v-model="username" v-bind="usernameAttrs" class="border d-block w-100 me-0 pe-4 mt-2 mb-0 pb-0"></Field>
-                      <ErrorMessage name="username" class="text-start text-danger d-block w-100 me-0 pe-0 mt-0 mb-0 pb-0" />
-                    </div>
-                    <div class="w-100 ps-0 me-0 pe-0 mt-0 pt-0 mb-0 pb-2 form-control" style="background: rgba(255,255,255,0);">
-                      <Field type="password" :placeholder="t('textField.password')" name="password" v-model="password" v-bind="passwordAttrs"  class="border d-block w-100 me-0 pe-4 mt-2 mb-0 pb-0"></Field>
-                      <ErrorMessage name="password" class="text-start text-danger d-block w-100 me-0 pe-0 mt-0 mb-0 pb-0" />
-                    </div>
-                    <div class="w-100 ps-0 me-0 pe-0 mt-0 pt-0 mb-0 pb-4 form-control" style="background: rgba(255,255,255,0);">
-                      <Field type="password" :placeholder="t('textField.passwordConfirmation')" name="passwordConfirmation" class="border d-block w-100 me-0 pe-4 mt-2 mb-0 pb-0"></Field>
-                      <ErrorMessage name="passwordConfirmation" class="text-start text-danger d-block w-100 me-0 pe-0 mt-0 mb-0 pb-0" />
-                    </div>
-                    <button :disabled="!meta.valid" class="btn btn-success shadow ms-0 ps-6 me-0 pe-6 w-100 d-block" >
-                      {{ loading ? 'Loading' : t('button.register') }}
-                    </button>
-                    <div></div>
-                  </div>
+              <div class="col d-flex align-items-md-center">
+                <div id="idform" class="card-body bg-gradient-body">
 
-                  <div v-if="error" style="color:red">{{ error }}</div>
+                <form id="msform" @submit.prevent="submitForm">
+                  <ul class="list-inline" id="progressMSForm">
+                    <li class="list-inline-item active" id="personal">{{ t('textLabel.user', 1) }}</li>
+                    <li class="list-inline-item" id="account">{{ t('textField.company') }}</li>
+                    <li class="list-inline-item" id="confirm">{{ t('textField.account') }}</li>
+                  </ul>
+                  <fieldset class="form-card">
+                    <h4 class="ps-2 pe-2 pt-2" style="text-align: left;">{{ t('textLabel.userProfile') }}</h4>
+                    <legend class="text-start ps-2 pe-2" style="font-size: 12px;">
+                      *this account will be Super Admin from organization
+                    </legend>
+                    <div class="text-center mt-2">
+                      <div class="d-inline-flex ps-2 pe-2 input-group-sm input-group">
+                        <span>{{ t('textField.username') }}</span>
+                        <input class="form-control" type="text" v-model="userName" v-bind="userNameAttrs" />
+                        <span>{{ userNameAttrs.errorMessage }}</span>
+                      </div>
+                      <div class="d-inline-flex ps-2 pe-2 input-group-sm input-group">
+                        <span>{{ t('textField.email') }}</span>
+                        <input class="form-control" type="email" v-model="userEmail" v-bind="userEmailAttrs" />
+                        <span>{{ userEmailAttrs.errorMessage }}</span>
+                      </div>
+                      <div class="d-inline-flex ps-2 pe-2 input-group-sm input-group">
+                        <span>{{ t('textField.phone') }}</span>
+                        <input class="form-control" type="tel" v-model="userPhone" v-bind="userPhoneAttrs" />
+                      </div>
+                    </div>
+                    <button class="btn btn-primary next" id="next" @click="next" type="button">{{ t('button.next') }}</button>
+                  </fieldset>
+                  <fieldset class="form-card">
+                    <h4 class="ps-2 pe-2 pt-2" style="text-align: left;">{{ t('textLabel.companyProfile') }}</h4>
+                    <legend class="text-start ps-2 pe-2" style="font-size: 12px;">
+                      <span>*Company at least have 1 department name</span>
+                    </legend>
+                    <div class="text-center mt-2">
+
+                      <div class="d-inline-flex ps-2 pe-2 input-group-sm input-group">
+                        <span>{{ t('textField.company') }}</span>
+                        <input class="form-control" type="text" v-model="companyName" v-bind="companyNameAttrs" />
+                        <span>{{ companyNameAttrs.errorMessage }}</span>
+                      </div>
+                      <div class="d-inline-flex ps-2 pe-2 input-group-sm input-group">
+                        <span>{{ t('textField.email') }}</span>
+                        <input class="form-control" type="email" v-model="companyEmail" v-bind="companyEmailAttrs" />
+                      </div>
+                      <div class="d-inline-flex ps-2 pe-2 input-group-sm input-group">
+                        <span>{{ t('textField.website') }}</span>
+                        <input class="form-control" type="text" v-model="companyWebsite" v-bind="companyWebsiteAttrs" />
+                      </div>
+
+                      <div class="d-inline-flex ps-2 pe-2 input-group-sm input-group">
+                        <span>{{ t('textField.phone') }}</span>
+                        <input class="form-control" type="tel" v-model="companyPhone" v-bind="companyPhoneAttrs" />
+                      </div>
+                      <div class="d-inline-flex ps-2 pe-2 input-group-sm input-group">
+                        <span>{{ t('textField.department') }}</span>
+                        <input class="form-control" type="text" v-model="departmentName" v-bind="departmentNameAttrs" />
+                        <span>{{ departmentNameAttrs.errorMessage }}</span>
+                      </div>
+                      <div class="d-inline-flex ps-2 pe-2 input-group-sm input-group">
+                        <span>{{ t('textField.address') }}</span>
+                        <input class="form-control" type="text" v-model="companyAddress" v-bind="companyAddressAttrs" />
+                      </div>
+                    </div>
+                    <button class="btn btn-secondary previous" id="previous" @click="previous" type="button">{{ t('button.back') }}</button>
+                    <button class="btn btn-primary next" id="next-1" @click="next" type="button">{{ t('button.next') }}</button>
+                  </fieldset>
+                  <fieldset class="form-card">
+                    <div class="text-center mt-2">
+                      <h4 class="ps-2 pe-2" style="text-align: left;">Confirmation</h4>
+                      <legend class="text-start ps-2 pe-2" style="font-size: 12px;">
+                        <span>*Please confirmation the data before submit</span>
+                      </legend>
+                      <div class="border p-1 mt-1">
+                        <h6 class="mb-3" style="text-align: left;">User Information</h6>
+                        <div class="d-inline-flex ps-2 pe-2 input-group-sm input-group">
+                          <span>{{ t('textField.username') }}</span><input class="form-control" type="text" v-model="userName" disabled>
+                        </div>
+                        <div class="d-inline-flex ps-2 pe-2 input-group-sm input-group">
+                          <span>{{ t('textField.email') }}</span><input class="form-control" type="text" v-model="userEmail" disabled>
+                        </div>
+                        <div class="d-inline-flex ps-2 pe-2 input-group-sm input-group">
+                          <span>{{ t('textField.phone') }}</span><input class="form-control" type="text" v-model="userPhone" disabled>
+                        </div>
+                      </div>
+                      <div class="border p-1 mt-1">
+                        <h6 class="mb-3" style="text-align: left;">Company Information</h6>
+                        <div class="d-inline-flex ps-2 pe-2 input-group-sm input-group">
+                          <span>{{ t('textField.company') }}</span><input class="form-control" type="text" v-model="companyName" disabled>
+                        </div>
+                        <div class="d-inline-flex ps-2 pe-2 input-group-sm input-group">
+                          <span>{{ t('textField.email') }}</span><input class="form-control" type="text" v-model="companyEmail" disabled>
+                        </div>
+                        <div class="d-inline-flex ps-2 pe-2 input-group-sm input-group">
+                          <span>{{ t('textField.website') }}</span><input class="form-control" type="text" v-model="companyWebsite" disabled>
+                        </div>
+                        <div class="d-inline-flex ps-2 pe-2 input-group-sm input-group">
+                          <span>{{ t('textField.phone') }}</span><input class="form-control" type="text" v-model="companyPhone" disabled>
+                        </div>
+                        <div class="d-inline-flex ps-2 pe-2 input-group-sm input-group">
+                          <span>{{ t('textField.department') }}</span><input class="form-control" type="text" v-model="departmentName" disabled>
+                        </div>
+                        <div class="d-inline-flex ps-2 pe-2 input-group-sm input-group">
+                          <span>{{ t('textField.address') }}</span><input class="form-control" type="text" v-model="companyAddress" disabled>
+                        </div>
+                      </div>
+                    </div>
+                    <button class="btn btn-secondary previous" id="previous"  @click="previous" type="button">{{ t('button.back') }}</button>
+                    <button :disabled="!meta.valid || loading"  class="btn btn-outline-primary" type="submit">{{ loading ? t('button.saving') : t('button.save') }}</button>
+
+                  </fieldset>
                 </form>
-              </Form>
+
+                </div>
+              </div>
             </div>
           </div>
         </div>

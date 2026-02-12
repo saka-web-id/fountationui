@@ -100,7 +100,9 @@
     "close": "关闭",
     "password": "密码",
     "add": "新增",
-    "view": "查看"
+    "view": "查看",
+    "next": "Next",
+    "back": "Back"
   },
   "textLabel": {
     "organization": "组织",
@@ -158,17 +160,25 @@
     "accountStatus": "账户状态",
     "userStatus": "用户状态",
     "userVerification": "用户验证",
+    "userProfile":"User Profile",
     "billingCycle": "计费周期",
     "feature": "功能 | 功能列表",
     "duration": "时长",
-    "billing": "计费"
+    "billing": "计费",
+    "companyProfile": "Company Profile"
   },
   "textField": {
     "email": "邮箱",
+    "account": "Account",
+    "fullName": "Fullname",
     "username": "用户名",
     "password": "密码",
     "passwordConfirmation": "确认密码",
-    "company": "公司"
+    "company": "公司",
+    "department": "Department",
+    "phone": "Phone",
+    "website": "Website",
+    "address": "Address"
   },
   "textError": {
     "formatError": {
@@ -182,7 +192,9 @@
         "number": "至少包含 1 个数字",
         "general": "密码格式错误"
       },
-      "passwordConfirmation": "两次输入的密码必须一致"
+      "passwordConfirmation": "两次输入的密码必须一致",
+      "company": "Wrong Company Format Name",
+      "department": "Wrong Department Format Name"
     },
     "unauthorized": "未授权访问"
   },
