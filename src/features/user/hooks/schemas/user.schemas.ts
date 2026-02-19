@@ -11,3 +11,13 @@ export function useUserSchema() {
         userNote: yup.string()
     });
 }
+
+
+export function useUserSimpleSchema() {
+
+    return yup.object({
+        userEmail: yup.string().email().required(),
+        userPhone: yup.string().min(8).required(),
+        userNote: yup.string()
+    });
+}

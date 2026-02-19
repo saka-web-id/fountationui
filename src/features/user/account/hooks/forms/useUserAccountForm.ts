@@ -8,6 +8,7 @@ export interface UserAccountPayload {
     phone: string;
     email: string;
     note: string;
+    status: string;
     isVerified: boolean;
     accountNumber: string;
     accountStatus: string;
@@ -63,6 +64,7 @@ export const mapUserAccountFromApi = (apiData: any): UserAccountPayload => ({
     phone: apiData.phone,
     email: apiData.email,
     note: apiData.note,
+    status: apiData.status,
     isVerified: apiData.isVerified,
     accountNumber: apiData.accountNumber,
     accountStatus: apiData.accountStatus,
@@ -85,6 +87,7 @@ export function useUserAccountForm() {
             name: "",
             email: "",
             note: "",
+            status: "",
             isVerified: false,
             accountNumber: "",
             accountStatus: "",
@@ -129,6 +132,7 @@ export function useUserAccountForm() {
     const [email, emailAttrs] = defineField('email');
     const [phone, phoneAttrs] = defineField('phone');
     const [note, noteAttrs] = defineField('note');
+    const [status, statusAttrs] = defineField('status');
     const [isVerified, isVerifiedAttrs] = defineField('isVerified');
     const [accountStatus, accountStatusAttrs] = defineField('accountStatus');
     const [membershipStatus, membershipStatusAttrs] = defineField('membershipStatus');
@@ -149,6 +153,8 @@ export function useUserAccountForm() {
         phoneAttrs,
         note,
         noteAttrs,
+        status,
+        statusAttrs,
         isVerified,
         isVerifiedAttrs,
         accountStatus,

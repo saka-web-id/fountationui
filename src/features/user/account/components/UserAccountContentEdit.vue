@@ -15,7 +15,7 @@ const { data: companyData, get: getCompany } = useApi();
 const { data: departmentData, get: getDepartment } = useApi();
 const { data: rolesData, get: getRoles } = useApi();
 const route = useRoute();
-const { handleSubmit, setValues, name, nameAttrs, email, emailAttrs, phone, phoneAttrs, note, noteAttrs, isVerified, isVerifiedAttrs, accountStatus, accountStatusAttrs, membershipStatus, membershipStatusAttrs, membershipType, membershipTypeAttrs, roleId, roleIdAttrs, companyId, companyIdAttrs, departmentId, departmentIdAttrs } = useUserAccountForm();
+const { handleSubmit, setValues, name, nameAttrs, email, emailAttrs, phone, phoneAttrs, note, noteAttrs, status, statusAttrs, isVerified, isVerifiedAttrs, accountStatus, accountStatusAttrs, membershipStatus, membershipStatusAttrs, membershipType, membershipTypeAttrs, roleId, roleIdAttrs, companyId, companyIdAttrs, departmentId, departmentIdAttrs } = useUserAccountForm();
 
 const isEdit = computed(() => !!route.params.userId);
 const { userId, companyIdParam, departmentIdParam } = route.params;
@@ -114,6 +114,16 @@ const submitForm = handleSubmit( async (values: UserAccountPayload) => {
               <ErrorMessage name="userPhone" class="text-start text-danger d-flex ms-0 ps-2 me-2 pe-4" />
             </div>
             <div class="text-start">
+              <div class="text-start d-flex"><span class="d-flex w-25 ms-2 ps-3 me-2 mb-2 input-group-text" style="font-size: calc(0.6em + 0.5vw);">{{ t('textLabel.userStatus') }}</span>
+                <div class="form-check form-check-inline text-start">
+                  <Field  type="radio" name="status" v-model="status" v-bind="statusAttrs" value="ACTIVE" class="form-check-input" ></Field>
+                  <label class="form-check-label" for="formCheck-4">{{ t('textLabel.active') }}</label>
+                </div>
+                <div class="form-check form-check-inline text-start">
+                  <Field  type="radio" name="status" v-model="status" v-bind="statusAttrs" value="INACTIVE" class="form-check-input" ></Field>
+                  <label class="form-check-label" for="formCheck-4">{{ t('textLabel.inactive') }}</label>
+                </div>
+              </div>
               <div class="text-start d-flex"><span class="d-flex w-25 ms-2 ps-3 me-2 mb-2 input-group-text" style="font-size: calc(0.6em + 0.5vw);">{{ t('textLabel.userVerification') }}</span>
                 <div class="form-check form-check-inline text-start">
                   <Field  type="radio" name="isVerified" v-model="isVerified" v-bind="isVerifiedAttrs" :value="true" class="form-check-input" ></Field>

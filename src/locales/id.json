@@ -95,6 +95,7 @@
     "true": "Benar",
     "false": "Salah",
     "dateCreated": "Tanggal Dibuat",
+    "dateUpdated": "Tanggal Diubah",
     "permission": "Ijin | Ijin",
     "isAssigned": "Apakah ditugaskan",
     "verified": "Terverifikasi",
@@ -111,7 +112,8 @@
     "feature": "Fitur | Fitur",
     "duration": "Durasi",
     "billing": "Penagihan",
-    "companyProfile": "Profil Perusahaan"
+    "companyProfile": "Profil Perusahaan",
+    "personalInformation": "Informasi Personal"
   },
   "textField": {
     "email": "Surel",

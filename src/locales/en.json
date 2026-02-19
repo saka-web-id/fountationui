@@ -95,6 +95,7 @@
     "true": "True",
     "false": "False",
     "dateCreated": "Date Created",
+    "dateUpdated": "Date Updated",
     "permission": "Permission | Permissions",
     "isAssigned": "Is Assigned",
     "verified": "Verified",
@@ -111,7 +112,8 @@
     "feature": "Feature | Features",
     "duration": "Duration",
     "billing": "Billing",
-    "companyProfile": "Company Profile"
+    "companyProfile": "Company Profile",
+    "personalInformation": "Personal Information"
   },
   "textField": {
     "email": "Email",
