@@ -15,7 +15,7 @@ const { companyId } = route.params;
 
 onMounted(async () => {
 
-  await get('/api/v0/user/organization/department/list/companyId/' + companyId + "/userId/" + auth.user?.id)
+  await get('/v0/user/organization/department/list/companyId/' + companyId + "/userId/" + auth.user?.id)
 });
 
 const goToEdit = (paramCompanyId: number, paramDepartmentId: number) => {

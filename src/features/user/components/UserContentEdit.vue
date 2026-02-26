@@ -13,10 +13,10 @@ const { t } = useI18n();
 const { data, loading, get, post } = useApi();
 const { data: companyData, get: getCompany } = useApi();
 const { data: departmentData, get: getDepartment } = useApi();
-const { data: rolesData, get: getRoles } = useApi();
+const { get: getRoles } = useApi();
 const route = useRoute();
 const userScheme = useUserSchema();
-const { handleSubmit, setValues, userName, userNameAttrs, userEmail, userEmailAttrs, userPhone, userPhoneAttrs, userStatus, userStatusAttrs, userIsVerified, userIsVerifiedAttrs, userNote, userNoteAttrs, companyId, companyIdAttrs, departmentId, departmentIdAttrs } = useUserForm();
+const { handleSubmit, setValues, userName, userNameAttrs, userEmail, userEmailAttrs, userPhone, userPhoneAttrs, userStatus, userStatusAttrs, userIsVerified, userIsVerifiedAttrs, userNote, userNoteAttrs } = useUserForm();
 
 const isEdit = computed(() => !!route.params.id);
 const { id, companyIdParam, departmentIdParam } = route.params;
@@ -24,18 +24,19 @@ const { id, companyIdParam, departmentIdParam } = route.params;
 onMounted(async () => {
   if (isEdit.value) {
 
-    await get("/api/v0/user/detail/" + id);
+    await get("/v0/user/detail/" + id);
 
     setValues(mapUserFromApi(data.value));
   }
 
-  await getCompany("/api/v0/user/organization/company/list/companyId/" + auth.user?.company.companyId + "/userId/" + auth.user?.id + "/valueCompanyId/" + companyIdParam);
+  await getCompany("/v0/user/organization/company/list/companyId/" + auth.user?.company.companyId + "/userId/" + auth.user?.id + "/valueCompanyId/" + companyIdParam);
 
   console.log("Department ID Param : " + departmentIdParam);
 
-  await getDepartment('/api/v0/user/organization/department/list/companyId/' + companyIdParam + "/userId/" + auth.user?.id);
+  await getDepartment('/v0/user/organization/department/list/companyId/' + companyIdParam + "/userId/" + auth.user?.id);
 
-  setValues({ departmentId: Number(departmentIdParam), companyId: Number(companyIdParam)  });
+  //note: departmentId and companyId already remark in userDTO in backend
+  /*setValues({ departmentId: Number(departmentIdParam), companyId: Number(companyIdParam)  });*/
 
   await getRoles('/authorization/company/role/list/companyId/' + auth.user?.company.companyId + '/userId/'+ auth.user?.id +'/valueCompanyId/'+ companyIdParam)
 
@@ -43,9 +44,9 @@ onMounted(async () => {
 
 const submitForm = handleSubmit( async (values: UserPayload) => {
         if (isEdit.value) {
-          post("/api/v0/user/update/companyId/" + auth.user?.company.companyId + "/userId/" + auth.user?.id, values)
+          post("/v0/user/update/companyId/" + auth.user?.company.companyId + "/userId/" + auth.user?.id, values)
         } else {
-          post("/api/v0/user/add/companyId/" + auth.user?.company.companyId + "/userId/" + auth.user?.id , values)
+          post("/v0/user/add/companyId/" + auth.user?.company.companyId + "/userId/" + auth.user?.id , values)
         }
 
     }
@@ -77,13 +78,13 @@ const submitForm = handleSubmit( async (values: UserPayload) => {
             <h4 class="text-start ms-2">User Edit</h4>
             <div class="input-group mb-2">
               <span class="d-flex w-25 ms-2 input-group-text" style="font-size: calc(0.6em + 0.5vw);">{{ t('textLabel.company') }}</span>
-              <select v-model="companyId" v-bind="companyIdAttrs" class="form-control d-flex ms-0 ps-2 me-2 pe-4" type="text">
+              <select v-model="companyIdParam" class="form-control d-flex ms-0 ps-2 me-2 pe-4" type="text">
                 <option v-for="company in companyData" :value="company.companyId">{{ company.companyName }}</option>
               </select>
             </div>
             <div class="input-group mb-2">
               <span class="d-flex w-25 ms-2 input-group-text" style="font-size: calc(0.6em + 0.5vw);">{{ t('textLabel.department') }}</span>
-              <select v-model="departmentId" v-bind="departmentIdAttrs" class="form-control d-flex ms-0 ps-2 me-2 pe-4" type="text">
+              <select v-model="departmentIdParam" class="form-control d-flex ms-0 ps-2 me-2 pe-4" type="text">
                 <option v-for="department in departmentData" :value="department.departmentId">{{ department.departmentName }}</option>
               </select>
             </div>

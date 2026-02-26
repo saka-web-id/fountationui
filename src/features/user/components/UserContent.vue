@@ -16,13 +16,13 @@ const { companyIdParam, departmentIdParam } = route.params;
 
 onMounted(async () => {
 
-  await get('/api/v0/user/organization/department/users/companyId/' + companyIdParam + "/userId/" + auth.user?.id + "/valueDepartmentId/" + departmentIdParam);
+  await get('/v0/user/organization/department/users/companyId/' + companyIdParam + "/userId/" + auth.user?.id + "/valueDepartmentId/" + departmentIdParam);
 
-  await getCompany('/api/v0/user/organization/company/detail/companyId/' + companyIdParam + "/userId/" + auth.user?.id);
+  await getCompany('/v0/user/organization/company/detail/companyId/' + companyIdParam + "/userId/" + auth.user?.id);
 
   console.log(companyData.value);
 
-  await getDepartment('/api/v0/user/organization/department/detail/companyId/' + companyIdParam + "/userId/" + auth.user?.id + "/" + departmentIdParam);
+  await getDepartment('/v0/user/organization/department/detail/companyId/' + companyIdParam + "/userId/" + auth.user?.id + "/" + departmentIdParam);
 
   console.log(departmentData.value);
 

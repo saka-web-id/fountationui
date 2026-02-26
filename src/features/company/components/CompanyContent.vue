@@ -12,9 +12,9 @@ const router = useRouter();
 
 onMounted(async () => {
 
-  console.log("URL :", '/api/v0/user/companies/list/companyId/'+auth.user?.company.companyId + "/userId/" + auth.user?.id);
+  console.log("URL :", '/v0/user/companies/list/companyId/'+auth.user?.company.companyId + "/userId/" + auth.user?.id);
 
-  await get('/api/v0/user/companies/list/companyId/'+auth.user?.company.companyId + "/userId/" + auth.user?.id)
+  await get('/v0/user/companies/list/companyId/'+auth.user?.company.companyId + "/userId/" + auth.user?.id)
 
 });
 

@@ -22,7 +22,7 @@ const isEdit = computed(() => !!route.params.billingCycleIdParam)
 
 onMounted(async () => {
   if (isEdit.value) {
-    await get("/api/v0/account/membership/billing/cycle/detail/companyId/" + companyIdParam + "/userId/" + auth.user?.id + "/valueBillingCycleId/" + billingCycleIdParam);
+    await get("/v0/account/membership/billing/cycle/detail/companyId/" + companyIdParam + "/userId/" + auth.user?.id + "/valueBillingCycleId/" + billingCycleIdParam);
 
     console.log("Data =", data.value);
 
@@ -35,13 +35,13 @@ onMounted(async () => {
 
 const submitForm = handleSubmit( async (values: BillingCyclePayload) => {
       if (isEdit.value) {
-        post("/api/v0/account/membership/billing/cycle/update/companyId/" + auth.user?.company.companyId + "/userId/" + auth.user?.id , values)
+        post("/v0/account/membership/billing/cycle/update/companyId/" + auth.user?.company.companyId + "/userId/" + auth.user?.id , values)
       } else {
         // force ID to null before sending
         const sanitizedValues = {...values, billingCycleId: null };
 
         console.log("RUNNING ADD" + sanitizedValues);
-        post("/api/v0/account/membership/billing/cycle/add/companyId/" + auth.user?.company.companyId + "/userId/" + auth.user?.id , sanitizedValues)
+        post("/v0/account/membership/billing/cycle/add/companyId/" + auth.user?.company.companyId + "/userId/" + auth.user?.id , sanitizedValues)
       }
     }
 )
@@ -75,7 +75,7 @@ function goBack() {
             </div>
           </div>
 
-          <Form :validationSchema="billingCycleSchema" v-slot="{ meta }" @submit="submitForm" class="text-center py-4">
+          <Form :validationSchema="billingCycleSchema" v-slot="{ meta }" class="text-center py-4">
             <h4 class="text-start ms-2">{{ isEdit ? t('button.edit') : t('button.add')  }}</h4>
             <div class="input-group mb-2">
               <span class="d-flex w-25 ms-2 input-group-text" style="font-size: calc(0.6em + 0.5vw);">{{ t('textLabel.name') }}</span>
@@ -88,9 +88,7 @@ function goBack() {
               <ErrorMessage name="billingCycleDuration" class="text-start text-danger d-flex ms-0 ps-2 me-2 pe-4" />
             </div>
             <div class="text-start">
-              <button :disabled="!meta.valid || loading" class="btn btn-outline-primary" type="submit">
-                {{ loading ? t('button.saving') : t('button.save') }}
-              </button>
+              <button :disabled="!meta.valid || loading"  class="btn btn-outline-primary ms-2 me-2" @click="submitForm" type="button">{{ loading ? t('button.saving') : t('button.save') }}</button>
             </div>
           </Form>
         </div>

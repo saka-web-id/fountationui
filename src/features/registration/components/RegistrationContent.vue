@@ -2,7 +2,7 @@
 import {onMounted} from "vue";
 import { useI18n } from 'vue-i18n';
 import { useMultiStepForm } from '../hooks/useMultistepForm';
-import { useUserRegisterForm, UserRegisterPayload } from "../hooks/forms/useUserRegisterForm"
+import { useUserRegisterForm, type UserRegisterPayload } from "../hooks/forms/useUserRegisterForm"
 import {useApi} from "~/composables/useApi.ts";
 
 const {  loading, post } = useApi();
@@ -28,14 +28,10 @@ onMounted(() => {
   init();
 });
 
-const onSubmit = handleSubmit(values => {
-  console.log("Form submitted:", values)
-})
-
 const submitForm = handleSubmit( async (values: UserRegisterPayload) => {
         console.log("RUNNING ADD" + values);
 
-        post("/api/v0/user/registration" , values)
+        post("/v0/user/registration" , values)
     }
 )
 

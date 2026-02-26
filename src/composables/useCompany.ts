@@ -21,7 +21,7 @@ export function useCompany(config: { routeName: string; apiPath: string }) {
 
     async function fetchCompanies() {
         await getUserCompany(
-            `/api/v0/user/organization/company/list/companyId/${auth.user?.company.companyId}/userId/${auth.user?.id}/valueCompanyId/0`
+            `/v0/user/organization/company/list/companyId/${auth.user?.company.companyId}/userId/${auth.user?.id}/valueCompanyId/0`
         )
 
         const defaultCompany = userCompanyData.value?.find(

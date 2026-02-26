@@ -10,7 +10,8 @@ export async function fetchUser() {
     const { data, get } = useApi()
 
     try {
-        await get('/api/v0/user/detail/')
+        /*await get('/api/v0/user/detail/')*/
+        await get('/v0/user/detail/')  //Recommended from ChatGPT
         console.log("User Detail Login : " + JSON.stringify(data.value))
 
         auth.user = data.value

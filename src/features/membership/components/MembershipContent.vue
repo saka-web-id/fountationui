@@ -8,7 +8,7 @@ const { t } = useI18n();
 const router = useRouter();
 const { selectedCompanyId, onCompanyChange, userCompanyData, data, fetchData } = useCompany({
   routeName: 'membership',
-  apiPath: '/api/v0/account/membership/plan/list'
+  apiPath: '/v0/account/membership/plan/list'
 })
 
 onMounted(async () => {

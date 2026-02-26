@@ -2,7 +2,8 @@ import axios from "axios";
 import router from "~/router";
 
 const api = axios.create({
-    baseURL: "http://www.myproject.local:8080", // change to your backend URL
+    /*baseURL: "http://www.myproject.local:8080", // change to your backend URL*/
+    baseURL: "/api", // Docker apps1, reference to vite.config.ts
     headers: {
         "Content-Type": "application/json",
     },

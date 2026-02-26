@@ -23,14 +23,14 @@ const isEdit = computed(() => !!route.params.membershipIdParam)
 
 onMounted(async () => {
   if (isEdit.value) {
-    await get("/api/v0/account/membership/plan/detail/companyId/" + companyIdParam + "/userId/" + auth.user?.id + "/valueMembershipPlanId/" + membershipIdParam);
+    await get("/v0/account/membership/plan/detail/companyId/" + companyIdParam + "/userId/" + auth.user?.id + "/valueMembershipPlanId/" + membershipIdParam);
 
     console.log("Data =", data.value);
 
     setValues(mapMembershipFromApi(data.value));
   }
 
-  await getBillingCycle("/api/v0/account/membership/billing/cycle/list/companyId/" + companyIdParam + "/userId/" + auth.user?.id + "/valueCompanyId/" + companyIdParam );
+  await getBillingCycle("/v0/account/membership/billing/cycle/list/companyId/" + companyIdParam + "/userId/" + auth.user?.id + "/valueCompanyId/" + companyIdParam );
 
 
   console.log("Data Billing Cycle : " + dataBillingCycle.value);
@@ -39,11 +39,11 @@ onMounted(async () => {
 
 const submitForm = handleSubmit( async (values: MembershipPayload) => {
       if (isEdit.value) {
-        post("/api/v0/account/membership/plan/update/companyId/" + auth.user?.company.companyId + "/userId/" + auth.user?.id, values)
+        post("/v0/account/membership/plan/update/companyId/" + auth.user?.company.companyId + "/userId/" + auth.user?.id, values)
       } else {
         console.log("RUNNING ADD" + values);
 
-        post("/api/v0/account/membership/plan/add/companyId/" + auth.user?.company.companyId + "/userId/" + auth.user?.id, values)
+        post("/v0/account/membership/plan/add/companyId/" + auth.user?.company.companyId + "/userId/" + auth.user?.id, values)
       }
     }
 )

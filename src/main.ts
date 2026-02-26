@@ -9,6 +9,7 @@ import router from './router'
 import en from './locales/en.json';
 import id from './locales/id.json';
 import cn from './locales/cn.json';
+import axios from 'axios';
 
 const i18n = createI18n({
     legacy: false,
@@ -17,6 +18,9 @@ const i18n = createI18n({
     fallbackLocale: 'en',
     messages: { en, id, cn }
 })
+
+// Set global default
+axios.defaults.withCredentials = true;
 
 const app = createApp(App);
 

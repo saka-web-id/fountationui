@@ -23,22 +23,22 @@ const { userId, companyIdParam, departmentIdParam } = route.params;
 onMounted(async () => {
   if (isEdit.value) {
 
-    console.log("URL Get User Account", "/api/v0/user/account/detail/companyId/" + auth.user?.company.companyId + "/userId/" + auth.user?.id + "/valueUserId/" + userId);
+    console.log("URL Get User Account", "/v0/user/account/detail/companyId/" + auth.user?.company.companyId + "/userId/" + auth.user?.id + "/valueUserId/" + userId);
 
-    await get("/api/v0/user/account/detail/companyId/" + auth.user?.company.companyId + "/userId/" + auth.user?.id + "/valueUserId/" + userId);
+    await get("/v0/user/account/detail/companyId/" + auth.user?.company.companyId + "/userId/" + auth.user?.id + "/valueUserId/" + userId);
 
     console.log("Data User Account : ", data.value);
 
     setValues(mapUserAccountFromApi(data.value));
   }
 
-  await getCompany("/api/v0/user/organization/company/list/companyId/" + auth.user?.company.companyId + "/userId/" + auth.user?.id + "/valueCompanyId/" + companyIdParam);
+  await getCompany("/v0/user/organization/company/list/companyId/" + auth.user?.company.companyId + "/userId/" + auth.user?.id + "/valueCompanyId/" + companyIdParam);
 
-  await getDepartment('/api/v0/user/organization/department/list/companyId/' + companyIdParam + "/userId/" + auth.user?.id);
+  await getDepartment('/v0/user/organization/department/list/companyId/' + companyIdParam + "/userId/" + auth.user?.id);
 
   setValues({ department: { departmentId: Number(departmentIdParam) }, company: { companyId: Number(companyIdParam) }  });
 
-  await getRoles('/api/v0/authorization/company/role/list/companyId/' + auth.user?.company.companyId + '/userId/'+ auth.user?.id +'/valueCompanyId/'+ companyIdParam)
+  await getRoles('/v0/authorization/company/role/list/companyId/' + auth.user?.company.companyId + '/userId/'+ auth.user?.id +'/valueCompanyId/'+ companyIdParam)
 
 });
 
@@ -47,9 +47,9 @@ const submitForm = handleSubmit( async (values: UserAccountPayload) => {
       console.log("UserAccountPayload : ", values);
 
         if (isEdit.value) {
-          post("/api/v0/user/account/update/companyId/" + auth.user?.company.companyId + "/userId/" + auth.user?.id + "/valueUserId/" + userId, values)
+          post("/v0/user/account/update/companyId/" + auth.user?.company.companyId + "/userId/" + auth.user?.id + "/valueUserId/" + userId, values)
         } else {
-          post("/api/v0/user/account/add/companyId/" + auth.user?.company.companyId + "/userId/" + auth.user?.id , values)
+          post("/v0/user/account/add/companyId/" + auth.user?.company.companyId + "/userId/" + auth.user?.id , values)
         }
 
     }

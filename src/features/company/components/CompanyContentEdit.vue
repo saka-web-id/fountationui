@@ -21,7 +21,7 @@ onMounted(async () => {
   if (isEdit.value) {
     const { companyIdParam } = route.params;
 
-    await get("/api/v0/user/organization/company/detail/companyId/" + companyIdParam + "/userId/" + auth.user?.id);
+    await get("/v0/user/organization/company/detail/companyId/" + companyIdParam + "/userId/" + auth.user?.id);
 
     setValues(mapCompanyFromApi(data.value));
   }
@@ -30,9 +30,9 @@ onMounted(async () => {
 
 const submitForm = handleSubmit( async (values: CompanyPayload) => {
         if (isEdit.value) {
-          post("/api/v0/user/organization/company/update/companyId/" + auth.user?.company.companyId + "/userId/" + auth.user?.id , values)
+          post("/v0/user/organization/company/update/companyId/" + auth.user?.company.companyId + "/userId/" + auth.user?.id , values)
         } else {
-          post("/api/v0/user/organization/company/add/companyId/" + auth.user?.company.companyId + "/userId/" + auth.user?.id, values)
+          post("/v0/user/organization/company/add/companyId/" + auth.user?.company.companyId + "/userId/" + auth.user?.id, values)
         }
     }
 )

@@ -21,14 +21,14 @@ const { paramCompanyId, paramDepartmentId } = route.params;
 
 onMounted(async () => {
   if (isEdit.value) {
-    await get("/api/v0/user/organization/department/detail/companyId/" + paramCompanyId + "/userId/" + auth.user?.id + "/" + paramDepartmentId);
+    await get("/v0/user/organization/department/detail/companyId/" + paramCompanyId + "/userId/" + auth.user?.id + "/" + paramDepartmentId);
 
     console.log("Data =", data.value);
 
     setValues(mapDepartmentFromApi(data.value));
   }
 
-  await getCompany("/api/v0/user/organization/company/list/companyId/" + auth.user?.company.companyId + "/userId/" + auth.user?.id + "/valueCompanyId/" + paramCompanyId);
+  await getCompany("/v0/user/organization/company/list/companyId/" + auth.user?.company.companyId + "/userId/" + auth.user?.id + "/valueCompanyId/" + paramCompanyId);
 
   console.log("Data =", companyData.value);
 
@@ -40,11 +40,11 @@ const submitForm = handleSubmit( async (values: DepartmentPayload) => {
       if (isEdit.value) {
         console.log("RUNNING EDIT" + values.departmentStatus);
 
-        post("/api/v0/user/organization/department/update/companyId/" + auth.user?.company.companyId + "/userId/" + auth.user?.id, values)
+        post("/v0/user/organization/department/update/companyId/" + auth.user?.company.companyId + "/userId/" + auth.user?.id, values)
       } else {
         console.log("RUNNING ADD" + values);
 
-        post("/api/v0/user/organization/department/add/companyId/" + auth.user?.company.companyId + "/userId/" + auth.user?.id, values)
+        post("/v0/user/organization/department/add/companyId/" + auth.user?.company.companyId + "/userId/" + auth.user?.id, values)
       }
     }
 )

@@ -12,19 +12,26 @@ const auth = useAuthStore()
 const router = useRouter();
 const { selectedCompanyId, onCompanyChange, userCompanyData } = useCompany({
   routeName: 'billingcycle',
-  apiPath: '/api/v0/account/membership/billing/cycle/list'
+  apiPath: '/v0/account/membership/billing/cycle/list'
 })
 
 
 onMounted(async () => {
 
-  console.log("URL :", '/api/v0/account/membership/billing/cycle/list/companyId/'+ selectedCompanyId + "/userId/" + auth.user?.id + "/valueCompanyId/" + selectedCompanyId);
+  console.log("URL :", '/v0/account/membership/billing/cycle/list/companyId/'+ selectedCompanyId + "/userId/" + auth.user?.id + "/valueCompanyId/" + selectedCompanyId);
 
-  await get('/api/v0/account/membership/billing/cycle/list/companyId/'+ selectedCompanyId + "/userId/" + auth.user?.id + "/valueCompanyId/" + selectedCompanyId)
+  await get('/v0/account/membership/billing/cycle/list/companyId/'+ selectedCompanyId + "/userId/" + auth.user?.id + "/valueCompanyId/" + selectedCompanyId)
 
 });
 
-await onCompanyChange({ valueMembershipPlanId: selectedCompanyId.value })
+/*const handleCompanyChange = async (event: Event) => {
+  const _target = event.target as HTMLSelectElement
+  await onCompanyChange({ valueMembershipPlanId: selectedCompanyId.value })
+}*/
+const handleCompanyChange = async (event: Event) => {
+  const target = event.target as HTMLSelectElement
+  await onCompanyChange({ valueMembershipPlanId: target.value })
+}
 
 const goToEdit = (companyIdParam: number) => {
   router.push({ name: 'billingcycleedit', params: { companyIdParam } });
@@ -46,7 +53,7 @@ const goToEdit = (companyIdParam: number) => {
         <div id="idform" class="text-center py-4">
           <div class="input-group mb-2">
             <span class="d-flex w-25 ms-2 input-group-text">Company</span>
-            <select class="form-control d-flex ms-0 ps-2 me-2 pe-4" type="text" v-model="selectedCompanyId" @change="onCompanyChange" >
+            <select class="form-control d-flex ms-0 ps-2 me-2 pe-4" type="text" v-model="selectedCompanyId" @change="handleCompanyChange" >
               <option v-for="userCompany in userCompanyData" :value="userCompany.companyId">{{ userCompany.companyName }}</option>
             </select>
           </div>

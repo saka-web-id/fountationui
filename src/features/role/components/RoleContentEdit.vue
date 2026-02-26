@@ -30,11 +30,11 @@ const permissionsForm = ref<PermissionPayload[]>([]);
 
 onMounted(async () => {
 
-  await getPermissions('/api/v0/authorization/permission/list/companyId/' + auth.user?.company.companyId + "/userId/" + auth.user?.id);
+  await getPermissions('/v0/authorization/permission/list/companyId/' + auth.user?.company.companyId + "/userId/" + auth.user?.id);
   permissionsForm.value = dataPermissions.value;
 
   if (isEdit.value) {
-    await get(`/api/v0/authorization/company/role/permission/detail/companyId/` + auth.user?.company.companyId + "/userId/" + auth.user?.id + "/valueCompanyId/" + companyIdParam + "/valueRoleId/" + roleIdParam);
+    await get(`/v0/authorization/company/role/permission/detail/companyId/` + auth.user?.company.companyId + "/userId/" + auth.user?.id + "/valueCompanyId/" + companyIdParam + "/valueRoleId/" + roleIdParam);
 
     setValuesRoleForm(mapRoleFormFromApi(data.value));
 
@@ -62,9 +62,9 @@ const submitForm = handleSubmit(async ( roleForm: RoleForm) => {
   };
 
   if (isEdit.value) {
-    await post(`/api/v0/authorization/company/role/permission/update/companyId/` + auth.user?.company.companyId + "/userId/" + auth.user?.id + "/valueCompanyId/" + companyIdParam + "/valueRoleId/" + roleIdParam, finalPayload);
+    await post(`/v0/authorization/company/role/permission/update/companyId/` + auth.user?.company.companyId + "/userId/" + auth.user?.id + "/valueCompanyId/" + companyIdParam + "/valueRoleId/" + roleIdParam, finalPayload);
   } else {
-    await post(`/api/v0/authorization/company/role/permission/add/companyId/` + auth.user?.company.companyId + "/userId/" + auth.user?.id + "/valueCompanyId/" + companyIdParam, finalPayload);
+    await post(`/v0/authorization/company/role/permission/add/companyId/` + auth.user?.company.companyId + "/userId/" + auth.user?.id + "/valueCompanyId/" + companyIdParam, finalPayload);
   }
 });
 </script>

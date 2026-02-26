@@ -27,6 +27,7 @@ const { t } = useI18n();
                 </div>
               </div>
               <div>
+
                 <div class="card text-center">
                   <div class="card-header">
                     <h4>{{ t('app.demo.login.title') }}</h4>
@@ -38,7 +39,10 @@ const { t } = useI18n();
                       <li class="text-start">{{ t('textField.username') }} : johndoe@example.com</li>
                       <li class="text-start">{{ t('textField.password') }} : Demo1234!</li>
                     </ul>
-                    <a class="card-link btn btn-info" href="http://www.myproject.local:8080/api/v0/user/login">{{ t('button.login') }}</a>
+                    <!--  Local :                  -->
+<!--                     <a class="card-link btn btn-info" href="http://www.myproject.local:8080/oauth2/authorization/auth0">{{ t('button.login') }}</a>-->
+                    <!--  Docker :                  -->
+                    <a class="card-link btn btn-info" href="https://192.168.1.51/oauth2/authorization/auth0">{{ t('button.login') }}</a><!-- Local -->
                   </div>
                 </div>
               </div>

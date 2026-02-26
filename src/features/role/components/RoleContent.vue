@@ -24,7 +24,7 @@ const selectedCompanyId = ref<number | null>(
 
 onMounted(async () => {
 
-  await getUserCompany('/api/v0/user/organization/company/list/companyId/' + auth.user?.company.companyId + "/userId/" + auth.user?.id + "/valueCompanyId/0" );
+  await getUserCompany('/v0/user/organization/company/list/companyId/' + auth.user?.company.companyId + "/userId/" + auth.user?.id + "/valueCompanyId/0" );
 
   console.log("List Company : ", userCompanyData.value);
 
@@ -37,7 +37,7 @@ onMounted(async () => {
     }
   }
 
-  await get('/api/v0/authorization/company/role/list/companyId/' + auth.user?.company.companyId + "/userId/" + auth.user?.id + "/valueCompanyId/" + selectedCompanyId.value );
+  await get('/v0/authorization/company/role/list/companyId/' + auth.user?.company.companyId + "/userId/" + auth.user?.id + "/valueCompanyId/" + selectedCompanyId.value );
 
 });
 
@@ -50,7 +50,7 @@ async function onCompanyChange() {
     });
 
     // Then trigger the API call and wait for it to complete
-    await get('/api/v0/authorization/company/role/list/companyId/' + auth.user?.company.companyId + "/userId/" + auth.user?.id + "/valueCompanyId/" + selectedCompanyId.value);
+    await get('/v0/authorization/company/role/list/companyId/' + auth.user?.company.companyId + "/userId/" + auth.user?.id + "/valueCompanyId/" + selectedCompanyId.value);
   }
 }
 

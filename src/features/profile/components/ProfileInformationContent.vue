@@ -15,7 +15,7 @@ const { handleSubmit, setValues, userName, userNameAttrs, userEmail, userEmailAt
 
 
 onMounted(async () => {
-  await get("/api/v0/user/detail/" + auth.user?.id);
+  await get("/v0/user/detail/" + auth.user?.id);
 
   setValues(mapUserFromApi(data.value));
 
@@ -25,7 +25,7 @@ const submitForm = handleSubmit( async (values: UserPayload) => {
 
       console.log("Values UserPayload : ", values);
 
-      post("/api/v0/user/update/companyId/" + auth.user?.company.companyId + "/userId/" + auth.user?.id , values)
+      post("/v0/user/update/companyId/" + auth.user?.company.companyId + "/userId/" + auth.user?.id , values)
   }
 )
 
