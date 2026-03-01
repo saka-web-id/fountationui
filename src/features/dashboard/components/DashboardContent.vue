@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { onMounted } from 'vue';
+/*import { onMounted } from 'vue';
 import { fetchUser } from '../../../composables/useAuth';
 
 onMounted(async () => {
   fetchUser();
-});
+});*/
 </script>
 
 <template>
@@ -15,53 +15,32 @@ onMounted(async () => {
         <li class="breadcrumb-item"><router-link to="/dashboard"><span>Home</span></router-link></li>
         <li class="breadcrumb-item active"><span>Dashboard</span></li>
       </ol>
+
       <div class="card mb-3 bg-gradient-dark">
         <div class="card-body ms-0 ps-0 me-0 pe-0 mt-0 pt-0 pb-0">
-          <div class="text-center py-4" id="idform">
-            <div class="input-group mb-2"><span class="d-flex w-25 ms-2 input-group-text">Company</span><input class="form-control d-flex ms-0 ps-5 me-2 pe-4" type="text"></div>
-            <div class="input-group mb-2"><span class="w-25 ms-2 input-group-text">Status</span><input class="form-control w-25 ms-0 ps-5 me-2 pe-4" type="text"></div>
-            <div class="text-end"><button class="btn btn-outline-primary btn-sm ms-2 me-2" type="button">Search</button></div>
-          </div>
-          <div class="text-end">
-            <div class="table-responsive ms-2 me-2 mt-2 mb-2">
-              <table class="table">
-                <thead>
-                <tr>
-                  <th>No</th>
-                  <th>Department</th>
-                  <th>Manager</th>
-                  <th>Employees</th>
-                  <th>Assets</th>
-                  <th class="text-center">Action</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                  <td>1</td>
-                  <td>IT Depart.</td>
-                  <td>Sakawijaya</td>
-                  <td>50</td>
-                  <td>50</td>
-                  <td class="text-center">
-                    <div class="btn-group" role="group"><button class="btn btn-primary" type="button">Edit</button><button class="btn btn-danger" type="button">Delete</button></div>
-                  </td>
-                </tr>
-                <tr>
-                  <td>2</td>
-                  <td>GA Depart.</td>
-                  <td>Surohige</td>
-                  <td>5</td>
-                  <td>5</td>
-                  <td class="text-center">
-                    <div class="btn-group" role="group"><button class="btn btn-primary" type="button">Edit</button><button class="btn btn-danger" type="button">Delete</button></div>
-                  </td>
-                </tr>
-                </tbody>
-              </table>
+          <div class="position-relative ms-1 pe-3 pt-3 bg-gradient-dark">
+            <div class="d-flex flex-row justify-content-start"><img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava6-bg.webp" alt="Avatar 0" width="45" height="100%" />
+              <div>
+                <p class="bg-body-tertiary rounded-3 p-2 ms-3 mb-1 small">Hello Morning,<br /><br /><br /><br />What can i help for today ? Any summary data you want ?</p>
+                <p class="text-muted rounded-3 float-end ms-3 mb-3 small">12:00 PM | Aug 26</p>
+              </div>
             </div>
+            <div class="d-flex flex-row justify-content-end">
+              <div>
+                <p class="text-white bg-info rounded-3 p-2 me-3 mb-1 small">Please provide me total user register until now with graph.</p>
+                <p class="text-muted rounded-3 me-3 mb-3 small">12:00 PM | Aug 26</p>
+              </div><img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp" width="45" height="45" />
+            </div>
+          </div>
+          <div class="text-muted d-flex justify-content-start align-items-center ms-1 pe-3 mt-2 pt-3">
+            <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp" alt="Avatar 3" width="40" height="40" />
+            <input class="form-control-lg form-control" type="text" />
+            <a class="ms-2 text-muted;" href="#"><i class="fa fa-paperclip fas"></i></a>
+            <a class="ms-2 text-muted;" href="#"><i class="fa fa-paper-plane-o"></i></a>
           </div>
         </div>
       </div>
+
       <div class="card bg-gradient-dark">
         <div class="card-body ms-0 ps-0 me-0 pe-0 mt-0 pt-0 pb-0"></div>
       </div>
