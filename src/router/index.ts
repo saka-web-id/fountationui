@@ -154,13 +154,31 @@ const routes: RouteRecordRaw[] = [
         path: '/email',
         name: 'email',
         component: () => import("../views/email/EmailView.vue"),
-        meta: { requiresAuth: true, roleAccess: "SUPER_ADMIN, ADMIN, MANAGER, USER, GUEST" }
+        meta: { requiresAuth: true, roleAccess: "SUPER_ADMIN, ADMIN, MANAGER" }
     },
     {
         path: '/oauth',
         name: 'oauth',
         component: () => import("../views/oauth/OauthView.vue"),
-        meta: { requiresAuth: true, roleAccess: "SUPER_ADMIN, ADMIN, MANAGER, USER, GUEST" }
+        meta: { requiresAuth: true, roleAccess: "SUPER_ADMIN, ADMIN, MANAGER" }
+    },
+    {
+        path: '/logsetting',
+        name: 'logsetting',
+        component: () => import("~/views/log/setting/LogSettingView.vue"),
+        meta: { requiresAuth: true, roleAccess: "SUPER_ADMIN, ADMIN, MANAGER" }
+    },
+    {
+        path: '/logsettinglist',
+        name: 'logsettinglist',
+        component: () => import("~/views/log/setting/LogSettingListView.vue"),
+        meta: { requiresAuth: true, roleAccess: "SUPER_ADMIN, ADMIN, MANAGER" }
+    },
+    {
+        path: '/logsettingedit',
+        name: 'logsettingedit',
+        component: () => import("~/views/log/setting/LogSettingEditView.vue"),
+        meta: { requiresAuth: true, roleAccess: "SUPER_ADMIN, ADMIN, MANAGER" }
     },
     {
         path: '/profileinformation',
