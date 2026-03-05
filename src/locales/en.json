@@ -114,7 +114,11 @@
     "duration": "Duration",
     "billing": "Billing",
     "companyProfile": "Company Profile",
-    "personalInformation": "Personal Information"
+    "personalInformation": "Personal Information",
+    "endpoint": "Endpoint",
+    "method": "Method",
+    "logFormat": "Log Format",
+    "enabled": "Enabled"
   },
   "textField": {
     "email": "Email",

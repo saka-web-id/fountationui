@@ -114,7 +114,11 @@
     "duration": "Durasi",
     "billing": "Penagihan",
     "companyProfile": "Profil Perusahaan",
-    "personalInformation": "Informasi Personal"
+    "personalInformation": "Informasi Personal",
+    "endpoint": "Titik Akhir",
+    "method": "Metode",
+    "logFormat": "Format Log",
+    "enabled": "Aktif"
   },
   "textField": {
     "email": "Surel",

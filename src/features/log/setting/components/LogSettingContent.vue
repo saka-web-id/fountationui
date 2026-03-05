@@ -11,14 +11,12 @@ const { data, get } = useApi();
 const router = useRouter();
 
 onMounted(async () => {
-
-  console.log("URL :", '/v0/user/companies/list/companyId/'+auth.user?.company.companyId + "/userId/" + auth.user?.id);
-
-  await get('/v0/user/companies/list/companyId/'+auth.user?.company.companyId + "/userId/" + auth.user?.id)
-
+  if (auth.user) {
+    await get('/v0/user/companies/list/companyId/' + auth.user.company.companyId + "/userId/" + auth.user.id);
+  }
 });
 
-const goToEdit = (companyIdParam: number) => {
+const goToList = (companyIdParam: number) => {
   router.push({ name: 'logsettinglist', params: { companyIdParam } });
 };
 
@@ -26,7 +24,6 @@ const goToEdit = (companyIdParam: number) => {
 
 <template>
   <section class="pt-2 pb-2">
-
     <div class="container">
       <ol class="breadcrumb ms-4 me-4">
         <li class="breadcrumb-item"><router-link to="/dashboard"><span>{{ t('textLabel.dashboard') }}</span></router-link></li>
@@ -35,7 +32,6 @@ const goToEdit = (companyIdParam: number) => {
       </ol>
       <div class="card mb-3 bg-gradient-dark">
         <div class="card-body ms-0 ps-0 me-0 pe-0 mt-0 pt-0 pb-0">
-
           <div class="table-responsive pt-2">
             <div class="row d-flex justify-content-between align-items-center me-2 mt-2 mb-2">
               <div class="col-auto">
@@ -43,7 +39,7 @@ const goToEdit = (companyIdParam: number) => {
               </div>
             </div>
             <div class="ms-2 me-2 mt-2 mb-2">
-              <table class="table">
+              <table class="table table-hover">
                 <thead>
                 <tr>
                   <th>{{ t('textLabel.number') }}</th>
@@ -53,13 +49,15 @@ const goToEdit = (companyIdParam: number) => {
                 </tr>
                 </thead>
                 <tbody>
-                <tr v-for="d in data" :key="d.companyId">
-                  <td>{{ d.companyId  }}</td>
+                <tr v-for="(d, index) in data" :key="d.companyId">
+                  <td>{{ index + 1 }}</td>
                   <td>{{ d.companyName }}</td>
                   <td>{{ d.companyEmail }}</td>
                   <td class="text-center">
                     <div class="btn-group" role="group">
-                      <button class="btn btn-primary" @click="goToEdit(d.companyId)">{{ t('button.edit') }}</button>
+                      <button class="btn btn-primary btn-sm" @click="goToList(d.companyId)">
+                        <i class="bi bi-list-check me-1"></i> {{ t('button.view') }}
+                      </button>
                     </div>
                   </td>
                 </tr>
@@ -69,13 +67,9 @@ const goToEdit = (companyIdParam: number) => {
           </div>
         </div>
       </div>
-      <div class="card bg-gradient-dark">
-        <div class="card-body ms-0 ps-0 me-0 pe-0 mt-0 pt-0 pb-0"></div>
-      </div>
     </div>
   </section>
 </template>
 
 <style scoped>
-
 </style>

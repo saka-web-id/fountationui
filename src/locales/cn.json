@@ -168,7 +168,11 @@
     "duration": "时长",
     "billing": "计费",
     "companyProfile": "公司简介",
-    "personalInformation": "个人信息"
+    "personalInformation": "个人信息",
+    "endpoint": "端点",
+    "method": "方法",
+    "logFormat": "日志格式",
+    "enabled": "已启用"
   },
   "textField": {
     "email": "邮箱",

@@ -1,5 +1,4 @@
 <script setup lang="ts">
-
 import SidebarDashboard from "~/layouts/sidebar/SidebarDashboard.vue";
 import HeaderDashboard from "~/layouts/headers/HeaderDashboard.vue";
 import LogSettingEditContent from "~/features/log/setting/components/LogSettingEditContent.vue";
@@ -8,11 +7,14 @@ import LogSettingEditContent from "~/features/log/setting/components/LogSettingE
 <template>
   <div id="wrapper">
     <SidebarDashboard />
-    <HeaderDashboard />
+    <div class="d-flex flex-column" id="content-wrapper">
+      <div id="content">
+        <HeaderDashboard />
+        <LogSettingEditContent />
+      </div>
+    </div>
   </div>
-  <LogSettingEditContent />
 </template>
 
 <style scoped>
-
 </style>

@@ -169,14 +169,20 @@ const routes: RouteRecordRaw[] = [
         meta: { requiresAuth: true, roleAccess: "SUPER_ADMIN, ADMIN, MANAGER" }
     },
     {
-        path: '/logsettinglist',
+        path: '/logsettinglist/:companyIdParam',
         name: 'logsettinglist',
         component: () => import("~/views/log/setting/LogSettingListView.vue"),
         meta: { requiresAuth: true, roleAccess: "SUPER_ADMIN, ADMIN, MANAGER" }
     },
     {
-        path: '/logsettingedit',
+        path: '/logsettingedit/:companyIdParam/:logSettingIdParam',
         name: 'logsettingedit',
+        component: () => import("~/views/log/setting/LogSettingEditView.vue"),
+        meta: { requiresAuth: true, roleAccess: "SUPER_ADMIN, ADMIN, MANAGER" }
+    },
+    {
+        path: '/logsettingadd/:companyIdParam',
+        name: 'logsettingadd',
         component: () => import("~/views/log/setting/LogSettingEditView.vue"),
         meta: { requiresAuth: true, roleAccess: "SUPER_ADMIN, ADMIN, MANAGER" }
     },
