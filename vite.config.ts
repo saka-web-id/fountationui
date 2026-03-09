@@ -18,7 +18,8 @@ export default defineConfig({
                 cert: fs.readFileSync('./certs/fullchain.pem'),
             },
         }),
-        proxy: {
+        /* TESTING IN LAPTOP ONLY */
+        /*proxy: {
             '/api': {
                 target: 'http://192.168.1.51:8080', // backend
                 changeOrigin: true,
@@ -34,7 +35,7 @@ export default defineConfig({
                 changeOrigin: true,
                 secure: false,
             },
-        },
+        },*/
     },
     plugins: [
         vue(),

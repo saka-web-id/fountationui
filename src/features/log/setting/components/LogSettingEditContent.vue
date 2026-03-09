@@ -77,19 +77,13 @@ const submitForm = handleSubmit(async (values: LogSettingPayload) => {
             
             <div class="input-group mb-3">
               <span class="input-group-text w-25">{{ t('textLabel.endpoint') }}</span>
-              <Field name="logSettingEndpoint" v-model="logSettingEndpoint" class="form-control" placeholder="/api/v0/..." />
+              <Field name="logSettingEndpoint" v-model="logSettingEndpoint" class="form-control bg-light" placeholder="/api/v0/..." readonly />
               <ErrorMessage name="logSettingEndpoint" class="d-block w-100 text-start text-danger small mt-1" />
             </div>
 
             <div class="input-group mb-3">
               <span class="input-group-text w-25">{{ t('textLabel.method') }}</span>
-              <Field name="logSettingMethod" as="select" v-model="logSettingMethod" class="form-select">
-                <option value="GET">GET</option>
-                <option value="POST">POST</option>
-                <option value="PUT">PUT</option>
-                <option value="DELETE">DELETE</option>
-                <option value="PATCH">PATCH</option>
-              </Field>
+              <Field name="logSettingMethod" v-model="logSettingMethod" class="form-control bg-light" placeholder="GET/POST/..." readonly />
               <ErrorMessage name="logSettingMethod" class="d-block w-100 text-start text-danger small mt-1" />
             </div>
 

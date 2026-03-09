@@ -181,12 +181,6 @@ const routes: RouteRecordRaw[] = [
         meta: { requiresAuth: true, roleAccess: "SUPER_ADMIN, ADMIN, MANAGER" }
     },
     {
-        path: '/logsettingadd/:companyIdParam',
-        name: 'logsettingadd',
-        component: () => import("~/views/log/setting/LogSettingEditView.vue"),
-        meta: { requiresAuth: true, roleAccess: "SUPER_ADMIN, ADMIN, MANAGER" }
-    },
-    {
         path: '/profileinformation',
         name: 'profileinformation',
         component: () => import("../views/profile/ProfileInformationView.vue"),

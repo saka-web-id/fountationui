@@ -30,6 +30,15 @@ export function useApi<T = any>() {
 
             data.value = response.data as unknown as T;
 
+            if (typeof data.value === 'string') {
+                try {
+                    data.value = JSON.parse(data.value);
+                } catch (e) {
+                    console.error("Failed to parse string as JSON", e);
+                }
+            }
+
+
             // ✅ Set global success
             if (method === "POST") {
                 setGlobalSuccess("Operation completed successfully");

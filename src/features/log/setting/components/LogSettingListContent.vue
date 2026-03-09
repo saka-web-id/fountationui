@@ -7,7 +7,7 @@ import { useAuthStore } from '~/stores/auth'
 
 const auth = useAuthStore()
 const { t } = useI18n();
-const { data, get } = useApi();
+const { data, get } = useApi<any[]>();
 const router = useRouter();
 const route = useRoute();
 
@@ -16,17 +16,18 @@ onMounted(async () => {
 
   console.log("LogSettingLIstContent companyIdParam ", companyIdParam);
 
-  if (auth.user && companyIdParam) {
-    await get(`/v0/logs/setting/list/companyId/${auth.user.company.companyId}/userId/${auth.user.id}/valueCompanyId/${companyIdParam}`);
+  try {
+    if (auth.user && companyIdParam) {
+      await get(`/v0/logs/setting/list/companyId/${auth.user.company.companyId}/userId/${auth.user.id}/valueCompanyId/${companyIdParam}`);
+    }
+  } catch (error) {
+    console.error("Fetch failed:", error);
   }
+
 });
 
 const goToEdit = (logSettingIdParam: number) => {
   router.push({ name: 'logsettingedit', params: { companyIdParam: route.params.companyIdParam, logSettingIdParam } });
-};
-
-const goToAdd = () => {
-  router.push({ name: 'logsettingadd', params: { companyIdParam: route.params.companyIdParam } });
 };
 
 </script>
@@ -45,11 +46,6 @@ const goToAdd = () => {
             <div class="row d-flex justify-content-between align-items-center me-2 mt-2 mb-2">
               <div class="col-auto">
                 <h4 class="ps-3">{{ t('textLabel.logSetting', 2) }}</h4>
-              </div>
-              <div class="col-auto">
-                <button class="btn btn-outline-primary btn-sm me-3" @click="goToAdd">
-                  <i class="bi bi-plus-lg me-1"></i> {{ t('button.add') }}
-                </button>
               </div>
             </div>
             <div class="ms-2 me-2 mt-2 mb-2">
