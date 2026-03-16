@@ -13,12 +13,21 @@ const {
   meta,
   userEmail, userEmailAttrs,
   userName, userNameAttrs,
+  userPassword, userPasswordAttrs,
+  confirmPassword, confirmPasswordAttrs,
   userPhone, userPhoneAttrs,
+  membershipType, membershipTypeAttrs,
   companyName, companyNameAttrs,
   companyEmail, companyEmailAttrs,
   companyWebsite, companyWebsiteAttrs,
   companyAddress, companyAddressAttrs,
   companyPhone, companyPhoneAttrs,
+  companyLogoUrl, companyLogoUrlAttrs,
+  companyTaxId, companyTaxIdAttrs,
+  companyRegistrationId, companyRegistrationIdAttrs,
+  companyIndustry, companyIndustryAttrs,
+  companyType, companyTypeAttrs,
+  companyDescription, companyDescriptionAttrs,
   departmentName, departmentNameAttrs,
 } = useUserRegisterForm()
 
@@ -29,7 +38,7 @@ onMounted(() => {
 });
 
 const submitForm = handleSubmit( async (values: UserRegisterPayload) => {
-        console.log("RUNNING ADD" + values);
+        console.log("RUNNING ADD", values);
 
         post("/v0/user/registration" , values)
     }
@@ -66,16 +75,36 @@ const submitForm = handleSubmit( async (values: UserRegisterPayload) => {
                       <div class="d-inline-flex ps-2 pe-2 input-group-sm input-group">
                         <span>{{ t('textField.username') }}</span>
                         <input class="form-control" type="text" v-model="userName" v-bind="userNameAttrs" />
-                        <span>{{ userNameAttrs.errorMessage }}</span>
+                        <span class="text-danger small">{{ userNameAttrs.errorMessage }}</span>
+                      </div>
+                      <div class="d-inline-flex ps-2 pe-2 input-group-sm input-group">
+                        <span>{{ t('textField.password') }}</span>
+                        <input class="form-control" type="password" v-model="userPassword" v-bind="userPasswordAttrs" />
+                        <span class="text-danger small">{{ userPasswordAttrs.errorMessage }}</span>
+                      </div>
+                      <div class="d-inline-flex ps-2 pe-2 input-group-sm input-group">
+                        <span>{{ t('textField.passwordConfirmation') }}</span>
+                        <input class="form-control" type="password" v-model="confirmPassword" v-bind="confirmPasswordAttrs" />
+                        <span class="text-danger small">{{ confirmPasswordAttrs.errorMessage }}</span>
                       </div>
                       <div class="d-inline-flex ps-2 pe-2 input-group-sm input-group">
                         <span>{{ t('textField.email') }}</span>
                         <input class="form-control" type="email" v-model="userEmail" v-bind="userEmailAttrs" />
-                        <span>{{ userEmailAttrs.errorMessage }}</span>
+                        <span class="text-danger small">{{ userEmailAttrs.errorMessage }}</span>
                       </div>
                       <div class="d-inline-flex ps-2 pe-2 input-group-sm input-group">
                         <span>{{ t('textField.phone') }}</span>
                         <input class="form-control" type="tel" v-model="userPhone" v-bind="userPhoneAttrs" />
+                      </div>
+                      <div class="d-inline-flex ps-2 pe-2 input-group-sm input-group">
+                        <span>Membership Type</span>
+                        <select class="form-select" v-model="membershipType" v-bind="membershipTypeAttrs">
+                          <option value="FREE">FREE</option>
+                          <option value="BASIC">BASIC</option>
+                          <option value="PREMIUM">PREMIUM</option>
+                          <option value="ENTERPRISE">ENTERPRISE</option>
+                        </select>
+                        <span class="text-danger small">{{ membershipTypeAttrs.errorMessage }}</span>
                       </div>
                     </div>
                     <button class="btn btn-primary next" id="next" @click="next" type="button">{{ t('button.next') }}</button>
@@ -90,7 +119,7 @@ const submitForm = handleSubmit( async (values: UserRegisterPayload) => {
                       <div class="d-inline-flex ps-2 pe-2 input-group-sm input-group">
                         <span>{{ t('textField.company') }}</span>
                         <input class="form-control" type="text" v-model="companyName" v-bind="companyNameAttrs" />
-                        <span>{{ companyNameAttrs.errorMessage }}</span>
+                        <span class="text-danger small">{{ companyNameAttrs.errorMessage }}</span>
                       </div>
                       <div class="d-inline-flex ps-2 pe-2 input-group-sm input-group">
                         <span>{{ t('textField.email') }}</span>
@@ -99,6 +128,7 @@ const submitForm = handleSubmit( async (values: UserRegisterPayload) => {
                       <div class="d-inline-flex ps-2 pe-2 input-group-sm input-group">
                         <span>{{ t('textField.website') }}</span>
                         <input class="form-control" type="text" v-model="companyWebsite" v-bind="companyWebsiteAttrs" />
+                        <span class="text-danger small">{{ companyWebsiteAttrs.errorMessage }}</span>
                       </div>
 
                       <div class="d-inline-flex ps-2 pe-2 input-group-sm input-group">
@@ -108,11 +138,36 @@ const submitForm = handleSubmit( async (values: UserRegisterPayload) => {
                       <div class="d-inline-flex ps-2 pe-2 input-group-sm input-group">
                         <span>{{ t('textField.department') }}</span>
                         <input class="form-control" type="text" v-model="departmentName" v-bind="departmentNameAttrs" />
-                        <span>{{ departmentNameAttrs.errorMessage }}</span>
+                        <span class="text-danger small">{{ departmentNameAttrs.errorMessage }}</span>
                       </div>
                       <div class="d-inline-flex ps-2 pe-2 input-group-sm input-group">
                         <span>{{ t('textField.address') }}</span>
                         <input class="form-control" type="text" v-model="companyAddress" v-bind="companyAddressAttrs" />
+                      </div>
+                      <div class="d-inline-flex ps-2 pe-2 input-group-sm input-group">
+                        <span>Logo URL</span>
+                        <input class="form-control" type="text" v-model="companyLogoUrl" v-bind="companyLogoUrlAttrs" />
+                        <span class="text-danger small">{{ companyLogoUrlAttrs.errorMessage }}</span>
+                      </div>
+                      <div class="d-inline-flex ps-2 pe-2 input-group-sm input-group">
+                        <span>Company Registration</span>
+                        <input class="form-control" type="text" v-model="companyRegistrationId" v-bind="companyRegistrationIdAttrs" />
+                      </div>
+                      <div class="d-inline-flex ps-2 pe-2 input-group-sm input-group">
+                        <span>Company Tax ID</span>
+                        <input class="form-control" type="text" v-model="companyTaxId" v-bind="companyTaxIdAttrs" />
+                      </div>
+                      <div class="d-inline-flex ps-2 pe-2 input-group-sm input-group">
+                        <span>Industry</span>
+                        <input class="form-control" type="text" v-model="companyIndustry" v-bind="companyIndustryAttrs" />
+                      </div>
+                      <div class="d-inline-flex ps-2 pe-2 input-group-sm input-group">
+                        <span>Company Type</span>
+                        <input class="form-control" type="text" v-model="companyType" v-bind="companyTypeAttrs" />
+                      </div>
+                      <div class="d-inline-flex ps-2 pe-2 input-group-sm input-group">
+                        <span>Description</span>
+                        <textarea class="form-control" v-model="companyDescription" v-bind="companyDescriptionAttrs"></textarea>
                       </div>
                     </div>
                     <button class="btn btn-secondary previous" id="previous" @click="previous" type="button">{{ t('button.back') }}</button>
@@ -135,6 +190,9 @@ const submitForm = handleSubmit( async (values: UserRegisterPayload) => {
                         <div class="d-inline-flex ps-2 pe-2 input-group-sm input-group">
                           <span>{{ t('textField.phone') }}</span><input class="form-control" type="text" v-model="userPhone" disabled>
                         </div>
+                        <div class="d-inline-flex ps-2 pe-2 input-group-sm input-group">
+                          <span>Membership Type</span><input class="form-control" type="text" v-model="membershipType" disabled>
+                        </div>
                       </div>
                       <div class="border p-1 mt-1">
                         <h6 class="mb-3" style="text-align: left;">Company Information</h6>
@@ -155,6 +213,21 @@ const submitForm = handleSubmit( async (values: UserRegisterPayload) => {
                         </div>
                         <div class="d-inline-flex ps-2 pe-2 input-group-sm input-group">
                           <span>{{ t('textField.address') }}</span><input class="form-control" type="text" v-model="companyAddress" disabled>
+                        </div>
+                        <div class="d-inline-flex ps-2 pe-2 input-group-sm input-group">
+                          <span>Logo URL</span><input class="form-control" type="text" v-model="companyLogoUrl" disabled>
+                        </div>
+                        <div class="d-inline-flex ps-2 pe-2 input-group-sm input-group">
+                          <span>Tax ID</span><input class="form-control" type="text" v-model="companyRegistrationId" disabled>
+                        </div>
+                        <div class="d-inline-flex ps-2 pe-2 input-group-sm input-group">
+                          <span>Industry</span><input class="form-control" type="text" v-model="companyIndustry" disabled>
+                        </div>
+                        <div class="d-inline-flex ps-2 pe-2 input-group-sm input-group">
+                          <span>Company Type</span><input class="form-control" type="text" v-model="companyType" disabled>
+                        </div>
+                        <div class="d-inline-flex ps-2 pe-2 input-group-sm input-group">
+                          <span>Description</span><textarea class="form-control" v-model="companyDescription" disabled></textarea>
                         </div>
                       </div>
                     </div>

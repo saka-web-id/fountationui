@@ -60,19 +60,19 @@ const goToEdit = (companyIdParam: number, membershipIdParam: number) => {
               <table class="table">
                 <thead>
                 <tr>
-                  <th>{{ t('textLabel.number') }}</th>
+                  <th class="d-none d-md-table-cell">{{ t('textLabel.number') }}</th>
                   <th>{{ t('textLabel.membership', 1) }}</th>
-                  <th>{{ t('textLabel.billingCycle') }}</th>
-                  <th>{{ t('textLabel.billing') }}</th>
+                  <th class="d-none d-md-table-cell">{{ t('textLabel.billingCycle') }}</th>
+                  <th class="d-none d-md-table-cell">{{ t('textLabel.billing') }}</th>
                   <th class="text-center">{{ t('textLabel.action') }}</th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr v-for="d in data" :key="d.membershipPlanId">
-                  <td>{{ d.membershipPlanId  }}</td>
+                  <td class="d-none d-md-table-cell">{{ d.membershipPlanId  }}</td>
                   <td>{{ d.membershipPlanName }}</td>
-                  <td>{{ d.membershipPlanBillingCycle }}</td>
-                  <td>{{ d.membershipPlanPrice }}</td>
+                  <td class="d-none d-md-table-cell">{{ d.membershipPlanBillingCycle }}</td>
+                  <td class="d-none d-md-table-cell">{{ d.membershipPlanPrice }}</td>
                   <td class="text-center">
                     <div class="btn-group" role="group">
                       <button class="btn btn-primary" @click="goToEdit(selectedCompanyId, d.membershipPlanId)">{{ t('button.edit') }}</button>

@@ -82,21 +82,21 @@ const goToEdit = (userId: number) => {
               <table class="table">
                 <thead>
                 <tr>
-                  <th>{{ t('textLabel.number') }}</th>
+                  <th class="d-none d-md-table-cell">{{ t('textLabel.number') }}</th>
                   <th>{{ t('textLabel.name') }}</th>
-                  <th>{{ t('textLabel.email') }}</th>
-                  <th>{{ t('textLabel.status') }}</th>
-                  <th>{{ t('textLabel.createdAt') }}</th>
+                  <th class="d-none d-md-table-cell">{{ t('textLabel.email') }}</th>
+                  <th class="d-none d-md-table-cell">{{ t('textLabel.status') }}</th>
+                  <th class="d-none d-md-table-cell">{{ t('textLabel.createdAt') }}</th>
                   <th class="text-center">{{ t('textLabel.action') }}</th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr v-for="d in data" :key="d.userId">
-                  <td>{{ d.userId  }}</td>
+                  <td class="d-none d-md-table-cell">{{ d.userId  }}</td>
                   <td>{{ d.userName  }}</td>
-                  <td>{{ d.userEmail  }}</td>
-                  <td>{{ d.userStatus  }}</td>
-                  <td>{{ d.userCreatedAt  }}</td>
+                  <td class="d-none d-md-table-cell">{{ d.userEmail  }}</td>
+                  <td class="d-none d-md-table-cell">{{ d.userStatus  }}</td>
+                  <td class="d-none d-md-table-cell">{{ d.userCreatedAt  }}</td>
                   <td class="text-center">
                     <div class="btn-group" role="group">
                       <button class="btn btn-primary" @click="goToEdit(d.userId)">{{ t('button.edit') }}</button>

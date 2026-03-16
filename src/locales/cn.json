@@ -144,6 +144,9 @@
     "taxId": "税号",
     "registrationNumber": "注册号",
     "role": "角色 | 角色列表",
+    "permission": "权限",
+    "permissionSetting": "权限设置",
+    "resource": "资源",
     "register": "注册",
     "createdAt": "创建时间",
     "note": "备注",
@@ -200,6 +203,7 @@
         "general": "密码格式错误"
       },
       "passwordConfirmation": "两次输入的密码必须一致",
+      "membershipType": "会员类型必填",
       "company": "公司名称格式错误",
       "department": "部门名称格式错误"
     },

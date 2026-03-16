@@ -60,9 +60,9 @@ const goToDepartment = (companyId: number) => {
               <table class="table">
                 <thead>
                 <tr>
-                  <th>{{ t('textLabel.number') }}</th>
+                  <th class="d-none d-md-table-cell">{{ t('textLabel.number') }}</th>
                   <th>{{ t('textLabel.company', 2) }}</th>
-                  <th>{{ t('textField.email') }}</th>
+                  <th class="d-none d-md-table-cell">{{ t('textField.email') }}</th>
                   <!--
                   <th>{{ t('textLabel.employee', 2) }}</th>
                   <th>{{ t('textLabel.asset', 2) }}</th>
@@ -72,9 +72,9 @@ const goToDepartment = (companyId: number) => {
                 </thead>
                 <tbody>
                 <tr v-for="d in data" :key="d.companyId">
-                  <td>{{ d.companyId  }}</td>
+                  <td class="d-none d-md-table-cell">{{ d.companyId  }}</td>
                   <td>{{ d.companyName }}</td>
-                  <td>{{ d.companyEmail }}</td>
+                  <td class="d-none d-md-table-cell">{{ d.companyEmail }}</td>
                   <!--
                   <td>50</td>
                   <td>50</td>

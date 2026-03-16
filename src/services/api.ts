@@ -7,6 +7,7 @@ const api = axios.create({
     headers: {
         "Content-Type": "application/json",
     },
+    timeout: 300000,
     withCredentials: true
 });
 
@@ -14,6 +15,9 @@ const api = axios.create({
 api.interceptors.response.use(
     res => res,
     err => {
+        console.error("FULL AXIOS ERROR:", err);
+        console.error("ERROR CONFIG:", err.config);
+
         const message =
             err.response?.data?.message ||
             err.response?.data?.error ||
@@ -25,7 +29,7 @@ api.interceptors.response.use(
             if (router.currentRoute.value.name !== "home") {
                 setTimeout(() => {
                     router.replace({name: "home"});
-                }, 3000);
+                }, 300000);
             }
         }
 

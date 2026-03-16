@@ -42,17 +42,17 @@ const goToList = (companyIdParam: number) => {
               <table class="table table-hover">
                 <thead>
                 <tr>
-                  <th>{{ t('textLabel.number') }}</th>
+                  <th class="d-none d-md-table-cell">{{ t('textLabel.number') }}</th>
                   <th>{{ t('textLabel.company', 2) }}</th>
-                  <th>{{ t('textField.email') }}</th>
+                  <th class="d-none d-md-table-cell">{{ t('textField.email') }}</th>
                   <th class="text-center">{{ t('textLabel.action') }}</th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr v-for="(d, index) in data" :key="d.companyId">
-                  <td>{{ index + 1 }}</td>
+                  <td class="d-none d-md-table-cell">{{ index + 1 }}</td>
                   <td>{{ d.companyName }}</td>
-                  <td>{{ d.companyEmail }}</td>
+                  <td class="d-none d-md-table-cell">{{ d.companyEmail }}</td>
                   <td class="text-center">
                     <div class="btn-group" role="group">
                       <button class="btn btn-primary btn-sm" @click="goToList(d.companyId)">

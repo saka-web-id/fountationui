@@ -1,14 +1,16 @@
-# Stage 1: Build app
-FROM node:24-alpine AS build
+# Stage 1: Build app (Force native speed)
+FROM --platform=$BUILDPLATFORM node:24-alpine AS build
 WORKDIR /app
 
+# Use cache mount to speed up npm installs
 COPY package*.json ./
-RUN npm install
+RUN --mount=type=cache,target=/root/.npm \
+    npm install
 
 COPY . .
 RUN npm run build
 
-# Stage 2: Serve with Nginx
+# Stage 2: Serve with Nginx (Multi-arch target)
 FROM nginx:alpine
 COPY --from=build /app/dist /usr/share/nginx/html
 COPY nginx.conf /etc/nginx/conf.d/default.conf

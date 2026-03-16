@@ -40,14 +40,16 @@ const { t } = useI18n();
         <img class="img-fluid me-3" width="40" height="40" src="/src/assets/img/logos/logo.svg" />
         <span class="fs-3 fw-bold">{{ t('app.brand.title') }}</span>
         </a><button class="navbar-toggler me-0" data-bs-toggle="collapse" data-bs-target="#navcol-3"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
-        <div id="navcol-3" class="collapse navbar-collapse">
+        <div id="navcol-3" class="collapse navbar-collapse text-center">
           <ul class="navbar-nav mb-4 mb-lg-0 mx-auto">
             <li class="nav-item"><router-link to="/" class="nav-link">{{ t('app.features.title') }}</router-link></li>
             <li class="nav-item"><router-link to="/howtouse" class="nav-link" >{{ t('app.howToUse.title') }}</router-link></li>
           </ul>
             <!--<router-link to="/login" tag="button" class="btn bg-white bg-opacity-10 bg-gradient me-2">{{ t('button.login') }}</router-link>-->
 <!--            <a href="http://www.myproject.local:8080/api/v0/user/login" tag="button" class="btn bg-white bg-opacity-10 bg-gradient me-2">{{ t('button.login') }}</a>-->
-            <router-link to="/demo" tag="button" class="btn bg-white bg-opacity-10 bg-gradient me-2">{{ t('app.demo.title') }}</router-link>
+          <div class="d-flex justify-content-center mt-2 mt-lg-0">
+            <router-link to="/demo" tag="button" class="btn bg-white bg-opacity-10 bg-gradient mx-auto mx-lg-0 me-lg-2">{{ t('app.demo.title') }}</router-link>
+          </div>
         </div>
       </div>
     </nav>

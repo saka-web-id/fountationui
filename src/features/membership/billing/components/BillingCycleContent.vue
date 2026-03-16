@@ -74,19 +74,19 @@ const goToEdit = (companyIdParam: number) => {
               <table class="table">
                 <thead>
                 <tr>
-                  <th>{{ t('textLabel.number') }}</th>
+                  <th class="d-none d-md-table-cell">{{ t('textLabel.number') }}</th>
                   <th>{{ t('textLabel.name', 1) }}</th>
-                  <th>{{ t('textField.duration') }}</th>
-                  <th>{{ t('textField.createdAt') }}</th>
+                  <th class="d-none d-md-table-cell">{{ t('textField.duration') }}</th>
+                  <th class="d-none d-md-table-cell">{{ t('textField.createdAt') }}</th>
                   <th class="text-center">{{ t('textLabel.action') }}</th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr v-for="d in data" :key="d.billingCycleId">
-                  <td>{{ d.billingCycleId  }}</td>
+                  <td class="d-none d-md-table-cell">{{ d.billingCycleId  }}</td>
                   <td>{{ d.billingCycleName }}</td>
-                  <td>{{ d.billingCycleDuration }}</td>
-                  <td>{{ d.billingCyclecreatedAt }}</td>
+                  <td class="d-none d-md-table-cell">{{ d.billingCycleDuration }}</td>
+                  <td class="d-none d-md-table-cell">{{ d.billingCyclecreatedAt }}</td>
                   <td class="text-center">
                     <div class="btn-group" role="group">
                       <button class="btn btn-primary" @click="goToEdit(selectedCompanyId)">{{ t('button.edit') }}</button>

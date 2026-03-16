@@ -61,17 +61,17 @@ const goToUsers = (companyId: number, departmentId: number) => {
               <table class="table">
                 <thead>
                 <tr>
-                  <th>{{ t('textLabel.number') }}</th>
+                  <th class="d-none d-md-table-cell">{{ t('textLabel.number') }}</th>
                   <th>{{ t('textLabel.department', 2) }}</th>
-                  <th>{{ t('textLabel.description') }}</th>
+                  <th class="d-none d-md-table-cell">{{ t('textLabel.description') }}</th>
                   <th class="text-center">{{ t('textLabel.action') }}</th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr v-for="d in data" :key="d.departmentId">
-                  <td>{{ d.departmentId  }}</td>
+                  <td class="d-none d-md-table-cell">{{ d.departmentId  }}</td>
                   <td>{{ d.departmentName  }}</td>
-                  <td>{{ d.departmentDescription  }}</td>
+                  <td class="d-none d-md-table-cell">{{ d.departmentDescription  }}</td>
                   <td class="text-center">
                     <div class="btn-group" role="group">
                       <button class="btn btn-primary" @click="goToEdit(d.companyId, d.departmentId)">{{ t('button.edit') }}</button>

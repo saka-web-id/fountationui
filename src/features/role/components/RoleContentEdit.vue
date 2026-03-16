@@ -103,14 +103,14 @@ const submitForm = handleSubmit(async ( roleForm: RoleForm) => {
                   <thead>
                   <tr>
                     <th class="text-center">{{ t('textLabel.permission') }}</th>
-                    <th class="text-center">{{ t('textLabel.description', 1) }}</th>
+                    <th class="text-center d-none d-md-table-cell">{{ t('textLabel.description', 1) }}</th>
                     <th class="text-center">{{ t('textLabel.isAssigned') }}</th>
                   </tr>
                   </thead>
                   <tbody>
                   <tr v-for="permission in permissionsForm" :key="permission.permissionId">
                     <td class="text-left">{{ permission.permissionName }}</td>
-                    <td class="text-left">{{ permission.permissionDescription }}</td>
+                    <td class="text-left d-none d-md-table-cell">{{ permission.permissionDescription }}</td>
                     <td class="text-center">
                       <Field type="checkbox" name="permissionIds" v-model="permissionIds" :checked="permission.isAssigned" :value="permission.permissionId" />
                     </td>

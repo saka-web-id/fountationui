@@ -181,6 +181,24 @@ const routes: RouteRecordRaw[] = [
         meta: { requiresAuth: true, roleAccess: "SUPER_ADMIN, ADMIN, MANAGER" }
     },
     {
+        path: '/permissionsetting',
+        name: 'permissionsetting',
+        component: () => import("~/views/permission/PermissionView.vue"),
+        meta: { requiresAuth: true, roleAccess: "SUPER_ADMIN, ADMIN" }
+    },
+    {
+        path: '/permissionadd',
+        name: 'permissionadd',
+        component: () => import("~/views/permission/PermissionEditView.vue"),
+        meta: { requiresAuth: true, roleAccess: "SUPER_ADMIN, ADMIN" }
+    },
+    {
+        path: '/permissionedit/:permissionIdParam',
+        name: 'permissionedit',
+        component: () => import("~/views/permission/PermissionEditView.vue"),
+        meta: { requiresAuth: true, roleAccess: "SUPER_ADMIN, ADMIN" }
+    },
+    {
         path: '/profileinformation',
         name: 'profileinformation',
         component: () => import("../views/profile/ProfileInformationView.vue"),

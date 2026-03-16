@@ -24,27 +24,27 @@
                 <thead>
                 <tr>
                   <th class="text-center">Name</th>
-                  <th class="text-center">Company</th>
-                  <th class="text-center">Being used for</th>
-                  <th class="text-center">Verified</th>
+                  <th class="text-center d-none d-md-table-cell">Company</th>
+                  <th class="text-center d-none d-md-table-cell">Being used for</th>
+                  <th class="text-center d-none d-md-table-cell">Verified</th>
                   <th class="text-center">Action</th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr>
                   <td class="text-center">Google OAuth</td>
-                  <td class="text-center">PT Auan DBB</td>
-                  <td class="text-center">Email</td>
-                  <td class="text-center">Yes</td>
+                  <td class="text-center d-none d-md-table-cell">PT Auan DBB</td>
+                  <td class="text-center d-none d-md-table-cell">Email</td>
+                  <td class="text-center d-none d-md-table-cell">Yes</td>
                   <td class="text-center">
                     <div class="btn-group btn-group-sm" role="group"><button class="btn btn-primary" type="button" data-bs-target="#editModal" data-bs-toggle="modal">Edit</button><button class="btn btn-danger" type="button" data-bs-target="#deleteModal" data-bs-toggle="modal">Delete</button></div>
                   </td>
                 </tr>
                 <tr>
                   <td class="text-center">Microsoft 365</td>
-                  <td class="text-center">PT Assarrra</td>
-                  <td class="text-center">None</td>
-                  <td class="text-center">No</td>
+                  <td class="text-center d-none d-md-table-cell">PT Assarrra</td>
+                  <td class="text-center d-none d-md-table-cell">None</td>
+                  <td class="text-center d-none d-md-table-cell">No</td>
                   <td class="text-center">
                     <div class="btn-group btn-group-sm" role="group"><button class="btn btn-primary" type="button" data-bs-target="#editModal" data-bs-toggle="modal">Edit</button><button class="btn btn-danger" type="button" data-bs-target="#deleteModal" data-bs-toggle="modal">Delete</button></div>
                   </td>

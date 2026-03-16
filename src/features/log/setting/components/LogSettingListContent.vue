@@ -53,18 +53,18 @@ const goToEdit = (logSettingIdParam: number) => {
                 <thead>
                 <tr>
                   <th>{{ t('textLabel.endpoint') }}</th>
-                  <th>{{ t('textLabel.method' ) }}</th>
-                  <th>{{ t('textLabel.logFormat') }}</th>
-                  <th>{{ t('textLabel.enabled') }}</th>
+                  <th class="d-none d-md-table-cell">{{ t('textLabel.method' ) }}</th>
+                  <th class="d-none d-md-table-cell">{{ t('textLabel.logFormat') }}</th>
+                  <th class="d-none d-md-table-cell">{{ t('textLabel.enabled') }}</th>
                   <th class="text-center">{{ t('textLabel.action') }}</th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr v-for="d in data" :key="d.logSettingId">
                   <td><code>{{ d.logSettingEndpoint }}</code></td>
-                  <td><span class="badge bg-secondary">{{ d.logSettingMethod }}</span></td>
-                  <td>{{ d.logSettingLogFormat }}</td>
-                  <td>
+                  <td class="d-none d-md-table-cell"><span class="badge bg-secondary">{{ d.logSettingMethod }}</span></td>
+                  <td class="d-none d-md-table-cell">{{ d.logSettingLogFormat }}</td>
+                  <td class="d-none d-md-table-cell">
                     <span :class="d.logSettingEnabled ? 'text-success' : 'text-danger'">
                       {{ d.logSettingEnabled ? t('textLabel.true') : t('textLabel.false') }}
                     </span>

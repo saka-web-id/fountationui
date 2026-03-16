@@ -96,8 +96,11 @@
     "true": "Benar",
     "false": "Salah",
     "dateCreated": "Tanggal Dibuat",
-    "dateUpdated": "Tanggal Diubah",
-    "permission": "Ijin | Ijin",
+    "dateUpdated": "Tanggal Diperbarui",
+    "permission": "Izin | Izin",
+    "permissionSetting": "Pengaturan Izin",
+    "resource": "Sumber Daya",
+
     "isAssigned": "Apakah ditugaskan",
     "verified": "Terverifikasi",
     "active": "Aktif",
@@ -146,6 +149,7 @@
         "general": "Format Password salah"
       },
       "passwordConfirmation": "Konfirmasi Password harus sama",
+      "membershipType": "Tipe Keanggotaan harus diisi",
       "company": "Format Nama Perusahaan Salah",
       "department": "Format Nama Department Salah"
     },

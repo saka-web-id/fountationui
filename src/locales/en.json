@@ -98,6 +98,8 @@
     "dateCreated": "Date Created",
     "dateUpdated": "Date Updated",
     "permission": "Permission | Permissions",
+    "permissionSetting": "Permission Settings",
+    "resource": "Resource",
     "isAssigned": "Is Assigned",
     "verified": "Verified",
     "active": "Active",
@@ -146,6 +148,7 @@
           "general": "Wrong password format"
       },
       "passwordConfirmation": "Password must match",
+      "membershipType": "Membership Type is required",
       "company": "Wrong Company Format Name",
       "department": "Wrong Department Format Name"
     },

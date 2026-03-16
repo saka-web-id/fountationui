@@ -11,7 +11,8 @@ export function useApi<T = any>() {
 
     async function request<R = T>(
         url: string,
-        method: "GET" | "POST",
+        // 1. Add "PUT" to the allowed methods type
+        method: "GET" | "POST" | "PUT",
         body?: any
     ): Promise<R | null> {
         loading.value = true;
@@ -19,7 +20,6 @@ export function useApi<T = any>() {
         error.value = null;
         setGlobalError(null);
         setGlobalSuccess(null);
-
 
         try {
             const response = await api.request<R>({
@@ -38,9 +38,8 @@ export function useApi<T = any>() {
                 }
             }
 
-
-            // ✅ Set global success
-            if (method === "POST") {
+            // 2. Trigger success message for both POST and PUT
+            if (method === "POST" || method === "PUT") {
                 setGlobalSuccess("Operation completed successfully");
             }
 
@@ -50,13 +49,11 @@ export function useApi<T = any>() {
             console.error("FULL ERROR:", JSON.stringify(err, null, 2));
 
             const parts = [];
-
             if (err?.response?.data?.message) parts.push(err.response.data.message);
             if (err?.response?.data?.error) parts.push(err.response.data.error);
             if (err?.message) parts.push(err.message);
 
             const message = parts.join(" | ");
-
             error.value = message;
             setGlobalError(message);
             return null;
@@ -69,6 +66,7 @@ export function useApi<T = any>() {
 
     const get = <R = T>(url: string) => request<R>(url, "GET");
     const post = <R = T>(url: string, body: any) => request<R>(url, "POST", body);
+    const put = <R = T>(url: string, body: any) => request<R>(url, "PUT", body);
 
     return {
         data,
@@ -76,5 +74,6 @@ export function useApi<T = any>() {
         loading,
         get,
         post,
+        put,
     };
 }

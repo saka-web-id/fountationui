@@ -41,7 +41,7 @@ export function useCompany(config: { routeName: string; apiPath: string }) {
             .map(([key, value]) => `${key}/${value}`)
             .join('/')
 
-        const url = `${config.apiPath}/companyId/${selectedCompanyId.value}/userId/${auth.user?.id}/${queryString}`
+        const url = `${config.apiPath}/companyId/${auth.user?.company.companyId}/userId/${auth.user?.id}/${queryString}`
 
         console.log("useCompany : " + url )
 

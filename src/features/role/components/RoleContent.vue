@@ -92,19 +92,19 @@ async function onCompanyChange() {
             <table class="table">
               <thead>
               <tr>
-                <th>{{ t('textLabel.number') }}</th>
+                <th class="d-none d-md-table-cell">{{ t('textLabel.number') }}</th>
                 <th>{{ t('textLabel.name') }}</th>
-                <th>{{ t('textLabel.description') }}</th>
-                <th>{{ t('textLabel.dateCreated') }}</th>
+                <th class="d-none d-md-table-cell">{{ t('textLabel.description') }}</th>
+                <th class="d-none d-md-table-cell">{{ t('textLabel.dateCreated') }}</th>
                 <th class="text-center">{{ t('textLabel.action') }}</th>
               </tr>
               </thead>
               <tbody>
               <tr v-for="role in data" :key="role.roleId">
-                <td>{{ role.roleId }}</td>
+                <td class="d-none d-md-table-cell">{{ role.roleId }}</td>
                 <td>{{ role.roleName }}</td>
-                <td>{{ role.roleDescription }}</td>
-                <td>{{ role.roleCreatedAt }}</td>
+                <td class="d-none d-md-table-cell">{{ role.roleDescription }}</td>
+                <td class="d-none d-md-table-cell">{{ role.roleCreatedAt }}</td>
                 <td class="text-center">
                   <div class="btn-group" role="group">
                     <button class="btn btn-primary" @click="router.push({ name: 'roleedit', params: { roleIdParam: role.roleId, companyIdParam: selectedCompanyId } })" >{{ t('button.view') }}</button>
