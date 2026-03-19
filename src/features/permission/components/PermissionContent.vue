@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n';
 import { useApi } from "~/composables/useApi";
-import { onMounted } from "vue";
+import { onMounted, computed } from "vue";
 import { useRouter } from "vue-router";
 import { useAuthStore } from '~/stores/auth'
 
@@ -12,6 +12,15 @@ const router = useRouter();
 
 onMounted(async () => {
   await get('/v0/authorization/permission/list/companyId/' + auth.user?.company.companyId + "/userId/" + auth.user?.id);
+});
+
+const sortedData = computed(() => {
+  if (!data.value) return [];
+  return [...data.value].sort((a, b) => {
+    if (a.permissionName < b.permissionName) return -1;
+    if (a.permissionName > b.permissionName) return 1;
+    return 0;
+  });
 });
 
 </script>
@@ -34,10 +43,9 @@ onMounted(async () => {
             </div>
           </div>
           <div class="table-responsive ms-2 me-2 mt-2 mb-2">
-            <table class="table">
+            <table class="table table-hover">
               <thead>
               <tr>
-                <th class="d-none d-md-table-cell">{{ t('textLabel.number') }}</th>
                 <th>{{ t('textLabel.name') }}</th>
                 <th class="d-none d-md-table-cell">{{ t('textLabel.resource') }}</th>
                 <th class="d-none d-md-table-cell">{{ t('textLabel.action') }}</th>
@@ -46,17 +54,21 @@ onMounted(async () => {
               </tr>
               </thead>
               <tbody>
-              <tr v-for="permission in data" :key="permission.permissionId">
-                <td class="d-none d-md-table-cell">{{ permission.permissionId }}</td>
-                <td>{{ permission.permissionName }}</td>
-                <td class="d-none d-md-table-cell">{{ permission.permissionResource }}</td>
-                <td class="d-none d-md-table-cell">{{ permission.permissionAction }}</td>
+              <tr v-for="permission in sortedData" :key="permission.permissionId">
+                <td class="fw-bold">{{ permission.permissionName }}</td>
+                <td class="d-none d-md-table-cell"><code>{{ permission.permissionResource }}</code></td>
+                <td class="d-none d-md-table-cell"><span class="badge bg-secondary">{{ permission.permissionAction }}</span></td>
                 <td class="d-none d-md-table-cell">{{ permission.permissionDescription }}</td>
                 <td class="text-center">
                   <div class="btn-group" role="group">
-                    <button class="btn btn-primary" @click="router.push({ name: 'permissionedit', params: { permissionIdParam: permission.permissionId } })" >{{ t('button.edit') }}</button>
+                    <button class="btn btn-primary btn-sm" @click="router.push({ name: 'permissionedit', params: { permissionIdParam: permission.permissionId } })" >
+                      <i class="bi bi-pencil-square me-1"></i> {{ t('button.edit') }}
+                    </button>
                   </div>
                 </td>
+              </tr>
+              <tr v-if="!sortedData || sortedData.length === 0">
+                <td colspan="5" class="text-center italic py-4 text-muted">No permissions found.</td>
               </tr>
               </tbody>
             </table>

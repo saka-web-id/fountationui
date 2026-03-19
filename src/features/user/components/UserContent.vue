@@ -72,7 +72,12 @@ const goToEdit = (userId: number) => {
           <div class="table-responsive pt-2">
             <div class="row d-flex justify-content-between align-items-center me-2 mt-2 mb-2">
               <div class="col-auto">
-                <h3 class="ps-3">Users</h3>
+                <h3 class="ps-3">
+                  {{ t('textLabel.user', 2) }} 
+                  <span v-if="companyData?.companyName && departmentData?.departmentName">
+                    - {{ companyData.companyName }} - {{ departmentData.departmentName }}
+                  </span>
+                </h3>
               </div>
               <div class="col-auto">
                 <button @click="router.push({ name: 'useradd', params: { companyIdParam, departmentIdParam } })" class="btn btn-outline-primary" type="button">{{ t('button.add') }}</button>

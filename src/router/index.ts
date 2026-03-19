@@ -181,6 +181,18 @@ const routes: RouteRecordRaw[] = [
         meta: { requiresAuth: true, roleAccess: "SUPER_ADMIN, ADMIN, MANAGER" }
     },
     {
+        path: '/gatewaylogs',
+        name: 'gatewaylogs',
+        component: () => import("~/views/log/gateway/LogsGatewayListView.vue"),
+        meta: { requiresAuth: true, roleAccess: "SUPER_ADMIN, ADMIN, MANAGER" }
+    },
+    {
+        path: '/apilogs',
+        name: 'apilogs',
+        component: () => import("~/views/log/api/LogsApiListView.vue"),
+        meta: { requiresAuth: true, roleAccess: "SUPER_ADMIN, ADMIN, MANAGER" }
+    },
+    {
         path: '/permissionsetting',
         name: 'permissionsetting',
         component: () => import("~/views/permission/PermissionView.vue"),

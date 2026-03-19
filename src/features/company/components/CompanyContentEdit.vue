@@ -104,15 +104,18 @@ const submitForm = handleSubmit( async (values: CompanyPayload) => {
                 <div class="text-start d-flex">
                   <span class="d-flex w-25 ms-2 ps-3 me-2 mb-2 input-group-text" style="font-size: calc(0.6em + 0.5vw);">Status</span>
                   <div class="form-check form-check-inline">
-                    <!--<input class="form-check-input" type="radio" id="statusEnabled" value="enabled" v-model="companyStatus" v-bind="companyStatusAttrs"  />-->
-                    <Field  type="radio" name="companyStatus" v-model="companyStatus" v-bind="companyStatusAttrs" value="ENABLED" class="form-check-input" ></Field>
-                    <label class="form-check-label" for="statusEnabled">{{ t('button.enable') }}</label>
+                    <Field type="radio" id="statusActive" name="companyStatus" v-model="companyStatus" v-bind="companyStatusAttrs" value="ACTIVE" class="form-check-input" ></Field>
+                    <label class="form-check-label" for="statusActive">{{ t('textLabel.active') }}</label>
                   </div>
 
                   <div class="form-check form-check-inline">
-                    <!-- <input class="form-check-input" type="radio" id="statusDisabled" value="disabled" v-model="companyStatus" />-->
-                    <Field type="radio" name="companyStatus" v-model="companyStatus" v-bind="companyStatusAttrs" value="DISABLED"  class="form-check-input" ></Field>
-                    <label class="form-check-label" for="statusDisabled"> {{ t('button.disable') }} </label>
+                    <Field type="radio" id="statusInactive" name="companyStatus" v-model="companyStatus" v-bind="companyStatusAttrs" value="INACTIVE" class="form-check-input" ></Field>
+                    <label class="form-check-label" for="statusInactive">{{ t('textLabel.inactive') }}</label>
+                  </div>
+
+                  <div class="form-check form-check-inline">
+                    <Field type="radio" id="statusDisabled" name="companyStatus" v-model="companyStatus" v-bind="companyStatusAttrs" value="DISABLED" class="form-check-input" ></Field>
+                    <label class="form-check-label" for="statusDisabled">{{ t('textLabel.disabled') }}</label>
                   </div>
 
                   <ErrorMessage name="companyStatus" class="text-start text-danger" />

@@ -1,38 +1,92 @@
 {
   "app": {
-    "brand": {"title": "Fountation", "description": "Fondasi untuk membangun Aplikasi enterprise apa saja" },
+    "brand": {
+      "title": "Fountation",
+      "description": "Fondasi untuk membangun Aplikasi enterprise apa saja"
+    },
     "features": {
       "title": "Fitur",
       "description": "Fitur Aplikasi",
-      "userMgmt": {"title": "Managemen Pengguna", "description": "Microservice untuk mengelola pengguna"},
-      "accountMgmt": {"title": "Managemen Akun", "description": "Microservice untuk mengelola akun"},
-      "orgMgmt": {"title": "Managemen Organisasi", "description": "Microservice untuk mengelola organisasi (Perusahaan dan departemen)"},
-      "roleMgmt": {"title": "Managemen Peran", "description": "Microservice untuk mengelola peran pengguna"},
-      "memberMgmt": {"title": "Managemen Member", "description": "Microservice untuk mengelola Member"},
-      "activityMgmt": {"title": "Managemen aktivitas", "description": "Microservice menyimpan transaksi aktivitas"},
-      "microservice": {"title": "Microservice Framework", "description": "Cara ringan dan siap cloud untuk membangun aplikasi enterprise dengan memecahnya menjadi layanan-layanan kecil yang mandiri, mudah diskalakan, berjalan andal, dan memungkinkan Anda menghadirkan fitur baru lebih cepat."},
-      "reactive": {"title": "Reactive-MVC Programming", "description": "Merespons data dan peristiwa secara instan, sehingga sistem menjadi lebih cepat, lebih efisien, dan mampu menangani banyak pengguna secara bersamaan tanpa mengalami penurunan kinerja dibandingkan dengan framework MVC tradisional."},
-      "spring": {"title": "Spring Framework", "description": "Framework enterprise yang telah terbukti, membantu organisasi mempercepat transformasi digital dengan mengurangi waktu pengembangan, menekan biaya operasional, dan memastikan skalabilitas sistem."},
-      "agnostic": {"title": "Agnostic Oriented", "description": "Bersifat agnostik terhadap model bisnis apa pun, sehingga framework ini dapat digunakan untuk membangun aplikasi dengan berbagai jenis model bisnis."}
+      "userMgmt": {
+        "title": "Managemen Pengguna",
+        "description": "Microservice untuk mengelola pengguna"
+      },
+      "accountMgmt": {
+        "title": "Managemen Akun",
+        "description": "Microservice untuk mengelola akun"
+      },
+      "orgMgmt": {
+        "title": "Managemen Organisasi",
+        "description": "Microservice untuk mengelola organisasi (Perusahaan dan departemen)"
+      },
+      "roleMgmt": {
+        "title": "Managemen Peran",
+        "description": "Microservice untuk mengelola peran pengguna"
+      },
+      "memberMgmt": {
+        "title": "Managemen Member",
+        "description": "Microservice untuk mengelola Member"
+      },
+      "activityMgmt": {
+        "title": "Managemen aktivitas",
+        "description": "Microservice menyimpan transaksi aktivitas"
+      },
+      "microservice": {
+        "title": "Microservice Framework",
+        "description": "Cara ringan dan siap cloud untuk membangun aplikasi enterprise dengan memecahnya menjadi layanan-layanan kecil yang mandiri, mudah diskalakan, berjalan andal, dan memungkinkan Anda menghadirkan fitur baru lebih cepat."
+      },
+      "reactive": {
+        "title": "Reactive-MVC Programming",
+        "description": "Merespons data dan peristiwa secara instan, sehingga sistem menjadi lebih cepat, lebih efisien, dan mampu menangani banyak pengguna secara bersamaan tanpa mengalami penurunan kinerja dibandingkan dengan framework MVC tradisional."
+      },
+      "spring": {
+        "title": "Spring Framework",
+        "description": "Framework enterprise yang telah terbukti, membantu organisasi mempercepat transformasi digital dengan mengurangi waktu pengembangan, menekan biaya operasional, dan memastikan skalabilitas sistem."
+      },
+      "agnostic": {
+        "title": "Agnostic Oriented",
+        "description": "Bersifat agnostik terhadap model bisnis apa pun, sehingga framework ini dapat digunakan untuk membangun aplikasi dengan berbagai jenis model bisnis."
+      }
     },
     "howToUse": {
       "title": "Cara Pemakaian",
       "description": "Video petunjuk pemakaian Fountation",
-      "install": {"title":  "Instalasi", "description": "Cara instal di server lokal / premise"},
-      "tutorial": {"title":  "Pemakaian", "description": "Tutorial pemakaian Fountation"},
-      "frameworkInformation": {"title":  "Informasi Framework", "description": "Informasi framework dari Fountation"}
+      "install": {
+        "title": "Instalasi",
+        "description": "Cara instal di server lokal / premise"
+      },
+      "tutorial": {
+        "title": "Pemakaian",
+        "description": "Tutorial pemakaian Fountation"
+      },
+      "frameworkInformation": {
+        "title": "Informasi Framework",
+        "description": "Informasi framework dari Fountation"
+      }
     },
     "demo": {
       "title": "Demo",
       "description": "Pada halaman demo ini, Anda bisa langsung mencoba Login atau Register.",
-      "signup": {"title": "Demo Sign up", "description": "Untuk mencoba proses masuk, klik tombol di bawah. Anda akan masuk menggunakan email Anda." },
-      "login": {"title": "Demo Log in", "description": "Jika Anda ingin langsung melihat halaman Dashboard, gunakan tombol di bawah dengan akun demo yang tersedia." }
+      "signup": {
+        "title": "Demo Sign up",
+        "description": "Untuk mencoba proses masuk, klik tombol di bawah. Anda akan masuk menggunakan email Anda."
+      },
+      "login": {
+        "title": "Demo Log in",
+        "description": "Jika Anda ingin langsung melihat halaman Dashboard, gunakan tombol di bawah dengan akun demo yang tersedia."
+      }
     },
-    "comingSoon": { "title": "Segera Hadir", "description": "Deskripsi fitur yang akan segera hadir" },
-    "copyright":  {"title": "Hak Cipta", "description": "Hak Cipta"},
+    "comingSoon": {
+      "title": "Segera Hadir",
+      "description": "Deskripsi fitur yang akan segera hadir"
+    },
+    "copyright": {
+      "title": "Hak Cipta",
+      "description": "Hak Cipta"
+    },
     "completeDescription": "Fountation adalah platform open-source yang kuat, dirancang untuk mempercepat pengembangan aplikasi perusahaan. Dibangun sebagai kerangka kerja perusahaan siap pakai, platform ini memanfaatkan arsitektur microservice modern untuk skalabilitas yang mudah, serta Reactive Programming untuk menghilangkan masalah blocking, sehingga menjamin kinerja tinggi dan ketahanan sistem. Dengan Fountation, Anda dapat berinovasi lebih cepat, meningkatkan skala dengan mulus, dan menghadirkan solusi tingkat perusahaan dengan penuh percaya diri."
   },
-  "button" : {
+  "button": {
     "login": "Masuk",
     "signup": "Daftar",
     "register": "Daftar",
@@ -100,28 +154,42 @@
     "permission": "Izin | Izin",
     "permissionSetting": "Pengaturan Izin",
     "resource": "Sumber Daya",
-
     "isAssigned": "Apakah ditugaskan",
     "verified": "Terverifikasi",
     "active": "Aktif",
     "inactive": "Tidak Aktif",
+    "disabled": "Dinonaktifkan",
     "membership": "Member | Keanggotaan",
     "membershipStatus": "Status Member",
     "membershipType": "Tipe Members",
     "accountStatus": "Status Akun",
     "userStatus": "Status Pengguna",
     "userVerification": "Verifikasi Pengguna",
-    "userProfile":"Profile Pengguna",
+    "userProfile": "Profile Pengguna",
     "billingCycle": "Siklus Penagihan",
     "feature": "Fitur | Fitur",
     "duration": "Durasi",
     "billing": "Penagihan",
     "companyProfile": "Profil Perusahaan",
     "personalInformation": "Informasi Personal",
-    "endpoint": "Titik Akhir",
+    "endpoint": "Endpoint",
     "method": "Metode",
+    "logs": "Log",
     "logFormat": "Format Log",
-    "enabled": "Aktif"
+    "enabled": "Aktif",
+    "gatewayLogs": "Log Gateway",
+    "apiLogs": "Log API",
+    "logDetail": "Detail Log",
+    "dateFrom": "Dari Tanggal",
+    "dateTo": "Sampai Tanggal",
+    "statusCode": "Kode Status",
+    "executionTime": "Waktu Eksekusi (ms)",
+    "clientIp": "IP Klien",
+    "correlationId": "ID Korelasi",
+    "noData": "Tidak ada data tersedia",
+    "previous": "Sebelumnya",
+    "next": "Selanjutnya",
+    "pageSize": "Ukuran Halaman"
   },
   "textField": {
     "email": "Surel",

@@ -7,6 +7,7 @@ import { useAuthStore } from '~/stores/auth'
 
 const auth = useAuthStore()
 const { data, get } = useApi();
+const { data: companyData, get: getCompany } = useApi();
 const route = useRoute();
 const router = useRouter();
 const { t } = useI18n();
@@ -14,7 +15,7 @@ const { t } = useI18n();
 const { companyId } = route.params;
 
 onMounted(async () => {
-
+  await getCompany('/v0/user/organization/company/detail/companyId/' + companyId + '/userId/' + auth.user?.id);
   await get('/v0/user/organization/department/list/companyId/' + companyId + "/userId/" + auth.user?.id)
 });
 
@@ -51,7 +52,7 @@ const goToUsers = (companyId: number, departmentId: number) => {
           <div class="table-responsive pt-2">
             <div class="row d-flex justify-content-between align-items-center me-2 mt-2 mb-2">
               <div class="col-auto">
-                <h3 class="ps-3">Departments</h3>
+                <h3 class="ps-3">{{ t('textLabel.department', 2) }} <span v-if="companyData?.companyName">- {{ companyData.companyName }}</span></h3>
               </div>
               <div class="col-auto">
                 <button @click="router.push({ name: 'departmentadd', params: { paramCompanyId: companyId } })" class="btn btn-outline-primary" type="button">{{ t('button.add') }}</button>

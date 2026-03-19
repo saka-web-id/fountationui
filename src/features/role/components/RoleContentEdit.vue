@@ -19,6 +19,21 @@ const auth = useAuthStore()
 const { setValues: setValuesRoleForm, handleSubmit, roleName, roleDescription, permissionIds } = useRoleForm();
 
 const { t } = useI18n();
+
+const isAllAssigned = computed({
+  get: () => {
+    return permissionsForm.value.length > 0 && 
+           (permissionIds.value || []).length === permissionsForm.value.length;
+  },
+  set: (val) => {
+    if (val) {
+      permissionIds.value = permissionsForm.value.map(p => p.permissionId);
+    } else {
+      permissionIds.value = [];
+    }
+  }
+});
+
 const route = useRoute();
 const { roleIdParam, companyIdParam } = route.params;
 const isEdit = computed(() => !!route.params.roleIdParam);
@@ -104,7 +119,12 @@ const submitForm = handleSubmit(async ( roleForm: RoleForm) => {
                   <tr>
                     <th class="text-center">{{ t('textLabel.permission') }}</th>
                     <th class="text-center d-none d-md-table-cell">{{ t('textLabel.description', 1) }}</th>
-                    <th class="text-center">{{ t('textLabel.isAssigned') }}</th>
+                    <th class="text-center">
+                      <div class="d-flex align-items-center justify-content-center">
+                        <span class="me-2">{{ t('textLabel.isAssigned') }}</span>
+                        <input type="checkbox" v-model="isAllAssigned" />
+                      </div>
+                    </th>
                   </tr>
                   </thead>
                   <tbody>

@@ -90,12 +90,16 @@ const submitForm = handleSubmit( async (values: DepartmentPayload) => {
                 <div class="text-start d-flex">
                   <span class="d-flex w-25 ms-2 ps-3 me-2 mb-2 input-group-text" style="font-size: calc(0.6em + 0.5vw);">{{ t('textLabel.status') }}</span>
                   <div class="form-check form-check-inline text-start">
-                    <Field  type="radio" name="departmentStatus" v-model="departmentStatus" v-bind="departmentStatusAttrs" value="ENABLED" class="form-check-input" ></Field>
-                    <label class="form-check-label" for="formCheck-4">{{ t('button.enable') }}</label>
+                    <Field type="radio" id="departmentStatusActive" name="departmentStatus" v-model="departmentStatus" v-bind="departmentStatusAttrs" value="ACTIVE" class="form-check-input" ></Field>
+                    <label class="form-check-label" for="departmentStatusActive">{{ t('textLabel.active') }}</label>
                   </div>
                   <div class="form-check form-check-inline text-start">
-                    <Field  type="radio" name="departmentStatus" v-model="departmentStatus" v-bind="departmentStatusAttrs" value="DISABLED" class="form-check-input" ></Field>
-                    <label class="form-check-label" for="formCheck-5">{{ t('button.disable') }}</label>
+                    <Field type="radio" id="departmentStatusInactive" name="departmentStatus" v-model="departmentStatus" v-bind="departmentStatusAttrs" value="INACTIVE" class="form-check-input" ></Field>
+                    <label class="form-check-label" for="departmentStatusInactive">{{ t('textLabel.inactive') }}</label>
+                  </div>
+                  <div class="form-check form-check-inline text-start">
+                    <Field type="radio" id="departmentStatusDisabled" name="departmentStatus" v-model="departmentStatus" v-bind="departmentStatusAttrs" value="DISABLED" class="form-check-input" ></Field>
+                    <label class="form-check-label" for="departmentStatusDisabled">{{ t('textLabel.disabled') }}</label>
                   </div>
                   <ErrorMessage name="departmentStatus" class="text-start text-danger" />
                 </div>

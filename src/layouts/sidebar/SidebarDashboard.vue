@@ -55,6 +55,29 @@ const { t } = useI18n();
         </router-link>
       </div>
     </li>
+    <li class="nav-item dropdown show" id="idlogs">
+      <a class="dropdown-toggle nav-link" aria-expanded="true" data-bs-toggle="dropdown" href="#">
+        <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-people-fill me-1 mb-1 pb-0" style="color: var(--bs-primary);">
+          <path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6m-5.784 6A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1zM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5"></path>
+        </svg>
+        {{ t('textLabel.logs') }}
+      </a>
+      <div class="dropdown-menu show" data-bs-popper="none">
+        <router-link to="/gatewaylogs" class="dropdown-item" id="idgatewaylogs">
+          <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-list-columns-reverse me-1 mb-1">
+            <path fill-rule="evenodd" d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v1h14V2a1 1 0 0 0-1-1zm14 3H0v1h14zM0 6h14v1H0zm0 2h14v1H0zm0 2h14v1H0zm0 2h14v1H0z"/>
+          </svg>
+          {{ t('textLabel.gatewayLogs') }}
+        </router-link>
+        <router-link to="/apilogs" class="dropdown-item" id="idapilogs">
+          <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-journal-text me-1 mb-1">
+            <path d="M5 1a.5.5 0 0 1 .5.5V2h5v-.5a.5.5 0 0 1 1 0V2h.5a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-11a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h.5v-.5a.5.5 0 0 1 .5-.5zM3 4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1V5a1 1 0 0 0-1-1H3z"/>
+            <path d="M4 7h8v1H4V7zm0 2h8v1H4V9zm0 2h4v1H4v-1z"/>
+          </svg>
+          {{ t('textLabel.apiLogs') }}
+        </router-link>
+      </div>
+    </li>
 
     <li class="nav-item dropdown show" id="idsetting">
       <a class="dropdown-toggle nav-link" aria-expanded="true" data-bs-toggle="dropdown" href="#">
