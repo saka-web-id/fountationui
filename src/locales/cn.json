@@ -189,7 +189,12 @@
     "noData": "暂无数据",
     "previous": "上一页",
     "next": "下一页",
-    "pageSize": "每页条数"
+    "pageSize": "每页条数",
+    "superAdmin": "超级管理员",
+    "admin": "管理员",
+    "manager": "经理",
+    "userRole": "用户",
+    "guest": "访客"
   },
   "textField": {
     "email": "邮箱",

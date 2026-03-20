@@ -189,7 +189,12 @@
     "noData": "No data available",
     "previous": "Previous",
     "next": "Next",
-    "pageSize": "Page Size"
+    "pageSize": "Page Size",
+    "superAdmin": "Super Admin",
+    "admin": "Admin",
+    "manager": "Manager",
+    "userRole": "User",
+    "guest": "Guest"
   },
   "textField": {
     "email": "Email",

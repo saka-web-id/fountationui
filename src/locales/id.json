@@ -189,7 +189,12 @@
     "noData": "Tidak ada data tersedia",
     "previous": "Sebelumnya",
     "next": "Selanjutnya",
-    "pageSize": "Ukuran Halaman"
+    "pageSize": "Ukuran Halaman",
+    "superAdmin": "Super Admin",
+    "admin": "Admin",
+    "manager": "Manajer",
+    "userRole": "Pengguna",
+    "guest": "Tamu"
   },
   "textField": {
     "email": "Surel",
