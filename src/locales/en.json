@@ -163,6 +163,7 @@
     "membershipStatus": "Membership Status",
     "membershipType": "Membership Type",
     "accountStatus": "Account Status",
+    "accountType": "Account Type",
     "userStatus": "User Status",
     "userVerification": "User Verification",
     "userProfile": "User Profile",

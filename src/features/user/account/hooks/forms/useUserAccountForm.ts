@@ -14,6 +14,7 @@ export interface UserAccountPayload {
     accountStatus: string;
     membershipType: string;
     membershipStatus: string;
+    membershipPlanId: number;
     createdAt: string;              // ISO date string
     membershipStartDate: string;    // ISO date string
     membershipEndDate: string;      // ISO date string
@@ -26,7 +27,7 @@ interface Authority {
     roleId: number;
     roleName: string;
     roleDescription: string;
-    permissions: Permission[];
+    /*permissions: Permission[];*/
 }
 
 interface Company {
@@ -54,9 +55,9 @@ interface Department {
     departmentUpdatedAt: string;
 }
 
-interface Permission {
+/*interface Permission {
     permissionName: string;
-}
+}*/
 
 export const mapUserAccountFromApi = (apiData: any): UserAccountPayload => ({
     id: apiData.id,
@@ -70,6 +71,7 @@ export const mapUserAccountFromApi = (apiData: any): UserAccountPayload => ({
     accountStatus: apiData.accountStatus,
     membershipType: apiData.membershipType,
     membershipStatus: apiData.membershipStatus,
+    membershipPlanId: apiData.membershipPlanId,
     createdAt: apiData.createdAt,              // ISO date string
     membershipStartDate: apiData.membershipStartDate,     // ISO date string
     membershipEndDate: apiData.membershipEndDate,    // ISO date string
@@ -93,14 +95,15 @@ export function useUserAccountForm() {
             accountStatus: "",
             membershipType: "",
             membershipStatus: "",
+            membershipPlanId: 0,
             createdAt: "",
             membershipStartDate: "",
             membershipEndDate: "",
             authority: {
                 roleId: 0,
                 roleName: "",
-                roleDescription: "",
-                permissions: []
+                roleDescription: ""
+                /*permissions: []*/
             },
             company: {
                 companyId: 0,
@@ -137,6 +140,7 @@ export function useUserAccountForm() {
     const [accountStatus, accountStatusAttrs] = defineField('accountStatus');
     const [membershipStatus, membershipStatusAttrs] = defineField('membershipStatus');
     const [membershipType, membershipTypeAttrs] = defineField('membershipType');
+    const [membershipPlanId, membershipPlanIdAttrs] = defineField('membershipPlanId');
     const [roleId, roleIdAttrs] = defineField('authority.roleId');
     const [companyId, companyIdAttrs] = defineField('company.companyId');
     const [departmentId, departmentIdAttrs] = defineField('department.departmentId');
@@ -163,6 +167,8 @@ export function useUserAccountForm() {
         membershipStatusAttrs,
         membershipType,
         membershipTypeAttrs,
+        membershipPlanId,
+        membershipPlanIdAttrs,
         roleId,
         roleIdAttrs,
         companyId,

@@ -163,6 +163,7 @@
     "membershipStatus": "会员状态",
     "membershipType": "会员类型",
     "accountStatus": "账户状态",
+    "accountType": "Account Type",
     "userStatus": "用户状态",
     "userVerification": "用户验证",
     "userProfile": "User Profile",

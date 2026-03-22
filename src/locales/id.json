@@ -163,6 +163,7 @@
     "membershipStatus": "Status Member",
     "membershipType": "Tipe Members",
     "accountStatus": "Status Akun",
+    "accountType": "Tipe Akun",
     "userStatus": "Status Pengguna",
     "userVerification": "Verifikasi Pengguna",
     "userProfile": "Profile Pengguna",

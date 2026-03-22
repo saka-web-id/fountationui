@@ -14,8 +14,9 @@ const { data, loading, get, post } = useApi();
 const { data: companyData, get: getCompany } = useApi();
 const { data: departmentData, get: getDepartment } = useApi();
 const { data: rolesData, get: getRoles } = useApi();
+const { data: membershipPlanData, get: getMembershipPlan } = useApi();
 const route = useRoute();
-const { handleSubmit, setValues, name, nameAttrs, email, emailAttrs, phone, phoneAttrs, note, noteAttrs, status, statusAttrs, isVerified, isVerifiedAttrs, accountStatus, accountStatusAttrs, membershipStatus, membershipStatusAttrs, membershipType, membershipTypeAttrs, roleId, roleIdAttrs, companyId, companyIdAttrs, departmentId, departmentIdAttrs } = useUserAccountForm();
+const { handleSubmit, setValues, name, nameAttrs, email, emailAttrs, phone, phoneAttrs, note, noteAttrs, status, statusAttrs, isVerified, isVerifiedAttrs, accountStatus, accountStatusAttrs, membershipStatus, membershipStatusAttrs, membershipType, membershipTypeAttrs, membershipPlanId, membershipPlanIdAttrs, roleId, roleIdAttrs, companyId, companyIdAttrs, departmentId, departmentIdAttrs } = useUserAccountForm();
 
 const isEdit = computed(() => !!route.params.userId);
 const { userId, companyIdParam, departmentIdParam } = route.params;
@@ -36,9 +37,11 @@ onMounted(async () => {
 
   await getDepartment('/v0/user/organization/department/list/companyId/' + companyIdParam + "/userId/" + auth.user?.id);
 
-  setValues({ department: { departmentId: Number(departmentIdParam) }, company: { companyId: Number(companyIdParam) }  });
-
   await getRoles('/v0/authorization/company/role/list/companyId/' + auth.user?.company.companyId + '/userId/'+ auth.user?.id +'/valueCompanyId/'+ companyIdParam)
+
+  await getMembershipPlan('/v0/account/membership/plan/list/companyId/' + auth.user?.company.companyId + '/userId/'+ auth.user?.id +'/valueCompanyId/'+ companyIdParam);
+
+  setValues({ department: { departmentId: Number(departmentIdParam) }, company: { companyId: Number(companyIdParam) }  });
 
 });
 
@@ -117,46 +120,75 @@ const submitForm = handleSubmit( async (values: UserAccountPayload) => {
               <div class="text-start d-flex"><span class="d-flex w-25 ms-2 ps-3 me-2 mb-2 input-group-text" style="font-size: calc(0.6em + 0.5vw);">{{ t('textLabel.userStatus') }}</span>
                 <div class="form-check form-check-inline text-start">
                   <Field  type="radio" name="status" v-model="status" v-bind="statusAttrs" value="ACTIVE" class="form-check-input" ></Field>
-                  <label class="form-check-label" for="formCheck-4">{{ t('textLabel.active') }}</label>
+                  <label class="form-check-label">{{ t('textLabel.active') }}</label>
                 </div>
                 <div class="form-check form-check-inline text-start">
                   <Field  type="radio" name="status" v-model="status" v-bind="statusAttrs" value="INACTIVE" class="form-check-input" ></Field>
-                  <label class="form-check-label" for="formCheck-4">{{ t('textLabel.inactive') }}</label>
+                  <label class="form-check-label">{{ t('textLabel.inactive') }}</label>
+                </div>
+                <div class="form-check form-check-inline text-start">
+                  <Field  type="radio" name="status" v-model="status" v-bind="statusAttrs" value="DISABLED" class="form-check-input" ></Field>
+                  <label class="form-check-label">{{ t('textLabel.disabled') }}</label>
                 </div>
               </div>
               <div class="text-start d-flex"><span class="d-flex w-25 ms-2 ps-3 me-2 mb-2 input-group-text" style="font-size: calc(0.6em + 0.5vw);">{{ t('textLabel.userVerification') }}</span>
                 <div class="form-check form-check-inline text-start">
                   <Field  type="radio" name="isVerified" v-model="isVerified" v-bind="isVerifiedAttrs" :value="true" class="form-check-input" ></Field>
-                  <label class="form-check-label" for="formCheck-4">{{ t('textLabel.true') }}</label>
+                  <label class="form-check-label">{{ t('textLabel.true') }}</label>
                 </div>
                 <div class="form-check form-check-inline text-start">
                   <Field  type="radio" name="isVerified" v-model="isVerified" v-bind="isVerifiedAttrs" :value="false" class="form-check-input" ></Field>
-                  <label class="form-check-label" for="formCheck-4">{{ t('textLabel.false') }}</label>
+                  <label class="form-check-label">{{ t('textLabel.false') }}</label>
                 </div>
               </div>
               <div class="text-start d-flex"><span class="d-flex w-25 ms-2 ps-3 me-2 mb-2 input-group-text" style="font-size: calc(0.6em + 0.5vw);">{{ t('textLabel.accountStatus') }}</span>
                 <div class="form-check form-check-inline text-start">
                   <Field  type="radio" name="accountStatus" v-model="accountStatus" v-bind="accountStatusAttrs" value="ACTIVE" class="form-check-input" ></Field>
-                  <label class="form-check-label" for="formCheck-4">{{ t('textLabel.active') }}</label>
+                  <label class="form-check-label">{{ t('textLabel.active') }}</label>
                 </div>
                 <div class="form-check form-check-inline text-start">
                   <Field  type="radio" name="accountStatus" v-model="accountStatus" v-bind="accountStatusAttrs" value="INACTIVE" class="form-check-input" ></Field>
-                  <label class="form-check-label" for="formCheck-4">{{ t('textLabel.inactive') }}</label>
+                  <label class="form-check-label">{{ t('textLabel.inactive') }}</label>
+                </div>
+                <div class="form-check form-check-inline text-start">
+                  <Field  type="radio" name="accountStatus" v-model="accountStatus" v-bind="accountStatusAttrs" value="DISABLED" class="form-check-input" ></Field>
+                  <label class="form-check-label">{{ t('textLabel.disabled') }}</label>
+                </div>
+              </div>
+              <div class="text-start d-flex"><span class="d-flex w-25 ms-2 ps-3 me-2 mb-2 input-group-text" style="font-size: calc(0.6em + 0.5vw);">{{ t('textLabel.accountType') }}</span>
+                <div class="form-check form-check-inline text-start">
+                  <Field  type="radio" name="membershipType" v-model="membershipType" v-bind="membershipTypeAttrs" value="FREE" class="form-check-input" ></Field>
+                  <label class="form-check-label">{{ t('textLabel.active') }}</label>
+                </div>
+                <div class="form-check form-check-inline text-start">
+                  <Field  type="radio" name="membershipType" v-model="membershipType" v-bind="membershipTypeAttrs" value="PREMIUM" class="form-check-input" ></Field>
+                  <label class="form-check-label">{{ t('textLabel.inactive') }}</label>
+                </div>
+                <div class="form-check form-check-inline text-start">
+                  <Field  type="radio" name="membershipType" v-model="membershipType" v-bind="membershipTypeAttrs" value="ENTERPRISE" class="form-check-input" ></Field>
+                  <label class="form-check-label">{{ t('textLabel.disabled') }}</label>
                 </div>
               </div>
               <div class="text-start d-flex"><span class="d-flex w-25 ms-2 ps-3 me-2 mb-2 input-group-text" style="font-size: calc(0.6em + 0.5vw);">{{ t('textLabel.membershipStatus') }}</span>
                 <div class="form-check form-check-inline text-start">
                   <Field  type="radio" name="membershipStatus" v-model="membershipStatus" v-bind="membershipStatusAttrs" value="ACTIVE" class="form-check-input" ></Field>
-                  <label class="form-check-label" for="formCheck-4">{{ t('textLabel.active') }}</label>
+                  <label class="form-check-label">{{ t('textLabel.active') }}</label>
                 </div>
                 <div class="form-check form-check-inline text-start">
                   <Field  type="radio" name="membershipStatus" v-model="membershipStatus" v-bind="membershipStatusAttrs" value="INACTIVE" class="form-check-input" ></Field>
-                  <label class="form-check-label" for="formCheck-4">{{ t('textLabel.inactive') }}</label>
+                  <label class="form-check-label">{{ t('textLabel.inactive') }}</label>
+                </div>
+                <div class="form-check form-check-inline text-start">
+                  <Field  type="radio" name="membershipStatus" v-model="membershipStatus" v-bind="membershipStatusAttrs" value="DISABLED" class="form-check-input" ></Field>
+                  <label class="form-check-label">{{ t('textLabel.disabled') }}</label>
                 </div>
               </div>
               <div class="input-group mb-2">
                 <span class="w-25 ms-2 input-group-text" style="font-size: calc(0.6em + 0.5vw);">{{ t('textLabel.membershipType') }}</span>
-                <Field as="input" type="tel" name="membershipType" v-model="membershipType" v-bind="membershipTypeAttrs"  class="form-control d-flex ms-0 ps-2 me-2 pe-4" ></Field>
+                <select v-model="membershipPlanId" v-bind="membershipPlanIdAttrs" class="form-control d-flex ms-0 ps-2 me-2 pe-4">
+                  <option v-for="plan in membershipPlanData" :value="plan.membershipPlanId">{{ plan.membershipPlanName }}</option>
+                </select>
+                <ErrorMessage name="membershipPlanId" class="text-start text-danger d-flex ms-0 ps-2 me-2 pe-4" />
               </div>
               <div class="input-group mb-2">
                 <span class="w-25 ms-2 input-group-text" style="font-size: calc(0.6em + 0.5vw);">{{ t('textLabel.note') }}</span>
