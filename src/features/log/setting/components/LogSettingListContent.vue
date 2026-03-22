@@ -1,21 +1,63 @@
 <script setup lang="ts">
-import { onMounted } from 'vue';
+import { onMounted, computed, h } from 'vue';
 import { useApi } from "~/composables/useApi";
 import { useRouter, useRoute } from "vue-router";
 import { useI18n } from 'vue-i18n';
 import { useAuthStore } from '~/stores/auth'
+import { createColumnHelper } from '@tanstack/vue-table'
+import { useDataTable } from '~/composables/useDataTable'
+import BaseTable from '~/components/table/BaseTable.vue'
+import type { LogSetting } from '../types'
 
 const auth = useAuthStore()
 const { t } = useI18n();
-const { data, get } = useApi<any[]>();
+const { data, get } = useApi<LogSetting[]>();
 const router = useRouter();
 const route = useRoute();
 
+const settings = computed(() => data.value || [])
+
+const columnHelper = createColumnHelper<LogSetting>()
+
+const columns = [
+  columnHelper.accessor('logSettingEndpoint', {
+    header: () => t('textLabel.endpoint'),
+    cell: info => h('code', info.getValue()),
+  }),
+  columnHelper.accessor('logSettingMethod', {
+    header: () => t('textLabel.method'),
+    cell: info => h('span', { class: 'badge bg-secondary' }, info.getValue()),
+    meta: { className: 'd-none d-md-table-cell' }
+  }),
+  columnHelper.accessor('logSettingLogFormat', {
+    header: () => t('textLabel.logFormat'),
+  }),
+  columnHelper.accessor('logSettingEnabled', {
+    header: () => t('textLabel.enabled'),
+    cell: info => h('span', { class: info.getValue() ? 'text-success' : 'text-danger' }, 
+      info.getValue() ? t('textLabel.true') : t('textLabel.false')
+    ),
+    meta: { className: 'd-none d-md-table-cell' }
+  }),
+  columnHelper.display({
+    id: 'actions',
+    header: () => t('textLabel.action'),
+    cell: info => h('div', { class: 'btn-group', role: 'group' }, [
+      h('button', {
+        class: 'btn btn-primary btn-sm',
+        onClick: () => goToEdit(info.row.original.logSettingId)
+      }, [
+        h('i', { class: 'bi bi-pencil-square me-1' }),
+        t('button.edit')
+      ])
+    ]),
+  }),
+]
+
+const { table, globalFilter } = useDataTable(settings, columns)
+
 onMounted(async () => {
   const companyIdParam = route.params.companyIdParam;
-
-  console.log("LogSettingLIstContent companyIdParam ", companyIdParam);
-
   try {
     if (auth.user && companyIdParam) {
       await get(`/v0/logs/setting/list/companyId/${auth.user.company.companyId}/userId/${auth.user.id}/valueCompanyId/${companyIdParam}`);
@@ -23,7 +65,6 @@ onMounted(async () => {
   } catch (error) {
     console.error("Fetch failed:", error);
   }
-
 });
 
 const goToEdit = (logSettingIdParam: number) => {
@@ -45,43 +86,19 @@ const goToEdit = (logSettingIdParam: number) => {
           <div class="table-responsive pt-2">
             <div class="row d-flex justify-content-between align-items-center me-2 mt-2 mb-2">
               <div class="col-auto">
-                <h4 class="ps-3">{{ t('textLabel.logSetting', 2) }}</h4>
+                <h4 class="ps-0 ps-md-3 display-6 fw-bold">{{ t('textLabel.logSetting', 2) }}</h4>
+              </div>
+              <div class="col-auto">
+                <input
+                  v-model="globalFilter"
+                  type="text"
+                  class="form-control"
+                  :placeholder="t('button.search') + '...'"
+                />
               </div>
             </div>
             <div class="ms-2 me-2 mt-2 mb-2">
-              <table class="table table-hover">
-                <thead>
-                <tr>
-                  <th>{{ t('textLabel.endpoint') }}</th>
-                  <th class="d-none d-md-table-cell">{{ t('textLabel.method' ) }}</th>
-                  <th class="d-none d-md-table-cell">{{ t('textLabel.logFormat') }}</th>
-                  <th class="d-none d-md-table-cell">{{ t('textLabel.enabled') }}</th>
-                  <th class="text-center">{{ t('textLabel.action') }}</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr v-for="d in data" :key="d.logSettingId">
-                  <td><code>{{ d.logSettingEndpoint }}</code></td>
-                  <td class="d-none d-md-table-cell"><span class="badge bg-secondary">{{ d.logSettingMethod }}</span></td>
-                  <td class="d-none d-md-table-cell">{{ d.logSettingLogFormat }}</td>
-                  <td class="d-none d-md-table-cell">
-                    <span :class="d.logSettingEnabled ? 'text-success' : 'text-danger'">
-                      {{ d.logSettingEnabled ? t('textLabel.true') : t('textLabel.false') }}
-                    </span>
-                  </td>
-                  <td class="text-center">
-                    <div class="btn-group" role="group">
-                      <button class="btn btn-primary btn-sm" @click="goToEdit(d.logSettingId)">
-                        <i class="bi bi-pencil-square me-1"></i> {{ t('button.edit') }}
-                      </button>
-                    </div>
-                  </td>
-                </tr>
-                <tr v-if="!data || data.length === 0">
-                  <td colspan="5" class="text-center italic py-4 text-muted">No log settings found for this company.</td>
-                </tr>
-                </tbody>
-              </table>
+              <BaseTable :table="table" />
             </div>
           </div>
         </div>
@@ -89,6 +106,7 @@ const goToEdit = (logSettingIdParam: number) => {
     </div>
   </section>
 </template>
+
 
 <style scoped>
 </style>

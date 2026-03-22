@@ -2,7 +2,11 @@
 import { useRouter} from "vue-router";
 import { useI18n } from 'vue-i18n';
 import { useCompany } from '~/composables/useCompany'
-import {onMounted} from "vue";
+import { onMounted, computed, h } from "vue";
+import { createColumnHelper } from '@tanstack/vue-table'
+import { useDataTable } from '~/composables/useDataTable'
+import BaseTable from '~/components/table/BaseTable.vue'
+import type { MembershipPlan } from '../types'
 
 const { t } = useI18n();
 const router = useRouter();
@@ -11,15 +15,45 @@ const { selectedCompanyId, onCompanyChange, userCompanyData, data, fetchData } =
   apiPath: '/v0/account/membership/plan/list'
 })
 
+const membershipPlans = computed(() => (data.value as any[]) || [])
+
+const columnHelper = createColumnHelper<MembershipPlan>()
+
+const columns = [
+  columnHelper.accessor('membershipPlanId', {
+    header: () => t('textLabel.number'),
+    meta: { className: 'd-none d-md-table-cell' }
+  }),
+  columnHelper.accessor('membershipPlanName', {
+    header: () => t('textLabel.membership', 1),
+  }),
+  columnHelper.accessor('membershipPlanBillingCycle', {
+    header: () => t('textLabel.billingCycle'),
+  }),
+  columnHelper.accessor('membershipPlanPrice', {
+    header: () => t('textLabel.billing'),
+  }),
+  columnHelper.display({
+    id: 'actions',
+    header: () => t('textLabel.action'),
+    cell: info => h('div', { class: 'btn-group', role: 'group' }, [
+      h('button', {
+        class: 'btn btn-primary',
+        onClick: () => goToEdit(selectedCompanyId.value, info.row.original.membershipPlanId)
+      }, t('button.edit'))
+    ]),
+  }),
+]
+
+const { table, globalFilter } = useDataTable(membershipPlans, columns)
+
 onMounted(async () => {
   if (selectedCompanyId.value) {
     await fetchData({ valueCompanyId: selectedCompanyId.value })
   }
 })
 
-
-
-const goToEdit = (companyIdParam: number, membershipIdParam: number) => {
+const goToEdit = (companyIdParam: any, membershipIdParam: number) => {
   router.push({ name: 'membershipedit', params: { companyIdParam, membershipIdParam } });
 };
 
@@ -50,37 +84,20 @@ const goToEdit = (companyIdParam: number, membershipIdParam: number) => {
           <div class="table-responsive pt-2">
             <div class="row d-flex justify-content-between align-items-center me-2 mt-2 mb-2">
               <div class="col-auto">
-                <h4 class="ps-3">{{ t('textLabel.membership', 2) }}</h4>
+                <h4 class="ps-0 ps-md-3 display-6 fw-bold">{{ t('textLabel.membership', 2) }}</h4>
               </div>
-              <div class="col-auto">
-                <button @click="router.push({ name: 'membershipadd' })" class="btn btn-outline-primary" type="button">{{ t('button.add') }}</button>
+              <div class="col-auto d-flex gap-2">
+                <input
+                  v-model="globalFilter"
+                  type="text"
+                  class="form-control"
+                  :placeholder="t('button.search') + '...'"
+                />
+                <button @click="router.push({ name: 'membershipadd' })" class="btn btn-outline-primary text-nowrap" type="button">{{ t('button.add') }}</button>
               </div>
             </div>
             <div class="ms-2 me-2 mt-2 mb-2">
-              <table class="table">
-                <thead>
-                <tr>
-                  <th class="d-none d-md-table-cell">{{ t('textLabel.number') }}</th>
-                  <th>{{ t('textLabel.membership', 1) }}</th>
-                  <th class="d-none d-md-table-cell">{{ t('textLabel.billingCycle') }}</th>
-                  <th class="d-none d-md-table-cell">{{ t('textLabel.billing') }}</th>
-                  <th class="text-center">{{ t('textLabel.action') }}</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr v-for="d in data" :key="d.membershipPlanId">
-                  <td class="d-none d-md-table-cell">{{ d.membershipPlanId  }}</td>
-                  <td>{{ d.membershipPlanName }}</td>
-                  <td class="d-none d-md-table-cell">{{ d.membershipPlanBillingCycle }}</td>
-                  <td class="d-none d-md-table-cell">{{ d.membershipPlanPrice }}</td>
-                  <td class="text-center">
-                    <div class="btn-group" role="group">
-                      <button class="btn btn-primary" @click="goToEdit(selectedCompanyId, d.membershipPlanId)">{{ t('button.edit') }}</button>
-                    </div>
-                  </td>
-                </tr>
-                </tbody>
-              </table>
+              <BaseTable :table="table" />
             </div>
           </div>
         </div>
@@ -91,6 +108,7 @@ const goToEdit = (companyIdParam: number, membershipIdParam: number) => {
     </div>
   </section>
 </template>
+
 
 <style scoped>
 

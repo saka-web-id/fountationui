@@ -1,17 +1,18 @@
 <script setup lang="ts">
-import { ref, onMounted, watch } from 'vue';
+import { ref, onMounted, watch, computed, h } from 'vue';
 import { useAuthStore } from '~/stores/auth';
 import { useI18n } from 'vue-i18n';
 import { getLogsGateway, getLogGatewayDetail, type LogsGateway } from '~/services/log/gateway/LogsGatewayService.ts';
 import { Offcanvas } from 'bootstrap';
+import { createColumnHelper } from '@tanstack/vue-table'
+import { useDataTable } from '~/composables/useDataTable'
+import BaseTable from '~/components/table/BaseTable.vue'
 
 const { t } = useI18n();
 const auth = useAuthStore();
 
 const logs = ref<LogsGateway[]>([]);
 const totalItems = ref(0);
-const currentPage = ref(0);
-const pageSize = ref(10);
 const loading = ref(false);
 
 const filterEndpoint = ref('');
@@ -21,6 +22,70 @@ const filterDateTo = ref(new Date().toISOString().split('T')[0]);
 const selectedLog = ref<LogsGateway | null>(null);
 const detailLoading = ref(false);
 let offcanvasInstance: Offcanvas | null = null;
+const paginationState = ref({
+  pageIndex: 0,
+  pageSize: 10,
+});
+
+const columnHelper = createColumnHelper<LogsGateway>()
+
+const columns = [
+  columnHelper.accessor('logGatewayEndPoint', {
+    header: () => t('textLabel.endpoint'),
+    cell: info => h('code', info.getValue()),
+  }),
+  columnHelper.accessor('logGatewayMethod', {
+    header: () => h('span', { class: 'd-none d-md-inline' }, t('textLabel.method')),
+    cell: info => h('span', { class: 'd-none d-md-inline badge bg-info text-dark' }, info.getValue()),
+    meta: { className: 'd-none d-md-table-cell' }
+  }),
+  columnHelper.accessor('logGatewayStatusCode', {
+    header: () => t('textLabel.statusCode'),
+    cell: info => h('span', {
+      class: ['badge', info.getValue() < 400 ? 'bg-success' : 'bg-danger']
+    }, info.getValue()),
+  }),
+  columnHelper.accessor('logGatewayExecutionTime', {
+    header: () => h('span', { class: 'd-none d-md-inline' }, t('textLabel.executionTime')),
+    cell: info => h('span', { class: 'd-none d-md-inline ' }, info.getValue()),
+    meta: { className: 'd-none d-md-table-cell' }
+  }),
+  columnHelper.accessor('logGatewayCreatedAt', {
+    header: () => t('textLabel.createdAt'),
+    cell: info => formatDate(info.getValue()),
+    meta: { className: 'd-none d-md-table-cell' }
+  }),
+  columnHelper.display({
+    id: 'actions',
+    header: () => t('textLabel.action'),
+    cell: info => h('button', {
+      class: 'btn btn-primary btn-sm',
+      onClick: (e: Event) => {
+        e.stopPropagation();
+        showDetail(info.row.original.logGatewayId);
+      }
+    }, [
+      h('i', { class: 'bi bi-eye me-1' }),
+      t('button.view')
+    ]),
+  }),
+]
+
+const { table } = useDataTable(logs, columns, {
+  manualPagination: true,
+  pageCount: computed(() => Math.ceil(totalItems.value / paginationState.value.pageSize)) as unknown as number,
+  state: {
+    pagination: paginationState.value // Inisialisasi awal
+  },
+  // Sinkronisasi manual jika composable mengubah internal state-nya
+  onPaginationChange: (updater) => {
+    if (typeof updater === 'function') {
+      paginationState.value = updater(paginationState.value);
+    } else {
+      paginationState.value = updater;
+    }
+  }
+})
 
 const fetchLogs = async () => {
   if (!auth.user) return;
@@ -30,8 +95,8 @@ const fetchLogs = async () => {
       endpoint: filterEndpoint.value,
       dateFrom: filterDateFrom.value,
       dateTo: filterDateTo.value,
-      page: currentPage.value,
-      size: pageSize.value
+      page: paginationState.value.pageIndex,
+      size: paginationState.value.pageSize
     });
     logs.value = response.logGatewayData;
     totalItems.value = response.logGatewayTotalItems;
@@ -68,14 +133,12 @@ const formatDate = (timestamp: number) => {
 
 onMounted(fetchLogs);
 
-watch([filterEndpoint, filterDateFrom, filterDateTo, pageSize], () => {
-  currentPage.value = 0;
+watch([filterEndpoint, filterDateFrom, filterDateTo, () => paginationState.value.pageSize], () => {
+  paginationState.value.pageIndex = 0;
   fetchLogs();
 });
 
-watch(currentPage, fetchLogs);
-
-const totalPages = () => Math.ceil(totalItems.value / pageSize.value);
+watch(() => paginationState.value.pageIndex, fetchLogs);
 
 </script>
 
@@ -92,97 +155,34 @@ const totalPages = () => Math.ceil(totalItems.value / pageSize.value);
           <div class="table-responsive pt-2">
             <div class="row d-flex justify-content-between align-items-center me-2 mt-2 mb-2">
               <div class="col-auto">
-                <h4 class="ps-3">{{ t('textLabel.gatewayLogs') }}</h4>
+                <h4 class="ps-0 ps-md-3 display-6 fw-bold">{{ t('textLabel.gatewayLogs') }}</h4>
               </div>
             </div>
             <!-- Filters -->
             <div class="row mb-3 g-3 ms-2 me-2 mt-2">
               <div class="col-md-4">
-              <label class="form-label">{{ t('textLabel.endpoint') }}</label>
-              <input v-model="filterEndpoint" type="text" class="form-control" :placeholder="t('button.search') + '...'">
+                <label class="form-label">{{ t('textLabel.endpoint') }}</label>
+                <input v-model="filterEndpoint" type="text" class="form-control" :placeholder="t('button.search') + '...'">
+              </div>
+              <div class="col-md-4">
+                <label class="form-label">{{ t('textLabel.dateFrom') }}</label>
+                <input v-model="filterDateFrom" type="date" class="form-control">
+              </div>
+              <div class="col-md-4">
+                <label class="form-label">{{ t('textLabel.dateTo') }}</label>
+                <input v-model="filterDateTo" type="date" class="form-control">
+              </div>
             </div>
-            <div class="col-md-3">
-              <label class="form-label">{{ t('textLabel.dateFrom') }}</label>
-              <input v-model="filterDateFrom" type="date" class="form-control">
-            </div>
-            <div class="col-md-3">
-              <label class="form-label">{{ t('textLabel.dateTo') }}</label>
-              <input v-model="filterDateTo" type="date" class="form-control">
-            </div>
-            <div class="col-md-2">
-              <label class="form-label">{{ t('textLabel.pageSize') }}</label>
-              <select v-model="pageSize" class="form-select">
-                <option :value="10">10</option>
-                <option :value="25">25</option>
-                <option :value="50">50</option>
-                <option :value="100">100</option>
-              </select>
-            </div>
-          </div>
 
-          <!-- Table -->
-          <div class="ms-2 me-2 mt-2 mb-2">
-            <table class="table table-hover">
-              <thead>
-                <tr>
-                  <th>{{ t('textLabel.endpoint') }}</th>
-                  <th class="d-none d-md-table-cell">{{ t('textLabel.method') }}</th>
-                  <th class="d-none d-md-table-cell">{{ t('textLabel.statusCode') }}</th>
-                  <th class="d-none d-md-table-cell">{{ t('textLabel.executionTime') }}</th>
-                  <th class="d-none d-md-table-cell">{{ t('textLabel.createdAt') }}</th>
-                  <th class="text-center">{{ t('textLabel.action') }}</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr v-if="loading">
-                  <td colspan="6" class="text-center py-5">
-                    <div class="spinner-border text-primary" role="status">
-                      <span class="visually-hidden">Loading...</span>
-                    </div>
-                  </td>
-                </tr>
-                <tr v-else-if="logs.length === 0">
-                  <td colspan="6" class="text-center py-4 text-muted">{{ t('textLabel.noData') }}</td>
-                </tr>
-                <tr v-for="log in logs" :key="log.logGatewayId" @click="showDetail(log.logGatewayId)" style="cursor: pointer">
-                  <td><code>{{ log.logGatewayEndPoint }}</code></td>
-                  <td class="d-none d-md-table-cell"><span class="badge bg-info text-dark">{{ log.logGatewayMethod }}</span></td>
-                  <td class="d-none d-md-table-cell">
-                    <span :class="['badge', log.logGatewayStatusCode < 400 ? 'bg-success' : 'bg-danger']">
-                      {{ log.logGatewayStatusCode }}
-                    </span>
-                  </td>
-                  <td class="d-none d-md-table-cell">{{ log.logGatewayExecutionTime }} ms</td>
-                  <td class="d-none d-md-table-cell">{{ formatDate(log.logGatewayCreatedAt) }}</td>
-                  <td class="text-center">
-                    <button class="btn btn-primary btn-sm" @click.stop="showDetail(log.logGatewayId)">
-                      <i class="bi bi-eye me-1"></i> {{ t('button.view') }}
-                    </button>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-
-          <!-- Pagination -->
-          <div class="d-flex justify-content-between align-items-center mt-3 ms-4 me-4 mb-3">
-            <div class="text-muted small">
-              Showing {{ (currentPage * pageSize) + 1 }} to {{ Math.min((currentPage + 1) * pageSize, totalItems) }} of {{ totalItems }} entries
+            <!-- Table -->
+            <div class="ms-2 me-2 mt-2 mb-2">
+              <div v-if="loading" class="text-center py-5">
+                <div class="spinner-border text-primary" role="status">
+                  <span class="visually-hidden">Loading...</span>
+                </div>
+              </div>
+              <BaseTable v-else :table="table" />
             </div>
-            <nav v-if="totalPages() > 1">
-              <ul class="pagination mb-0">
-                <li class="page-item" :class="{ disabled: currentPage === 0 }">
-                  <a class="page-link" href="#" @click.prevent="currentPage--">{{ t('textLabel.previous') }}</a>
-                </li>
-                <li v-for="p in totalPages()" :key="p" class="page-item" :class="{ active: currentPage === p - 1 }">
-                  <a class="page-link" href="#" @click.prevent="currentPage = p - 1">{{ p }}</a>
-                </li>
-                <li class="page-item" :class="{ disabled: currentPage === totalPages() - 1 }">
-                  <a class="page-link" href="#" @click.prevent="currentPage++">{{ t('textLabel.next') }}</a>
-                </li>
-              </ul>
-            </nav>
-          </div>
           </div>
         </div>
       </div>
@@ -246,6 +246,7 @@ const totalPages = () => Math.ceil(totalItems.value / pageSize.value);
     </div>
   </section>
 </template>
+
 
 <style scoped>
 pre {

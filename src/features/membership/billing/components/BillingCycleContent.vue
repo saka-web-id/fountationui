@@ -1,13 +1,17 @@
 <script setup lang="ts">
-import { onMounted } from 'vue';
+import { onMounted, computed, h } from 'vue';
 import { useApi } from "~/composables/useApi";
 import { useRouter } from "vue-router";
 import { useI18n } from 'vue-i18n';
 import { useAuthStore } from '~/stores/auth'
 import { useCompany } from '~/composables/useCompany'
+import { createColumnHelper } from '@tanstack/vue-table'
+import { useDataTable } from '~/composables/useDataTable'
+import BaseTable from '~/components/table/BaseTable.vue'
+import type { BillingCycle } from '../types'
 
 const { t } = useI18n();
-const { data, get } = useApi();
+const { data, get } = useApi<BillingCycle[]>();
 const auth = useAuthStore()
 const router = useRouter();
 const { selectedCompanyId, onCompanyChange, userCompanyData } = useCompany({
@@ -15,19 +19,45 @@ const { selectedCompanyId, onCompanyChange, userCompanyData } = useCompany({
   apiPath: '/v0/account/membership/billing/cycle/list'
 })
 
+const billingCycles = computed(() => data.value || [])
+
+const columnHelper = createColumnHelper<BillingCycle>()
+
+const columns = [
+  columnHelper.accessor('billingCycleId', {
+    header: () => h('span', { class: 'd-none d-md-inline' }, t('textLabel.number')),
+    cell: info => h('span', { class: 'd-none d-md-inline' }, info.getValue()),
+    meta: { className: 'd-none d-md-table-cell' }
+  }),
+  columnHelper.accessor('billingCycleName', {
+    header: () => t('textLabel.name', 1),
+  }),
+  columnHelper.accessor('billingCycleDuration', {
+    header: () => t('textField.duration'),
+  }),
+  columnHelper.accessor('billingCyclecreatedAt', {
+    header: () => h('span', { class: 'd-none d-md-inline' }, t('textField.createdAt')),
+    cell: info => h('span', { class: 'd-none d-md-inline' }, info.getValue()),
+    meta: { className: 'd-none d-md-table-cell' }
+  }),
+  columnHelper.display({
+    id: 'actions',
+    header: () => t('textLabel.action'),
+    cell: _info => h('div', { class: 'btn-group', role: 'group' }, [
+      h('button', {
+        class: 'btn btn-primary',
+        onClick: () => goToEdit(selectedCompanyId.value as any)
+      }, t('button.edit'))
+    ]),
+  }),
+]
+
+const { table, globalFilter } = useDataTable(billingCycles, columns)
 
 onMounted(async () => {
-
-  console.log("URL :", '/v0/account/membership/billing/cycle/list/companyId/'+ selectedCompanyId + "/userId/" + auth.user?.id + "/valueCompanyId/" + selectedCompanyId);
-
-  await get('/v0/account/membership/billing/cycle/list/companyId/'+ selectedCompanyId + "/userId/" + auth.user?.id + "/valueCompanyId/" + selectedCompanyId)
-
+  await get('/v0/account/membership/billing/cycle/list/companyId/'+ selectedCompanyId.value + "/userId/" + auth.user?.id + "/valueCompanyId/" + selectedCompanyId.value)
 });
 
-/*const handleCompanyChange = async (event: Event) => {
-  const _target = event.target as HTMLSelectElement
-  await onCompanyChange({ valueMembershipPlanId: selectedCompanyId.value })
-}*/
 const handleCompanyChange = async (event: Event) => {
   const target = event.target as HTMLSelectElement
   await onCompanyChange({ valueMembershipPlanId: target.value })
@@ -66,35 +96,18 @@ const goToEdit = (companyIdParam: number) => {
               <div class="col-auto">
                 <h4 class="ps-3">{{ t('textLabel.membership', 2) }}</h4>
               </div>
-              <div class="col-auto">
-                <button @click="router.push({ name: 'billingcycleadd', params: { companyIdParam: selectedCompanyId } })" class="btn btn-outline-primary" type="button">{{ t('button.add') }}</button>
+              <div class="col-auto d-flex gap-2">
+                <input
+                  v-model="globalFilter"
+                  type="text"
+                  class="form-control"
+                  :placeholder="t('button.search') + '...'"
+                />
+                <button @click="router.push({ name: 'billingcycleadd', params: { companyIdParam: selectedCompanyId } })" class="btn btn-outline-primary text-nowrap" type="button">{{ t('button.add') }}</button>
               </div>
             </div>
             <div class="ms-2 me-2 mt-2 mb-2">
-              <table class="table">
-                <thead>
-                <tr>
-                  <th class="d-none d-md-table-cell">{{ t('textLabel.number') }}</th>
-                  <th>{{ t('textLabel.name', 1) }}</th>
-                  <th class="d-none d-md-table-cell">{{ t('textField.duration') }}</th>
-                  <th class="d-none d-md-table-cell">{{ t('textField.createdAt') }}</th>
-                  <th class="text-center">{{ t('textLabel.action') }}</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr v-for="d in data" :key="d.billingCycleId">
-                  <td class="d-none d-md-table-cell">{{ d.billingCycleId  }}</td>
-                  <td>{{ d.billingCycleName }}</td>
-                  <td class="d-none d-md-table-cell">{{ d.billingCycleDuration }}</td>
-                  <td class="d-none d-md-table-cell">{{ d.billingCyclecreatedAt }}</td>
-                  <td class="text-center">
-                    <div class="btn-group" role="group">
-                      <button class="btn btn-primary" @click="goToEdit(selectedCompanyId)">{{ t('button.edit') }}</button>
-                    </div>
-                  </td>
-                </tr>
-                </tbody>
-              </table>
+              <BaseTable :table="table" />
             </div>
           </div>
         </div>
@@ -105,6 +118,7 @@ const goToEdit = (companyIdParam: number) => {
     </div>
   </section>
 </template>
+
 
 <style scoped>
 

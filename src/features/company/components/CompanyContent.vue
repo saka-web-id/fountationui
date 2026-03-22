@@ -1,21 +1,55 @@
 <script setup lang="ts">
-import { onMounted } from 'vue';
+import { onMounted, computed, h } from 'vue';
 import { useApi } from "~/composables/useApi";
 import { useRouter } from "vue-router";
 import { useI18n } from 'vue-i18n';
 import { useAuthStore } from '~/stores/auth'
+import { createColumnHelper } from '@tanstack/vue-table'
+import { useDataTable } from '~/composables/useDataTable'
+import BaseTable from '~/components/table/BaseTable.vue'
+import type { Company } from '../types'
 
 const auth = useAuthStore()
 const { t } = useI18n();
-const { data, get } = useApi();
+const { data, get } = useApi<Company[]>();
 const router = useRouter();
 
+const companies = computed(() => data.value || [])
+
+const columnHelper = createColumnHelper<Company>()
+
+const columns = [
+  columnHelper.accessor('companyId', {
+    header: () => t('textLabel.number'),
+    meta: { className: 'd-none d-md-table-cell' }
+  }),
+  columnHelper.accessor('companyName', {
+    header: () => t('textLabel.company', 2),
+  }),
+  columnHelper.accessor('companyEmail', {
+    header: () => t('textField.email'),
+    meta: { className: 'd-none d-md-table-cell' }
+  }),
+  columnHelper.display({
+    id: 'actions',
+    header: () => t('textLabel.action'),
+    cell: info => h('div', { class: 'btn-group', role: 'group' }, [
+      h('button', {
+        class: 'btn btn-primary',
+        onClick: () => goToEdit(info.row.original.companyId)
+      }, t('button.edit')),
+      h('button', {
+        class: 'btn btn-info',
+        onClick: () => goToDepartment(info.row.original.companyId)
+      }, t('textLabel.department'))
+    ]),
+  }),
+]
+
+const { table, globalFilter } = useDataTable(companies, columns)
+
 onMounted(async () => {
-
-  console.log("URL :", '/v0/user/companies/list/companyId/'+auth.user?.company.companyId + "/userId/" + auth.user?.id);
-
   await get('/v0/user/companies/list/companyId/'+auth.user?.company.companyId + "/userId/" + auth.user?.id)
-
 });
 
 const goToEdit = (companyIdParam: number) => {
@@ -23,9 +57,6 @@ const goToEdit = (companyIdParam: number) => {
 };
 
 const goToDepartment = (companyId: number) => {
-
-  console.log("Company ID = " + companyId);
-
   router.push({ name: 'companydepartment', params: { companyId } });
 }
 
@@ -41,54 +72,22 @@ const goToDepartment = (companyId: number) => {
       </ol>
       <div class="card mb-3 bg-gradient-dark">
         <div class="card-body ms-0 ps-0 me-0 pe-0 mt-0 pt-0 pb-0">
-<!--          <div class="text-center py-4" id="idform">
-            <div class="input-group mb-2"><span class="d-flex w-25 ms-2 input-group-text">{{ t('textLabel.company', 2) }}</span><input class="form-control d-flex ms-0 ps-5 me-2 pe-4" type="text"></div>
-            <div class="input-group mb-2"><span class="w-25 ms-2 input-group-text">{{ t('textLabel.status') }}</span><input class="form-control w-25 ms-0 ps-5 me-2 pe-4" type="text"></div>
-            <div class="text-end"><button class="btn btn-outline-primary btn-sm ms-2 me-2" type="button">{{ t('button.search') }}</button></div>
-          </div>-->
-
-          <div class="table-responsive pt-2">
-            <div class="row d-flex justify-content-between align-items-center me-2 mt-2 mb-2">
-              <div class="col-auto">
-                <h4 class="ps-3">{{ t('textLabel.company', 2) }}</h4>
-              </div>
-              <div class="col-auto">
-                <button @click="router.push({ name: 'companyadd' })" class="btn btn-outline-primary" type="button">{{ t('button.add') }}</button>
-              </div>
+          <div class="row d-flex justify-content-between align-items-center me-2 mt-2 mb-2">
+            <div class="col-auto">
+              <h4 class="ps-0 ps-md-3 display-6 fw-bold">{{ t('textLabel.company', 2) }}</h4>
             </div>
-            <div class="ms-2 me-2 mt-2 mb-2">
-              <table class="table">
-                <thead>
-                <tr>
-                  <th class="d-none d-md-table-cell">{{ t('textLabel.number') }}</th>
-                  <th>{{ t('textLabel.company', 2) }}</th>
-                  <th class="d-none d-md-table-cell">{{ t('textField.email') }}</th>
-                  <!--
-                  <th>{{ t('textLabel.employee', 2) }}</th>
-                  <th>{{ t('textLabel.asset', 2) }}</th>
-                  -->
-                  <th class="text-center">{{ t('textLabel.action') }}</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr v-for="d in data" :key="d.companyId">
-                  <td class="d-none d-md-table-cell">{{ d.companyId  }}</td>
-                  <td>{{ d.companyName }}</td>
-                  <td class="d-none d-md-table-cell">{{ d.companyEmail }}</td>
-                  <!--
-                  <td>50</td>
-                  <td>50</td>
-                  -->
-                  <td class="text-center">
-                    <div class="btn-group" role="group">
-                      <button class="btn btn-primary" @click="goToEdit(d.companyId)">{{ t('button.edit') }}</button>
-                      <button class="btn btn-info" @click="goToDepartment(d.companyId)">{{ t('textLabel.department') }}</button>
-                    </div>
-                  </td>
-                </tr>
-                </tbody>
-              </table>
+            <div class="col-auto d-flex gap-2">
+              <input
+                  v-model="globalFilter"
+                  type="text"
+                  class="form-control"
+                  :placeholder="t('button.search') + '...'"
+              />
+              <button @click="router.push({ name: 'companyadd' })" class="btn btn-outline-primary text-nowrap" type="button">{{ t('button.add') }}</button>
             </div>
+          </div>
+          <div class="ms-2 me-2 mt-2 mb-2">
+            <BaseTable :table="table" />
           </div>
         </div>
       </div>
@@ -98,6 +97,7 @@ const goToDepartment = (companyId: number) => {
     </div>
   </section>
 </template>
+
 
 <style scoped>
 

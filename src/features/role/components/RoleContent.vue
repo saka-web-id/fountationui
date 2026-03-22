@@ -1,13 +1,17 @@
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n';
 import { useApi } from "~/composables/useApi";
-import {onMounted, ref} from "vue";
+import { onMounted, ref, computed, h } from "vue";
 import { type UserCompanyPayLoad } from "~/features/user/hooks/forms/useUserForm.ts";
-import {useRoute, useRouter} from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 import { useAuthStore } from '~/stores/auth'
+import { createColumnHelper } from '@tanstack/vue-table'
+import { useDataTable } from '~/composables/useDataTable'
+import BaseTable from '~/components/table/BaseTable.vue'
+import type { Role } from '../types'
 
 const auth = useAuthStore()
-const { data, get } = useApi();
+const { data, get } = useApi<Role[]>();
 const { data: userCompanyData, get: getUserCompany } = useApi();
 const { t } = useI18n();
 const router = useRouter();
@@ -21,14 +25,48 @@ const selectedCompanyId = ref<number | null>(
         : null
 );
 
+const roles = computed(() => data.value || [])
+
+const columnHelper = createColumnHelper<Role>()
+
+const columns = [
+  columnHelper.accessor('roleId', {
+    header: () => h('span', { class: 'd-none d-md-inline' }, t('textLabel.number')),
+    cell: info => h('span', { class: 'd-none d-md-inline' }, info.getValue()),
+    meta: { className: 'd-none d-md-table-cell' }
+  }),
+  columnHelper.accessor('roleName', {
+    header: () => t('textLabel.name'),
+  }),
+  columnHelper.accessor('roleDescription', {
+    header: () => h('span', { class: 'd-none d-md-inline' }, t('textLabel.description')),
+    cell: info => h('span', { class: 'd-none d-md-inline' }, info.getValue()),
+    meta: { className: 'd-none d-md-table-cell' }
+  }),
+  columnHelper.accessor('roleCreatedAt', {
+    header: () => h('span', { class: 'd-none d-md-inline' }, t('textLabel.dateCreated')),
+    cell: info => h('span', { class: 'd-none d-md-inline' }, info.getValue()),
+    meta: { className: 'd-none d-md-table-cell' }
+  }),
+  columnHelper.display({
+    id: 'actions',
+    header: () => t('textLabel.action'),
+    cell: info => h('div', { class: 'btn-group', role: 'group' }, [
+      h('button', {
+        class: 'btn btn-primary',
+        onClick: () => router.push({ name: 'roleedit', params: { roleIdParam: info.row.original.roleId, companyIdParam: selectedCompanyId.value } })
+      }, t('button.view'))
+    ]),
+  }),
+]
+
+const { table, globalFilter } = useDataTable(roles, columns)
 
 onMounted(async () => {
 
   await getUserCompany('/v0/user/organization/company/list/companyId/' + auth.user?.company.companyId + "/userId/" + auth.user?.id + "/valueCompanyId/0" );
 
   console.log("List Company : ", userCompanyData.value);
-
-  console.log("Default user company : ", userCompanyData.value.find((c: any) : UserCompanyPayLoad => c.companyIsDefault));
 
   const defaultCompany = userCompanyData.value.find((c: any) : UserCompanyPayLoad => c.companyIsDefault)
   if (defaultCompany) { //Get is defaultCompany True
@@ -72,47 +110,24 @@ async function onCompanyChange() {
               <option v-for="userCompany in userCompanyData" :value="userCompany.companyId">{{ userCompany.companyName }}</option>
             </select>
           </div>
-<!--          <div class="text-end">
-            <button class="btn btn-outline-primary btn-sm ms-2 me-2" type="button">Search</button>
-          </div>-->
         </div>
 
         <div class="table-responsive pt-2">
           <div class="row d-flex justify-content-between align-items-center me-2 mt-2 mb-2">
             <div class="col-auto">
-              <h3 class="ps-3">Roles</h3>
+              <h3 class="ps-3">{{ t('textLabel.role', 2) }}</h3>
             </div>
-            <!--
-            <div class="col-auto">
-              <button @click="router.push({ name: 'roleadd', params: { companyIdParam: selectedCompanyId } })" class="btn btn-outline-primary" type="button">{{ t('button.add') }}</button>
+            <div class="col-auto d-flex gap-2">
+              <input
+                v-model="globalFilter"
+                type="text"
+                class="form-control"
+                :placeholder="t('button.search') + '...'"
+              />
             </div>
-            -->
           </div>
-          <div class="table-responsive ms-2 me-2 mt-2 mb-2">
-            <table class="table">
-              <thead>
-              <tr>
-                <th class="d-none d-md-table-cell">{{ t('textLabel.number') }}</th>
-                <th>{{ t('textLabel.name') }}</th>
-                <th class="d-none d-md-table-cell">{{ t('textLabel.description') }}</th>
-                <th class="d-none d-md-table-cell">{{ t('textLabel.dateCreated') }}</th>
-                <th class="text-center">{{ t('textLabel.action') }}</th>
-              </tr>
-              </thead>
-              <tbody>
-              <tr v-for="role in data" :key="role.roleId">
-                <td class="d-none d-md-table-cell">{{ role.roleId }}</td>
-                <td>{{ role.roleName }}</td>
-                <td class="d-none d-md-table-cell">{{ role.roleDescription }}</td>
-                <td class="d-none d-md-table-cell">{{ role.roleCreatedAt }}</td>
-                <td class="text-center">
-                  <div class="btn-group" role="group">
-                    <button class="btn btn-primary" @click="router.push({ name: 'roleedit', params: { roleIdParam: role.roleId, companyIdParam: selectedCompanyId } })" >{{ t('button.view') }}</button>
-                  </div>
-                </td>
-              </tr>
-              </tbody>
-            </table>
+          <div class="ms-2 me-2 mt-2 mb-2">
+            <BaseTable :table="table" />
           </div>
         </div>
       </div>
@@ -122,6 +137,7 @@ async function onCompanyChange() {
     </div>
   </section>
 </template>
+
 
 <style scoped>
 

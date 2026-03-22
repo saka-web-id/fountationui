@@ -1,18 +1,70 @@
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n';
 import { useApi } from "~/composables/useApi";
-import {onMounted} from "vue";
+import { onMounted, computed, h } from "vue";
 import { useRoute, useRouter } from 'vue-router';
 import { useAuthStore } from '~/stores/auth'
+import { createColumnHelper } from '@tanstack/vue-table'
+import { useDataTable } from '~/composables/useDataTable'
+import BaseTable from '~/components/table/BaseTable.vue'
+import type { User } from '../types'
 
 const auth = useAuthStore()
-const { data, get } = useApi();
+const { data, get } = useApi<User[]>();
 const { data: companyData, get: getCompany } = useApi();
 const { data: departmentData, get: getDepartment } = useApi();
 const { t } = useI18n();
 const route = useRoute();
 const router = useRouter();
 const { companyIdParam, departmentIdParam } = route.params;
+
+const users = computed(() => data.value || [])
+
+const columnHelper = createColumnHelper<User>()
+
+const columns = [
+  columnHelper.accessor('userId', {
+    header: () => h('span', { class: 'd-none d-md-inline' }, t('textLabel.number')),
+    cell: info => h('span', { class: 'd-none d-md-inline' }, info.getValue()),
+    meta: {
+      className: 'd-none d-md-table-cell'
+    }
+  }),
+  columnHelper.accessor('userName', {
+    header: () => t('textLabel.name'),
+    cell: info => info.getValue(),
+  }),
+  columnHelper.accessor('userEmail', {
+    header: () => h('span', { class: 'd-none d-md-inline' }, t('textLabel.email')),
+    cell: info => h('span', { class: 'd-none d-md-inline' }, info.getValue()),
+    meta: {
+      className: 'd-none d-md-table-cell'
+    }
+  }),
+  columnHelper.accessor('userStatus', {
+    header: () => t('textLabel.status'),
+    cell: info => info.getValue(),
+  }),
+  columnHelper.accessor('userCreatedAt', {
+    header: () => h('span', { class: 'd-none d-md-inline' }, t('textLabel.createdAt')),
+    cell: info => h('span', { class: 'd-none d-md-inline' }, info.getValue()),
+    meta: {
+      className: 'd-none d-md-table-cell'
+    }
+  }),
+  columnHelper.display({
+    id: 'actions',
+    header: () => t('textLabel.action'),
+    cell: info => h('div', { class: 'btn-group', role: 'group' }, [
+      h('button', {
+        class: 'btn btn-primary',
+        onClick: () => goToEdit(info.row.original.userId)
+      }, t('button.edit'))
+    ]),
+  }),
+]
+
+const { table, globalFilter } = useDataTable(users, columns)
 
 onMounted(async () => {
 
@@ -51,65 +103,28 @@ const goToEdit = (userId: number) => {
       <div class="card mb-3 bg-gradient-dark">
         <div class="card-body ms-0 ps-0 me-0 pe-0 mt-0 pt-0 pb-0">
 
-          <!--
-          <div class="text-center py-4" id="idform">
-            <div class="input-group mb-2">
-              <span class="d-flex w-25 ms-2 input-group-text" style="font-size: calc(0.6em + 0.5vw);">{{ t('textLabel.company', 1) }}</span>
-              <select class="form-control d-flex ms-0 ps-2 me-2 pe-4" type="text">
-                <option v-for="company in companyData" :value="company.companyId">{{ company.companyName }}</option>
-              </select>
-            </div>
-            <div class="input-group mb-2">
-              <span class="d-flex w-25 ms-2 input-group-text">{{ t('textLabel.department', 1) }}</span>
-              <select class="form-select me-2"></select>
-              <select class="form-control d-flex ms-0 ps-2 me-2 pe-4" type="text">
-                <option v-for="department in departmentData" :value="department.departmentId">{{ department.departmentName }}</option>
-              </select>
-            </div>
-          </div>
-          -->
-
           <div class="table-responsive pt-2">
             <div class="row d-flex justify-content-between align-items-center me-2 mt-2 mb-2">
               <div class="col-auto">
-                <h3 class="ps-3">
+                <h3 class="ps-0 ps-md-3 display-6 fw-bold">
                   {{ t('textLabel.user', 2) }} 
                   <span v-if="companyData?.companyName && departmentData?.departmentName">
                     - {{ companyData.companyName }} - {{ departmentData.departmentName }}
                   </span>
                 </h3>
               </div>
-              <div class="col-auto">
-                <button @click="router.push({ name: 'useradd', params: { companyIdParam, departmentIdParam } })" class="btn btn-outline-primary" type="button">{{ t('button.add') }}</button>
+              <div class="col-auto d-flex gap-2">
+                <input
+                  v-model="globalFilter"
+                  type="text"
+                  class="form-control"
+                  :placeholder="t('button.search') + '...'"
+                />
+                <button @click="router.push({ name: 'useradd', params: { companyIdParam, departmentIdParam } })" class="btn btn-outline-primary text-nowrap" type="button">{{ t('button.add') }}</button>
               </div>
             </div>
-            <div class="table-responsive ms-2 me-2 mt-2 mb-2">
-              <table class="table">
-                <thead>
-                <tr>
-                  <th class="d-none d-md-table-cell">{{ t('textLabel.number') }}</th>
-                  <th>{{ t('textLabel.name') }}</th>
-                  <th class="d-none d-md-table-cell">{{ t('textLabel.email') }}</th>
-                  <th class="d-none d-md-table-cell">{{ t('textLabel.status') }}</th>
-                  <th class="d-none d-md-table-cell">{{ t('textLabel.createdAt') }}</th>
-                  <th class="text-center">{{ t('textLabel.action') }}</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr v-for="d in data" :key="d.userId">
-                  <td class="d-none d-md-table-cell">{{ d.userId  }}</td>
-                  <td>{{ d.userName  }}</td>
-                  <td class="d-none d-md-table-cell">{{ d.userEmail  }}</td>
-                  <td class="d-none d-md-table-cell">{{ d.userStatus  }}</td>
-                  <td class="d-none d-md-table-cell">{{ d.userCreatedAt  }}</td>
-                  <td class="text-center">
-                    <div class="btn-group" role="group">
-                      <button class="btn btn-primary" @click="goToEdit(d.userId)">{{ t('button.edit') }}</button>
-                    </div>
-                  </td>
-                </tr>
-                </tbody>
-              </table>
+            <div class="ms-2 me-2 mt-2 mb-2">
+              <BaseTable :table="table" />
             </div>
           </div>
         </div>
@@ -120,6 +135,7 @@ const goToEdit = (userId: number) => {
     </div>
   </section>
 </template>
+
 
 <style scoped>
 

@@ -1,14 +1,53 @@
 <script setup lang="ts">
-import { onMounted } from 'vue';
+import { onMounted, computed, h } from 'vue';
 import { useApi } from "~/composables/useApi";
 import { useRouter } from "vue-router";
 import { useI18n } from 'vue-i18n';
 import { useAuthStore } from '~/stores/auth'
+import { createColumnHelper } from '@tanstack/vue-table'
+import { useDataTable } from '~/composables/useDataTable'
+import BaseTable from '~/components/table/BaseTable.vue'
+import type { CompanyLogSetting } from '../types'
 
 const auth = useAuthStore()
 const { t } = useI18n();
-const { data, get } = useApi();
+const { data, get } = useApi<CompanyLogSetting[]>();
 const router = useRouter();
+
+const companies = computed(() => data.value || [])
+
+const columnHelper = createColumnHelper<CompanyLogSetting>()
+
+const columns = [
+  columnHelper.display({
+    id: 'index',
+    header: () => t('textLabel.number'),
+    cell: info => info.row.index + 1,
+    meta: { className: 'd-none d-md-table-cell' }
+  }),
+  columnHelper.accessor('companyName', {
+    header: () => t('textLabel.company', 2),
+  }),
+  columnHelper.accessor('companyEmail', {
+    header: () => t('textField.email'),
+    meta: { className: 'd-none d-md-table-cell' }
+  }),
+  columnHelper.display({
+    id: 'actions',
+    header: () => t('textLabel.action'),
+    cell: info => h('div', { class: 'btn-group', role: 'group' }, [
+      h('button', {
+        class: 'btn btn-primary btn-sm',
+        onClick: () => goToList(info.row.original.companyId)
+      }, [
+        h('i', { class: 'bi bi-list-check me-1' }),
+        t('button.view')
+      ])
+    ]),
+  }),
+]
+
+const { table, globalFilter } = useDataTable(companies, columns)
 
 onMounted(async () => {
   if (auth.user) {
@@ -35,34 +74,19 @@ const goToList = (companyIdParam: number) => {
           <div class="table-responsive pt-2">
             <div class="row d-flex justify-content-between align-items-center me-2 mt-2 mb-2">
               <div class="col-auto">
-                <h4 class="ps-3">{{ t('textLabel.logSetting', 2) }}</h4>
+                <h4 class="ps-0 ps-md-3 display-6 fw-bold">{{ t('textLabel.logSetting', 2) }}</h4>
+              </div>
+              <div class="col-auto">
+                <input
+                  v-model="globalFilter"
+                  type="text"
+                  class="form-control"
+                  :placeholder="t('button.search') + '...'"
+                />
               </div>
             </div>
             <div class="ms-2 me-2 mt-2 mb-2">
-              <table class="table table-hover">
-                <thead>
-                <tr>
-                  <th class="d-none d-md-table-cell">{{ t('textLabel.number') }}</th>
-                  <th>{{ t('textLabel.company', 2) }}</th>
-                  <th class="d-none d-md-table-cell">{{ t('textField.email') }}</th>
-                  <th class="text-center">{{ t('textLabel.action') }}</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr v-for="(d, index) in data" :key="d.companyId">
-                  <td class="d-none d-md-table-cell">{{ index + 1 }}</td>
-                  <td>{{ d.companyName }}</td>
-                  <td class="d-none d-md-table-cell">{{ d.companyEmail }}</td>
-                  <td class="text-center">
-                    <div class="btn-group" role="group">
-                      <button class="btn btn-primary btn-sm" @click="goToList(d.companyId)">
-                        <i class="bi bi-list-check me-1"></i> {{ t('button.view') }}
-                      </button>
-                    </div>
-                  </td>
-                </tr>
-                </tbody>
-              </table>
+              <BaseTable :table="table" />
             </div>
           </div>
         </div>
@@ -70,6 +94,7 @@ const goToList = (companyIdParam: number) => {
     </div>
   </section>
 </template>
+
 
 <style scoped>
 </style>
