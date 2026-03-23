@@ -34,7 +34,7 @@ const submitForm = handleSubmit( async (values: UserPayload) => {
 <template>
   <section class="py-4">
     <div class="container">
-      <ol class="breadcrumb ms-4 me-4">
+      <ol class="breadcrumb ms-2 me-2">
         <li class="breadcrumb-item"><router-link to="/dashboard"><span>{{ t('textLabel.home') }}</span></router-link></li>
         <li class="breadcrumb-item active"><span>{{ t('textLabel.profile') }}</span></li>
       </ol>

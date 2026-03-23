@@ -19,11 +19,10 @@ const router = useRouter();
 const { t } = useI18n();
 const logSettingSchema = useLogSettingSchema();
 const { handleSubmit, setValues, logSettingEndpoint, logSettingMethod, logSettingLogFormat, logSettingEnabled } = useLogSettingForm();
-
+const { companyIdParam, logSettingIdParam } = route.params as { companyIdParam: string, logSettingIdParam: string };
 const isEdit = ref(false);
 
 onMounted(async () => {
-  const { companyIdParam, logSettingIdParam } = route.params;
   
   if (logSettingIdParam) {
     isEdit.value = true;
@@ -65,15 +64,20 @@ const submitForm = handleSubmit(async (values: LogSettingPayload) => {
 <template>
   <section class="pt-2 pb-2">
     <div class="container">
-      <ol class="breadcrumb ms-4 me-4">
+      <ol class="breadcrumb ms-2 me-2">
         <li class="breadcrumb-item"><router-link to="/dashboard"><span>{{ t('textLabel.dashboard') }}</span></router-link></li>
         <li class="breadcrumb-item"><router-link to="/logsetting"><span>{{ t('textLabel.logSetting', 2) }}</span></router-link></li>
+        <li class="breadcrumb-item">
+          <router-link :to="{ name: 'logsettinglist', params: { companyIdParam: companyIdParam } }">
+            <span>List</span>
+          </router-link>
+        </li>
         <li class="breadcrumb-item active"><span>{{ isEdit ? t('button.edit') : t('button.add') }}</span></li>
       </ol>
       <div class="card mb-3 bg-gradient-dark">
         <div class="card-body py-4">
           <Form :validationSchema="logSettingSchema" id="idform" v-slot="{ meta }" >
-            <h4 class="text-start ms-2 mb-4">{{ isEdit ? 'Edit Log Setting' : 'Add Log Setting' }}</h4>
+            <h4 class="ps-0 ps-md-3 fs-5 fs-md-3">{{ isEdit ? 'Edit Log Setting' : 'Add Log Setting' }}</h4>
             
             <div class="input-group mb-3">
               <span class="input-group-text w-25">{{ t('textLabel.endpoint') }}</span>

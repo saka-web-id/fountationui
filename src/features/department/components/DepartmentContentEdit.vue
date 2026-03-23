@@ -54,7 +54,7 @@ const submitForm = handleSubmit( async (values: DepartmentPayload) => {
 <template>
   <section class="pt-2 pb-2">
     <div class="container">
-      <ol class="breadcrumb ms-4 me-4">
+      <ol class="breadcrumb ms-2 me-2">
         <li class="breadcrumb-item"><router-link to="/dashboard"><span>{{ t('textLabel.dashboard') }}</span></router-link></li>
         <li class="breadcrumb-item"><router-link to="/company"><span>{{ t('textLabel.company', 2) }}</span></router-link></li>
         <li class="breadcrumb-item">

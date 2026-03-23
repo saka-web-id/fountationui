@@ -136,9 +136,9 @@ const submitForm = handleSubmit(async ( roleForm: RoleForm) => {
       </ol>
       <div class="card mb-3 bg-gradient-dark">
         <div class="card-body ms-0 ps-0 me-0 pe-0 mt-0 pt-0 pb-0">
-          <Form :validation-schema="roleSchema" id="idform" v-slot="{ meta }" class="text-center py-4" >
-            <div class="text-center py-4" id="idform">
-              <h4 class="text-start ms-2">Role Edit</h4>
+          <Form :validation-schema="roleSchema" id="idform" v-slot="{ meta }" >
+            <div id="idform">
+              <h4 class="ps-0 ps-md-3 fs-5 fs-md-3 ms-2">Role Edit</h4>
               <div class="input-group mb-2">
                 <span class="d-flex w-25 ms-2 input-group-text">Name</span>
                 <Field name="roleName" v-model="roleName" as="input" class="form-control d-flex ms-0 ps-2 me-2 pe-4" />

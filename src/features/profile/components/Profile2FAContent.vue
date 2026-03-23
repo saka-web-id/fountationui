@@ -22,7 +22,7 @@ export default {
 <template>
   <section class="py-4">
     <div class="container">
-      <ol class="breadcrumb ms-4 me-4">
+      <ol class="breadcrumb ms-2 me-2">
         <li class="breadcrumb-item"><router-link to="/dashboard"><span>Home</span></router-link></li>
         <li class="breadcrumb-item"><a href="#"><span>Profile</span></a></li>
         <li class="breadcrumb-item active"><span>My Profile 2FA Authentication</span></li>

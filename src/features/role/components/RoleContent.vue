@@ -103,10 +103,10 @@ async function onCompanyChange() {
       </ol>
       <div class="card mb-3 bg-gradient-dark">
 
-        <div id="idform" class="text-center py-4">
+        <div id="idform" class="text-center">
           <div class="input-group mb-2">
             <span class="d-flex w-25 ms-2 input-group-text">Company</span>
-            <select class="form-control d-flex ms-0 ps-2 me-2 pe-4" type="text" v-model="selectedCompanyId" @change="onCompanyChange" >
+            <select class="form-control d-flex ms-0 ps-2 me-2 pe-2" type="text" v-model="selectedCompanyId" @change="onCompanyChange" >
               <option v-for="userCompany in userCompanyData" :value="userCompany.companyId">{{ userCompany.companyName }}</option>
             </select>
           </div>
@@ -115,7 +115,7 @@ async function onCompanyChange() {
         <div class="table-responsive pt-2">
           <div class="row d-flex justify-content-between align-items-center me-2 mt-2 mb-2">
             <div class="col-auto">
-              <h3 class="ps-3">{{ t('textLabel.role', 2) }}</h3>
+              <h3 class="ps-0 ps-md-3 fs-5 fs-md-3 ms-2">{{ t('textLabel.role', 2) }}</h3>
             </div>
             <div class="col-auto d-flex gap-2">
               <input

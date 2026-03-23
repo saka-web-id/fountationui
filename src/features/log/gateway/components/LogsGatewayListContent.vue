@@ -155,7 +155,7 @@ watch(() => paginationState.value.pageIndex, fetchLogs);
           <div class="table-responsive pt-2">
             <div class="row d-flex justify-content-between align-items-center me-2 mt-2 mb-2">
               <div class="col-auto">
-                <h4 class="ps-0 ps-md-3 display-6 fw-bold">{{ t('textLabel.gatewayLogs') }}</h4>
+                <h4 class="ps-0 ps-md-3 fs-5 fs-md-3 ms-2">{{ t('textLabel.gatewayLogs') }}</h4>
               </div>
             </div>
             <!-- Filters -->
