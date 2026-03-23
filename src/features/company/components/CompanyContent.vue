@@ -1,65 +1,18 @@
 <script setup lang="ts">
-import { onMounted, computed, h } from 'vue';
-import { useApi } from "~/composables/useApi";
+import { onMounted } from 'vue';
 import { useRouter } from "vue-router";
-import { useI18n } from 'vue-i18n';
-import { useAuthStore } from '~/stores/auth'
-import { createColumnHelper } from '@tanstack/vue-table'
-import { useDataTable } from '~/composables/useDataTable'
+import { useCompanyTable } from '~/features/company/hooks/tables/useCompanyTable';
 import BaseTable from '~/components/table/BaseTable.vue'
-import type { Company } from '../types'
 
-const auth = useAuthStore()
-const { t } = useI18n();
-const { data, get } = useApi<Company[]>();
 const router = useRouter();
+const {
+  table,
+  globalFilter,
+  fetchData,
+  t
+} = useCompanyTable();
 
-const companies = computed(() => data.value || [])
-
-const columnHelper = createColumnHelper<Company>()
-
-const columns = [
-  columnHelper.accessor('companyId', {
-    header: () => t('textLabel.number'),
-    meta: { className: 'd-none d-md-table-cell' }
-  }),
-  columnHelper.accessor('companyName', {
-    header: () => t('textLabel.company', 2),
-  }),
-  columnHelper.accessor('companyEmail', {
-    header: () => t('textField.email'),
-    meta: { className: 'd-none d-md-table-cell' }
-  }),
-  columnHelper.display({
-    id: 'actions',
-    header: () => t('textLabel.action'),
-    cell: info => h('div', { class: 'btn-group', role: 'group' }, [
-      h('button', {
-        class: 'btn btn-primary',
-        onClick: () => goToEdit(info.row.original.companyId)
-      }, t('button.edit')),
-      h('button', {
-        class: 'btn btn-info',
-        onClick: () => goToDepartment(info.row.original.companyId)
-      }, t('textLabel.department'))
-    ]),
-  }),
-]
-
-const { table, globalFilter } = useDataTable(companies, columns)
-
-onMounted(async () => {
-  await get('/v0/user/companies/list/companyId/'+auth.user?.company.companyId + "/userId/" + auth.user?.id)
-});
-
-const goToEdit = (companyIdParam: number) => {
-  router.push({ name: 'companyedit', params: { companyIdParam } });
-};
-
-const goToDepartment = (companyId: number) => {
-  router.push({ name: 'companydepartment', params: { companyId } });
-}
-
+onMounted(fetchData);
 </script>
 
 <template>

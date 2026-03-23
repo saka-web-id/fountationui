@@ -1,74 +1,22 @@
 <script setup lang="ts">
-import { onMounted, computed, h } from 'vue';
-import { useApi } from "~/composables/useApi";
-import { useI18n } from 'vue-i18n';
+import { onMounted } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
-import { useAuthStore } from '~/stores/auth'
-import { createColumnHelper } from '@tanstack/vue-table'
-import { useDataTable } from '~/composables/useDataTable'
+import { useDepartmentTable } from '~/features/department/hooks/tables/useDepartmentTable';
 import BaseTable from '~/components/table/BaseTable.vue'
-import type { Department } from '../types'
 
-const auth = useAuthStore()
-const { data, get } = useApi<Department[]>();
-const { data: companyData, get: getCompany } = useApi();
 const route = useRoute();
 const router = useRouter();
-const { t } = useI18n();
+const { companyId } = route.params as { companyId: string };
 
-const { companyId } = route.params;
+const {
+  table,
+  globalFilter,
+  companyData,
+  fetchData,
+  t
+} = useDepartmentTable(companyId);
 
-const departments = computed(() => data.value || [])
-
-const columnHelper = createColumnHelper<Department>()
-
-const columns = [
-  columnHelper.accessor('departmentId', {
-    header: () => h('span', { class: 'd-none d-md-inline' }, t('textLabel.number')),
-    cell: info => h('span', { class: 'd-none d-md-inline' }, info.getValue()),
-    meta: { className: 'd-none d-md-table-cell' }
-  }),
-  columnHelper.accessor('departmentName', {
-    header: () => t('textLabel.department', 2),
-  }),
-  columnHelper.accessor('departmentDescription', {
-    header: () => h('span', { class: 'd-none d-md-inline' }, t('textLabel.description')),
-    cell: info => h('span', { class: 'd-none d-md-inline' }, info.getValue()),
-    meta: { className: 'd-none d-md-table-cell' }
-  }),
-  columnHelper.display({
-    id: 'actions',
-    header: () => t('textLabel.action'),
-    cell: info => h('div', { class: 'btn-group', role: 'group' }, [
-      h('button', {
-        class: 'btn btn-primary',
-        onClick: () => goToEdit(info.row.original.companyId, info.row.original.departmentId)
-      }, t('button.edit')),
-      h('button', {
-        class: 'btn btn-info',
-        onClick: () => goToUsers(info.row.original.companyId, info.row.original.departmentId)
-      }, t('textLabel.user', 2))
-    ]),
-  }),
-]
-
-const { table, globalFilter } = useDataTable(departments, columns)
-
-onMounted(async () => {
-  await getCompany('/v0/user/organization/company/detail/companyId/' + companyId + '/userId/' + auth.user?.id);
-  await get('/v0/user/organization/department/list/companyId/' + companyId + "/userId/" + auth.user?.id)
-});
-
-const goToEdit = (paramCompanyId: number, paramDepartmentId: number) => {
-
-  router.push({ name: 'departmentedit', params: { paramCompanyId, paramDepartmentId } });
-};
-
-const goToUsers = (companyId: number, departmentId: number) => {
-
-  router.push({ name: 'departmentusers', params: { companyIdParam: companyId, departmentIdParam: departmentId } });
-}
-
+onMounted(fetchData);
 </script>
 
 <template>

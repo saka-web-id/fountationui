@@ -1,97 +1,23 @@
 <script setup lang="ts">
-import { useI18n } from 'vue-i18n';
-import { useApi } from "~/composables/useApi";
-import { onMounted, ref, computed, h } from "vue";
-import { type UserCompanyPayLoad } from "~/features/user/hooks/forms/useUserForm.ts";
-import { useRoute, useRouter } from "vue-router";
-import { useAuthStore } from '~/stores/auth'
-import { createColumnHelper } from '@tanstack/vue-table'
-import { useDataTable } from '~/composables/useDataTable'
+import { onMounted } from "vue";
+import { useRoute } from "vue-router";
+import { useRoleTable } from '~/features/role/hooks/tables/useRoleTable';
 import BaseTable from '~/components/table/BaseTable.vue'
-import type { Role } from '../types'
 
-const auth = useAuthStore()
-const { data, get } = useApi<Role[]>();
-const { data: userCompanyData, get: getUserCompany } = useApi();
-const { t } = useI18n();
-const router = useRouter();
 const route = useRoute();
 const { companyIdParam } = route.params;
 
-// Selected company ID
-const selectedCompanyId = ref<number | null>(
-    companyIdParam != null && Number(companyIdParam) > 0
-        ? Number(companyIdParam)
-        : null
-);
+const {
+  table,
+  globalFilter,
+  userCompanyData,
+  selectedCompanyId,
+  onCompanyChange,
+  fetchData,
+  t
+} = useRoleTable(companyIdParam as string);
 
-const roles = computed(() => data.value || [])
-
-const columnHelper = createColumnHelper<Role>()
-
-const columns = [
-  columnHelper.accessor('roleId', {
-    header: () => h('span', { class: 'd-none d-md-inline' }, t('textLabel.number')),
-    cell: info => h('span', { class: 'd-none d-md-inline' }, info.getValue()),
-    meta: { className: 'd-none d-md-table-cell' }
-  }),
-  columnHelper.accessor('roleName', {
-    header: () => t('textLabel.name'),
-  }),
-  columnHelper.accessor('roleDescription', {
-    header: () => h('span', { class: 'd-none d-md-inline' }, t('textLabel.description')),
-    cell: info => h('span', { class: 'd-none d-md-inline' }, info.getValue()),
-    meta: { className: 'd-none d-md-table-cell' }
-  }),
-  columnHelper.accessor('roleCreatedAt', {
-    header: () => h('span', { class: 'd-none d-md-inline' }, t('textLabel.dateCreated')),
-    cell: info => h('span', { class: 'd-none d-md-inline' }, info.getValue()),
-    meta: { className: 'd-none d-md-table-cell' }
-  }),
-  columnHelper.display({
-    id: 'actions',
-    header: () => t('textLabel.action'),
-    cell: info => h('div', { class: 'btn-group', role: 'group' }, [
-      h('button', {
-        class: 'btn btn-primary',
-        onClick: () => router.push({ name: 'roleedit', params: { roleIdParam: info.row.original.roleId, companyIdParam: selectedCompanyId.value } })
-      }, t('button.view'))
-    ]),
-  }),
-]
-
-const { table, globalFilter } = useDataTable(roles, columns)
-
-onMounted(async () => {
-
-  await getUserCompany('/v0/user/organization/company/list/companyId/' + auth.user?.company.companyId + "/userId/" + auth.user?.id + "/valueCompanyId/0" );
-
-  console.log("List Company : ", userCompanyData.value);
-
-  const defaultCompany = userCompanyData.value.find((c: any) : UserCompanyPayLoad => c.companyIsDefault)
-  if (defaultCompany) { //Get is defaultCompany True
-    if(selectedCompanyId.value == null || selectedCompanyId.value == 0) {
-      selectedCompanyId.value = defaultCompany.companyId
-    }
-  }
-
-  await get('/v0/authorization/company/role/list/companyId/' + auth.user?.company.companyId + "/userId/" + auth.user?.id + "/valueCompanyId/" + selectedCompanyId.value );
-
-});
-
-async function onCompanyChange() {
-  if (selectedCompanyId.value) {
-    // Wait until the route navigation finishes
-    await router.push({
-      name: 'roles',
-      params: { companyIdParam: selectedCompanyId.value }
-    });
-
-    // Then trigger the API call and wait for it to complete
-    await get('/v0/authorization/company/role/list/companyId/' + auth.user?.company.companyId + "/userId/" + auth.user?.id + "/valueCompanyId/" + selectedCompanyId.value);
-  }
-}
-
+onMounted(fetchData);
 </script>
 
 <template>

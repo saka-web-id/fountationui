@@ -1,71 +1,22 @@
 <script setup lang="ts">
-import { onMounted, computed, h } from 'vue';
-import { useApi } from "~/composables/useApi";
+import { onMounted } from 'vue';
 import { useRouter } from "vue-router";
-import { useI18n } from 'vue-i18n';
-import { useAuthStore } from '~/stores/auth'
-import { useCompany } from '~/composables/useCompany'
-import { createColumnHelper } from '@tanstack/vue-table'
-import { useDataTable } from '~/composables/useDataTable'
+import { useBillingCycleTable } from '~/features/membership/billing/hooks/tables/useBillingCycleTable';
 import BaseTable from '~/components/table/BaseTable.vue'
-import type { BillingCycle } from '../types'
 
-const { t } = useI18n();
-const { data, get } = useApi<BillingCycle[]>();
-const auth = useAuthStore()
 const router = useRouter();
-const { selectedCompanyId, onCompanyChange, userCompanyData } = useCompany({
-  routeName: 'billingcycle',
-  apiPath: '/v0/account/membership/billing/cycle/list'
-})
 
-const billingCycles = computed(() => data.value || [])
+const {
+  table,
+  globalFilter,
+  selectedCompanyId,
+  userCompanyData,
+  handleCompanyChange,
+  fetchData,
+  t
+} = useBillingCycleTable();
 
-const columnHelper = createColumnHelper<BillingCycle>()
-
-const columns = [
-  columnHelper.accessor('billingCycleId', {
-    header: () => h('span', { class: 'd-none d-md-inline' }, t('textLabel.number')),
-    cell: info => h('span', { class: 'd-none d-md-inline' }, info.getValue()),
-    meta: { className: 'd-none d-md-table-cell' }
-  }),
-  columnHelper.accessor('billingCycleName', {
-    header: () => t('textLabel.name', 1),
-  }),
-  columnHelper.accessor('billingCycleDuration', {
-    header: () => t('textField.duration'),
-  }),
-  columnHelper.accessor('billingCyclecreatedAt', {
-    header: () => h('span', { class: 'd-none d-md-inline' }, t('textField.createdAt')),
-    cell: info => h('span', { class: 'd-none d-md-inline' }, info.getValue()),
-    meta: { className: 'd-none d-md-table-cell' }
-  }),
-  columnHelper.display({
-    id: 'actions',
-    header: () => t('textLabel.action'),
-    cell: _info => h('div', { class: 'btn-group', role: 'group' }, [
-      h('button', {
-        class: 'btn btn-primary',
-        onClick: () => goToEdit(selectedCompanyId.value as any)
-      }, t('button.edit'))
-    ]),
-  }),
-]
-
-const { table, globalFilter } = useDataTable(billingCycles, columns)
-
-onMounted(async () => {
-  await get('/v0/account/membership/billing/cycle/list/companyId/'+ selectedCompanyId.value + "/userId/" + auth.user?.id + "/valueCompanyId/" + selectedCompanyId.value)
-});
-
-const handleCompanyChange = async (event: Event) => {
-  const target = event.target as HTMLSelectElement
-  await onCompanyChange({ valueMembershipPlanId: target.value })
-}
-
-const goToEdit = (companyIdParam: number) => {
-  router.push({ name: 'billingcycleedit', params: { companyIdParam } });
-};
+onMounted(fetchData);
 
 </script>
 

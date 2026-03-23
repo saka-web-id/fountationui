@@ -1,76 +1,20 @@
 <script setup lang="ts">
-import { onMounted, computed, h } from 'vue';
-import { useApi } from "~/composables/useApi";
-import { useRouter, useRoute } from "vue-router";
-import { useI18n } from 'vue-i18n';
-import { useAuthStore } from '~/stores/auth'
-import { createColumnHelper } from '@tanstack/vue-table'
-import { useDataTable } from '~/composables/useDataTable'
+import { onMounted } from 'vue';
+import { useRoute } from "vue-router";
+import { useLogSettingTable } from '~/features/log/setting/hooks/tables/useLogSettingTable';
 import BaseTable from '~/components/table/BaseTable.vue'
-import type { LogSetting } from '../types'
 
-const auth = useAuthStore()
-const { t } = useI18n();
-const { data, get } = useApi<LogSetting[]>();
-const router = useRouter();
 const route = useRoute();
+const companyIdParam = route.params.companyIdParam;
 
-const settings = computed(() => data.value || [])
+const {
+  table,
+  globalFilter,
+  fetchData,
+  t
+} = useLogSettingTable(companyIdParam);
 
-const columnHelper = createColumnHelper<LogSetting>()
-
-const columns = [
-  columnHelper.accessor('logSettingEndpoint', {
-    header: () => t('textLabel.endpoint'),
-    cell: info => h('code', info.getValue()),
-  }),
-  columnHelper.accessor('logSettingMethod', {
-    header: () => t('textLabel.method'),
-    cell: info => h('span', { class: 'badge bg-secondary' }, info.getValue()),
-    meta: { className: 'd-none d-md-table-cell' }
-  }),
-  columnHelper.accessor('logSettingLogFormat', {
-    header: () => t('textLabel.logFormat'),
-  }),
-  columnHelper.accessor('logSettingEnabled', {
-    header: () => t('textLabel.enabled'),
-    cell: info => h('span', { class: info.getValue() ? 'text-success' : 'text-danger' }, 
-      info.getValue() ? t('textLabel.true') : t('textLabel.false')
-    ),
-    meta: { className: 'd-none d-md-table-cell' }
-  }),
-  columnHelper.display({
-    id: 'actions',
-    header: () => t('textLabel.action'),
-    cell: info => h('div', { class: 'btn-group', role: 'group' }, [
-      h('button', {
-        class: 'btn btn-primary btn-sm',
-        onClick: () => goToEdit(info.row.original.logSettingId)
-      }, [
-        h('i', { class: 'bi bi-pencil-square me-1' }),
-        t('button.edit')
-      ])
-    ]),
-  }),
-]
-
-const { table, globalFilter } = useDataTable(settings, columns)
-
-onMounted(async () => {
-  const companyIdParam = route.params.companyIdParam;
-  try {
-    if (auth.user && companyIdParam) {
-      await get(`/v0/logs/setting/list/companyId/${auth.user.company.companyId}/userId/${auth.user.id}/valueCompanyId/${companyIdParam}`);
-    }
-  } catch (error) {
-    console.error("Fetch failed:", error);
-  }
-});
-
-const goToEdit = (logSettingIdParam: number) => {
-  router.push({ name: 'logsettingedit', params: { companyIdParam: route.params.companyIdParam, logSettingIdParam } });
-};
-
+onMounted(fetchData);
 </script>
 
 <template>
