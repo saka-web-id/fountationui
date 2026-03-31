@@ -2,9 +2,9 @@ import { computed, h } from 'vue'
 import { createColumnHelper } from '@tanstack/vue-table'
 import { useI18n } from 'vue-i18n'
 import { useRouter } from 'vue-router'
-import { useApi } from "~/composables/useApi"
-import { useDataTable } from '~/composables/useDataTable'
-import { useAuthStore } from '~/stores/auth'
+import { useApi } from "~/composables/useApi.ts"
+import { useDataTable } from '~/composables/useDataTable.ts'
+import { useAuthStore } from '~/stores/auth.ts'
 
 export interface Company {
     companyId: number;
@@ -12,7 +12,7 @@ export interface Company {
     companyEmail: string;
 }
 
-export function useCompanyTable() {
+export function useSmsCompanyTable() {
     const { t } = useI18n()
     const router = useRouter()
     const auth = useAuthStore()
@@ -25,12 +25,8 @@ export function useCompanyTable() {
 
     // Helper functions for navigation
     const goToEdit = (companyIdParam: number) => {
-        router.push({ name: 'companyedit', params: { companyIdParam } });
+        router.push({ name: 'notificationlistsms', params: { companyIdParam } });
     };
-
-    const goToDepartment = (companyId: number) => {
-        router.push({ name: 'companydepartment', params: { companyId } });
-    }
 
     // Column Definitions
     const columns = [
@@ -55,11 +51,7 @@ export function useCompanyTable() {
                 h('button', {
                     class: 'btn btn-primary',
                     onClick: () => goToEdit(info.row.original.companyId)
-                }, t('button.edit')),
-                h('button', {
-                    class: 'btn btn-info',
-                    onClick: () => goToDepartment(info.row.original.companyId)
-                }, t('textLabel.department'))
+                }, t('button.view'))
             ]),
         }),
     ]

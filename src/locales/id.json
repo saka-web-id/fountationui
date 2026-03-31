@@ -127,6 +127,8 @@
     "user": "Pengguna",
     "email": "Surel",
     "emailSetting": "Pengaturan Surel",
+    "smsSetting": "Pengaturan SMS",
+    "whatappsSetting": "Pengaturan Whatapps",
     "oauthSetting": "Pengaturan Oauth",
     "logSetting": "Pengaturan Log",
     "number": "No",
@@ -196,9 +198,11 @@
     "show": "Tampil",
     "superAdmin": "Super Admin",
     "admin": "Admin",
-    "manager": "Manajer",
     "userRole": "Pengguna",
-    "guest": "Tamu"
+    "guest": "Tamu",
+    "priority": "Prioritas",
+    "notification": "Notifikasi",
+    "service": "Layanan | Daftar Layanan"
   },
   "textField": {
     "email": "Surel",

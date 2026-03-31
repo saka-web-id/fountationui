@@ -127,6 +127,8 @@
     "user": "User | Users",
     "email": "Email",
     "emailSetting": "Email Setting",
+    "smsSetting": "SMS Setting",
+    "whatappsSetting": "Whatapps Setting",
     "oauthSetting": "Oauth Settings",
     "logSetting": "Log Settings",
     "number": "No",
@@ -196,9 +198,11 @@
     "show": "Show",
     "superAdmin": "Super Admin",
     "admin": "Admin",
-    "manager": "Manager",
     "userRole": "User",
-    "guest": "Guest"
+    "guest": "Guest",
+    "priority": "Priority",
+    "notification": "Notification",
+    "service": "Service | Services"
   },
   "textField": {
     "email": "Email",

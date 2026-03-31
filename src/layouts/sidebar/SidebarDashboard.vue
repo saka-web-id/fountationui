@@ -4,6 +4,8 @@ import SvgButtonCloseSideBar from "../../components/button/svg/SvgButtonCloseSid
 import { useI18n } from 'vue-i18n';
 
 const { t } = useI18n();
+
+const isPremium = import.meta.env.VITE_APP_PLAN === 'PREMIUM';
 </script>
 
 <template>
@@ -25,14 +27,14 @@ const { t } = useI18n();
         {{ t('textLabel.dashboard') }}
       </router-link>
     </li>
-    <li class="nav-item dropdown show" id="idorganization">
+    <li class="nav-item dropdown " id="idorganization">
       <a class="dropdown-toggle nav-link" aria-expanded="true" data-bs-toggle="dropdown" href="#">
         <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-people-fill me-1 mb-1 pb-0" style="color: var(--bs-primary);">
           <path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6m-5.784 6A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1zM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5"></path>
         </svg>
         {{ t('textLabel.organization') }}
       </a>
-      <div class="dropdown-menu show" data-bs-popper="none">
+      <div class="dropdown-menu " data-bs-popper="none">
         <router-link to="/company" class="dropdown-item" id="idemail">
           <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-building me-1 mb-1">
             <path d="M4 2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm3.5-.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zM4 5.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zM7.5 5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zm2.5.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zM4.5 8a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zm2.5.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm3.5-.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5z"></path>
@@ -55,73 +57,117 @@ const { t } = useI18n();
         </router-link>
       </div>
     </li>
-    <li class="nav-item dropdown show" id="idlogs">
+    <li class="nav-item dropdown " id="idlogs">
       <a class="dropdown-toggle nav-link" aria-expanded="true" data-bs-toggle="dropdown" href="#">
         <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-people-fill me-1 mb-1 pb-0" style="color: var(--bs-primary);">
           <path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6m-5.784 6A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1zM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5"></path>
         </svg>
         {{ t('textLabel.logs') }}
       </a>
-      <div class="dropdown-menu show" data-bs-popper="none">
-        <router-link to="/gatewaylogs" class="dropdown-item" id="idgatewaylogs">
-          <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-list-columns-reverse me-1 mb-1">
-            <path fill-rule="evenodd" d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v1h14V2a1 1 0 0 0-1-1zm14 3H0v1h14zM0 6h14v1H0zm0 2h14v1H0zm0 2h14v1H0zm0 2h14v1H0z"/>
-          </svg>
-          {{ t('textLabel.gatewayLogs') }}
-        </router-link>
-        <router-link to="/apilogs" class="dropdown-item" id="idapilogs">
-          <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-journal-text me-1 mb-1">
-            <path d="M5 1a.5.5 0 0 1 .5.5V2h5v-.5a.5.5 0 0 1 1 0V2h.5a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-11a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h.5v-.5a.5.5 0 0 1 .5-.5zM3 4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1V5a1 1 0 0 0-1-1H3z"/>
-            <path d="M4 7h8v1H4V7zm0 2h8v1H4V9zm0 2h4v1H4v-1z"/>
-          </svg>
-          {{ t('textLabel.apiLogs') }}
-        </router-link>
+      <div class="dropdown-menu " data-bs-popper="none">
+        <template v-if="isPremium">
+          <router-link to="/gatewaylogs" class="dropdown-item" id="idgatewaylogs">
+            <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-list-columns-reverse me-1 mb-1">
+              <path fill-rule="evenodd" d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v1h14V2a1 1 0 0 0-1-1zm14 3H0v1h14zM0 6h14v1H0zm0 2h14v1H0zm0 2h14v1H0zm0 2h14v1H0z"/>
+            </svg>
+            {{ t('textLabel.gatewayLogs') }}
+          </router-link>
+        </template>
+        <template v-else>
+              <span class="dropdown-item text-muted disabled" style="cursor: not-allowed;">
+                <i class="bi bi-lock-fill me-1"></i> {{ t('textLabel.gatewayLogs') }} (Premium)
+              </span>
+        </template>
+
+        <template v-if="isPremium">
+          <router-link to="/apilogs" class="dropdown-item" id="idapilogs">
+            <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-journal-text me-1 mb-1">
+              <path d="M5 1a.5.5 0 0 1 .5.5V2h5v-.5a.5.5 0 0 1 1 0V2h.5a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-11a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h.5v-.5a.5.5 0 0 1 .5-.5zM3 4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1V5a1 1 0 0 0-1-1H3z"/>
+              <path d="M4 7h8v1H4V7zm0 2h8v1H4V9zm0 2h4v1H4v-1z"/>
+            </svg>
+            {{ t('textLabel.apiLogs') }}
+          </router-link>
+        </template>
+        <template v-else>
+            <span class="dropdown-item text-muted disabled" style="cursor: not-allowed;">
+              <i class="bi bi-lock-fill me-1"></i> {{ t('textLabel.apiLogs') }} (Premium)
+            </span>
+        </template>
       </div>
     </li>
 
-    <li class="nav-item dropdown show" id="idsetting">
-      <a class="dropdown-toggle nav-link" aria-expanded="true" data-bs-toggle="dropdown" href="#">
+    <li class="nav-item dropdown" id="idsetting">
+      <a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#" role="button">
         <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-gear-fill me-1 mb-1" style="color: var(--bs-primary);">
           <path d="M9.405 1.05c-.413-1.4-2.397-1.4-2.81 0l-.1.34a1.464 1.464 0 0 1-2.105.872l-.31-.17c-1.283-.698-2.686.705-1.987 1.987l.169.311c.446.82.023 1.841-.872 2.105l-.34.1c-1.4.413-1.4 2.397 0 2.81l.34.1a1.464 1.464 0 0 1 .872 2.105l-.17.31c-.698 1.283.705 2.686 1.987 1.987l.311-.169a1.464 1.464 0 0 1 2.105.872l.1.34c.413 1.4 2.397 1.4 2.81 0l.1-.34a1.464 1.464 0 0 1 2.105-.872l.31.17c1.283.698 2.686-.705 1.987-1.987l-.169-.311a1.464 1.464 0 0 1 .872-2.105l.34-.1c1.4-.413 1.4-2.397 0-2.81l-.34-.1a1.464 1.464 0 0 1-.872-2.105l.17-.31c.698-1.283-.705-2.686-1.987-1.987l-.311.169a1.464 1.464 0 0 1-2.105-.872l-.1-.34zM8 10.93a2.929 2.929 0 1 1 0-5.86 2.929 2.929 0 0 1 0 5.858z"></path>
         </svg>
         {{ t('textLabel.setting', 2) }}
       </a>
-      <div class="dropdown-menu show" data-bs-popper="none">
-        <router-link to="/email" class="dropdown-item" id="idemail">
-          <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-envelope-at me-1 mb-1">
-            <path d="M2 2a2 2 0 0 0-2 2v8.01A2 2 0 0 0 2 14h5.5a.5.5 0 0 0 0-1H2a1 1 0 0 1-.966-.741l5.64-3.471L8 9.583l7-4.2V8.5a.5.5 0 0 0 1 0V4a2 2 0 0 0-2-2zm3.708 6.208L1 11.105V5.383zM1 4.217V4a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v.217l-7 4.2z"></path>
-            <path d="M14.247 14.269c1.01 0 1.587-.857 1.587-2.025v-.21C15.834 10.43 14.64 9 12.52 9h-.035C10.42 9 9 10.36 9 12.432v.214C9 14.82 10.438 16 12.358 16h.044c.594 0 1.018-.074 1.237-.175v-.73c-.245.11-.673.18-1.18.18h-.044c-1.334 0-2.571-.788-2.571-2.655v-.157c0-1.657 1.058-2.724 2.64-2.724h.04c1.535 0 2.484 1.05 2.484 2.326v.118c0 .975-.324 1.39-.639 1.39-.232 0-.41-.148-.41-.42v-2.19h-.906v.569h-.03c-.084-.298-.368-.63-.954-.63-.778 0-1.259.555-1.259 1.4v.528c0 .892.49 1.434 1.26 1.434.471 0 .896-.227 1.014-.643h.043c.118.42.617.648 1.12.648Zm-2.453-1.588v-.227c0-.546.227-.791.573-.791.297 0 .572.192.572.708v.367c0 .573-.253.744-.564.744-.354 0-.581-.215-.581-.8Z"></path>
-          </svg>
-          {{ t('textLabel.emailSetting') }}
-        </router-link>
-        <router-link to="/logsetting" class="dropdown-item" id="idlogsetting">
-          <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-shield-lock me-1 mb-1">
-            <path d="M5.338 1.59a61.44 61.44 0 0 0-2.837.856.481.481 0 0 0-.328.39c-.554 4.157.726 7.19 2.253 9.188a10.725 10.725 0 0 0 2.287 2.233c.346.244.652.42.893.533.12.057.218.095.293.118a.55.55 0 0 0 .101.025.615.615 0 0 0 .1-.025c.076-.023.174-.061.294-.118.24-.113.547-.29.893-.533a10.726 10.726 0 0 0 2.287-2.233c1.527-1.997 2.807-5.031 2.253-9.188a.48.48 0 0 0-.328-.39c-.651-.213-1.75-.56-2.837-.855C9.552 1.29 8.531 1.067 8 1.067c-.53 0-1.552.223-2.662.524zM5.072.56C6.157.265 7.31 0 8 0s1.843.265 2.928.56c1.11.3 2.229.655 2.887.87a1.54 1.54 0 0 1 1.044 1.262c.596 4.477-.787 7.795-2.465 9.99a11.775 11.775 0 0 1-2.517 2.453 7.159 7.159 0 0 1-1.048.625c-.28.132-.581.24-.829.24s-.548-.108-.829-.24a7.158 7.158 0 0 1-1.048-.625 11.777 11.777 0 0 1-2.517-2.453C1.928 10.487.545 7.169 1.141 2.692A1.54 1.54 0 0 1 2.185 1.43 62.456 62.456 0 0 1 5.072.56"></path>
-            <path d="M9.5 6.5a1.5 1.5 0 0 1-1 1.415l.385 1.99a.5.5 0 0 1-.491.595h-.788a.5.5 0 0 1-.49-.595l.384-1.99a1.5 1.5 0 1 1 2-1.415z"></path>
-          </svg>
-          {{ t('textLabel.logSetting') }}
-        </router-link>
-        <router-link to="/permissionsetting" class="dropdown-item" id="idpermissionsetting">
-          <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-key me-1 mb-1">
-            <path d="M0 8a4 4 0 0 1 7.465-2H14a.5.5 0 0 1 .354.146l1.5 1.5a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0L13 9.207l-.646.647a.5.5 0 0 1-.708 0L11 9.207l-.646.647a.5.5 0 0 1-.708 0L9 9.207l-.646.647A.5.5 0 0 1 8 10h-.535A4 4 0 0 1 0 8m4-3a3 3 0 1 0 2.712 4.285A.5.5 0 0 1 7.163 9h.63l.853-.854a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 0 1 .708 0l.646.647.793-.793-1-1h-6.63a.5.5 0 0 1-.451-.285A3 3 0 0 0 4 5"></path>
-            <path d="M4 8a1 1 0 1 1-2 0 1 1 0 0 1 2 0"></path>
-          </svg>
-          {{ t('textLabel.permissionSetting') }}
-        </router-link>
-        <!--
-        <router-link to="/oauth" class="dropdown-item" id="idoauth">
-          <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-shield-lock me-1 mb-1">
-            <path d="M5.338 1.59a61.44 61.44 0 0 0-2.837.856.481.481 0 0 0-.328.39c-.554 4.157.726 7.19 2.253 9.188a10.725 10.725 0 0 0 2.287 2.233c.346.244.652.42.893.533.12.057.218.095.293.118a.55.55 0 0 0 .101.025.615.615 0 0 0 .1-.025c.076-.023.174-.061.294-.118.24-.113.547-.29.893-.533a10.726 10.726 0 0 0 2.287-2.233c1.527-1.997 2.807-5.031 2.253-9.188a.48.48 0 0 0-.328-.39c-.651-.213-1.75-.56-2.837-.855C9.552 1.29 8.531 1.067 8 1.067c-.53 0-1.552.223-2.662.524zM5.072.56C6.157.265 7.31 0 8 0s1.843.265 2.928.56c1.11.3 2.229.655 2.887.87a1.54 1.54 0 0 1 1.044 1.262c.596 4.477-.787 7.795-2.465 9.99a11.775 11.775 0 0 1-2.517 2.453 7.159 7.159 0 0 1-1.048.625c-.28.132-.581.24-.829.24s-.548-.108-.829-.24a7.158 7.158 0 0 1-1.048-.625 11.777 11.777 0 0 1-2.517-2.453C1.928 10.487.545 7.169 1.141 2.692A1.54 1.54 0 0 1 2.185 1.43 62.456 62.456 0 0 1 5.072.56"></path>
-            <path d="M9.5 6.5a1.5 1.5 0 0 1-1 1.415l.385 1.99a.5.5 0 0 1-.491.595h-.788a.5.5 0 0 1-.49-.595l.384-1.99a1.5 1.5 0 1 1 2-1.415z"></path>
-          </svg>
-          {{ t('textLabel.oauthSetting') }}
-        </router-link>
-        -->
-      </div>
+
+      <ul class="dropdown-menu">
+
+        <li class="dropdown-submenu">
+          <a class="dropdown-item dropdown-toggle" href="javascript:void(0)">
+            <i class="bi bi-bell me-1"></i> {{ t('textLabel.notification') }}
+          </a>
+          <ul class="dropdown-menu">
+            <li>
+              <router-link to="/notification/email" class="dropdown-item">
+                <i class="bi bi-envelope-at me-1"></i> {{ t('textLabel.emailSetting') }}
+              </router-link>
+            </li>
+            <li>
+              <router-link to="/notification/sms" class="dropdown-item">
+                <i class="bi bi-chat-left-text me-1"></i> {{ t('textLabel.smsSetting') }}
+              </router-link>
+            </li>
+            <li>
+              <router-link to="/notification/whatapps" class="dropdown-item">
+                <i class="bi bi-whatsapp me-1"></i> {{ t('textLabel.whatappsSetting') }}
+              </router-link>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <template v-if="isPremium">
+            <router-link to="/logsetting" class="dropdown-item">
+              <i class="bi bi-shield-lock me-1"></i> {{ t('textLabel.logSetting') }}
+            </router-link>
+          </template>
+          <template v-else>
+        <span class="dropdown-item text-muted disabled" style="cursor: not-allowed;">
+          <i class="bi bi-lock-fill me-1"></i> {{ t('textLabel.logSetting') }} (Premium)
+        </span>
+          </template>
+        </li>
+
+        <li>
+          <router-link to="/permissionsetting" class="dropdown-item">
+            <i class="bi bi-key me-1"></i> {{ t('textLabel.permissionSetting') }}
+          </router-link>
+        </li>
+      </ul>
     </li>
   </ul>
 </template>
 
 <style scoped>
+.dropdown-submenu {
+  position: relative;
+}
 
+.dropdown-submenu .dropdown-menu {
+  top: 0;
+  left: 95%; /* Mulai sedikit lebih ke kiri agar transisi hover tidak mudah putus */
+  margin-top: -5px;
+  display: none;
+  z-index: 1000; /* Pastikan di atas elemen lain */
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Tambahkan bayangan agar terlihat terpisah */
+}
+
+.dropdown-submenu:hover > .dropdown-menu {
+  display: block;
+  left: 100%; /* Geser ke posisi penuh saat hover */
+  transition: all 0.2s ease;
+}
 </style>

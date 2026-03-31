@@ -11,14 +11,14 @@ export default {
 
     sidebar.removeClass('mobile-hid');
 
-    win.resize(function() {
-
-      if (w===win.width()) {
+    win.resize(() => {
+      if (w === win.width()) {
         return;
       }
 
       w = win.width();
 
+      // Sekarang 'this' di sini merujuk ke komponen Vue Anda
       if (w < 992 && !sidebar.hasClass('collapsed')) {
         this.toggleCloseSidebar();
       } else if (w > 992 && sidebar.hasClass('collapsed')) {

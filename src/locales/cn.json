@@ -127,6 +127,8 @@
     "user": "用户 | 用户列表",
     "email": "邮箱",
     "emailSetting": "邮箱设置",
+    "smsSetting": "SMS 设置",
+    "whatappsSetting": "Whatapps 设置",
     "oauthSetting": "OAuth 设置",
     "logSetting": "Log Settings",
     "number": "编号",
@@ -196,9 +198,11 @@
     "show": "显示",
     "superAdmin": "超级管理员",
     "admin": "管理员",
-    "manager": "经理",
     "userRole": "用户",
-    "guest": "访客"
+    "guest": "访客",
+    "priority": "Priority",
+    "notification": "Notification",
+    "service": "Service | Services"
   },
   "textField": {
     "email": "邮箱",

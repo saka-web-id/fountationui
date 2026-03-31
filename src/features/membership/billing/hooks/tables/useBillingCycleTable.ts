@@ -1,4 +1,4 @@
-import { computed, h, onMounted } from 'vue'
+import { computed, h } from 'vue'
 import { createColumnHelper } from '@tanstack/vue-table'
 import { useI18n } from 'vue-i18n'
 import { useRouter } from 'vue-router'
