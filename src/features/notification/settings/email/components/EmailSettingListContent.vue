@@ -4,6 +4,7 @@ import { onMounted } from 'vue';
 import { useEmailSettingTable } from '~/features/notification/settings/email/hooks/tables/useEmailSettingTable';
 import BaseTable from '~/components/table/BaseTable.vue'
 import {useRoute} from "vue-router";
+import router from "~/router";
 
 const route = useRoute();
 const companyIdParam = route.params.companyIdParam;
@@ -26,7 +27,7 @@ onMounted(fetchData);
         <li class="breadcrumb-item"><router-link to="/dashboard"><span>{{ t('textLabel.dashboard') }}</span></router-link></li>
         <li class="breadcrumb-item"><span>{{ t('textLabel.setting') }}</span></li>
         <li class="breadcrumb-item"><router-link to="/notification/email"><span class="active">{{ t('textLabel.emailSetting') }}</span></router-link></li>
-        <li class="breadcrumb-item active"><span class="active">{{ t('textLabel.service', 2) }}</span></li>
+        <li class="breadcrumb-item active"><span class="active">{{ t('textLabel.provider', 2) }}</span></li>
       </ol>
       <div class="card mb-3 bg-gradient-dark">
         <div class="card-body ms-0 ps-0 me-0 pe-0 mt-0 pt-0 pb-0">
@@ -41,6 +42,7 @@ onMounted(fetchData);
                   class="form-control"
                   :placeholder="t('button.search') + '...'"
               />
+              <button @click="router.push({ name: 'notificationdetailaddemail' })" class="btn btn-outline-primary text-nowrap" type="button">{{ t('button.add') }}</button>
             </div>
           </div>
           <div class="ms-2 me-2 mt-2 mb-2">

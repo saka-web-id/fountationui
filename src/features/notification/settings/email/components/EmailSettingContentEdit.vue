@@ -1,86 +1,172 @@
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n';
 import { useApi } from "~/composables/useApi";
-import { computed, onMounted, ref, h } from "vue";
+import { computed, onMounted, ref } from "vue";
 import { useRoute } from 'vue-router';
 import { ErrorMessage, Field, Form } from "vee-validate";
-import { useProviderSchema } from '../hooks/schemas/provider.schema';
+import { useProviderConfigSchema } from '../hooks/schemas/providerConfig.schema';
 import {
   useProviderPayload,
-  type ProviderPayload,
-  mapProviderFormFromApi
+  mapProviderFormFromApi, type NotificationProviderConfigPayload
 } from "../hooks/forms/useEmailSettingForm";
-/*import { useAuthStore } from '~/stores/auth'*/
-import { createColumnHelper } from '@tanstack/vue-table'
-import { useDataTable } from '~/composables/useDataTable'
+import { useEmailSettingContentEditTable } from '../hooks/tables/useEmailSettingContentEditTable';
 import BaseTable from '~/components/table/BaseTable.vue'
+import { Offcanvas } from "bootstrap";
+import { useAuthStore } from "~/stores/auth.ts";
+import dayjs from "dayjs";
 
-/*const auth = useAuthStore()*/
 const { t } = useI18n();
 const route = useRoute();
+const auth = useAuthStore();
+const { providerIdParam, companyIdParam } = route.params;
+const isEdit = computed(() => !!providerIdParam);
+const { data, loading, get, post, put } = useApi();
 
-// Ambil payload helpers
+// Form Manager from useProviderPayload
 const {
   setValues: setValuesProvider,
   handleSubmit,
-  /*values // Berisi semua field termasuk providerConfigs*/
+  values,
+  meta,
+  errors: formErrors,
+  addConfig,
+  updateConfig,
+  removeConfig,
+  providerName,
+  providerSlug,
+  providerPriority,
+  providerIsActive,
+  providerType
 } = useProviderPayload();
 
-const { providerIdParam } = route.params;
-const isEdit = computed(() => !!providerIdParam);
+const notificationProviderConfigSelected = ref<Partial<NotificationProviderConfigPayload> | null>(null)
+const isEditConfig = ref(false)
+const selectedIndex = ref<number | null>(null)
 
-const { data, loading, get, post } = useApi();
-/*const { data: configData, get: getConfigList } = useApi();*/
+// 2. Gunakan computed agar tabel selalu sinkron dengan state form VeeValidate
+const configsData = computed(() => values.providerConfigs || []);
 
-// Data untuk tabel config (Child)
-const configsForm = ref<any[]>([]);
-
-const columnHelper = createColumnHelper<any>()
-
-const columns = [
-  columnHelper.accessor('providerConfigKey', {
-    header: () => t('textLabel.key'),
-    cell: info => h('span', info.getValue()),
-  }),
-  columnHelper.accessor('providerConfigValue', {
-    header: () => t('textLabel.value'),
-    cell: info => h(Field, {
-      name: `providerConfigs[${info.row.index}].providerConfigValue`,
-      as: 'input',
-      class: 'form-control form-control-sm',
-      modelValue: info.row.original.providerConfigValue
-    }),
-  }),
-  columnHelper.accessor('providerConfigIsSecret', {
-    header: () => t('textLabel.secret'),
-    cell: info => h('input', {
-      type: 'checkbox',
-      checked: info.getValue(),
-      disabled: true // Biasanya secret ditentukan di level schema/backend
-    }),
-  })
-]
-
-const { table, globalFilter } = useDataTable(configsForm, columns)
+// TanStack Table Refactoring
+const { table, globalFilter } = useEmailSettingContentEditTable(
+  configsData,
+  (item, index) => prepareEditConfig(item, index),
+  (index) => removeConfig(index)
+);
 
 onMounted(async () => {
-  // 1. Ambil data provider jika mode EDIT
   if (isEdit.value) {
-    await get(`/v0/notification/provider/detail/${providerIdParam}`);
+    await get(`/v0/notification/provider/config/detail/companyId/${auth.user?.company.companyId}/userId/${auth.user?.id}/providerId/${providerIdParam}`);
     if (data.value) {
       const mappedData = mapProviderFormFromApi(data.value);
       setValuesProvider(mappedData);
-      configsForm.value = mappedData.providerConfigs || [];
     }
   }
 });
 
-const submitForm = handleSubmit(async (values: ProviderPayload) => {
-  const url = isEdit.value
-      ? `/v0/notification/provider/update/${providerIdParam}`
-      : `/v0/notification/provider/add`;
+// FUNGSI UNTUK MODAL/OFFCANVAS
+const prepareAddNewConfig = () => {
+  selectedIndex.value = null;
+  isEditConfig.value = false;
+  notificationProviderConfigSelected.value = {
+    providerConfigKey: '',
+    providerConfigValue: '',
+    providerConfigSecret: false,
+  };
+};
 
-  await post(url, values);
+const prepareEditConfig = (item: any, index: number) => {
+  selectedIndex.value = index;
+  isEditConfig.value = true;
+  // Deep copy to avoid direct mutation
+  notificationProviderConfigSelected.value = JSON.parse(JSON.stringify(item));
+
+  const element = document.getElementById('notificationProviderConfigDetailOffcanvas');
+  if (element) {
+    const instance = Offcanvas.getOrCreateInstance(element);
+    instance.show();
+  }
+};
+
+const onSubmitOffCanvas = (configValues: any) => {
+  if (isEditConfig.value && selectedIndex.value !== null) {
+    updateConfig(selectedIndex.value, {
+      ...configValues,
+      providerConfigUpdateAt: new Date().toISOString()
+    });
+  } else {
+    addConfig({
+      ...configValues,
+      providerConfigId: Date.now(), // ID sementara
+      providerId: Number(providerIdParam) || 0,
+      providerConfigUpdateAt: new Date().toISOString()
+    });
+  }
+  closeOffcanvas();
+};
+
+const closeOffcanvas = () => {
+  const element = document.getElementById('notificationProviderConfigDetailOffcanvas');
+  if (element) {
+    const instance = Offcanvas.getInstance(element);
+    instance?.hide();
+  }
+};
+
+// Fungsi murni logika pengiriman data
+const executeSubmit = async (finalValues: any) => {
+  const companyId = auth.user?.company.companyId;
+  const userId = auth.user?.id;
+
+  // Pastikan tanggal valid, jika tidak ada (Add mode), gunakan waktu sekarang
+  const createdAtRaw = finalValues.providerCreatedAt || new Date().toISOString();
+  const formattedCreatedAt = dayjs(createdAtRaw).format('YYYY-MM-DD HH:mm:ssZ');
+
+  // Susun payload sesuai struktur ProviderConfigRequestDTO
+  const payload = {
+    providerId: Number(providerIdParam) || 0,
+    providerCompanyId: Number(companyId) || 0,
+    providerName: finalValues.providerName,
+    providerType: finalValues.providerType,
+    providerSlug: finalValues.providerSlug,
+    providerIsActive: !!finalValues.providerIsActive,
+    providerPriority: Number(finalValues.providerPriority) || 100,
+    providerCreatedAt: formattedCreatedAt,
+
+    // Kirim SEMUA array config
+    providerConfigs: (finalValues.providerConfigs || []).map((cfg: any) => ({
+      ...cfg,
+      providerId: Number(providerIdParam) || 0,
+      // Pastikan ID sementara (Date.now()) dikonversi ke Number agar jadi Long
+      providerConfigId: 0
+    }))
+  };
+
+  // Tentukan URL
+  const url = isEdit.value
+      ? `/v0/notification/provider/config/update/companyId/${companyId}/userId/${userId}/providerId/${providerIdParam}`
+      : `/v0/notification/provider/config/add/companyId/${companyId}/userId/${userId}`;
+
+  try {
+    console.log("Submitting payload to backend:", payload);
+
+    if (isEdit.value) {
+      await put(url, payload);
+    } else {
+      await post(url, payload);
+    }
+
+    // Opsional: Tambahkan notifikasi sukses atau redirect
+    // router.push({ name: 'notificationlistemail' })
+
+  } catch (error: any) {
+    // Sangat penting untuk melihat detail error dari Axios jika 400 terjadi lagi
+    console.error("Failed to submit form:", error.response?.data || error.message);
+  }
+};
+
+const submitForm = handleSubmit((values) => {
+  console.log("Handle Submit Running", values);
+  return executeSubmit(values);
 });
 </script>
 
@@ -88,9 +174,11 @@ const submitForm = handleSubmit(async (values: ProviderPayload) => {
   <section class="pt-2 pb-2">
     <div class="container">
       <ol class="breadcrumb ms-4">
-        <li class="breadcrumb-item"><router-link to="/dashboard">{{ t('textLabel.dashboard') }}</router-link></li>
+        <li class="breadcrumb-item"><router-link to="/dashboard"><span>{{ t('textLabel.dashboard') }}</span></router-link></li>
+        <li class="breadcrumb-item"><span>{{ t('textLabel.setting') }}</span></li>
+        <li class="breadcrumb-item"><router-link to="/notification/email"><span class="active">{{ t('textLabel.emailSetting') }}</span></router-link></li>
         <li class="breadcrumb-item">
-          <router-link :to="{ name: 'notification-providers' }">
+          <router-link :to="{ name: 'notificationlistemail', params: { companyIdParam: companyIdParam } }">
             {{ t('textLabel.provider', 2) }}
           </router-link>
         </li>
@@ -99,26 +187,61 @@ const submitForm = handleSubmit(async (values: ProviderPayload) => {
 
       <div class="card mb-3 bg-gradient-dark">
         <div class="card-body p-4">
-          <Form :validation-schema="useProviderSchema" v-slot="{ meta }">
+          <div id="idform">
             <h4 class="mb-4">{{ isEdit ? 'Edit Provider' : 'Add New Provider' }}</h4>
 
             <div class="row mb-3">
               <div class="col-md-6">
                 <div class="input-group mb-2">
                   <span class="input-group-text w-25">Name</span>
-                  <Field name="providerName" as="input" class="form-control" />
+                  <input v-model="providerName" class="form-control" />
                 </div>
-                <ErrorMessage name="providerName" class="text-danger small" />
+                <div v-if="formErrors.providerName" class="text-danger small">{{ formErrors.providerName }}</div>
+              </div>
+
+              <div class="col-md-6">
+                <div class="input-group mb-2">
+                  <span class="input-group-text w-25">Slug</span>
+                  <input v-model="providerSlug" class="form-control" />
+                </div>
+                <div v-if="formErrors.providerSlug" class="text-danger small">{{ formErrors.providerSlug }}</div>
+              </div>
+
+              <div class="col-md-6">
+                <div class="input-group mb-2">
+                  <span class="input-group-text w-25">Priority</span>
+                  <input
+                      v-model="providerPriority"
+                      type="number"
+                      class="form-control"
+                      placeholder="0"
+                      min="1"
+                  />
+                </div>
+                <div v-if="formErrors.providerPriority" class="text-danger small">{{ formErrors.providerPriority }}</div>
+              </div>
+
+              <div class="col-md-6">
+                <div class="form-check form-switch mt-2">
+                  <input
+                      v-model="providerIsActive"
+                      type="checkbox"
+                      class="form-check-input"
+                      id="isActive"
+                  />
+                  <label class="form-check-label ms-2" for="isActive">Is Active</label>
+                </div>
+                <div v-if="formErrors.providerIsActive" class="text-danger small">{{ formErrors.providerIsActive }}</div>
               </div>
 
               <div class="col-md-6">
                 <div class="input-group mb-2">
                   <span class="input-group-text w-25">Type</span>
-                  <Field name="providerType" as="select" class="form-select">
+                  <select v-model="providerType" class="form-select">
                     <option value="EMAIL">Email</option>
                     <option value="WHATSAPP">WhatsApp</option>
                     <option value="SMS">SMS</option>
-                  </Field>
+                  </select>
                 </div>
               </div>
             </div>
@@ -127,23 +250,77 @@ const submitForm = handleSubmit(async (values: ProviderPayload) => {
               <div class="d-flex justify-content-between align-items-center mb-2">
                 <h5>Configurations</h5>
                 <input v-model="globalFilter" type="text" class="form-control w-25" :placeholder="t('button.search')" />
+
+                <button
+                    type="button"
+                    class="btn btn-success btn-sm d-flex align-items-center"
+                    @click="prepareAddNewConfig"
+                    data-bs-toggle="offcanvas"
+                    data-bs-target="#notificationProviderConfigDetailOffcanvas"
+                >
+                  <i class="bi bi-plus-lg me-1"></i> Add Config
+                </button>
               </div>
               <BaseTable :table="table" />
             </div>
 
             <div class="mt-4">
-              <button
-                  :disabled="!meta.valid || loading"
-                  class="btn btn-primary me-2"
-                  @click="submitForm"
-                  type="button"
-              >
+              <button :disabled="!meta.valid || loading"  class="btn btn-outline-primary ms-2 me-2" @click="submitForm" type="button">
                 {{ loading ? t('button.saving') : t('button.save') }}
               </button>
             </div>
-          </Form>
+          </div>
         </div>
       </div>
     </div>
+
+    <!-- Detail Offcanvas -->
+    <div class="offcanvas offcanvas-end w-50" tabindex="-1" id="notificationProviderConfigDetailOffcanvas">
+      <div class="offcanvas-header bg-light border-bottom">
+        <h5 class="offcanvas-title">{{ isEditConfig ? 'Edit Config' : 'Add New Config' }}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+      </div>
+
+      <div class="offcanvas-body">
+        <!-- Force re-render with key to refresh initial-values -->
+        <Form
+            :key="notificationProviderConfigSelected ? 'edit-' + selectedIndex : 'new'"
+            @submit="onSubmitOffCanvas"
+            :validation-schema="useProviderConfigSchema"
+            :initial-values="notificationProviderConfigSelected ?? undefined"
+        >
+          <div class="mb-3">
+            <label class="form-label fw-bold">Provider Key</label>
+            <Field name="providerConfigKey" class="form-control" />
+            <ErrorMessage name="providerConfigKey" class="text-danger small" />
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label fw-bold">Value</label>
+            <Field name="providerConfigValue" class="form-control" />
+            <ErrorMessage name="providerConfigValue" class="text-danger small" />
+          </div>
+
+          <div class="row">
+            <div class="col-md-12 mb-3">
+              <div class="form-check form-switch">
+                <Field name="providerConfigSecret" type="checkbox" :value="true" :unchecked-value="false" class="form-check-input" id="secretCheck" />
+                <label class="form-check-label" for="secretCheck">Is Secret Content?</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-4 d-flex gap-2">
+            <button type="submit" class="btn btn-primary w-100">
+              <i class="bi bi-save me-1"></i> {{ isEditConfig ? 'Update Config' : 'Add to List' }}
+            </button>
+            <button type="button" class="btn btn-outline-secondary w-100" data-bs-dismiss="offcanvas">
+              Cancel
+            </button>
+          </div>
+        </Form>
+      </div>
+    </div>
+
   </section>
 </template>

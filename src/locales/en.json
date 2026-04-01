@@ -202,7 +202,11 @@
     "guest": "Guest",
     "priority": "Priority",
     "notification": "Notification",
-    "service": "Service | Services"
+    "service": "Service | Services",
+    "key": "Key",
+    "value": "Value",
+    "secret": "Secret",
+    "provider": "Provider"
   },
   "textField": {
     "email": "Email",

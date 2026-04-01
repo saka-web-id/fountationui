@@ -202,7 +202,11 @@
     "guest": "Tamu",
     "priority": "Prioritas",
     "notification": "Notifikasi",
-    "service": "Layanan | Daftar Layanan"
+    "service": "Layanan | Daftar Layanan",
+    "key": "Kunci",
+    "value": "  Nilai",
+    "secret": "Rahasia",
+    "provider": "Provider"
   },
   "textField": {
     "email": "Surel",

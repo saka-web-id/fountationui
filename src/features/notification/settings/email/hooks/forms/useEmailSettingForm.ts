@@ -1,19 +1,7 @@
-import { useForm } from "vee-validate";
+import {useFieldArray, useForm} from "vee-validate";
 import {useProviderSchema} from "../schemas/provider.schema.ts";
 
-export interface ProviderPayload {
-    providerId: number;
-    providerCompanyId: number;
-    providerName: string;
-    providerType: string;
-    providerSlug: string;
-    providerIsActive: boolean;
-    providerPriority: number;
-    providerCreatedAt: string;
-    providerConfigs: ProviderConfigPayload[];
-}
-
-export interface ProviderConfigPayload {
+export interface NotificationProviderConfigPayload {
     providerConfigId: number;
     providerId: number;
     providerConfigKey: string;
@@ -22,7 +10,19 @@ export interface ProviderConfigPayload {
     providerConfigUpdateAt: string;
 }
 
-export const mapProviderFormFromApi = (apiData: ProviderPayload): ProviderPayload => ({
+export interface NotificationProviderPayload {
+    providerId: number;
+    providerCompanyId: number;
+    providerName: string;
+    providerType: string;
+    providerSlug: string;
+    providerIsActive: boolean;
+    providerPriority: number;
+    providerCreatedAt: string;
+    providerConfigs: NotificationProviderConfigPayload[];
+}
+
+export const mapProviderFormFromApi = (apiData: NotificationProviderPayload): NotificationProviderPayload => ({
     providerId: apiData.providerId,
     providerCompanyId: apiData.providerCompanyId,
     providerName: apiData.providerName,
@@ -35,52 +35,55 @@ export const mapProviderFormFromApi = (apiData: ProviderPayload): ProviderPayloa
 });
 
 export function useProviderPayload() {
-    const { defineField, handleSubmit, setValues, resetForm, values } = useForm<ProviderPayload>({
+    // 1. Inisialisasi Form Utama
+    const { defineField, handleSubmit, setValues, resetForm, values, errors, meta } = useForm<NotificationProviderPayload>({
         validationSchema: useProviderSchema(),
         initialValues: {
             providerId: 0,
             providerCompanyId: 0,
             providerName: "",
-            providerType: "",
+            providerType: "EMAIL",
             providerSlug: "",
-            providerIsActive: false,
-            providerPriority: 0,
-            providerCreatedAt: "",
-            providerConfigs: [], // Kosongkan secara default agar dinamis
+            providerIsActive: true,
+            providerPriority: 1,
+            providerCreatedAt: new Date().toISOString(),
+            providerConfigs: [],
         }
     });
 
-    // Define fields dengan atribut untuk v-bind
-    const [providerId, providerIdAttrs] = defineField('providerId');
-    const [providerCompanyId, providerCompanyIdAttrs] = defineField('providerCompanyId');
-    const [providerName, providerNameAttrs] = defineField('providerName');
-    const [providerType, providerTypeAttrs] = defineField('providerType');
-    const [providerSlug, providerSlugAttrs] = defineField('providerSlug');
-    const [providerIsActive, providerIsActiveAttrs] = defineField('providerIsActive');
-    const [providerPriority, providerPriorityAttrs] = defineField('providerPriority');
-    const [providerCreatedAt, providerCreatedAtAttrs] = defineField('providerCreatedAt');
+    // 2. Gunakan useFieldArray untuk mengelola list configurations
+    // Ini otomatis terhubung ke 'providerConfigs' di dalam initialValues
+    const { remove, push, update, replace } = useFieldArray<NotificationProviderConfigPayload>('providerConfigs');
+
+    // 3. Define fields untuk Master Provider
+    const [providerId] = defineField('providerId');
+    const [providerName] = defineField('providerName');
+    const [providerType] = defineField('providerType');
+    const [providerSlug] = defineField('providerSlug');
+    const [providerIsActive] = defineField('providerIsActive');
+    const [providerPriority] = defineField('providerPriority');
 
     return {
         handleSubmit,
         setValues,
         resetForm,
-        values, // Sangat berguna untuk melihat state form saat debugging
+        values,
+        errors,
+        meta,
 
+        // Master Fields
         providerId,
-        providerIdAttrs,
-        providerCompanyId,
-        providerCompanyIdAttrs,
         providerName,
-        providerNameAttrs,
         providerType,
-        providerTypeAttrs,
         providerSlug,
-        providerSlugAttrs,
         providerIsActive,
-        providerIsActiveAttrs,
         providerPriority,
-        providerPriorityAttrs,
-        providerCreatedAt,
-        providerCreatedAtAttrs
+
+        // Config Array Helpers (Untuk dipakai di Component)
+        configs: values.providerConfigs, // Data untuk Tabel
+        addConfig: push,       // Fungsi tambah (Offcanvas Add)
+        updateConfig: update, // Fungsi edit (Offcanvas Edit)
+        removeConfig: remove, // Fungsi hapus (Action Table)
+        replaceConfigs: replace // Fungsi isi ulang (Saat Load Data API)
     }
 }
