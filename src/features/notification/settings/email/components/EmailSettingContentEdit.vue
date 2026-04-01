@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n';
 import { useApi } from "~/composables/useApi";
-import { computed, onMounted, ref } from "vue";
+import {computed, nextTick, onMounted, ref} from "vue";
 import { useRoute } from 'vue-router';
 import { ErrorMessage, Field, Form } from "vee-validate";
 import { useProviderConfigSchema } from '../hooks/schemas/providerConfig.schema';
@@ -26,9 +26,9 @@ const { data, loading, get, post, put } = useApi();
 const {
   setValues: setValuesProvider,
   handleSubmit,
-  values,
   meta,
   errors: formErrors,
+  configs,
   addConfig,
   updateConfig,
   removeConfig,
@@ -42,13 +42,14 @@ const {
 const notificationProviderConfigSelected = ref<Partial<NotificationProviderConfigPayload> | null>(null)
 const isEditConfig = ref(false)
 const selectedIndex = ref<number | null>(null)
+const tableRefreshTrigger = ref(0);
 
 // 2. Gunakan computed agar tabel selalu sinkron dengan state form VeeValidate
-const configsData = computed(() => values.providerConfigs || []);
+//const configsData = computed(() => values.providerConfigs || []);
 
 // TanStack Table Refactoring
 const { table, globalFilter } = useEmailSettingContentEditTable(
-  configsData,
+  configs,
   (item, index) => prepareEditConfig(item, index),
   (index) => removeConfig(index)
 );
@@ -65,7 +66,7 @@ onMounted(async () => {
 
 // FUNGSI UNTUK MODAL/OFFCANVAS
 const prepareAddNewConfig = () => {
-  selectedIndex.value = null;
+  selectedIndex.value = null; // WAJIB NULL
   isEditConfig.value = false;
   notificationProviderConfigSelected.value = {
     providerConfigKey: '',
@@ -74,11 +75,17 @@ const prepareAddNewConfig = () => {
   };
 };
 
-const prepareEditConfig = (item: any, index: number) => {
+const prepareEditConfig = async (item: any, index: number) => {
+  // 1. Reset dulu agar key berubah dan form lama hancur
+  notificationProviderConfigSelected.value = null;
+  selectedIndex.value = null;
+
+  await nextTick(); // Tunggu sebentar agar Vue memproses reset
+
+  // 2. Isi dengan data baru
   selectedIndex.value = index;
   isEditConfig.value = true;
-  // Deep copy to avoid direct mutation
-  notificationProviderConfigSelected.value = JSON.parse(JSON.stringify(item));
+  notificationProviderConfigSelected.value = { ...item };
 
   const element = document.getElementById('notificationProviderConfigDetailOffcanvas');
   if (element) {
@@ -88,19 +95,21 @@ const prepareEditConfig = (item: any, index: number) => {
 };
 
 const onSubmitOffCanvas = (configValues: any) => {
+  // Pastikan kita mengirim data yang bersih
+  const cleanValues = { ...configValues };
+
   if (isEditConfig.value && selectedIndex.value !== null) {
-    updateConfig(selectedIndex.value, {
-      ...configValues,
-      providerConfigUpdateAt: new Date().toISOString()
-    });
+    console.log("Updating index:", selectedIndex.value, cleanValues);
+    updateConfig(selectedIndex.value, cleanValues);
   } else {
+    console.log("Adding new config", cleanValues);
     addConfig({
-      ...configValues,
-      providerConfigId: Date.now(), // ID sementara
-      providerId: Number(providerIdParam) || 0,
-      providerConfigUpdateAt: new Date().toISOString()
+      ...cleanValues,
+      providerConfigId: Date.now(), // ID sementara untuk key di tabel
+      providerId: Number(providerIdParam) || 0
     });
   }
+  tableRefreshTrigger.value++;
   closeOffcanvas();
 };
 
@@ -261,7 +270,7 @@ const submitForm = handleSubmit((values) => {
                   <i class="bi bi-plus-lg me-1"></i> Add Config
                 </button>
               </div>
-              <BaseTable :table="table" />
+              <BaseTable :table="table" :key="`table-${tableRefreshTrigger}`" />
             </div>
 
             <div class="mt-4">

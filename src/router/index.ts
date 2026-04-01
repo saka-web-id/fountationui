@@ -157,8 +157,14 @@ const routes: RouteRecordRaw[] = [
         meta: { requiresAuth: true, requiresPremium: false, roleAccess: "SUPER_ADMIN, ADMIN, MANAGER" }
     },
     {
-        path: '/notification/detail/email/:providerIdParam',
-        name: 'notificationdetailemail',
+        path: '/notification/detail/edit/email/:companyIdParam/:providerIdParam',
+        name: 'notificationdetaileditemail',
+        component: () => import("~/views/notification/settings/email/EmailSettingDetailView.vue"),
+        meta: { requiresAuth: true, requiresPremium: false, roleAccess: "SUPER_ADMIN, ADMIN, MANAGER" }
+    },
+    {
+        path: '/notification/detail/add/email/:companyIdParam',
+        name: 'notificationdetailaddemail',
         component: () => import("~/views/notification/settings/email/EmailSettingDetailView.vue"),
         meta: { requiresAuth: true, requiresPremium: false, roleAccess: "SUPER_ADMIN, ADMIN, MANAGER" }
     },

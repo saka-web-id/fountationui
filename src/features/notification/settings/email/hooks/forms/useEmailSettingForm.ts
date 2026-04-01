@@ -1,5 +1,6 @@
 import {useFieldArray, useForm} from "vee-validate";
 import {useProviderSchema} from "../schemas/provider.schema.ts";
+import {computed} from "vue";
 
 export interface NotificationProviderConfigPayload {
     providerConfigId: number;
@@ -53,7 +54,11 @@ export function useProviderPayload() {
 
     // 2. Gunakan useFieldArray untuk mengelola list configurations
     // Ini otomatis terhubung ke 'providerConfigs' di dalam initialValues
-    const { remove, push, update, replace } = useFieldArray<NotificationProviderConfigPayload>('providerConfigs');
+    const { remove, push, update, replace, fields } = useFieldArray<NotificationProviderConfigPayload>('providerConfigs');
+
+    // Buat computed yang mengekstrak nilai asli dari fields
+    // Ini yang akan menjamin BaseTable refresh saat update() dipanggil
+    const configsData = computed(() => fields.value.map(f => f.value));
 
     // 3. Define fields untuk Master Provider
     const [providerId] = defineField('providerId');
@@ -80,7 +85,7 @@ export function useProviderPayload() {
         providerPriority,
 
         // Config Array Helpers (Untuk dipakai di Component)
-        configs: values.providerConfigs, // Data untuk Tabel
+        configs: configsData, // Data untuk Tabel
         addConfig: push,       // Fungsi tambah (Offcanvas Add)
         updateConfig: update, // Fungsi edit (Offcanvas Edit)
         removeConfig: remove, // Fungsi hapus (Action Table)
