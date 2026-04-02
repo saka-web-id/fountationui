@@ -29,8 +29,8 @@ export function useWhatappsSettingTable(companyIdParam: string | string[]) {
     const columnHelper = createColumnHelper<Provider>()
 
     // Helper functions for navigation
-    const goToEdit = (providerIdParam: number) => {
-        router.push({ name: 'whatappssettingdetail', params: { providerIdParam } });
+    const goToEdit = (providerIdParam: number, companyIdParam: string | string[]) => {
+        router.push({ name: 'notificationdetaileditwhatapps', params: { companyIdParam, providerIdParam } });
     };
 
     // Column Definitions
@@ -70,7 +70,7 @@ export function useWhatappsSettingTable(companyIdParam: string | string[]) {
             cell: info => h('div', { class: 'btn-group', role: 'group' }, [
                 h('button', {
                     class: 'btn btn-primary',
-                    onClick: () => goToEdit(info.row.original.providerId)
+                    onClick: () => goToEdit(info.row.original.providerId, companyIdParam)
                 }, t('button.view'))
             ]),
         }),
@@ -79,7 +79,7 @@ export function useWhatappsSettingTable(companyIdParam: string | string[]) {
     const { table, globalFilter } = useDataTable(companies, columns)
 
     const fetchData = async () => {
-        await get(`/v0/notification/provider/list/companyId/${auth.user?.company.companyId}/userId/${auth.user?.id}/valueCompanyId/${companyIdParam}/notificationType/WHATAPPS`)
+        await get(`/v0/notification/provider/list/companyId/${auth.user?.company.companyId}/userId/${auth.user?.id}/valueCompanyId/${companyIdParam}/notificationType/WHATSAPP`)
     }
 
     return {

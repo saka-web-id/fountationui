@@ -2,7 +2,7 @@
 
 import SidebarDashboard from "~/layouts/sidebar/SidebarDashboard.vue"
 import HeaderDashboard from "~/layouts/headers/HeaderDashboard.vue"
-import SmsSettingCompanyContent from "~/features/notification/settings/sms/components/SmsSettingCompanyContent.vue";
+import SmsSettingContentEdit from "~/features/notification/settings/sms/components/SmsSettingContentEdit.vue";
 
 </script>
 
@@ -11,7 +11,7 @@ import SmsSettingCompanyContent from "~/features/notification/settings/sms/compo
     <SidebarDashboard />
     <HeaderDashboard />
   </div>
-  <SmsSettingCompanyContent />
+  <SmsSettingContentEdit />
 </template>
 
 <style scoped>

@@ -181,8 +181,14 @@ const routes: RouteRecordRaw[] = [
         meta: { requiresAuth: true, requiresPremium: false, roleAccess: "SUPER_ADMIN, ADMIN, MANAGER" }
     },
     {
-        path: '/notification/detail/sms/:providerIdParam',
-        name: 'notificationdetailsms',
+        path: '/notification/detail/edit/sms/:companyIdParam/:providerIdParam',
+        name: 'notificationdetaileditsms',
+        component: () => import("~/views/notification/settings/sms/SmsSettingDetailView.vue"),
+        meta: { requiresAuth: true, requiresPremium: false, roleAccess: "SUPER_ADMIN, ADMIN, MANAGER" }
+    },
+    {
+        path: '/notification/detail/add/sms/:companyIdParam',
+        name: 'notificationdetailaddsms',
         component: () => import("~/views/notification/settings/sms/SmsSettingDetailView.vue"),
         meta: { requiresAuth: true, requiresPremium: false, roleAccess: "SUPER_ADMIN, ADMIN, MANAGER" }
     },
@@ -199,8 +205,14 @@ const routes: RouteRecordRaw[] = [
         meta: { requiresAuth: true, requiresPremium: false, roleAccess: "SUPER_ADMIN, ADMIN, MANAGER" }
     },
     {
-        path: '/notification/detail/whatapps/:providerIdParam',
-        name: 'notificationdetailwhatapps',
+        path: '/notification/detail/edit/whatapps/:companyIdParam/:providerIdParam',
+        name: 'notificationdetaileditwhatapps',
+        component: () => import("~/views/notification/settings/whatapps/WhatappsSettingDetailView.vue"),
+        meta: { requiresAuth: true, requiresPremium: false, roleAccess: "SUPER_ADMIN, ADMIN, MANAGER" }
+    },
+    {
+        path: '/notification/detail/add/whatapps/:companyIdParam',
+        name: 'notificationdetailaddwhatapps',
         component: () => import("~/views/notification/settings/whatapps/WhatappsSettingDetailView.vue"),
         meta: { requiresAuth: true, requiresPremium: false, roleAccess: "SUPER_ADMIN, ADMIN, MANAGER" }
     },

@@ -2,7 +2,7 @@
 
 import SidebarDashboard from "~/layouts/sidebar/SidebarDashboard.vue"
 import HeaderDashboard from "~/layouts/headers/HeaderDashboard.vue"
-import WhatappsSettingCompanyContent from "~/features/notification/settings/whatapps/components/WhatappsSettingCompanyContent.vue";
+import WhatappsSettingContentEdit from "~/features/notification/settings/whatapps/components/WhatappsSettingContentEdit.vue";
 
 </script>
 
@@ -11,7 +11,7 @@ import WhatappsSettingCompanyContent from "~/features/notification/settings/what
     <SidebarDashboard />
     <HeaderDashboard />
   </div>
-  <WhatappsSettingCompanyContent />
+  <WhatappsSettingContentEdit />
 </template>
 
 <style scoped>

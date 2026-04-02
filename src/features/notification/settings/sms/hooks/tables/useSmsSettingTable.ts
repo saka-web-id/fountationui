@@ -29,8 +29,8 @@ export function useSmsSettingTable(companyIdParam: string | string[]) {
     const columnHelper = createColumnHelper<Provider>()
 
     // Helper functions for navigation
-    const goToEdit = (providerIdParam: number) => {
-        router.push({ name: 'smssettingdetail', params: { providerIdParam } });
+    const goToEdit = (providerIdParam: number, companyIdParam: string | string[]) => {
+        router.push({ name: 'notificationdetaileditsms', params: { companyIdParam, providerIdParam } });
     };
 
     // Column Definitions
@@ -70,7 +70,7 @@ export function useSmsSettingTable(companyIdParam: string | string[]) {
             cell: info => h('div', { class: 'btn-group', role: 'group' }, [
                 h('button', {
                     class: 'btn btn-primary',
-                    onClick: () => goToEdit(info.row.original.providerId)
+                    onClick: () => goToEdit(info.row.original.providerId, companyIdParam)
                 }, t('button.view'))
             ]),
         }),
