@@ -16,6 +16,7 @@ export interface NotificationProviderPayload {
     providerCompanyId: number;
     providerName: string;
     providerType: string;
+    providerEngine: string;
     providerSlug: string;
     providerIsActive: boolean;
     providerPriority: number;
@@ -28,6 +29,7 @@ export const mapProviderFormFromApi = (apiData: NotificationProviderPayload): No
     providerCompanyId: apiData.providerCompanyId,
     providerName: apiData.providerName,
     providerType: apiData.providerType,
+    providerEngine: apiData.providerEngine,
     providerSlug: apiData.providerSlug,
     providerIsActive: apiData.providerIsActive,
     providerPriority: apiData.providerPriority,
@@ -44,6 +46,7 @@ export function useProviderPayload() {
             providerCompanyId: 0,
             providerName: "",
             providerType: "EMAIL",
+            providerEngine: "",
             providerSlug: "",
             providerIsActive: true,
             providerPriority: 1,
@@ -64,6 +67,7 @@ export function useProviderPayload() {
     const [providerId] = defineField('providerId');
     const [providerName] = defineField('providerName');
     const [providerType] = defineField('providerType');
+    const [providerEngine] = defineField('providerEngine');
     const [providerSlug] = defineField('providerSlug');
     const [providerIsActive] = defineField('providerIsActive');
     const [providerPriority] = defineField('providerPriority');
@@ -80,6 +84,7 @@ export function useProviderPayload() {
         providerId,
         providerName,
         providerType,
+        providerEngine,
         providerSlug,
         providerIsActive,
         providerPriority,

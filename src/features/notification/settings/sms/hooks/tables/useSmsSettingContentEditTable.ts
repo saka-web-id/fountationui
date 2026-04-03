@@ -30,7 +30,7 @@ export function useSmsSettingContentEditTable(
     }),
     columnHelper.display({
       id: 'actions',
-      header: () => 'Action',
+      header: () => t('textLabel.action'),
       cell: info => h('div', { class: 'd-flex gap-2' }, [
         h('button', {
           class: 'btn btn-warning btn-sm',

@@ -102,7 +102,9 @@
     "add": "Add",
     "view": "View",
     "next": "Next",
-    "back": "Back"
+    "back": "Back",
+    "test": "Test",
+    "adjust": "Adjust"
   },
   "textLabel": {
     "organization": "Organization",
@@ -206,7 +208,13 @@
     "key": "Key",
     "value": "Value",
     "secret": "Secret",
-    "provider": "Provider"
+    "provider": "Provider",
+    "engine": "Engine",
+    "slug": "Slug",
+    "isActive": "Is Active",
+    "configuration": "Configuration | Configurations",
+    "isSecret": "Is Secret",
+    "validJson": "Valid JSON"
   },
   "textField": {
     "email": "Email",

@@ -5,6 +5,7 @@ import { useRouter } from 'vue-router'
 import { useApi } from "~/composables/useApi.ts"
 import { useDataTable } from '~/composables/useDataTable.ts'
 import { useAuthStore } from '~/stores/auth.ts'
+import type { ProviderPayload } from "~/features/notification/providers/interfaces/provider.payload.ts";
 
 export interface Provider {
     providerId: number;
@@ -23,14 +24,18 @@ export function useEmailSettingTable(companyIdParam: string | string[]) {
     const auth = useAuthStore()
 
     // API State
-    const { data, get } = useApi<Provider[]>()
+    const { data, get } = useApi<ProviderPayload[]>()
 
     const companies = computed(() => data.value || [])
-    const columnHelper = createColumnHelper<Provider>()
+    const columnHelper = createColumnHelper<ProviderPayload>()
 
     // Helper functions for navigation
     const goToEdit = (providerIdParam: number, companyIdParam: string | string[]) => {
         router.push({ name: 'notificationdetaileditemail', params: { companyIdParam, providerIdParam } });
+    };
+
+    const onTestNotification = (providerIdParam: number, companyIdParam: string | string[]) => {
+        router.push({ name: 'notificationtestemail', params: { companyIdParam, providerIdParam } });
     };
 
     // Column Definitions
@@ -49,8 +54,8 @@ export function useEmailSettingTable(companyIdParam: string | string[]) {
             cell: info => info.getValue(),
             meta: { className: 'd-none d-md-table-cell' }
         }),
-        columnHelper.accessor('providerIsActive', {
-            header: () => t('textLabel.active'),
+        columnHelper.accessor('providerEngine', {
+            header: () => t('textLabel.engine'),
             cell: info => info.getValue(),
             meta: { className: 'd-none d-md-table-cell' }
         }),
@@ -68,10 +73,17 @@ export function useEmailSettingTable(companyIdParam: string | string[]) {
             id: 'actions',
             header: () => t('textLabel.action'),
             cell: info => h('div', { class: 'btn-group', role: 'group' }, [
+                // Button View / Edit
                 h('button', {
-                    class: 'btn btn-primary',
+                    class: 'btn btn-sm btn-primary',
                     onClick: () => goToEdit(info.row.original.providerId, companyIdParam)
-                }, t('button.view'))
+                }, t('button.view')),
+
+                // Button Test Notification
+                h('button', {
+                    class: 'btn btn-warning btn-sm',
+                    onClick: () => onTestNotification(info.row.original.providerId, companyIdParam)
+                }, t('button.test'))
             ]),
         }),
     ]

@@ -101,8 +101,9 @@
     "password": "Sandi",
     "add": "Tambah",
     "view": "Lihat",
-    "next": "Next",
-    "back": "Back"
+    "next": "Lanjut",
+    "back": "Kembali",
+    "test": "Coba"
   },
   "textLabel": {
     "organization": "Organisasi",
@@ -206,7 +207,13 @@
     "key": "Kunci",
     "value": "  Nilai",
     "secret": "Rahasia",
-    "provider": "Provider"
+    "provider": "Provider",
+    "engine": "Mesin",
+    "slug": "Slug",
+    "isActive": "Apakah Aktif",
+    "configuration": "Konfigurasi | Konfigurasi",
+    "isSecret": "Apakah Rahasia",
+    "validJson": "Valid JSON"
   },
   "textField": {
     "email": "Surel",

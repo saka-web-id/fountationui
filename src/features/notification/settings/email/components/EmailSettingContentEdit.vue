@@ -36,7 +36,8 @@ const {
   providerSlug,
   providerPriority,
   providerIsActive,
-  providerType
+  providerType,
+  providerEngine
 } = useProviderPayload();
 
 const notificationProviderConfigSelected = ref<Partial<NotificationProviderConfigPayload> | null>(null)
@@ -121,6 +122,28 @@ const closeOffcanvas = () => {
   }
 };
 
+// Helper untuk deteksi apakah string adalah JSON valid
+const isJson = (val: any) => {
+  if (!val || typeof val !== 'string') return false;
+  try {
+    const parsed = JSON.parse(val);
+    return typeof parsed === 'object' && parsed !== null;
+  } catch {
+    return false;
+  }
+};
+
+// Fungsi untuk merapikan JSON di dalam Field VeeValidate
+const beautifyField = (currentValue: string, setFieldValue: any) => {
+  try {
+    const formatted = JSON.stringify(JSON.parse(currentValue), null, 2);
+    // Kita panggil setFieldValue untuk mengupdate state form secara reaktif
+    setFieldValue('providerConfigValue', formatted);
+  } catch (e) {
+    console.warn("Format JSON tidak valid");
+  }
+};
+
 // Fungsi murni logika pengiriman data
 const executeSubmit = async (finalValues: any) => {
   const companyId = auth.user?.company.companyId;
@@ -136,6 +159,7 @@ const executeSubmit = async (finalValues: any) => {
     providerCompanyId: Number(companyId) || 0,
     providerName: finalValues.providerName,
     providerType: finalValues.providerType,
+    providerEngine: finalValues.providerEngine,
     providerSlug: finalValues.providerSlug,
     providerIsActive: !!finalValues.providerIsActive,
     providerPriority: Number(finalValues.providerPriority) || 100,
@@ -163,9 +187,6 @@ const executeSubmit = async (finalValues: any) => {
     } else {
       await post(url, payload);
     }
-
-    // Opsional: Tambahkan notifikasi sukses atau redirect
-    // router.push({ name: 'notificationlistemail' })
 
   } catch (error: any) {
     // Sangat penting untuk melihat detail error dari Axios jika 400 terjadi lagi
@@ -197,12 +218,12 @@ const submitForm = handleSubmit((values) => {
       <div class="card mb-3 bg-gradient-dark">
         <div class="card-body p-4">
           <div id="idform">
-            <h4 class="mb-4">{{ isEdit ? 'Edit Provider' : 'Add New Provider' }}</h4>
+            <h4 class="mb-4">{{ isEdit ? t('button.edit') : t('button.add') }}</h4>
 
             <div class="row mb-3">
               <div class="col-md-6">
                 <div class="input-group mb-2">
-                  <span class="input-group-text w-25">Name</span>
+                  <span class="input-group-text w-25">{{ t('textLabel.name') }}</span>
                   <input v-model="providerName" class="form-control" />
                 </div>
                 <div v-if="formErrors.providerName" class="text-danger small">{{ formErrors.providerName }}</div>
@@ -210,7 +231,7 @@ const submitForm = handleSubmit((values) => {
 
               <div class="col-md-6">
                 <div class="input-group mb-2">
-                  <span class="input-group-text w-25">Slug</span>
+                  <span class="input-group-text w-25">{{ t('textLabel.slug') }}</span>
                   <input v-model="providerSlug" class="form-control" />
                 </div>
                 <div v-if="formErrors.providerSlug" class="text-danger small">{{ formErrors.providerSlug }}</div>
@@ -218,7 +239,7 @@ const submitForm = handleSubmit((values) => {
 
               <div class="col-md-6">
                 <div class="input-group mb-2">
-                  <span class="input-group-text w-25">Priority</span>
+                  <span class="input-group-text w-25">{{ t('textLabel.priority') }}</span>
                   <input
                       v-model="providerPriority"
                       type="number"
@@ -231,21 +252,8 @@ const submitForm = handleSubmit((values) => {
               </div>
 
               <div class="col-md-6">
-                <div class="form-check form-switch mt-2">
-                  <input
-                      v-model="providerIsActive"
-                      type="checkbox"
-                      class="form-check-input"
-                      id="isActive"
-                  />
-                  <label class="form-check-label ms-2" for="isActive">Is Active</label>
-                </div>
-                <div v-if="formErrors.providerIsActive" class="text-danger small">{{ formErrors.providerIsActive }}</div>
-              </div>
-
-              <div class="col-md-6">
                 <div class="input-group mb-2">
-                  <span class="input-group-text w-25">Type</span>
+                  <span class="input-group-text w-25">{{ t('textLabel.type') }}</span>
                   <select v-model="providerType" class="form-select">
                     <option value="EMAIL">Email</option>
                     <option value="WHATSAPP">WhatsApp</option>
@@ -253,11 +261,34 @@ const submitForm = handleSubmit((values) => {
                   </select>
                 </div>
               </div>
+
+              <div class="col-md-6">
+                <div class="input-group mb-2">
+                  <span class="input-group-text w-25">{{ t('textLabel.engine') }}</span>
+                  <select v-model="providerEngine" class="form-select">
+                    <option value="SMTP_EMAIL_SENDER">SMTP Email Sender</option>
+                    <option value="API_EMAIL_SENDER">API Email Sender</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <div class="form-check form-switch mt-2">
+                  <input
+                      v-model="providerIsActive"
+                      type="checkbox"
+                      class="form-check-input"
+                      id="isActive"
+                  />
+                  <label class="form-check-label ms-2" for="isActive">{{ t('textLabel.isActive') }}</label>
+                </div>
+                <div v-if="formErrors.providerIsActive" class="text-danger small">{{ formErrors.providerIsActive }}</div>
+              </div>
             </div>
 
             <div class="mt-4">
               <div class="d-flex justify-content-between align-items-center mb-2">
-                <h5>Configurations</h5>
+                <h5>{{ t('textLabel.configuration', 2) }}</h5>
                 <input v-model="globalFilter" type="text" class="form-control w-25" :placeholder="t('button.search')" />
 
                 <button
@@ -267,7 +298,7 @@ const submitForm = handleSubmit((values) => {
                     data-bs-toggle="offcanvas"
                     data-bs-target="#notificationProviderConfigDetailOffcanvas"
                 >
-                  <i class="bi bi-plus-lg me-1"></i> Add Config
+                  <i class="bi bi-plus-lg me-1"></i> {{ t('button.add') }}
                 </button>
               </div>
               <BaseTable :table="table" :key="`table-${tableRefreshTrigger}`" />
@@ -286,7 +317,7 @@ const submitForm = handleSubmit((values) => {
     <!-- Detail Offcanvas -->
     <div class="offcanvas offcanvas-end w-50" tabindex="-1" id="notificationProviderConfigDetailOffcanvas">
       <div class="offcanvas-header bg-light border-bottom">
-        <h5 class="offcanvas-title">{{ isEditConfig ? 'Edit Config' : 'Add New Config' }}</h5>
+        <h5 class="offcanvas-title">{{ isEditConfig ? t('button.edit') : t('button.add') }}</h5>
         <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
       </div>
 
@@ -297,16 +328,45 @@ const submitForm = handleSubmit((values) => {
             @submit="onSubmitOffCanvas"
             :validation-schema="useProviderConfigSchema"
             :initial-values="notificationProviderConfigSelected ?? undefined"
+            v-slot="{ setFieldValue }"
         >
           <div class="mb-3">
-            <label class="form-label fw-bold">Provider Key</label>
+            <label class="form-label fw-bold">{{ t('textLabel.key') }}</label>
             <Field name="providerConfigKey" class="form-control" />
             <ErrorMessage name="providerConfigKey" class="text-danger small" />
           </div>
 
           <div class="mb-3">
-            <label class="form-label fw-bold">Value</label>
-            <Field name="providerConfigValue" class="form-control" />
+            <Field name="providerConfigValue" v-slot="{ field, value, errorMessage }">
+              <div class="d-flex justify-content-between align-items-end mb-1">
+                <label class="form-label fw-bold small text-uppercase text-muted mb-0">{{ t('textLabel.value') }}</label>
+
+                <button
+                    v-if="isJson(value)"
+                    type="button"
+                    class="btn btn-link btn-sm p-0 text-decoration-none shadow-none"
+                    @click="beautifyField(value, setFieldValue)"
+                >
+                  <i class="bi bi-magic me-1"></i>{{ t('button.adjust') }}
+                </button>
+              </div>
+
+              <textarea
+                  v-bind="field"
+                  class="form-control font-monospace"
+                  :class="{
+              'is-invalid': errorMessage,
+              'border-info shadow-sm': isJson(value)
+            }"
+                  rows="6"
+                  placeholder="Enter configuration value or paste JSON template..."
+              ></textarea>
+
+              <div v-if="errorMessage" class="invalid-feedback">{{ errorMessage }}</div>
+              <div v-if="isJson(value)" class="text-info small mt-1" style="font-size: 0.75rem;">
+                <i class="bi bi-info-circle me-1"></i>{{ t('textLabel.validJson') }}
+              </div>
+            </Field>
             <ErrorMessage name="providerConfigValue" class="text-danger small" />
           </div>
 
@@ -314,14 +374,14 @@ const submitForm = handleSubmit((values) => {
             <div class="col-md-12 mb-3">
               <div class="form-check form-switch">
                 <Field name="providerConfigSecret" type="checkbox" :value="true" :unchecked-value="false" class="form-check-input" id="secretCheck" />
-                <label class="form-check-label" for="secretCheck">Is Secret Content?</label>
+                <label class="form-check-label" for="secretCheck">{{ t('textLabel.isSecret') }} ?</label>
               </div>
             </div>
           </div>
 
           <div class="mt-4 d-flex gap-2">
             <button type="submit" class="btn btn-primary w-100">
-              <i class="bi bi-save me-1"></i> {{ isEditConfig ? 'Update Config' : 'Add to List' }}
+              <i class="bi bi-save me-1"></i> {{ isEditConfig ? t('button.update') : t('button.add') }}
             </button>
             <button type="button" class="btn btn-outline-secondary w-100" data-bs-dismiss="offcanvas">
               Cancel

@@ -18,7 +18,14 @@ export function useEmailSettingContentEditTable(
     }),
     columnHelper.accessor('providerConfigValue', {
       header: () => t('textLabel.value'),
-      cell: info => h('span', info.getValue()),
+      cell: info => {
+        const value = info.getValue() || '';
+        const truncated = value.length > 30
+            ? value.substring(0, 30) + '...'
+            : value;
+
+        return h('span', { title: value }, truncated); // 'title' agar saat hover muncul teks lengkapnya
+      },
     }),
     columnHelper.accessor('providerConfigSecret', {
       header: () => t('textLabel.secret'),
@@ -30,8 +37,8 @@ export function useEmailSettingContentEditTable(
     }),
     columnHelper.display({
       id: 'actions',
-      header: () => 'Action',
-      cell: info => h('div', { class: 'd-flex gap-2' }, [
+      header: () => t('textLabel.action'),
+      cell: info => h('div', { class: 'btn-group', role: 'group' }, [
         h('button', {
           class: 'btn btn-warning btn-sm',
           onClick: () => onEdit(info.row.original, info.row.index)

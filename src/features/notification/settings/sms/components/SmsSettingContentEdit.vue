@@ -36,7 +36,8 @@ const {
   providerSlug,
   providerPriority,
   providerIsActive,
-  providerType
+  providerType,
+  providerEngine
 } = useSmsSettingForm();
 
 const notificationProviderConfigSelected = ref<Partial<NotificationProviderConfigPayload> | null>(null)
@@ -226,6 +227,27 @@ const submitForm = handleSubmit((values) => {
                 <div v-if="formErrors.providerPriority" class="text-danger small">{{ formErrors.providerPriority }}</div>
               </div>
 
+
+              <div class="col-md-6">
+                <div class="input-group mb-2">
+                  <span class="input-group-text w-25">Type</span>
+                  <select v-model="providerType" class="form-select">
+                    <option value="EMAIL">Email</option>
+                    <option value="WHATSAPP">WhatsApp</option>
+                    <option value="SMS">SMS</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <div class="input-group mb-2">
+                  <span class="input-group-text w-25">Type</span>
+                  <select v-model="providerEngine" class="form-select">
+                    <option value="API_SMS_SENDER">API SMS Sender</option>
+                  </select>
+                </div>
+              </div>
+
               <div class="col-md-6">
                 <div class="form-check form-switch mt-2">
                   <input
@@ -239,16 +261,6 @@ const submitForm = handleSubmit((values) => {
                 <div v-if="formErrors.providerIsActive" class="text-danger small">{{ formErrors.providerIsActive }}</div>
               </div>
 
-              <div class="col-md-6">
-                <div class="input-group mb-2">
-                  <span class="input-group-text w-25">Type</span>
-                  <select v-model="providerType" class="form-select">
-                    <option value="EMAIL">Email</option>
-                    <option value="WHATSAPP">WhatsApp</option>
-                    <option value="SMS">SMS</option>
-                  </select>
-                </div>
-              </div>
             </div>
 
             <div class="mt-4">
