@@ -33,6 +33,10 @@ export function useWhatappsSettingTable(companyIdParam: string | string[]) {
         router.push({ name: 'notificationdetaileditwhatapps', params: { companyIdParam, providerIdParam } });
     };
 
+    const onTestNotification = (providerIdParam: number, companyIdParam: string | string[]) => {
+        router.push({ name: 'notificationtestwhatapps', params: { companyIdParam, providerIdParam } });
+    };
+
     // Column Definitions
     const columns = [
         columnHelper.accessor('providerId', {
@@ -68,10 +72,17 @@ export function useWhatappsSettingTable(companyIdParam: string | string[]) {
             id: 'actions',
             header: () => t('textLabel.action'),
             cell: info => h('div', { class: 'btn-group', role: 'group' }, [
+                // Button View / Edit
                 h('button', {
-                    class: 'btn btn-primary',
+                    class: 'btn btn-sm btn-primary',
                     onClick: () => goToEdit(info.row.original.providerId, companyIdParam)
-                }, t('button.view'))
+                }, t('button.view')),
+
+                // Button Test Notification
+                h('button', {
+                    class: 'btn btn-warning btn-sm',
+                    onClick: () => onTestNotification(info.row.original.providerId, companyIdParam)
+                }, t('button.test'))
             ]),
         }),
     ]

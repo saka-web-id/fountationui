@@ -134,6 +134,7 @@ const executeSubmit = async (finalValues: any) => {
     providerCompanyId: Number(companyId) || 0,
     providerName: finalValues.providerName,
     providerType: finalValues.providerType,
+    providerEngine: finalValues.providerEngine,
     providerSlug: finalValues.providerSlug,
     providerIsActive: !!finalValues.providerIsActive,
     providerPriority: Number(finalValues.providerPriority) || 100,

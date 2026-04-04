@@ -199,6 +199,12 @@ const routes: RouteRecordRaw[] = [
         meta: { requiresAuth: true, requiresPremium: false, roleAccess: "SUPER_ADMIN, ADMIN, MANAGER" }
     },
     {
+        path: '/notification/test/sms/:companyIdParam/:providerIdParam',
+        name: 'notificationtestsms',
+        component: () => import("~/views/notification/settings/sms/SmsSettingTestView.vue"),
+        meta: { requiresAuth: true, requiresPremium: false, roleAccess: "SUPER_ADMIN, ADMIN, MANAGER" }
+    },
+    {
         path: '/notification/whatapps',
         name: 'notificationwhatapps',
         component: () => import("~/views/notification/settings/whatapps/WhatappsSettingCompanyView.vue"),
@@ -214,6 +220,12 @@ const routes: RouteRecordRaw[] = [
         path: '/notification/detail/edit/whatapps/:companyIdParam/:providerIdParam',
         name: 'notificationdetaileditwhatapps',
         component: () => import("~/views/notification/settings/whatapps/WhatappsSettingDetailView.vue"),
+        meta: { requiresAuth: true, requiresPremium: false, roleAccess: "SUPER_ADMIN, ADMIN, MANAGER" }
+    },
+    {
+        path: '/notification/test/whatapps/:companyIdParam/:providerIdParam',
+        name: 'notificationtestwhatapps',
+        component: () => import("~/views/notification/settings/whatapps/WhatappsSettingTestView.vue"),
         meta: { requiresAuth: true, requiresPremium: false, roleAccess: "SUPER_ADMIN, ADMIN, MANAGER" }
     },
     {
