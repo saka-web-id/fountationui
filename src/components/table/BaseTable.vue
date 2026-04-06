@@ -116,7 +116,7 @@ defineProps<{
             :value="table.getState().pagination.pageSize"
             @change="e => table.setPageSize(Number((e.target as HTMLSelectElement).value))"
         >
-          <option v-for="pageSize in [10, 20, 30, 40, 50]" :key="pageSize" :value="pageSize">
+          <option v-for="pageSize in [10, 20, 30, 50, 100]" :key="pageSize" :value="pageSize">
             {{ t('textLabel.show') || 'Show' }} {{ pageSize }}
           </option>
         </select>

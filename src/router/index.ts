@@ -289,6 +289,12 @@ const routes: RouteRecordRaw[] = [
         meta: { requiresAuth: true, requiresPremium: true, roleAccess: "SUPER_ADMIN, ADMIN, MANAGER" }
     },
     {
+        path: '/notificationlogs',
+        name: 'notificationlogs',
+        component: () => import("~/views/log/notification/provider/LogsNotificationProviderListView.vue"),
+        meta: { requiresAuth: true, requiresPremium: true, roleAccess: "SUPER_ADMIN, ADMIN, MANAGER" }
+    },
+    {
         path: '/permissionsetting',
         name: 'permissionsetting',
         component: () => import("~/views/permission/PermissionView.vue"),
