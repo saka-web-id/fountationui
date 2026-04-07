@@ -203,6 +203,8 @@
     "guest": "访客",
     "priority": "优先级",
     "notification": "通知",
+    "notificationSetting": "通知设置",
+    "notificationCategory": "通知类别",
     "service": "服务",
     "key": "键",
     "value": "值",
@@ -213,7 +215,9 @@
     "isActive": "已启用",
     "configuration": "配置",
     "isSecret": "是否加密",
-    "validJson": "有效的 JSON"
+    "validJson": "有效的 JSON",
+    "category": "Category | Categories",
+    "list": "List"
   },
   "textField": {
     "email": "邮箱",

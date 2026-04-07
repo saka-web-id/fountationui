@@ -19,7 +19,7 @@ onMounted(fetchData);
     <div class="container">
       <ol class="breadcrumb ms-2 me-2">
         <li class="breadcrumb-item"><router-link to="/dashboard"><span>{{ t('textLabel.dashboard') }}</span></router-link></li>
-        <li class="breadcrumb-item"><span>{{ t('textLabel.setting') }}</span></li>
+        <li class="breadcrumb-item"><router-link :to="{ name: 'notificationsetting' }" ><span>{{ t('textLabel.notificationSetting') }}</span></router-link></li>
         <li class="breadcrumb-item active"><span class="active">{{ t('textLabel.whatappsSetting') }}</span></li>
       </ol>
       <div class="card mb-3 bg-gradient-dark">

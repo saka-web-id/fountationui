@@ -204,6 +204,8 @@
     "guest": "Guest",
     "priority": "Priority",
     "notification": "Notification",
+    "notificationSetting": "Notification Setting | Notification Settings",
+    "notificationCategory": "Notification Category | Notification Categories",
     "service": "Service | Services",
     "key": "Key",
     "value": "Value",
@@ -214,7 +216,9 @@
     "isActive": "Is Active",
     "configuration": "Configuration | Configurations",
     "isSecret": "Is Secret",
-    "validJson": "Valid JSON"
+    "validJson": "Valid JSON",
+    "category": "Category | Categories",
+    "list": "List"
   },
   "textField": {
     "email": "Email",

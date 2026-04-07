@@ -63,7 +63,7 @@ const submitForm = handleSubmit(async (values) => {
     <div class="container">
       <ol class="breadcrumb ms-4">
         <li class="breadcrumb-item"><router-link to="/dashboard"><span>{{ t('textLabel.dashboard') }}</span></router-link></li>
-        <li class="breadcrumb-item"><span>{{ t('textLabel.setting') }}</span></li>
+        <li class="breadcrumb-item"><router-link :to="{ name: 'notificationsetting' }" ><span>{{ t('textLabel.notificationSetting') }}</span></router-link></li>
         <li class="breadcrumb-item"><router-link to="/notification/whatapps"><span class="active">{{ t('textLabel.whatappsSetting') }}</span></router-link></li>
         <li class="breadcrumb-item">
           <router-link :to="{ name: 'notificationlistwhatapps', params: { companyIdParam: companyIdParam } }">

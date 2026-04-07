@@ -203,6 +203,9 @@
     "guest": "Tamu",
     "priority": "Prioritas",
     "notification": "Notifikasi",
+    "notificationSetting": "Pengaturan Notifikasi",
+    "notificationCategory": "Kategori Notifikasi",
+
     "service": "Layanan | Daftar Layanan",
     "key": "Kunci",
     "value": "  Nilai",
@@ -213,7 +216,9 @@
     "isActive": "Apakah Aktif",
     "configuration": "Konfigurasi | Konfigurasi",
     "isSecret": "Apakah Rahasia",
-    "validJson": "Valid JSON"
+    "validJson": "Valid JSON",
+    "category": "Kategori",
+    "list": "Daftar"
   },
   "textField": {
     "email": "Surel",

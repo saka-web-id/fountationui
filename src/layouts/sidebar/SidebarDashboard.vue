@@ -110,7 +110,7 @@ const isPremium = import.meta.env.VITE_APP_PLAN === 'PREMIUM';
       </div>
     </li>
 
-    <li class="nav-item dropdown" id="idsetting">
+    <li class="nav-item" id="idsetting">
       <a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#" role="button">
         <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-gear-fill me-1 mb-1" style="color: var(--bs-primary);">
           <path d="M9.405 1.05c-.413-1.4-2.397-1.4-2.81 0l-.1.34a1.464 1.464 0 0 1-2.105.872l-.31-.17c-1.283-.698-2.686.705-1.987 1.987l.169.311c.446.82.023 1.841-.872 2.105l-.34.1c-1.4.413-1.4 2.397 0 2.81l.34.1a1.464 1.464 0 0 1 .872 2.105l-.17.31c-.698 1.283.705 2.686 1.987 1.987l.311-.169a1.464 1.464 0 0 1 2.105.872l.1.34c.413 1.4 2.397 1.4 2.81 0l.1-.34a1.464 1.464 0 0 1 2.105-.872l.31.17c1.283.698 2.686-.705 1.987-1.987l-.169-.311a1.464 1.464 0 0 1 .872-2.105l.34-.1c1.4-.413 1.4-2.397 0-2.81l-.34-.1a1.464 1.464 0 0 1-.872-2.105l.17-.31c.698-1.283-.705-2.686-1.987-1.987l-.311.169a1.464 1.464 0 0 1-2.105-.872l-.1-.34zM8 10.93a2.929 2.929 0 1 1 0-5.86 2.929 2.929 0 0 1 0 5.858z"></path>
@@ -119,28 +119,17 @@ const isPremium = import.meta.env.VITE_APP_PLAN === 'PREMIUM';
       </a>
 
       <ul class="dropdown-menu">
-
-        <li class="dropdown-submenu">
-          <a class="dropdown-item dropdown-toggle" href="javascript:void(0)">
-            <i class="bi bi-bell me-1"></i> {{ t('textLabel.notification') }}
-          </a>
-          <ul class="dropdown-menu">
-            <li>
-              <router-link to="/notification/email" class="dropdown-item">
-                <i class="bi bi-envelope-at me-1"></i> {{ t('textLabel.emailSetting') }}
-              </router-link>
-            </li>
-            <li>
-              <router-link to="/notification/sms" class="dropdown-item">
-                <i class="bi bi-chat-left-text me-1"></i> {{ t('textLabel.smsSetting') }}
-              </router-link>
-            </li>
-            <li>
-              <router-link to="/notification/whatapps" class="dropdown-item">
-                <i class="bi bi-whatsapp me-1"></i> {{ t('textLabel.whatappsSetting') }}
-              </router-link>
-            </li>
-          </ul>
+        <li>
+          <template v-if="isPremium">
+            <router-link to="/notification/setting" class="dropdown-item">
+              <i class="bi bi-envelope-at me-1"></i> {{ t('textLabel.notification') }}
+            </router-link>
+          </template>
+          <template v-else>
+              <span class="dropdown-item text-muted disabled" style="cursor: not-allowed;">
+                <i class="bi bi-lock-fill me-1"></i> {{ t('textLabel.notification') }} (Premium)
+              </span>
+          </template>
         </li>
         <li>
           <template v-if="isPremium">
@@ -149,9 +138,9 @@ const isPremium = import.meta.env.VITE_APP_PLAN === 'PREMIUM';
             </router-link>
           </template>
           <template v-else>
-            <span class="dropdown-item text-muted disabled" style="cursor: not-allowed;">
-              <i class="bi bi-lock-fill me-1"></i> {{ t('textLabel.logSetting') }} (Premium)
-            </span>
+              <span class="dropdown-item text-muted disabled" style="cursor: not-allowed;">
+                <i class="bi bi-lock-fill me-1"></i> {{ t('textLabel.logSetting') }} (Premium)
+              </span>
           </template>
         </li>
 
@@ -166,22 +155,22 @@ const isPremium = import.meta.env.VITE_APP_PLAN === 'PREMIUM';
 </template>
 
 <style scoped>
-.dropdown-submenu {
+/*.dropdown-submenu {
   position: relative;
 }
 
 .dropdown-submenu .dropdown-menu {
   top: 0;
-  left: 95%; /* Mulai sedikit lebih ke kiri agar transisi hover tidak mudah putus */
+  left: 95%; !* Mulai sedikit lebih ke kiri agar transisi hover tidak mudah putus *!
   margin-top: -5px;
   display: none;
-  z-index: 1000; /* Pastikan di atas elemen lain */
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Tambahkan bayangan agar terlihat terpisah */
+  z-index: 1000; !* Pastikan di atas elemen lain *!
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1); !* Tambahkan bayangan agar terlihat terpisah *!
 }
 
 .dropdown-submenu:hover > .dropdown-menu {
   display: block;
-  left: 100%; /* Geser ke posisi penuh saat hover */
+  left: 100%; !* Geser ke posisi penuh saat hover *!
   transition: all 0.2s ease;
-}
+}*/
 </style>

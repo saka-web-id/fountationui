@@ -182,7 +182,7 @@ const submitForm = handleSubmit((values) => {
     <div class="container">
       <ol class="breadcrumb ms-4">
         <li class="breadcrumb-item"><router-link to="/dashboard"><span>{{ t('textLabel.dashboard') }}</span></router-link></li>
-        <li class="breadcrumb-item"><span>{{ t('textLabel.setting') }}</span></li>
+        <li class="breadcrumb-item"><router-link :to="{ name: 'notificationsetting' }" ><span>{{ t('textLabel.notificationSetting') }}</span></router-link></li>
         <li class="breadcrumb-item"><router-link to="/notification/whatapps"><span class="active">{{ t('textLabel.whatappsSetting') }}</span></router-link></li>
         <li class="breadcrumb-item">
           <router-link :to="{ name: 'notificationlistwhatapps', params: { companyIdParam: companyIdParam } }">
@@ -291,10 +291,10 @@ const submitForm = handleSubmit((values) => {
     </div>
 
     <!-- Detail Offcanvas -->
-    <div class="offcanvas offcanvas-end w-50" tabindex="-1" id="notificationProviderConfigDetailOffcanvas">
-      <div class="offcanvas-header bg-light border-bottom">
+    <div class="offcanvas offcanvas-end bg-dark text-white" tabindex="-1" id="notificationProviderConfigDetailOffcanvas">
+      <div class="offcanvas-header">
         <h5 class="offcanvas-title">{{ isEditConfig ? 'Edit Config' : 'Add New Config' }}</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+        <button type="button" class="btn-close btn-close-white text-reset" data-bs-dismiss="offcanvas"></button>
       </div>
 
       <div class="offcanvas-body">
