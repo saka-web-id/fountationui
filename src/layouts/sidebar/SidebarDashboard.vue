@@ -57,6 +57,23 @@ const isPremium = import.meta.env.VITE_APP_PLAN === 'PREMIUM';
         </router-link>
       </div>
     </li>
+    <li class="nav-item dropdown " id="idnotification">
+      <a class="dropdown-toggle nav-link" aria-expanded="true" data-bs-toggle="dropdown" href="#">
+        <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-bell-fill me-1 mb-1 pb-0" style="color: var(--bs-primary);">
+          <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2m.995-14.901a1 1 0 1 0-1.99 0A5 5 0 0 0 3 6c0 1.098-.5 6-2 7h14c-1.5-1-2-5.902-2-7 0-2.42-1.72-4.44-4.005-4.901"/>
+        </svg>
+        {{ t('textLabel.notification') }}
+      </a>
+      <div class="dropdown-menu " data-bs-popper="none">
+        <router-link to="/notification/templates" class="dropdown-item" id="idnotificationtemplates">
+          <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-layout-text-window-reverse me-1 mb-1">
+            <path d="M13 6.5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h5a.5.5 0 0 0 .5-.5m0 3a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h5a.5.5 0 0 0 .5-.5m0 3a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h5a.5.5 0 0 0 .5-.5m-9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2m0-3a1 1 0 1 0 0 2 1 1 0 0 0 0-2m0-3a1 1 0 1 0 0 2 1 1 0 0 0 0-2"/>
+            <path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm1 2v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4zm14-1V2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v1z"/>
+          </svg>
+          {{ t('textLabel.template', 2) }}
+        </router-link>
+      </div>
+    </li>
     <li class="nav-item dropdown " id="idlogs">
       <a class="dropdown-toggle nav-link" aria-expanded="true" data-bs-toggle="dropdown" href="#">
         <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-people-fill me-1 mb-1 pb-0" style="color: var(--bs-primary);">

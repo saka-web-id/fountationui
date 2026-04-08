@@ -218,7 +218,9 @@
     "isSecret": "Apakah Rahasia",
     "validJson": "Valid JSON",
     "category": "Kategori",
-    "list": "Daftar"
+    "list": "Daftar",
+    "template": "Templat | Templat",
+    "subject": "Subjek"
   },
   "textField": {
     "email": "Surel",

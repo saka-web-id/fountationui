@@ -218,7 +218,9 @@
     "isSecret": "Is Secret",
     "validJson": "Valid JSON",
     "category": "Category | Categories",
-    "list": "List"
+    "list": "List",
+    "template": "Template | Templates",
+    "subject": "Subject"
   },
   "textField": {
     "email": "Email",

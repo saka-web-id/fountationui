@@ -163,6 +163,24 @@ const routes: RouteRecordRaw[] = [
         meta: { requiresAuth: true, requiresPremium: false, roleAccess: "SUPER_ADMIN, ADMIN, MANAGER" }
     },
     {
+        path: '/notification/templates',
+        name: 'notificationtemplates',
+        component: () => import("~/views/notification/templates/NotificationTemplateCompanyView.vue"),
+        meta: { requiresAuth: true, requiresPremium: false, roleAccess: "SUPER_ADMIN, ADMIN, MANAGER" }
+    },
+    {
+        path: '/notification/templates/list/:companyId',
+        name: 'notificationTemplateList',
+        component: () => import("~/views/notification/templates/NotificationTemplateListView.vue"),
+        meta: { requiresAuth: true, requiresPremium: false, roleAccess: "SUPER_ADMIN, ADMIN, MANAGER" }
+    },
+    {
+        path: '/notification/templates/designer/:companyId/:templateId',
+        name: 'notificationTemplateDesigner',
+        component: () => import("~/views/notification/templates/NotificationTemplateDesignerView.vue"),
+        meta: { requiresAuth: true, requiresPremium: false, roleAccess: "SUPER_ADMIN, ADMIN, MANAGER" }
+    },
+    {
         path: '/notification/email',
         name: 'notificationemail',
         component: () => import("~/views/notification/settings/email/EmailSettingCompanyView.vue"),

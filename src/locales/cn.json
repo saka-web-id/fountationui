@@ -217,7 +217,9 @@
     "isSecret": "是否加密",
     "validJson": "有效的 JSON",
     "category": "Category | Categories",
-    "list": "List"
+    "list": "List",
+    "template": "模板 | 模板列表",
+    "subject": "主题"
   },
   "textField": {
     "email": "邮箱",
