@@ -2,7 +2,7 @@ import { ref, onMounted } from 'vue'
 import { useApi } from '~/composables/useApi'
 import { useRouter, useRoute } from 'vue-router'
 import { useAuthStore } from '~/stores/auth'
-import type { UserCompanyPayLoad } from '~/features/user/hooks/forms/useUserForm.ts'
+import type { UserCompanyPayLoad } from "~/features/user/interfaces/user.interfaces.ts";
 
 export function useCompany(config: { routeName: string; apiPath: string }) {
 

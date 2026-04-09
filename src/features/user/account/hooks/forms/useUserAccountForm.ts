@@ -1,63 +1,6 @@
 import {useForm} from "vee-validate";
 import {useUserAccountSchema} from "~/features/user/account/hooks/schemas/useraccount.schemas.ts";
-
-
-export interface UserAccountPayload {
-    id: number;
-    name: string;
-    phone: string;
-    email: string;
-    note: string;
-    status: string;
-    isVerified: boolean;
-    accountNumber: string;
-    accountStatus: string;
-    membershipType: string;
-    membershipStatus: string;
-    membershipPlanId: number;
-    createdAt: string;              // ISO date string
-    membershipStartDate: string;    // ISO date string
-    membershipEndDate: string;      // ISO date string
-    authority: Authority;
-    company: Company;
-    department: Department;
-}
-
-interface Authority {
-    roleId: number;
-    roleName: string;
-    roleDescription: string;
-    /*permissions: Permission[];*/
-}
-
-interface Company {
-    companyId: number;
-    companyName: string;
-    companyAddress: string;
-    companyPhone: string;
-    companyEmail: string;
-    companyWebsite: string;
-    companyDescription: string;
-    companyLogoUrl: string;
-    companyTaxId: string;
-    companyRegistrationId: string;
-    companyStatus: string;
-    companyIndustry: string;
-    companyType: string;
-}
-
-interface Department {
-    departmentId: number;
-    departmentName: string;
-    departmentStatus: string;
-    departmentDescription: string;
-    departmentCreatedAt: string;
-    departmentUpdatedAt: string;
-}
-
-/*interface Permission {
-    permissionName: string;
-}*/
+import type { UserAccountPayload } from "~/features/user/interfaces/user.interfaces.ts";
 
 export const mapUserAccountFromApi = (apiData: any): UserAccountPayload => ({
     id: apiData.id,

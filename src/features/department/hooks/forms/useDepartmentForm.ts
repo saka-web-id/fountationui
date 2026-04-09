@@ -1,18 +1,10 @@
 // hooks/useRegisterForm.ts
 import { useForm } from 'vee-validate'
 import { useDepartmentSchema } from '../schemas/department.schema';
+import type {DepartmentCompanySimplePayload} from "~/features/department/interfaces/department.interfaces.ts";
 
-export interface DepartmentPayload {
-    departmentId: number;
-    companyId: number;
-    departmentName: string;
-    departmentStatus: string;
-    departmentDescription: string;
-    departmentCreatedAt: string;
-    departmentUpdatedAt: string;
-}
 
-export const mapDepartmentFromApi = (apiData: any): DepartmentPayload => ({
+export const mapDepartmentFromApi = (apiData: any): DepartmentCompanySimplePayload => ({
     departmentId: apiData.departmentId,
     companyId: apiData.companyId,
     departmentName: apiData.departmentName,
@@ -25,7 +17,7 @@ export const mapDepartmentFromApi = (apiData: any): DepartmentPayload => ({
 
 export function useDepartmentForm() {
     // useForm with schema
-    const {  defineField, handleSubmit, setValues } = useForm<DepartmentPayload>({
+    const {  defineField, handleSubmit, setValues } = useForm<DepartmentCompanySimplePayload>({
         validationSchema: useDepartmentSchema,
         initialValues: {departmentId: 0, companyId: 0, departmentName:"", departmentStatus:"", departmentDescription:"", departmentCreatedAt:"", departmentUpdatedAt:"" }
     })

@@ -3,7 +3,8 @@ import { Form, Field, ErrorMessage } from 'vee-validate';
 import {useApi} from "~/composables/useApi.ts";
 import { onMounted, computed } from "vue";
 import { useCompanySchema  } from "~/features/company/hooks/schemas/company.schema";
-import {type CompanyPayload, mapCompanyFromApi, useCompanyForm} from "~/features/company/hooks/forms/useCompanyForm";
+import {mapCompanyFromApi, useCompanyForm} from "~/features/company/hooks/forms/useCompanyForm";
+import type { Company } from "~/features/company/interfaces/company.interfaces.ts";
 import { useI18n } from 'vue-i18n';
 import { useRoute } from 'vue-router';
 import { useAuthStore } from '~/stores/auth'
@@ -28,7 +29,7 @@ onMounted(async () => {
 });
 
 
-const submitForm = handleSubmit( async (values: CompanyPayload) => {
+const submitForm = handleSubmit( async (values: Company) => {
         if (isEdit.value) {
           post("/v0/user/organization/company/update/companyId/" + auth.user?.company.companyId + "/userId/" + auth.user?.id , values)
         } else {

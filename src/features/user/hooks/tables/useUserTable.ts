@@ -6,14 +6,7 @@ import { useRouter } from 'vue-router'
 import { useApi } from "~/composables/useApi"
 import { useDataTable } from '~/composables/useDataTable'
 import { useAuthStore } from '~/stores/auth'
-
-export interface User {
-    userId: number;
-    userName: string;
-    userEmail: string;
-    userStatus: string;
-    userCreatedAt: string;
-}
+import type { UserTableData } from "~/features/user/interfaces/user.interfaces.ts"
 
 export function useUserTable(companyIdParam: string, departmentIdParam: string) {
     const { t } = useI18n()
@@ -21,12 +14,12 @@ export function useUserTable(companyIdParam: string, departmentIdParam: string) 
     const auth = useAuthStore()
 
     // API State
-    const { data, get } = useApi<User[]>()
+    const { data, get } = useApi<UserTableData[]>()
     const { data: companyData, get: getCompany } = useApi()
     const { data: departmentData, get: getDepartment } = useApi()
 
     const users = computed(() => data.value || [])
-    const columnHelper = createColumnHelper<User>()
+    const columnHelper = createColumnHelper<UserTableData>()
 
     // Helper function for navigation
     const goToEdit = (userId: number) => {

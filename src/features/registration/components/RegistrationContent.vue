@@ -2,7 +2,8 @@
 import {onMounted} from "vue";
 import { useI18n } from 'vue-i18n';
 import { useMultiStepForm } from '../hooks/useMultistepForm';
-import { useUserRegisterForm, type UserRegisterPayload } from "../hooks/forms/useUserRegisterForm"
+import { useUserRegisterForm } from "../hooks/forms/useUserRegisterForm"
+import type { UserRegisterPayload } from "~/features/user/interfaces/user.interfaces.ts";
 import {useApi} from "~/composables/useApi.ts";
 
 const {  loading, post } = useApi();

@@ -5,7 +5,7 @@ import { useRouter } from 'vue-router'
 import { useApi } from "~/composables/useApi"
 import { useDataTable } from '~/composables/useDataTable'
 import { useAuthStore } from '~/stores/auth'
-import { type UserCompanyPayLoad } from "~/features/user/hooks/forms/useUserForm.ts";
+import type { UserCompanyPayLoad } from "~/features/user/interfaces/user.interfaces.ts";
 
 export interface Role {
     roleId: number;

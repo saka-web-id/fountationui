@@ -1,54 +1,7 @@
-// hooks/useRegisterForm.ts
 import { useForm } from 'vee-validate'
 import { useUserRegisterSchema } from '../schemas/userregister.schema';
+import { type UserRegisterPayload } from "~/features/user/interfaces/user.interfaces.ts";
 
-
-export interface UserRegisterPayload {
-    user: UserPayload;
-    account: AccountPayload;
-    company: CompanyPayload;
-    department: DepartmentPayload;
-}
-
-export interface UserPayload {
-    userEmail: string;
-    userName: string;
-    userPassword: string;
-    userPhone: string;
-    userStatus: string;
-    userLastLoginAt: string;
-}
-
-export interface AccountPayload {
-    accountNumber: string
-    accountStatus: string;
-    membershipType: string;
-    membershipStatus: string;
-    createdAt: string;
-    membershipStartDate: string;
-    membershipEndDate: string;
-}
-
-export interface CompanyPayload {
-    companyName: string;
-    companyPhone: string;
-    companyEmail: string;
-    companyAddress: string;
-    companyWebsite: string;
-    companyStatus: string;
-    companyLogoUrl: string;
-    companyTaxId: string;
-    companyRegistrationId: string;
-    companyIndustry: string;
-    companyType: string;
-    companyDescription: string;
-}
-
-export interface DepartmentPayload {
-    departmentName: string;
-    departmentStatus: string;
-    departmentDescription: string;
-}
 
 export function useUserRegisterForm() {
     const currentTimestamp = new Date().toISOString();

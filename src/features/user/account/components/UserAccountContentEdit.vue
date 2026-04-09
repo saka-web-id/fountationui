@@ -2,7 +2,8 @@
 import { useI18n } from 'vue-i18n';
 import {useApi} from "~/composables/useApi";
 import {computed, onMounted} from "vue";
-import {mapUserAccountFromApi, useUserAccountForm, type UserAccountPayload} from "~/features/user/account/hooks/forms/useUserAccountForm";
+import {mapUserAccountFromApi, useUserAccountForm} from "~/features/user/account/hooks/forms/useUserAccountForm";
+import type { UserAccountPayload } from "~/features/user/interfaces/user.interfaces.ts";
 import {useRoute} from "vue-router";
 import { useUserAccountSchema } from "~/features/user/account/hooks/schemas/useraccount.schemas";
 import {ErrorMessage, Field, Form} from "vee-validate";

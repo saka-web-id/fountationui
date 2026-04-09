@@ -1,30 +1,6 @@
 import {useForm} from "vee-validate";
 import {useUserSchema} from "~/features/user/hooks/schemas/user.schemas.ts";
-
-export interface UserPayload {
-    userId: number;
-    userEmail: string;
-    userPhone: string;
-    userName: string;
-    userStatus: string;
-    userIsVerified: string;
-    userLastLoginAt: string;
-    userCreatedAt: string;
-    userUpdatedAt: string;
-    userLeaderId: number;
-    userNote: string;
-    /*departmentId: number;
-    companyId: number;*/
-}
-
-export interface UserCompanyPayLoad {
-    userId: number;
-    userName: string;
-    companyId: number;
-    companyName: string;
-    isDefault: boolean;
-}
-
+import type { UserPayload, UserCompanyPayLoad } from "~/features/user/interfaces/user.interfaces.ts";
 
 export const mapUserFromApi = (apiData: any): UserPayload => ({
     userId: apiData.userId,

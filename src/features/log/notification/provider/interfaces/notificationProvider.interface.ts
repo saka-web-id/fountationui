@@ -1,3 +1,5 @@
+import type { CompanySimplePayload } from "~/features/company/interfaces/company.interfaces.ts";
+
 export type NotificationType = 'SMS' | 'EMAIL' | 'WHATAPPS';
 
 export interface LogsProviderNotificationSimple {
@@ -40,10 +42,7 @@ export interface FilterParams {
     size: number;
 }
 
-export interface Company {
-    companyId: number;
-    companyName: string;
-}
+export interface Company extends CompanySimplePayload {}
 
 export interface Provider {
     providerId: number;

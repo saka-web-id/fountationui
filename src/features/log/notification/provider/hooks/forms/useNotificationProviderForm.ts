@@ -30,7 +30,7 @@ export function useNotificationProviderForm() {
     const fetchCompanies = async () => {
         if (!auth.user) return;
         try {
-            const data = await getCompanies(auth.user.company.companyId, auth.user.id);
+            const data = await getCompanies(auth.user.company.companyId ?? 0, auth.user.id ?? 0);
             companies.value = data;
             
             // If the current company is in the list, keep it, otherwise set to null or first
@@ -50,9 +50,9 @@ export function useNotificationProviderForm() {
         }
         try {
             const data = await getProviders(
-                auth.user.company.companyId, 
-                auth.user.id, 
-                filters.value.companyId, 
+                auth.user.company.companyId ?? 0,
+                auth.user.id ?? 0,
+                filters.value.companyId,
                 filters.value.notificationType
             );
             providers.value = data;

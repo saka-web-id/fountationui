@@ -5,12 +5,7 @@ import { useRouter } from 'vue-router'
 import { useApi } from "~/composables/useApi.ts"
 import { useDataTable } from '~/composables/useDataTable.ts'
 import { useAuthStore } from '~/stores/auth.ts'
-
-export interface Company {
-    companyId: number;
-    companyName: string;
-    companyEmail: string;
-}
+import type { CompanySimplePayload } from "~/features/company/interfaces/company.interfaces.ts"
 
 export function useSmsCompanyTable() {
     const { t } = useI18n()
@@ -18,10 +13,10 @@ export function useSmsCompanyTable() {
     const auth = useAuthStore()
 
     // API State
-    const { data, get } = useApi<Company[]>()
+    const { data, get } = useApi<CompanySimplePayload[]>()
 
     const companies = computed(() => data.value || [])
-    const columnHelper = createColumnHelper<Company>()
+    const columnHelper = createColumnHelper<CompanySimplePayload>()
 
     // Helper functions for navigation
     const goToEdit = (companyIdParam: number) => {

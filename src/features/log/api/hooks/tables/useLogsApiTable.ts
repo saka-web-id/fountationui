@@ -95,7 +95,7 @@ export function useLogsApiTable() {
         if (!auth.user) return;
         loading.value = true;
         try {
-            const response = await getLogsApi(auth.user.company.companyId, auth.user.id, {
+            const response = await getLogsApi(auth.user.company.companyId ?? 0, auth.user.id ?? 0, {
                 endpoint: filterEndpoint.value,
                 dateFrom: filterDateFrom.value,
                 dateTo: filterDateTo.value,
@@ -127,7 +127,7 @@ export function useLogsApiTable() {
         }
 
         try {
-            selectedLog.value = await getLogApiDetail(auth.user.company.companyId, auth.user.id, id);
+            selectedLog.value = await getLogApiDetail(auth.user.company.companyId ?? 0, auth.user.id ?? 0, id);
         } catch (error) {
             console.error("Failed to fetch log detail:", error);
         } finally {

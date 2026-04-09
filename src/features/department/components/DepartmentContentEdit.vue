@@ -4,7 +4,8 @@ import {useApi} from "~/composables/useApi";
 import {useDepartmentSchema} from "~/features/department/hooks/schemas/department.schema";
 import {useRoute} from "vue-router";
 import {computed, onMounted} from "vue";
-import {  useDepartmentForm,  mapDepartmentFromApi,  type DepartmentPayload } from "~/features/department/hooks/forms/useDepartmentForm"
+import {  useDepartmentForm,  mapDepartmentFromApi } from "~/features/department/hooks/forms/useDepartmentForm"
+import { type DepartmentCompanySimplePayload } from "~/features/department/interfaces/department.interfaces"
 import {ErrorMessage, Field, Form} from "vee-validate";
 import { useAuthStore } from '~/stores/auth'
 
@@ -36,7 +37,7 @@ onMounted(async () => {
 
 });
 
-const submitForm = handleSubmit( async (values: DepartmentPayload) => {
+const submitForm = handleSubmit( async (values: DepartmentCompanySimplePayload) => {
       if (isEdit.value) {
         console.log("RUNNING EDIT" + values.departmentStatus);
 

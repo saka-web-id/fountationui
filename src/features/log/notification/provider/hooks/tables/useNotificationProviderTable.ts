@@ -96,8 +96,8 @@ export function useNotificationProviderTable(filters: any) {
         loading.value = true;
         try {
             const response = await getLogsProviderNotificationList(
-                auth.user.company.companyId, 
-                auth.user.id, 
+                auth.user.company.companyId ?? 0,
+                auth.user.id ?? 0,
                 filters.value.providerId,
                 {
                     dateFrom: filters.value.dateFrom,
@@ -130,8 +130,8 @@ export function useNotificationProviderTable(filters: any) {
 
         try {
             const data = await getLogsProviderNotificationDetail(
-                auth.user.company.companyId, 
-                auth.user.id, 
+                auth.user.company.companyId ?? 0,
+                auth.user.id ?? 0,
                 id
             );
             selectedLog.value = mapDetailToUI(data);

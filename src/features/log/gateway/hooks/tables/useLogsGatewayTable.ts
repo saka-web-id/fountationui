@@ -94,7 +94,7 @@ export function useLogsGatewayTable() {
         if (!auth.user) return;
         loading.value = true;
         try {
-            const response = await getLogsGateway(auth.user.company.companyId, auth.user.id, {
+            const response = await getLogsGateway(auth.user.company.companyId ?? 0, auth.user.id ?? 0, {
                 endpoint: filterEndpoint.value,
                 dateFrom: filterDateFrom.value,
                 dateTo: filterDateTo.value,
@@ -122,7 +122,7 @@ export function useLogsGatewayTable() {
         }
 
         try {
-            selectedLog.value = await getLogGatewayDetail(auth.user.company.companyId, auth.user.id, id);
+            selectedLog.value = await getLogGatewayDetail(auth.user.company.companyId ?? 0, auth.user.id ?? 0, id);
         } catch (error) {
             console.error("Failed to fetch log detail:", error);
         } finally {

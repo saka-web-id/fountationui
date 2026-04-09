@@ -1,26 +1,8 @@
-// hooks/useRegisterForm.ts
 import { useForm } from 'vee-validate'
 import { useCompanySchema } from '../schemas/company.schema.ts';
+import type { Company } from "~/features/company/interfaces/company.interfaces.ts";
 
-export interface CompanyPayload {
-    companyId: number;
-    companyName: string;
-    companyAddress: string;
-    companyPhone: string;
-    companyEmail: string;
-    companyWebsite: string;
-    companyDescription: string;
-    companyLogoUrl: string;
-    companyTaxId: string;
-    companyRegistrationId: string;
-    companyStatus: string;
-    companyIndustry: string;
-    companyType: string;
-    companyCreatedAt: string;
-    companyUpdatedAt: string;
-}
-
-export const mapCompanyFromApi = (apiData: any): CompanyPayload => ({
+export const mapCompanyFromApi = (apiData: any): Company => ({
     companyId: apiData.companyId,
     companyName: apiData.companyName,
     companyAddress: apiData.companyAddress,
@@ -41,7 +23,7 @@ export const mapCompanyFromApi = (apiData: any): CompanyPayload => ({
 
 export function useCompanyForm() {
     // useForm with schema
-    const {  defineField, handleSubmit, setValues } = useForm<CompanyPayload>({
+    const {  defineField, handleSubmit, setValues } = useForm<Company>({
         validationSchema: useCompanySchema,
         initialValues: {companyId: 0, companyName: "", companyAddress: "", companyPhone: "", companyEmail: "", companyWebsite: "", companyDescription: "", companyLogoUrl:"",  companyTaxId:"", companyRegistrationId:"", companyStatus:"", companyIndustry:"", companyType:"", companyCreatedAt:"", companyUpdatedAt:""}
     })
