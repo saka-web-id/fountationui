@@ -1,6 +1,7 @@
 import { useForm } from "vee-validate";
 import { useCampaignSchema } from "~/features/notification/campaign/hooks/schemas/campaign.schema.ts";
 import type { NotificationCampaignDTO, NotificationDTO } from "~/features/notification/campaign/interfaces/types.ts";
+import dayjs from "dayjs";
 
 export interface CampaignFormValues {
     notiCampaignId: number;
@@ -22,7 +23,7 @@ export const mapCampaignFromApi = (apiData: NotificationCampaignDTO): CampaignFo
     notiCampaignDescription: apiData.notiCampaignDescription,
     notiCampaignStatus: apiData.notiCampaignStatus,
     notiCampaignMetadata: JSON.stringify(apiData.notiCampaignMetadata, null, 2),
-    notiCampaignScheduledAt: apiData.notiCampaignScheduledAt ? new Date(apiData.notiCampaignScheduledAt).toISOString().split('T')[0] : "",
+    notiCampaignScheduledAt: apiData.notiCampaignScheduledAt ? dayjs(apiData.notiCampaignScheduledAt).format('YYYY-MM-DDTHH:mm') : "",
     notiCampaignNotifications: apiData.notiCampaignNotifications || []
 });
 

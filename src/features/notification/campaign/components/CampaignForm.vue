@@ -36,6 +36,7 @@ const {
     notiCampaignDescription,
     notiCampaignMetadata,
     notiCampaignScheduledAt,
+    notiCampaignNotifications,
     beautifyMetadata,
     updateNotification,
     addNotification,
@@ -57,7 +58,7 @@ const recipientForm = ref<Partial<NotificationDTO>>({
 const editingRecipientIndex = ref<number>(-1);
 
 // Recipients Table Logic
-const recipientsData = computed(() => values.notiCampaignNotifications || []);
+const recipientsData = computed(() => notiCampaignNotifications.value || []);
 const columnHelper = createColumnHelper<NotificationDTO>();
 
 const columns = [
@@ -118,7 +119,12 @@ const fetchData = async () => {
     if (props.campaignId) {
         await get(`/v0/notification/campaign/detail/companyId/${auth.user?.company.companyId}/userId/${userId}/campaignId/${props.campaignId}`);
         if (campaignData.value) {
-            setValues(mapCampaignFromApi(campaignData.value as any));
+            const mapped = mapCampaignFromApi(campaignData.value as any);
+            setValues(mapped);
+            if (mapped.notiCampaignNotifications.length > 0) {
+                selectedCategory.value = mapped.notiCampaignNotifications[0].notiCategoryId;
+                selectedProvider.value = mapped.notiCampaignNotifications[0].notiProviderId;
+            }
         }
     }
 };
