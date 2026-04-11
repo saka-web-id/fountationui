@@ -103,7 +103,9 @@
     "view": "查看",
     "next": "下一步",
     "back": "返回",
-    "test": "测试"
+    "test": "测试",
+    "start": "现在开始",
+    "cancel": "取消"
   },
   "textLabel": {
     "organization": "组织",
@@ -216,10 +218,39 @@
     "configuration": "配置",
     "isSecret": "是否加密",
     "validJson": "有效的 JSON",
-    "category": "Category | Categories",
-    "list": "List",
+    "category": "类别",
+    "list": "列表",
     "template": "模板 | 模板列表",
-    "subject": "主题"
+    "subject": "主题",
+    "recipient": "收件人"
+  },
+  "campaign": {
+    "title": "营销标题",
+    "description": "描述",
+    "scheduledAt": "预定时间",
+    "metadata": "元数据",
+    "recipients": "收件人",
+    "template": "模板",
+    "listTitle": "通知营销列表",
+    "addTitle": "新增营销",
+    "editTitle": "编辑营销",
+    "uploadCSV": "上传收件人 (CSV)",
+    "downloadExample": "下载示例 CSV",
+    "status": "状态"
+  },
+  "status": {
+    "pending": "待处理",
+    "sent": "已发送",
+    "failed": "失败",
+    "scheduled": "已预定",
+    "starting": "启动中",
+    "cancelled": "已取消"
+  },
+  "category": {
+    "name": "类别"
+  },
+  "provider": {
+    "name": "供应商"
   },
   "textField": {
     "email": "邮箱",

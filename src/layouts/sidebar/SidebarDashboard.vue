@@ -72,6 +72,12 @@ const isPremium = import.meta.env.VITE_APP_PLAN === 'PREMIUM';
           </svg>
           {{ t('textLabel.template', 2) }}
         </router-link>
+        <router-link to="/notification/campaign" class="dropdown-item" id="idnotificationcampaign">
+          <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-megaphone me-1 mb-1">
+            <path d="M13 2.5a1.5 1.5 0 0 1 1.5 1.5v10.128a.5.5 0 0 1-.73.444l-1.136-.568a2 2 0 0 0-1.754 0l-1.136.568a.5.5 0 0 1-.73-.444V4a1.5 1.5 0 0 1 1.5-1.5zm0 1a.5.5 0 0 0-.5.5v8.8a1 1 0 0 1-1.316.949l-.115-.058a1 1 0 0 0-.877 0l-.115.058a1 1 0 0 1-1.316-.949V4a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v10a.5.5 0 0 1-1 0V4a1.5 1.5 0 0 1 1.5-1.5h1zm-7.002 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zM1 4v10a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1zm1 0h2v10H2V4z"/>
+          </svg>
+          {{ t('textLabel.activity', 1) }}
+        </router-link>
       </div>
     </li>
     <li class="nav-item dropdown " id="idlogs">

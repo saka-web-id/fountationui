@@ -103,7 +103,9 @@
     "view": "Lihat",
     "next": "Lanjut",
     "back": "Kembali",
-    "test": "Coba"
+    "test": "Coba",
+    "start": "Mulai Sekarang",
+    "cancel": "Batal"
   },
   "textLabel": {
     "organization": "Organisasi",
@@ -205,7 +207,6 @@
     "notification": "Notifikasi",
     "notificationSetting": "Pengaturan Notifikasi",
     "notificationCategory": "Kategori Notifikasi",
-
     "service": "Layanan | Daftar Layanan",
     "key": "Kunci",
     "value": "  Nilai",
@@ -220,7 +221,36 @@
     "category": "Kategori",
     "list": "Daftar",
     "template": "Templat | Templat",
-    "subject": "Subjek"
+    "subject": "Subjek",
+    "recipient": "Penerima"
+  },
+  "campaign": {
+    "title": "Judul Kampanye",
+    "description": "Deskripsi",
+    "scheduledAt": "Dijadwalkan Pada",
+    "metadata": "Metadata",
+    "recipients": "Penerima",
+    "template": "Templat",
+    "listTitle": "Kampanye Notifikasi",
+    "addTitle": "Tambah Kampanye Baru",
+    "editTitle": "Ubah Kampanye",
+    "uploadCSV": "Unggah Penerima (CSV)",
+    "downloadExample": "Unduh Contoh CSV",
+    "status": "Status"
+  },
+  "status": {
+    "pending": "Menunggu",
+    "sent": "Terkirim",
+    "failed": "Gagal",
+    "scheduled": "Dijadwalkan",
+    "starting": "Memulai",
+    "cancelled": "Dibatalkan"
+  },
+  "category": {
+    "name": "Kategori"
+  },
+  "provider": {
+    "name": "Provider"
   },
   "textField": {
     "email": "Surel",

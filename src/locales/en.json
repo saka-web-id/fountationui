@@ -104,7 +104,9 @@
     "next": "Next",
     "back": "Back",
     "test": "Test",
-    "adjust": "Adjust"
+    "adjust": "Adjust",
+    "start": "Start Now",
+    "cancel": "Cancel"
   },
   "textLabel": {
     "organization": "Organization",
@@ -220,7 +222,36 @@
     "category": "Category | Categories",
     "list": "List",
     "template": "Template | Templates",
-    "subject": "Subject"
+    "subject": "Subject",
+    "recipient": "Recipient | Recipients"
+  },
+  "campaign": {
+    "title": "Campaign Title",
+    "description": "Description",
+    "scheduledAt": "Scheduled At",
+    "metadata": "Metadata",
+    "recipients": "Recipients",
+    "template": "Template",
+    "listTitle": "Notification Campaigns",
+    "addTitle": "Add New Campaign",
+    "editTitle": "Edit Campaign",
+    "uploadCSV": "Upload Recipients (CSV)",
+    "downloadExample": "Download Example CSV",
+    "status": "Status"
+  },
+  "status": {
+    "pending": "Pending",
+    "sent": "Sent",
+    "failed": "Failed",
+    "scheduled": "Scheduled",
+    "starting": "Starting",
+    "cancelled": "Cancelled"
+  },
+  "category": {
+    "name": "Category"
+  },
+  "provider": {
+    "name": "Provider"
   },
   "textField": {
     "email": "Email",
