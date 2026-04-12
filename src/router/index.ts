@@ -193,6 +193,18 @@ const routes: RouteRecordRaw[] = [
         meta: { requiresAuth: true, requiresPremium: false, roleAccess: "SUPER_ADMIN, ADMIN, MANAGER" }
     },
     {
+        path: '/notification/history',
+        name: 'notificationhistory',
+        component: () => import("~/views/notification/history/NotificationHistoryCompanyView.vue"),
+        meta: { requiresAuth: true, requiresPremium: false, roleAccess: "SUPER_ADMIN, ADMIN, MANAGER" }
+    },
+    {
+        path: '/notification/history/list/:companyIdParam',
+        name: 'notificationhistorylist',
+        component: () => import("~/views/notification/history/NotificationHistoryListView.vue"),
+        meta: { requiresAuth: true, requiresPremium: false, roleAccess: "SUPER_ADMIN, ADMIN, MANAGER" }
+    },
+    {
         path: '/notification/email',
         name: 'notificationemail',
         component: () => import("~/views/notification/settings/email/EmailSettingCompanyView.vue"),

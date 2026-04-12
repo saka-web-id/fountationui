@@ -105,7 +105,8 @@
     "back": "Kembali",
     "test": "Coba",
     "start": "Mulai Sekarang",
-    "cancel": "Batal"
+    "cancel": "Batal",
+    "readMore": "Baca Selengkapnya"
   },
   "textLabel": {
     "organization": "Organisasi",
@@ -125,6 +126,7 @@
     "profile": "Profil",
     "type": "Tipe",
     "activity": "Aktifitas",
+    "activityLogs": "Log Aktivitas",
     "logout": "Keluar",
     "setting": "Pengaturan",
     "user": "Pengguna",
@@ -172,6 +174,36 @@
     "userStatus": "Status Pengguna",
     "userVerification": "Verifikasi Pengguna",
     "userProfile": "Profile Pengguna",
+    "userEdit": "Ubah Pengguna",
+    "userDelete": "Hapus Pengguna",
+    "userPassword": "Kata Sandi Pengguna",
+    "oldPassword": "Kata Sandi Lama",
+    "newPassword": "Kata Sandi Baru",
+    "confirmPassword": "Konfirmasi Kata Sandi",
+    "adminPasswordNote": "*Administrator tidak perlu memasukkan Kata Sandi Lama",
+    "deleteConfirmation": "Apakah Anda yakin ingin menghapus pengguna ini?",
+    "confirmation": "Konfirmasi",
+    "currentPassword": "Kata Sandi Saat Ini",
+    "changePassword": "Ubah Kata Sandi",
+    "personalInformation": "Informasi Personal",
+    "twoFactorAuthentication": "Autentikasi 2FA",
+    "updatePassword": "Perbarui kata sandi Anda",
+    "scanQr": "Pindai QR",
+    "completed": "Selesai",
+    "twoFactorChannel": "Saluran 2FA",
+    "updateTwoFactor": "Perbarui Autentikasi 2 Faktor Anda",
+    "personalTwoFactor": "2FA Personal",
+    "oauthProviders": "Provider Oauth",
+    "addOauthProvider": "Tambah Provider OAuth",
+    "sendingEmail": "Mengirim Surel",
+    "maxRecipients": "Maksimal Penerima",
+    "smtpProtocols": "Protokol SMTP",
+    "smtpHost": "Host SMTP",
+    "smtpPort": "Port SMTP",
+    "smtpTimeout": "Timeout SMTP",
+    "encryption": "Enkripsi",
+    "contentJson": "Properti Konten JSON",
+    "contentCompiled": "Konten Kompilasi (Templat Body)",
     "billingCycle": "Siklus Penagihan",
     "feature": "Fitur | Fitur",
     "duration": "Durasi",
@@ -222,7 +254,21 @@
     "list": "Daftar",
     "template": "Templat | Templat",
     "subject": "Subjek",
-    "recipient": "Penerima"
+    "recipient": "Penerima",
+    "history": "Riwayat"
+  },
+  "history": {
+    "detailTitle": "Detail Riwayat Notifikasi",
+    "noData": "Riwayat data tidak ditemukan untuk notifikasi ini.",
+    "searchPlaceholder": "Cari kampanye (min 3 karakter)...",
+    "selectCompanyTitle": "Pilih Perusahaan untuk Riwayat Notifikasi",
+    "selectCompanyButton": "Pilih Perusahaan",
+    "campaignList": "Daftar Kampanye",
+    "listTitle": "Riwayat Kampanye Notifikasi",
+    "exportCsv": "Ekspor CSV",
+    "selectPrompt": "Silakan pilih kampanye dan rentang tanggal untuk melihat riwayat.",
+    "alertFilter": "Silakan filter berdasarkan kampanye terlebih dahulu.",
+    "alertDownloadFailed": "Gagal mengunduh CSV."
   },
   "campaign": {
     "title": "Judul Kampanye",
@@ -236,7 +282,16 @@
     "editTitle": "Ubah Kampanye",
     "uploadCSV": "Unggah Penerima (CSV)",
     "downloadExample": "Unduh Contoh CSV",
-    "status": "Status"
+    "status": "Status",
+    "selectTemplate": "-- Pilih Templat --",
+    "selectCategory": "-- Kategori --",
+    "selectProvider": "-- Provider --",
+    "beautify": "Perindah",
+    "addManual": "Tambah Manual",
+    "example": "Contoh",
+    "addRecipient": "Tambah Penerima",
+    "editRecipient": "Ubah Penerima",
+    "recipientAddress": "Alamat Penerima"
   },
   "status": {
     "pending": "Menunggu",
@@ -244,7 +299,10 @@
     "failed": "Gagal",
     "scheduled": "Dijadwalkan",
     "starting": "Memulai",
-    "cancelled": "Dibatalkan"
+    "cancelled": "Dibatalkan",
+    "draft": "Draf",
+    "queued": "Antrian",
+    "in_progress": "Sedang Berjalan"
   },
   "category": {
     "name": "Kategori"

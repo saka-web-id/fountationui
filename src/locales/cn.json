@@ -105,7 +105,8 @@
     "back": "返回",
     "test": "测试",
     "start": "现在开始",
-    "cancel": "取消"
+    "cancel": "取消",
+    "readMore": "阅读更多"
   },
   "textLabel": {
     "organization": "组织",
@@ -125,6 +126,7 @@
     "profile": "个人资料",
     "type": "类型",
     "activity": "活动 | 活动列表",
+    "activityLogs": "活动日志",
     "logout": "退出登录",
     "setting": "设置 | 设置项",
     "user": "用户 | 用户列表",
@@ -172,6 +174,36 @@
     "userStatus": "用户状态",
     "userVerification": "用户验证",
     "userProfile": "用户资料",
+    "userEdit": "编辑用户",
+    "userDelete": "删除用户",
+    "userPassword": "用户密码",
+    "oldPassword": "旧密码",
+    "newPassword": "新密码",
+    "confirmPassword": "确认密码",
+    "adminPasswordNote": "*管理员无需输入旧密码",
+    "deleteConfirmation": "您确定要删除该用户吗？",
+    "confirmation": "确认",
+    "currentPassword": "当前密码",
+    "changePassword": "修改密码",
+    "personalInformation": "个人信息",
+    "twoFactorAuthentication": "2FA 认证",
+    "updatePassword": "更新您的密码",
+    "scanQr": "扫描二维码",
+    "completed": "已完成",
+    "twoFactorChannel": "2FA 渠道",
+    "updateTwoFactor": "更新您的双重身份验证",
+    "personalTwoFactor": "个人 2FA",
+    "oauthProviders": "OAuth 供应商",
+    "addOauthProvider": "添加 OAuth 供应商",
+    "sendingEmail": "发送邮件",
+    "maxRecipients": "最大收件人数量",
+    "smtpProtocols": "SMTP 协议",
+    "smtpHost": "SMTP 主机",
+    "smtpPort": "SMTP 端口",
+    "smtpTimeout": "SMTP 超时",
+    "encryption": "加密",
+    "contentJson": "内容 JSON (属性)",
+    "contentCompiled": "编译内容 (正文模板)",
     "billingCycle": "计费周期",
     "feature": "功能 | 功能列表",
     "duration": "时长",
@@ -222,7 +254,21 @@
     "list": "列表",
     "template": "模板 | 模板列表",
     "subject": "主题",
-    "recipient": "收件人"
+    "recipient": "收件人",
+    "history": "历史记录"
+  },
+  "history": {
+    "detailTitle": "通知历史详情",
+    "noData": "未找到此通知的历史数据。",
+    "searchPlaceholder": "搜索营销活动（至少 3 个字符）...",
+    "selectCompanyTitle": "选择公司以查看历史记录",
+    "selectCompanyButton": "选择公司",
+    "campaignList": "营销列表",
+    "listTitle": "通知营销历史",
+    "exportCsv": "导出 CSV",
+    "selectPrompt": "请选择营销活动和日期范围以查看历史记录。",
+    "alertFilter": "请先筛选营销活动。",
+    "alertDownloadFailed": "导出 CSV 失败。"
   },
   "campaign": {
     "title": "营销标题",
@@ -236,7 +282,16 @@
     "editTitle": "编辑营销",
     "uploadCSV": "上传收件人 (CSV)",
     "downloadExample": "下载示例 CSV",
-    "status": "状态"
+    "status": "状态",
+    "selectTemplate": "-- 选择模板 --",
+    "selectCategory": "-- 类别 --",
+    "selectProvider": "-- 供应商 --",
+    "beautify": "美化",
+    "addManual": "手动添加",
+    "example": "示例",
+    "addRecipient": "添加收件人",
+    "editRecipient": "编辑收件人",
+    "recipientAddress": "收件人地址"
   },
   "status": {
     "pending": "待处理",
@@ -244,7 +299,10 @@
     "failed": "失败",
     "scheduled": "已预定",
     "starting": "启动中",
-    "cancelled": "已取消"
+    "cancelled": "已取消",
+    "draft": "草稿",
+    "queued": "队列中",
+    "in_progress": "进行中"
   },
   "category": {
     "name": "类别"

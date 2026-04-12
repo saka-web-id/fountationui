@@ -114,14 +114,14 @@ const beautifyJson = () => {
 
         <div class="mb-3">
           <div class="d-flex justify-content-between align-items-center mb-1">
-            <label class="form-label mb-0">Content JSON (Properties)</label>
-            <button type="button" class="btn btn-sm btn-outline-secondary" @click="beautifyJson">Beautify</button>
+            <label class="form-label mb-0">{{ t('textLabel.contentJson') }}</label>
+            <button type="button" class="btn btn-sm btn-outline-secondary" @click="beautifyJson">{{ t('campaign.beautify') }}</button>
           </div>
           <textarea v-model="notiTemplateContentJson" class="form-control font-monospace" rows="8"></textarea>
         </div>
 
         <div class="mb-3">
-          <label class="form-label">Content Compiled (Body Template)</label>
+          <label class="form-label">{{ t('textLabel.contentCompiled') }}</label>
           <textarea v-model="notiTemplateContentCompiled" class="form-control" rows="8"></textarea>
         </div>
 

@@ -59,7 +59,7 @@ const submitForm = handleSubmit( async (values: UserPayload) => {
   <section class="pt-2 pb-2">
     <div class="container">
       <ol class="breadcrumb ms-4">
-        <li class="breadcrumb-item"><router-link to="/dashboard"><span>Home</span></router-link></li>
+        <li class="breadcrumb-item"><router-link to="/dashboard"><span>{{ t('textLabel.home') }}</span></router-link></li>
         <li class="breadcrumb-item"><router-link to="/company"><span>{{ t('textLabel.company', 2) }}</span></router-link></li>
         <li class="breadcrumb-item">
           <router-link :to="{ name: 'companydepartment', params: { companyId: companyIdParam } }">
@@ -76,7 +76,7 @@ const submitForm = handleSubmit( async (values: UserPayload) => {
       <div class="card mb-3 bg-gradient-dark">
         <div class="card-body ms-0 ps-0 me-0 pe-0 mt-0 pt-0 pb-0">
           <Form :validation-schema="userScheme" id="idform" v-slot="{ meta }" class="text-center py-4" >
-            <h4 class="text-start ms-2">User Edit</h4>
+            <h4 class="text-start ms-2">{{ t('textLabel.userEdit') }}</h4>
             <div class="input-group mb-2">
               <span class="d-flex w-25 ms-2 input-group-text" style="font-size: calc(0.6em + 0.5vw);">{{ t('textLabel.company') }}</span>
               <select v-model="companyIdParam" class="form-control d-flex ms-0 ps-2 me-2 pe-4" type="text">

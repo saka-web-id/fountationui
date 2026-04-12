@@ -1,5 +1,6 @@
 <script setup lang="ts">
-
+import { useI18n } from 'vue-i18n';
+const { t } = useI18n();
 </script>
 
 <template>
@@ -7,13 +8,13 @@
 
     <div class="container">
       <ol class="breadcrumb ms-2 me-2">
-        <li class="breadcrumb-item"><router-link to="/dashboard"><span>Home</span></router-link></li>
-        <li class="breadcrumb-item active"><span>Activity Logs</span></li>
+        <li class="breadcrumb-item"><router-link to="/dashboard"><span>{{ t('textLabel.home') }}</span></router-link></li>
+        <li class="breadcrumb-item active"><span>{{ t('textLabel.activityLogs') }}</span></li>
       </ol>
       <div class="card mb-3 bg-gradient-dark">
         <div class="card-body ms-0 ps-0 me-0 pe-0 mt-0 pt-0 pb-0">
           <div class="text-center py-4" id="idform">
-            <h4 class="text-start ms-2">Activity Logs</h4>
+            <h4 class="text-start ms-2">{{ t('textLabel.activityLogs') }}</h4>
             <ul class="list-group list-group-flush">
               <li class="list-group-item d-flex mt-1 pt-0 mb-0 pb-1">
                 <div class="text-start w-75 mt-0 mb-0 pb-0"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-info-circle me-2" style="width: 24px;height: 24px;color: var(--bs-blue);">
@@ -57,7 +58,7 @@
                 </svg><span class="me-2 mt-0 pt-0 mb-0">System</span><small class="text-secondary me-0 mt-0 pt-0 mb-0">System problem - database limited</small></div>
                 <div class="text-end w-25"><sub>2025-09-17 23:47:00</sub></div>
               </li>
-            </ul><button class="btn btn-primary" type="button">Read More</button>
+            </ul><button class="btn btn-primary" type="button">{{ t('button.readMore') }}</button>
           </div>
         </div>
       </div>

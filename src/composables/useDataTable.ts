@@ -9,19 +9,19 @@ import {
   type ColumnFiltersState,
   type PaginationState,
   type TableOptions,
-  /*type OnChangeFn,*/
+  type Updater,
 } from '@tanstack/vue-table'
 import { ref, type Ref } from 'vue'
 
 export function useDataTable<TData>(
   data: Ref<TData[]>,
   columns: ColumnDef<TData, any>[],
-  options?: Partial<TableOptions<TData>>
+  options?: Partial<TableOptions<TData>> & { pagination?: Ref<PaginationState> }
 ) {
   const sorting = ref<SortingState>(options?.state?.sorting || [])
   const globalFilter = ref(options?.state?.globalFilter || '')
   const columnFilters = ref<ColumnFiltersState>(options?.state?.columnFilters || [])
-  const pagination = ref<PaginationState>(options?.state?.pagination || {
+  const pagination = options?.pagination || ref<PaginationState>(options?.state?.pagination || {
     pageIndex: 0,
     pageSize: 10,
   })
@@ -43,7 +43,7 @@ export function useDataTable<TData>(
       }
       options?.onSortingChange?.(updater)
     },
-    onGlobalFilterChange: updater => {
+    onGlobalFilterChange: (updater: Updater<any>) => {
       if (typeof updater === 'function') {
         globalFilter.value = updater(globalFilter.value)
       } else {
@@ -75,7 +75,7 @@ export function useDataTable<TData>(
     manualPagination: options?.manualPagination,
     manualSorting: options?.manualSorting,
     manualFiltering: options?.manualFiltering,
-    pageCount: options?.pageCount,
+    get pageCount() { return options?.pageCount },
     ...options,
   })
 

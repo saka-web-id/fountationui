@@ -78,6 +78,13 @@ const isPremium = import.meta.env.VITE_APP_PLAN === 'PREMIUM';
           </svg>
           {{ t('textLabel.activity', 1) }}
         </router-link>
+        <router-link to="/notification/history" class="dropdown-item" id="idnotificationhistory">
+          <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-clock-history me-1 mb-1">
+            <path d="M8.515 1.019A7 7 0 0 0 8 1V0a8 8 0 0 1 .589.022l-.074.997zm2.004.45a7.003 7.003 0 0 0-.985-.299l.219-.976c.383.086.76.2 1.126.342l-.36.933zm1.37.71a7.01 7.01 0 0 0-.439-.74l.908-.417c.184.4.349.81.493 1.23l-.962.327a7.054 7.054 0 0 0-.44-.741zM12.795 4.3c-.165-.267-.35-.521-.553-.76l.77-.639c.24.282.458.582.653.899l-.87.5zM14 8A6 6 0 0 0 8.5 2.123V1c3.313 0 6 2.687 6 6 0 .222-.012.442-.035.658l-.993-.108A5.99 5.99 0 0 0 14 8zM1.4 6a6 6 0 0 0 0 4h1.018a4.996 4.996 0 0 1 0-4H1.4zM3.25 12.182c.113.113.23.223.352.328l-.66.752a7.107 7.107 0 0 1-.433-.408l.741-.672zM5.132 14.155c.17.078.344.15.522.213l-.338.942a8.04 8.04 0 0 1-.682-.277l.498-.878zM8 15a6 6 0 0 0 5.5-3.877l.933.36a7 7 0 0 1-13.433 0l.933-.36A6 6 0 0 0 8 15z"/>
+            <path d="M7 5V8h3v1H6V5h1z"/>
+          </svg>
+          {{ t('textLabel.history') }}
+        </router-link>
       </div>
     </li>
     <li class="nav-item dropdown " id="idlogs">

@@ -74,7 +74,7 @@ export function useCampaignTable(companyIdParam: string) {
 
     const fetchData = async () => {
         const userId = auth.user?.id;
-        await get(`/v0/notification/campaign/list/companyId/${companyIdParam}/userId/${userId}`);
+        await get(`/v0/notification/campaign/list/companyId/${auth.user?.company.companyId}/userId/${userId}/valueCompanyId/${companyIdParam}`);
     };
 
     // We'll use an event emitter pattern or a callback for edit

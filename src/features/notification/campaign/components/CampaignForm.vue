@@ -269,7 +269,7 @@ const onSubmit = handleSubmit(async (values) => {
                 <div class="col-md-6">
                     <label class="form-label">{{ t('campaign.template') }}</label>
                     <select v-model="notiCampaignTemplateId" class="form-select" :class="{ 'is-invalid': errors.notiCampaignTemplateId }">
-                        <option :value="0">-- Select Template --</option>
+                        <option :value="0">{{ t('campaign.selectTemplate') }}</option>
                         <option v-for="tpl in templates" :key="tpl.notiTemplateId" :value="tpl.notiTemplateId">
                             {{ tpl.notiTemplateName }} ({{ tpl.notiTemplateType }})
                         </option>
@@ -286,7 +286,7 @@ const onSubmit = handleSubmit(async (values) => {
             <div class="mb-3">
                 <div class="d-flex justify-content-between align-items-center mb-2">
                     <label class="form-label mb-0">{{ t('campaign.metadata') }} (JSON)</label>
-                    <button type="button" class="btn btn-outline-secondary btn-sm" @click="beautifyMetadata">Beautify</button>
+                    <button type="button" class="btn btn-outline-secondary btn-sm" @click="beautifyMetadata">{{ t('campaign.beautify') }}</button>
                 </div>
                 <textarea v-model="notiCampaignMetadata" class="form-control font-monospace" rows="5" :class="{ 'is-invalid': errors.notiCampaignMetadata }"></textarea>
                 <div class="invalid-feedback">{{ errors.notiCampaignMetadata }}</div>
@@ -298,7 +298,7 @@ const onSubmit = handleSubmit(async (values) => {
                 <div class="d-flex justify-content-between align-items-center mb-3">
                     <h5 class="mb-0">{{ t('campaign.recipients') }} ({{ recipientsData.length }})</h5>
                     <button type="button" class="btn btn-sm btn-outline-primary" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRecipientForm" @click="openAddRecipient">
-                        <i class="fas fa-plus me-1"></i>Add Manual
+                        <i class="fas fa-plus me-1"></i>{{ t('campaign.addManual') }}
                     </button>
                 </div>
                 
@@ -306,14 +306,14 @@ const onSubmit = handleSubmit(async (values) => {
                     <div class="col-md-3">
                         <label class="form-label small">{{ t('category.name') }}</label>
                         <select v-model="selectedCategory" class="form-select form-select-sm">
-                            <option :value="0">-- Category --</option>
+                            <option :value="0">{{ t('campaign.selectCategory') }}</option>
                             <option v-for="cat in categories" :key="cat.notiCategoryId" :value="cat.notiCategoryId">{{ cat.notiCategoryName }}</option>
                         </select>
                     </div>
                     <div class="col-md-3">
                         <label class="form-label small">{{ t('provider.name') }}</label>
                         <select v-model="selectedProvider" class="form-select form-select-sm" :disabled="!selectedCategory">
-                            <option :value="0">-- Provider --</option>
+                            <option :value="0">{{ t('campaign.selectProvider') }}</option>
                             <option v-for="p in providers" :key="p.providerId" :value="p.providerId">{{ p.providerName }}</option>
                         </select>
                     </div>
@@ -321,7 +321,7 @@ const onSubmit = handleSubmit(async (values) => {
                         <div class="d-flex justify-content-between align-items-center mb-1">
                             <label class="form-label small mb-0">{{ t('campaign.uploadCSV') }}</label>
                             <a href="#" class="small text-decoration-none" @click.prevent="downloadExampleCSV" style="font-size: 0.7rem;">
-                                <i class="fas fa-download me-1"></i>Example
+                                <i class="fas fa-download me-1"></i>{{ t('campaign.example') }}
                             </a>
                         </div>
                         <input type="file" class="form-control form-control-sm" accept=".csv" @change="onFileChange" :disabled="isUploading">
@@ -346,34 +346,34 @@ const onSubmit = handleSubmit(async (values) => {
         <!-- Recipient Add/Edit Offcanvas -->
         <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRecipientForm" aria-labelledby="offcanvasRecipientFormLabel">
             <div class="offcanvas-header border-bottom">
-                <h5 id="offcanvasRecipientFormLabel">{{ editingRecipientIndex >= 0 ? 'Edit Recipient' : 'Add Recipient' }}</h5>
+                <h5 id="offcanvasRecipientFormLabel">{{ editingRecipientIndex >= 0 ? t('campaign.editRecipient') : t('campaign.addRecipient') }}</h5>
                 <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
             </div>
             <div class="offcanvas-body">
                 <div class="mb-3">
-                    <label class="form-label">{{ t('campaign.recipients') }} Address</label>
+                    <label class="form-label">{{ t('campaign.recipientAddress') }}</label>
                     <input v-model="recipientForm.notiRecipientAddress" type="text" class="form-control" placeholder="e.g. email@example.com or +62...">
                 </div>
                 <div class="mb-3">
                     <label class="form-label">{{ t('category.name') }}</label>
                     <select v-model="recipientForm.notiCategoryId" class="form-select">
-                        <option :value="0">-- Select Category --</option>
+                        <option :value="0">{{ t('campaign.selectCategory') }}</option>
                         <option v-for="cat in categories" :key="cat.notiCategoryId" :value="cat.notiCategoryId">{{ cat.notiCategoryName }}</option>
                     </select>
                 </div>
                 <div class="mb-3">
                     <label class="form-label">{{ t('provider.name') }}</label>
                     <select v-model="recipientForm.notiProviderId" class="form-select">
-                        <option :value="0">-- Select Provider --</option>
+                        <option :value="0">{{ t('campaign.selectProvider') }}</option>
                         <option v-for="p in providers" :key="p.providerId" :value="p.providerId">{{ p.providerName }}</option>
                     </select>
                 </div>
                 <div class="mb-3">
                     <label class="form-label">{{ t('textLabel.status') }}</label>
                     <select v-model="recipientForm.notiStatus" class="form-select">
-                        <option value="SCHEDULED">Scheduled</option>
-                        <option value="SENT">Sent</option>
-                        <option value="FAILED">Failed</option>
+                        <option value="SCHEDULED">{{ t('status.scheduled') }}</option>
+                        <option value="SENT">{{ t('status.sent') }}</option>
+                        <option value="FAILED">{{ t('status.failed') }}</option>
                     </select>
                 </div>
                 <div class="d-grid mt-4">

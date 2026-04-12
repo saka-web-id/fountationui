@@ -106,7 +106,8 @@
     "test": "Test",
     "adjust": "Adjust",
     "start": "Start Now",
-    "cancel": "Cancel"
+    "cancel": "Cancel",
+    "readMore": "Read More"
   },
   "textLabel": {
     "organization": "Organization",
@@ -126,6 +127,7 @@
     "profile": "Profile",
     "type": "Type",
     "activity": "Activity | Activities",
+    "activityLogs": "Activity Logs",
     "logout": "Logout",
     "setting": "Setting | Settings",
     "user": "User | Users",
@@ -173,6 +175,36 @@
     "userStatus": "User Status",
     "userVerification": "User Verification",
     "userProfile": "User Profile",
+    "userEdit": "User Edit",
+    "userDelete": "User Delete",
+    "userPassword": "User Password",
+    "oldPassword": "Old Password",
+    "newPassword": "New Password",
+    "confirmPassword": "Confirm Password",
+    "adminPasswordNote": "*Administrator no need to input Old Password",
+    "deleteConfirmation": "Are you sure delete the user ?",
+    "confirmation": "Confirmation",
+    "currentPassword": "Current Password",
+    "changePassword": "Change Password",
+    "personalInformation": "Personal Information",
+    "twoFactorAuthentication": "2FA Authentication",
+    "updatePassword": "Update your password",
+    "scanQr": "Scan QR",
+    "completed": "Completed",
+    "twoFactorChannel": "2FA Channel",
+    "updateTwoFactor": "Update your 2 Factor Authentication",
+    "personalTwoFactor": "Personal 2FA",
+    "oauthProviders": "OAuth Providers",
+    "addOauthProvider": "Add OAuth Provider",
+    "sendingEmail": "Sending Email",
+    "maxRecipients": "Max Recipients",
+    "smtpProtocols": "SMTP Protocols",
+    "smtpHost": "SMTP Host",
+    "smtpPort": "SMTP Port",
+    "smtpTimeout": "SMTP Timeout",
+    "encryption": "Encryption",
+    "contentJson": "Content JSON (Properties)",
+    "contentCompiled": "Content Compiled (Body Template)",
     "billingCycle": "Billing Cycle",
     "feature": "Feature | Features",
     "duration": "Duration",
@@ -223,7 +255,21 @@
     "list": "List",
     "template": "Template | Templates",
     "subject": "Subject",
-    "recipient": "Recipient | Recipients"
+    "recipient": "Recipient | Recipients",
+    "history": "History"
+  },
+  "history": {
+    "detailTitle": "Notification History Details",
+    "noData": "No history data found for this notification.",
+    "searchPlaceholder": "Search campaign (min 3 chars)...",
+    "selectCompanyTitle": "Select Company for History View",
+    "selectCompanyButton": "Select Company",
+    "campaignList": "Campaign List",
+    "listTitle": "Notification Campaign History",
+    "exportCsv": "Export CSV",
+    "selectPrompt": "Please select a campaign and date range to view history.",
+    "alertFilter": "Please filter by campaign first.",
+    "alertDownloadFailed": "Failed to download CSV."
   },
   "campaign": {
     "title": "Campaign Title",
@@ -237,7 +283,16 @@
     "editTitle": "Edit Campaign",
     "uploadCSV": "Upload Recipients (CSV)",
     "downloadExample": "Download Example CSV",
-    "status": "Status"
+    "status": "Status",
+    "selectTemplate": "-- Select Template --",
+    "selectCategory": "-- Category --",
+    "selectProvider": "-- Provider --",
+    "beautify": "Beautify",
+    "addManual": "Add Manual",
+    "example": "Example",
+    "addRecipient": "Add Recipient",
+    "editRecipient": "Edit Recipient",
+    "recipientAddress": "Recipient Address"
   },
   "status": {
     "pending": "Pending",
@@ -245,7 +300,10 @@
     "failed": "Failed",
     "scheduled": "Scheduled",
     "starting": "Starting",
-    "cancelled": "Cancelled"
+    "cancelled": "Cancelled",
+    "draft": "Draft",
+    "queued": "Queued",
+    "in_progress": "In Progress"
   },
   "category": {
     "name": "Category"

@@ -1,5 +1,6 @@
 <script setup lang="ts">
-
+import { useI18n } from 'vue-i18n';
+const { t } = useI18n();
 </script>
 
 <template>
@@ -7,12 +8,12 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h4 class="modal-title">Confirmation</h4><button class="btn-close" type="button" aria-label="Close" data-bs-dismiss="modal"></button>
+          <h4 class="modal-title">{{ t('textLabel.confirmation') }}</h4><button class="btn-close" type="button" aria-label="Close" data-bs-dismiss="modal"></button>
         </div>
         <div class="modal-body">
-          <p>Are you sure delete the user ?</p>
+          <p>{{ t('textLabel.deleteConfirmation') }}</p>
         </div>
-        <div class="modal-footer"><button class="btn btn-light" type="button" data-bs-dismiss="modal">Close</button><button class="btn btn-danger" type="button">Delete</button></div>
+        <div class="modal-footer"><button class="btn btn-light" type="button" data-bs-dismiss="modal">{{ t('button.close') }}</button><button class="btn btn-danger" type="button">{{ t('button.delete') }}</button></div>
       </div>
     </div>
   </div>
