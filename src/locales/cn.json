@@ -255,7 +255,8 @@
     "template": "模板 | 模板列表",
     "subject": "主题",
     "recipient": "收件人",
-    "history": "历史记录"
+    "history": "历史记录",
+    "watched": "已观看"
   },
   "history": {
     "detailTitle": "通知历史详情",

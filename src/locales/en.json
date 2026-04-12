@@ -256,7 +256,8 @@
     "template": "Template | Templates",
     "subject": "Subject",
     "recipient": "Recipient | Recipients",
-    "history": "History"
+    "history": "History",
+    "watched": "Watched"
   },
   "history": {
     "detailTitle": "Notification History Details",

@@ -255,7 +255,8 @@
     "template": "Templat | Templat",
     "subject": "Subjek",
     "recipient": "Penerima",
-    "history": "Riwayat"
+    "history": "Riwayat",
+    "watched": "Sudah Dilihat"
   },
   "history": {
     "detailTitle": "Detail Riwayat Notifikasi",
