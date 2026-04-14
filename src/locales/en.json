@@ -210,7 +210,6 @@
     "duration": "Duration",
     "billing": "Billing",
     "companyProfile": "Company Profile",
-    "personalInformation": "Personal Information",
     "endpoint": "Endpoint",
     "method": "Method",
     "logs": "Logs",
@@ -257,7 +256,8 @@
     "subject": "Subject",
     "recipient": "Recipient | Recipients",
     "history": "History",
-    "watched": "Watched"
+    "watched": "Watched",
+    "campaign": "Campaign | Campaigns"
   },
   "history": {
     "detailTitle": "Notification History Details",
@@ -282,6 +282,7 @@
     "listTitle": "Notification Campaigns",
     "addTitle": "Add New Campaign",
     "editTitle": "Edit Campaign",
+    "viewTitle": "View Campaign",
     "uploadCSV": "Upload Recipients (CSV)",
     "downloadExample": "Download Example CSV",
     "status": "Status",
@@ -293,6 +294,7 @@
     "example": "Example",
     "addRecipient": "Add Recipient",
     "editRecipient": "Edit Recipient",
+    "viewRecipient": "View Recipient",
     "recipientAddress": "Recipient Address"
   },
   "status": {
@@ -302,8 +304,10 @@
     "scheduled": "Scheduled",
     "starting": "Starting",
     "cancelled": "Cancelled",
+    "canceled": "Canceled",
     "draft": "Draft",
     "queued": "Queued",
+    "completed": "Completed",
     "in_progress": "In Progress"
   },
   "category": {
@@ -340,7 +344,8 @@
       "passwordConfirmation": "Password must match",
       "membershipType": "Membership Type is required",
       "company": "Wrong Company Format Name",
-      "department": "Wrong Department Format Name"
+      "department": "Wrong Department Format Name",
+      "desktopOnly": "This feature is only available on Desktop view."
     },
     "unauthorized": "Unauthorized Access"
   },

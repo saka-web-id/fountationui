@@ -20,6 +20,10 @@ export function useTemplateTable(companyIdParam: number, onEdit: (template: Temp
 
     // Helper functions for navigation
     const goToDesigner = (templateId: number) => {
+        if (window.innerWidth < 768) {
+            alert(t('textError.desktopOnly'));
+            return;
+        }
         router.push({ name: 'notificationTemplateDesigner', params: { companyId: companyIdParam, templateId } });
     };
 

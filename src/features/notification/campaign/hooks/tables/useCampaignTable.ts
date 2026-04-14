@@ -45,17 +45,25 @@ export function useCampaignTable(companyIdParam: string) {
         columnHelper.display({
             id: 'actions',
             header: () => t('textLabel.action'),
-            cell: info => h('div', { class: 'btn-group' }, [
-                h('button', {
-                    class: 'btn btn-success btn-sm me-1',
-                    onClick: () => onStartNow(info.row.original.notiCampaignId),
-                    disabled: info.row.original.notiCampaignStatus !== 'SCHEDULED'
-                }, t('button.start')),
-                h('button', {
-                    class: 'btn btn-primary btn-sm',
-                    onClick: () => emitEdit(info.row.original.notiCampaignId)
-                }, t('button.edit'))
-            ]),
+            cell: info => {
+                const status = info.row.original.notiCampaignStatus;
+                const isViewOnly = ['FAILED', 'CANCELED', 'COMPLETED'].includes(status);
+                
+                return h('div', { class: 'btn-group' }, [
+                    h('button', {
+                        class: 'btn btn-success btn-sm me-1',
+                        onClick: () => onStartNow(info.row.original.notiCampaignId),
+                        disabled: status !== 'SCHEDULED'
+                    }, t('button.start')),
+                    h('button', {
+                        class: `btn ${isViewOnly ? 'btn-info' : 'btn-primary'} btn-sm`,
+                        onClick: () => emitEdit(info.row.original.notiCampaignId)
+                    }, [
+                        h('i', { class: `fas ${isViewOnly ? 'fa-eye' : 'fa-edit'} me-1` }),
+                        t(isViewOnly ? 'button.view' : 'button.edit')
+                    ])
+                ]);
+            },
         }),
     ];
 
@@ -65,7 +73,7 @@ export function useCampaignTable(companyIdParam: string) {
             case 'FAILED': return 'bg-danger';
             case 'SCHEDULED': return 'bg-info text-white';
             case 'STARTING': return 'bg-primary';
-            case 'CANCELLED': return 'bg-secondary';
+            case 'CANCELED': return 'bg-secondary';
             default: return 'bg-light text-dark';
         }
     };

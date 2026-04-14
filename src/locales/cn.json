@@ -209,7 +209,6 @@
     "duration": "时长",
     "billing": "计费",
     "companyProfile": "公司简介",
-    "personalInformation": "个人信息",
     "endpoint": "端点",
     "method": "方法",
     "logs": "日志",
@@ -256,7 +255,8 @@
     "subject": "主题",
     "recipient": "收件人",
     "history": "历史记录",
-    "watched": "已观看"
+    "watched": "已观看",
+    "campaign": "Campaign | Campaigns"
   },
   "history": {
     "detailTitle": "通知历史详情",
@@ -281,6 +281,7 @@
     "listTitle": "通知营销列表",
     "addTitle": "新增营销",
     "editTitle": "编辑营销",
+    "viewTitle": "查看营销",
     "uploadCSV": "上传收件人 (CSV)",
     "downloadExample": "下载示例 CSV",
     "status": "状态",
@@ -292,6 +293,7 @@
     "example": "示例",
     "addRecipient": "添加收件人",
     "editRecipient": "编辑收件人",
+    "viewRecipient": "查看收件人",
     "recipientAddress": "收件人地址"
   },
   "status": {
@@ -301,8 +303,10 @@
     "scheduled": "已预定",
     "starting": "启动中",
     "cancelled": "已取消",
+    "canceled": "已取消",
     "draft": "草稿",
     "queued": "队列中",
+    "completed": "已完成",
     "in_progress": "进行中"
   },
   "category": {
@@ -339,7 +343,8 @@
       "passwordConfirmation": "两次输入的密码必须一致",
       "membershipType": "会员类型必填",
       "company": "公司名称格式错误",
-      "department": "部门名称格式错误"
+      "department": "部门名称格式错误",
+      "desktopOnly": "此功能仅在桌面视图中可用。"
     },
     "unauthorized": "未授权访问"
   },

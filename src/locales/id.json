@@ -209,7 +209,6 @@
     "duration": "Durasi",
     "billing": "Penagihan",
     "companyProfile": "Profil Perusahaan",
-    "personalInformation": "Informasi Personal",
     "endpoint": "Endpoint",
     "method": "Metode",
     "logs": "Log",
@@ -256,7 +255,8 @@
     "subject": "Subjek",
     "recipient": "Penerima",
     "history": "Riwayat",
-    "watched": "Sudah Dilihat"
+    "watched": "Sudah Dilihat",
+    "campaign": "Kampanye | Kampanye"
   },
   "history": {
     "detailTitle": "Detail Riwayat Notifikasi",
@@ -281,6 +281,7 @@
     "listTitle": "Kampanye Notifikasi",
     "addTitle": "Tambah Kampanye Baru",
     "editTitle": "Ubah Kampanye",
+    "viewTitle": "Lihat Kampanye",
     "uploadCSV": "Unggah Penerima (CSV)",
     "downloadExample": "Unduh Contoh CSV",
     "status": "Status",
@@ -292,6 +293,7 @@
     "example": "Contoh",
     "addRecipient": "Tambah Penerima",
     "editRecipient": "Ubah Penerima",
+    "viewRecipient": "Lihat Penerima",
     "recipientAddress": "Alamat Penerima"
   },
   "status": {
@@ -301,8 +303,10 @@
     "scheduled": "Dijadwalkan",
     "starting": "Memulai",
     "cancelled": "Dibatalkan",
+    "canceled": "Dibatalkan",
     "draft": "Draf",
     "queued": "Antrian",
+    "completed": "Selesai",
     "in_progress": "Sedang Berjalan"
   },
   "category": {
@@ -339,7 +343,8 @@
       "passwordConfirmation": "Konfirmasi Password harus sama",
       "membershipType": "Tipe Keanggotaan harus diisi",
       "company": "Format Nama Perusahaan Salah",
-      "department": "Format Nama Department Salah"
+      "department": "Format Nama Department Salah",
+      "desktopOnly": "Fitur ini hanya dapat diakses melalui tampilan Desktop."
     },
     "unauthorized": "Akses tidak terauthorisasi"
   },

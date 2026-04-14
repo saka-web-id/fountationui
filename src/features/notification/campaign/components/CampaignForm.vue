@@ -43,6 +43,11 @@ const {
     removeNotification
 } = useCampaignForm();
 
+const isCampaignViewOnly = computed(() => {
+    const status = values.notiCampaignStatus;
+    return ['FAILED', 'CANCELED', 'COMPLETED'].includes(status);
+});
+
 const providers = ref<ProviderPayload[]>([]);
 const selectedCategory = ref<number>(0);
 const selectedProvider = ref<number>(0);
@@ -90,20 +95,26 @@ const columns = [
     columnHelper.display({
         id: 'actions',
         header: () => t('textLabel.action'),
-        cell: info => h('div', { class: 'btn-group' }, [
-            h('button', {
-                type: 'button',
-                class: 'btn btn-outline-primary btn-sm border-0',
-                'data-bs-toggle': 'offcanvas',
-                'data-bs-target': '#offcanvasRecipientForm',
-                onClick: () => openEditRecipient(info.row.index)
-            }, h('i', { class: 'fas fa-edit' })),
-            h('button', {
-                type: 'button',
-                class: 'btn btn-outline-danger btn-sm border-0',
-                onClick: () => removeNotification(info.row.index)
-            }, h('i', { class: 'fas fa-trash' }))
-        ]),
+        cell: info => {
+            const status = info.row.original.notiStatus;
+            const isRowViewOnly = ['FAILED', 'CANCELED', 'COMPLETED'].includes(status);
+            const isCampaignView = isCampaignViewOnly.value;
+
+            return h('div', { class: 'btn-group' }, [
+                h('button', {
+                    type: 'button',
+                    class: `btn btn-outline-${isCampaignView || isRowViewOnly ? 'info' : 'primary'} btn-sm border-0`,
+                    'data-bs-toggle': 'offcanvas',
+                    'data-bs-target': '#offcanvasRecipientForm',
+                    onClick: () => openEditRecipient(info.row.index)
+                }, h('i', { class: `fas ${isCampaignView || isRowViewOnly ? 'fa-eye' : 'fa-edit'}` })),
+                !(isCampaignView || isRowViewOnly) ? h('button', {
+                    type: 'button',
+                    class: 'btn btn-outline-danger btn-sm border-0',
+                    onClick: () => removeNotification(info.row.index)
+                }, h('i', { class: 'fas fa-trash' })) : null
+            ]);
+        },
     }),
 ];
 
@@ -252,23 +263,23 @@ const onSubmit = handleSubmit(async (values) => {
 
 <template>
     <div class="card p-4">
-        <h4 class="mb-4">{{ props.campaignId ? t('campaign.editTitle') : t('campaign.addTitle') }}</h4>
+        <h4 class="mb-4">{{ isCampaignViewOnly ? t('campaign.viewTitle') : (props.campaignId ? t('campaign.editTitle') : t('campaign.addTitle')) }}</h4>
         <form @submit.prevent="onSubmit">
             <div class="mb-3">
                 <label class="form-label">{{ t('campaign.title') }}</label>
-                <input v-model="notiCampaignTitle" type="text" class="form-control" :class="{ 'is-invalid': errors.notiCampaignTitle }">
+                <input v-model="notiCampaignTitle" type="text" class="form-control" :class="{ 'is-invalid': errors.notiCampaignTitle }" :disabled="isCampaignViewOnly">
                 <div class="invalid-feedback">{{ errors.notiCampaignTitle }}</div>
             </div>
 
             <div class="mb-3">
                 <label class="form-label">{{ t('campaign.description') }}</label>
-                <textarea v-model="notiCampaignDescription" class="form-control"></textarea>
+                <textarea v-model="notiCampaignDescription" class="form-control" :disabled="isCampaignViewOnly"></textarea>
             </div>
 
             <div class="row mb-3">
                 <div class="col-md-6">
                     <label class="form-label">{{ t('campaign.template') }}</label>
-                    <select v-model="notiCampaignTemplateId" class="form-select" :class="{ 'is-invalid': errors.notiCampaignTemplateId }">
+                    <select v-model="notiCampaignTemplateId" class="form-select" :class="{ 'is-invalid': errors.notiCampaignTemplateId }" :disabled="isCampaignViewOnly">
                         <option :value="0">{{ t('campaign.selectTemplate') }}</option>
                         <option v-for="tpl in templates" :key="tpl.notiTemplateId" :value="tpl.notiTemplateId">
                             {{ tpl.notiTemplateName }} ({{ tpl.notiTemplateType }})
@@ -278,7 +289,7 @@ const onSubmit = handleSubmit(async (values) => {
                 </div>
                 <div class="col-md-6">
                     <label class="form-label">{{ t('campaign.scheduledAt') }}</label>
-                    <input v-model="notiCampaignScheduledAt" type="datetime-local" class="form-control" :class="{ 'is-invalid': errors.notiCampaignScheduledAt }">
+                    <input v-model="notiCampaignScheduledAt" type="datetime-local" class="form-control" :class="{ 'is-invalid': errors.notiCampaignScheduledAt }" :disabled="isCampaignViewOnly">
                     <div class="invalid-feedback">{{ errors.notiCampaignScheduledAt }}</div>
                 </div>
             </div>
@@ -286,9 +297,9 @@ const onSubmit = handleSubmit(async (values) => {
             <div class="mb-3">
                 <div class="d-flex justify-content-between align-items-center mb-2">
                     <label class="form-label mb-0">{{ t('campaign.metadata') }} (JSON)</label>
-                    <button type="button" class="btn btn-outline-secondary btn-sm" @click="beautifyMetadata">{{ t('campaign.beautify') }}</button>
+                    <button v-if="!isCampaignViewOnly" type="button" class="btn btn-outline-secondary btn-sm" @click="beautifyMetadata">{{ t('campaign.beautify') }}</button>
                 </div>
-                <textarea v-model="notiCampaignMetadata" class="form-control font-monospace" rows="5" :class="{ 'is-invalid': errors.notiCampaignMetadata }"></textarea>
+                <textarea v-model="notiCampaignMetadata" class="form-control font-monospace" rows="5" :class="{ 'is-invalid': errors.notiCampaignMetadata }" :disabled="isCampaignViewOnly"></textarea>
                 <div class="invalid-feedback">{{ errors.notiCampaignMetadata }}</div>
             </div>
 
@@ -297,7 +308,7 @@ const onSubmit = handleSubmit(async (values) => {
             <div class="mb-4">
                 <div class="d-flex justify-content-between align-items-center mb-3">
                     <h5 class="mb-0">{{ t('campaign.recipients') }} ({{ recipientsData.length }})</h5>
-                    <button type="button" class="btn btn-sm btn-outline-primary" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRecipientForm" @click="openAddRecipient">
+                    <button v-if="!isCampaignViewOnly" type="button" class="btn btn-sm btn-outline-primary" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRecipientForm" @click="openAddRecipient">
                         <i class="fas fa-plus me-1"></i>{{ t('campaign.addManual') }}
                     </button>
                 </div>
@@ -305,14 +316,14 @@ const onSubmit = handleSubmit(async (values) => {
                 <div class="row g-2 align-items-end mb-3">
                     <div class="col-md-3">
                         <label class="form-label small">{{ t('category.name') }}</label>
-                        <select v-model="selectedCategory" class="form-select form-select-sm">
+                        <select v-model="selectedCategory" class="form-select form-select-sm" :disabled="isCampaignViewOnly">
                             <option :value="0">{{ t('campaign.selectCategory') }}</option>
                             <option v-for="cat in categories" :key="cat.notiCategoryId" :value="cat.notiCategoryId">{{ cat.notiCategoryName }}</option>
                         </select>
                     </div>
                     <div class="col-md-3">
                         <label class="form-label small">{{ t('provider.name') }}</label>
-                        <select v-model="selectedProvider" class="form-select form-select-sm" :disabled="!selectedCategory">
+                        <select v-model="selectedProvider" class="form-select form-select-sm" :disabled="!selectedCategory || isCampaignViewOnly">
                             <option :value="0">{{ t('campaign.selectProvider') }}</option>
                             <option v-for="p in providers" :key="p.providerId" :value="p.providerId">{{ p.providerName }}</option>
                         </select>
@@ -320,11 +331,11 @@ const onSubmit = handleSubmit(async (values) => {
                     <div class="col-md-3">
                         <div class="d-flex justify-content-between align-items-center mb-1">
                             <label class="form-label small mb-0">{{ t('campaign.uploadCSV') }}</label>
-                            <a href="#" class="small text-decoration-none" @click.prevent="downloadExampleCSV" style="font-size: 0.7rem;">
+                            <a v-if="!isCampaignViewOnly" href="#" class="small text-decoration-none" @click.prevent="downloadExampleCSV" style="font-size: 0.7rem;">
                                 <i class="fas fa-download me-1"></i>{{ t('campaign.example') }}
                             </a>
                         </div>
-                        <input type="file" class="form-control form-control-sm" accept=".csv" @change="onFileChange" :disabled="isUploading">
+                        <input type="file" class="form-control form-control-sm" accept=".csv" @change="onFileChange" :disabled="isUploading || isCampaignViewOnly">
                     </div>
                     <div class="col-md-3">
                         <label class="form-label small">{{ t('button.search') }}</label>
@@ -339,44 +350,48 @@ const onSubmit = handleSubmit(async (values) => {
 
             <div class="d-flex justify-content-end gap-2 mt-4">
                 <button type="button" class="btn btn-secondary" @click="emit('cancel')">{{ t('button.cancel') }}</button>
-                <button type="submit" class="btn btn-primary">{{ t('button.save') }}</button>
+                <button v-if="!isCampaignViewOnly" type="submit" class="btn btn-primary">{{ t('button.save') }}</button>
             </div>
         </form>
 
         <!-- Recipient Add/Edit Offcanvas -->
         <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRecipientForm" aria-labelledby="offcanvasRecipientFormLabel">
             <div class="offcanvas-header border-bottom">
-                <h5 id="offcanvasRecipientFormLabel">{{ editingRecipientIndex >= 0 ? t('campaign.editRecipient') : t('campaign.addRecipient') }}</h5>
+                <h5 id="offcanvasRecipientFormLabel">
+                    {{ (isCampaignViewOnly || ['FAILED', 'CANCELED', 'COMPLETED'].includes(recipientForm.notiStatus || '')) ? t('campaign.viewRecipient') : (editingRecipientIndex >= 0 ? t('campaign.editRecipient') : t('campaign.addRecipient')) }}
+                </h5>
                 <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
             </div>
             <div class="offcanvas-body">
                 <div class="mb-3">
                     <label class="form-label">{{ t('campaign.recipientAddress') }}</label>
-                    <input v-model="recipientForm.notiRecipientAddress" type="text" class="form-control" placeholder="e.g. email@example.com or +62...">
+                    <input v-model="recipientForm.notiRecipientAddress" type="text" class="form-control" placeholder="e.g. email@example.com or +62..." :disabled="isCampaignViewOnly || ['FAILED', 'CANCELED', 'COMPLETED'].includes(recipientForm.notiStatus || '')">
                 </div>
                 <div class="mb-3">
                     <label class="form-label">{{ t('category.name') }}</label>
-                    <select v-model="recipientForm.notiCategoryId" class="form-select">
+                    <select v-model="recipientForm.notiCategoryId" class="form-select" :disabled="isCampaignViewOnly || ['FAILED', 'CANCELED', 'COMPLETED'].includes(recipientForm.notiStatus || '')">
                         <option :value="0">{{ t('campaign.selectCategory') }}</option>
                         <option v-for="cat in categories" :key="cat.notiCategoryId" :value="cat.notiCategoryId">{{ cat.notiCategoryName }}</option>
                     </select>
                 </div>
                 <div class="mb-3">
                     <label class="form-label">{{ t('provider.name') }}</label>
-                    <select v-model="recipientForm.notiProviderId" class="form-select">
+                    <select v-model="recipientForm.notiProviderId" class="form-select" :disabled="isCampaignViewOnly || ['FAILED', 'CANCELED', 'COMPLETED'].includes(recipientForm.notiStatus || '')">
                         <option :value="0">{{ t('campaign.selectProvider') }}</option>
                         <option v-for="p in providers" :key="p.providerId" :value="p.providerId">{{ p.providerName }}</option>
                     </select>
                 </div>
                 <div class="mb-3">
                     <label class="form-label">{{ t('textLabel.status') }}</label>
-                    <select v-model="recipientForm.notiStatus" class="form-select">
+                    <select v-model="recipientForm.notiStatus" class="form-select" :disabled="isCampaignViewOnly || ['FAILED', 'CANCELED', 'COMPLETED'].includes(recipientForm.notiStatus || '')">
                         <option value="SCHEDULED">{{ t('status.scheduled') }}</option>
                         <option value="SENT">{{ t('status.sent') }}</option>
                         <option value="FAILED">{{ t('status.failed') }}</option>
+                        <option value="COMPLETED">{{ t('status.completed') }}</option>
+                        <option value="CANCELED">{{ t('status.canceled') }}</option>
                     </select>
                 </div>
-                <div class="d-grid mt-4">
+                <div class="d-grid mt-4" v-if="!(isCampaignViewOnly || ['FAILED', 'CANCELED', 'COMPLETED'].includes(recipientForm.notiStatus || ''))">
                     <button type="button" class="btn btn-primary" @click="saveRecipientManual">
                         {{ editingRecipientIndex >= 0 ? t('button.save') : t('button.add') }}
                     </button>
