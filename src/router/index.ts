@@ -403,6 +403,12 @@ const routes: RouteRecordRaw[] = [
         meta: { requiresAuth: true, requiresPremium: false, roleAccess: "SUPER_ADMIN, ADMIN, MANAGER, USER, GUEST" }
     },
     {
+        path: '/submenu/registries',
+        name: 'registries',
+        component: () => import("~/views/registry/RegistryMenuView.vue"),
+        meta: { requiresAuth: true, requiresPremium: false, roleAccess: "SUPER_ADMIN, ADMIN, MANAGER, USER, GUEST" }
+    },
+    {
         path: '/unauthorized',
         name: 'unauthorized',
         component: () => import("../views/error/UnauthorizedView.vue")

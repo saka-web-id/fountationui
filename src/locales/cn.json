@@ -256,7 +256,8 @@
     "recipient": "收件人",
     "history": "历史记录",
     "watched": "已观看",
-    "campaign": "Campaign | Campaigns"
+    "campaign": "Campaign | Campaigns",
+    "registry": "注册表 | 注册表"
   },
   "history": {
     "detailTitle": "通知历史详情",
@@ -270,6 +271,11 @@
     "selectPrompt": "请选择营销活动和日期范围以查看历史记录。",
     "alertFilter": "请先筛选营销活动。",
     "alertDownloadFailed": "导出 CSV 失败。"
+  },
+  "registry": {
+    "country": "国家 | 国家",
+    "currency": "货币 | 货币",
+    "language": "语言 | 语言"
   },
   "campaign": {
     "title": "营销标题",

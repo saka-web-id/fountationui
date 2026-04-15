@@ -257,7 +257,8 @@
     "recipient": "Recipient | Recipients",
     "history": "History",
     "watched": "Watched",
-    "campaign": "Campaign | Campaigns"
+    "campaign": "Campaign | Campaigns",
+    "registry": "Registry | Registries"
   },
   "history": {
     "detailTitle": "Notification History Details",
@@ -271,6 +272,11 @@
     "selectPrompt": "Please select a campaign and date range to view history.",
     "alertFilter": "Please filter by campaign first.",
     "alertDownloadFailed": "Failed to download CSV."
+  },
+  "registry": {
+    "country": "Country | Countries",
+    "currency": "Currency | Currencies",
+    "language": "Language | Languages"
   },
   "campaign": {
     "title": "Campaign Title",

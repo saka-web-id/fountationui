@@ -256,7 +256,8 @@
     "recipient": "Penerima",
     "history": "Riwayat",
     "watched": "Sudah Dilihat",
-    "campaign": "Kampanye | Kampanye"
+    "campaign": "Kampanye | Kampanye",
+    "registry": "Registri | Daftar Registri"
   },
   "history": {
     "detailTitle": "Detail Riwayat Notifikasi",
@@ -270,6 +271,11 @@
     "selectPrompt": "Silakan pilih kampanye dan rentang tanggal untuk melihat riwayat.",
     "alertFilter": "Silakan filter berdasarkan kampanye terlebih dahulu.",
     "alertDownloadFailed": "Gagal mengunduh CSV."
+  },
+  "registry": {
+    "country": "Negara | Negara",
+    "currency": "Mata Uang | Mata Uang",
+    "language": "Bahasa | Bahasa"
   },
   "campaign": {
     "title": "Judul Kampanye",
