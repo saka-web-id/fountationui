@@ -87,57 +87,14 @@ const isPremium = import.meta.env.VITE_APP_PLAN === 'PREMIUM';
         </router-link>
       </div>
     </li>
-    <li class="nav-item dropdown" id="idlogs">
-      <a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" data-bs-display="static" href="#" role="button">
-        <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-journal-code me-1 mb-1 pb-0" style="color: var(--bs-primary);">
+
+    <li class="nav-item" id="idlogs">
+      <router-link to="/submenulogs" class="nav-link">
+        <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-journal-code me-1 mb-1" style="color: var(--bs-primary);">
           <path d="M9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.5zm0 1v3.5H13l-3.5-3.5zM3 2a1 1 0 0 1 1-1h5.5l.001 3.5a1 1 0 0 0 1 1H13v9a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1zm3.354 4.646a.5.5 0 1 0-.708.708L7.293 9l-1.647 1.646a.5.5 0 0 0 .708.708l2-2a.5.5 0 0 0 0-.708z"/>
         </svg>
-        {{ t('textLabel.logs') }}
-      </a>
-      <div class="dropdown-menu">
-        <template v-if="isPremium">
-          <router-link to="/gatewaylogs" class="dropdown-item" id="idgatewaylogs" data-bs-dismiss="dropdown">
-            <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-list-columns-reverse me-1 mb-1">
-              <path fill-rule="evenodd" d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v1h14V2a1 1 0 0 0-1-1zm14 3H0v1h14zM0 6h14v1H0zm0 2h14v1H0zm0 2h14v1H0zm0 2h14v1H0z"/>
-            </svg>
-            {{ t('textLabel.gatewayLogs') }}
-          </router-link>
-        </template>
-        <template v-else>
-              <span class="dropdown-item text-muted disabled" style="cursor: not-allowed;" data-bs-dismiss="dropdown">
-                <i class="bi bi-lock-fill me-1"></i> {{ t('textLabel.gatewayLogs') }} (Premium)
-              </span>
-        </template>
-
-        <template v-if="isPremium">
-          <router-link to="/apilogs" class="dropdown-item" id="idapilogs" data-bs-dismiss="dropdown">
-            <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-journal-text me-1 mb-1">
-              <path d="M5 1a.5.5 0 0 1 .5.5V2h5v-.5a.5.5 0 0 1 1 0V2h.5a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-11a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h.5v-.5a.5.5 0 0 1 .5-.5zM3 4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1V5a1 1 0 0 0-1-1H3z"/>
-              <path d="M4 7h8v1H4V7zm0 2h8v1H4V9zm0 2h4v1H4v-1z"/>
-            </svg>
-            {{ t('textLabel.apiLogs') }}
-          </router-link>
-        </template>
-        <template v-else>
-            <span class="dropdown-item text-muted disabled" style="cursor: not-allowed;" data-bs-dismiss="dropdown">
-              <i class="bi bi-lock-fill me-1"></i> {{ t('textLabel.apiLogs') }} (Premium)
-            </span>
-        </template>
-        <template v-if="isPremium">
-          <router-link to="/notificationlogs" class="dropdown-item" id="idnotificationlogs" data-bs-dismiss="dropdown">
-            <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-journal-text me-1 mb-1">
-              <path d="M5 1a.5.5 0 0 1 .5.5V2h5v-.5a.5.5 0 0 1 1 0V2h.5a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-11a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h.5v-.5a.5.5 0 0 1 .5-.5zM3 4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1V5a1 1 0 0 0-1-1H3z"/>
-              <path d="M4 7h8v1H4V7zm0 2h8v1H4V9zm0 2h4v1H4v-1z"/>
-            </svg>
-            {{ t('textLabel.notification') }}
-          </router-link>
-        </template>
-        <template v-else>
-            <span class="dropdown-item text-muted disabled" style="cursor: not-allowed;" data-bs-dismiss="dropdown">
-              <i class="bi bi-lock-fill me-1"></i> {{ t('textLabel.notification') }} (Premium)
-            </span>
-        </template>
-      </div>
+        {{t('textLabel.activityLogs')}}
+      </router-link>
     </li>
 
     <li class="nav-item dropdown" id="idsetting">

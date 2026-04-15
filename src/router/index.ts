@@ -337,6 +337,12 @@ const routes: RouteRecordRaw[] = [
         meta: { requiresAuth: true, requiresPremium: true, roleAccess: "SUPER_ADMIN, ADMIN, MANAGER" }
     },
     {
+        path: '/submenulogs',
+        name: 'submenulogs',
+        component: () => import("~/views/log/LogMenuView.vue"),
+        meta: { requiresAuth: true, requiresPremium: true, roleAccess: "SUPER_ADMIN, ADMIN, MANAGER, USER, GUEST" }
+    },
+    {
         path: '/gatewaylogs',
         name: 'gatewaylogs',
         component: () => import("~/views/log/gateway/LogsGatewayListView.vue"),
