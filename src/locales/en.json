@@ -276,7 +276,16 @@
   "registry": {
     "country": "Country | Countries",
     "currency": "Currency | Currencies",
-    "language": "Language | Languages"
+    "language": "Language | Languages",
+    "countryState": "Country State | Country States",
+    "code": "Code",
+    "name": "Name",
+    "phoneCode": "Phone Code",
+    "active": "Active",
+    "symbol": "Symbol",
+    "position": "Position",
+    "isoCode": "ISO Code",
+    "direction": "Direction"
   },
   "campaign": {
     "title": "Campaign Title",

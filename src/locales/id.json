@@ -275,7 +275,16 @@
   "registry": {
     "country": "Negara | Negara",
     "currency": "Mata Uang | Mata Uang",
-    "language": "Bahasa | Bahasa"
+    "language": "Bahasa | Bahasa",
+    "countryState": "Provinsi/Bagian | Provinsi/Bagian",
+    "code": "Kode",
+    "name": "Nama",
+    "phoneCode": "Kode Telepon",
+    "active": "Aktif",
+    "symbol": "Simbol",
+    "position": "Posisi",
+    "isoCode": "Kode ISO",
+    "direction": "Arah"
   },
   "campaign": {
     "title": "Judul Kampanye",

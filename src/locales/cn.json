@@ -275,7 +275,16 @@
   "registry": {
     "country": "国家 | 国家",
     "currency": "货币 | 货币",
-    "language": "语言 | 语言"
+    "language": "语言 | 语言",
+    "countryState": "州/省 | 州/省",
+    "code": "代码",
+    "name": "名称",
+    "phoneCode": "电话代码",
+    "active": "有效",
+    "symbol": "符号",
+    "position": "位置",
+    "isoCode": "ISO 代码",
+    "direction": "方向"
   },
   "campaign": {
     "title": "营销标题",

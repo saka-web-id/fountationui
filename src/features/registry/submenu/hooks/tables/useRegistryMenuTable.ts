@@ -19,9 +19,17 @@ export function useRegistryMenuTable() {
             isPremium: true
         },
         {
+            id: 'idregistrycountrystate',
+            name: t('registry.countryState'),
+            route: '/registry/country/state',
+            icon: 'bi-map',
+            description: 'Registry Country State',
+            isPremium: true
+        },
+        {
             id: 'idregistrycurrency',
             name: t('registry.currency'),
-            route: '/registry/country',
+            route: '/registry/currency',
             icon: 'bi-currency-exchange',
             description: 'Registry Currency',
             isPremium: true

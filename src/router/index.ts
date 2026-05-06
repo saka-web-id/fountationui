@@ -409,6 +409,30 @@ const routes: RouteRecordRaw[] = [
         meta: { requiresAuth: true, requiresPremium: false, roleAccess: "SUPER_ADMIN, ADMIN, MANAGER, USER, GUEST" }
     },
     {
+        path: '/registry/country/state',
+        name: 'registrycountrystate',
+        component: () => import("~/views/registry/country-state/CountryStateView.vue"),
+        meta: { requiresAuth: true, requiresPremium: false, roleAccess: "SUPER_ADMIN, ADMIN, MANAGER, USER, GUEST" }
+    },
+    {
+        path: '/registry/country',
+        name: 'registrycountry',
+        component: () => import("~/views/registry/country/CountryView.vue"),
+        meta: { requiresAuth: true, requiresPremium: false, roleAccess: "SUPER_ADMIN, ADMIN, MANAGER, USER, GUEST" }
+    },
+    {
+        path: '/registry/currency',
+        name: 'registrycurrency',
+        component: () => import("~/views/registry/currency/CurrencyView.vue"),
+        meta: { requiresAuth: true, requiresPremium: false, roleAccess: "SUPER_ADMIN, ADMIN, MANAGER, USER, GUEST" }
+    },
+    {
+        path: '/registry/language',
+        name: 'registrylanguage',
+        component: () => import("~/views/registry/language/LanguageView.vue"),
+        meta: { requiresAuth: true, requiresPremium: false, roleAccess: "SUPER_ADMIN, ADMIN, MANAGER, USER, GUEST" }
+    },
+    {
         path: '/unauthorized',
         name: 'unauthorized',
         component: () => import("../views/error/UnauthorizedView.vue")
