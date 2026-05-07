@@ -41,6 +41,38 @@ export function useRegistryMenuTable() {
             icon: 'bi-translate',
             description: 'Registry Language',
             isPremium: true
+        },
+        {
+            id: 'idregistryuom',
+            name: t('registry.uom'),
+            route: '/registry/uom',
+            icon: 'bi-rulers',
+            description: 'Registry Unit of Measure',
+            isPremium: true
+        },
+        {
+            id: 'idregistryuomcategory',
+            name: t('registry.uomCategory'),
+            route: '/registry/uomcategory',
+            icon: 'bi-tags',
+            description: 'Registry UoM Category',
+            isPremium: true
+        },
+        {
+            id: 'idregistryconfigparameter',
+            name: t('registry.configParameter'),
+            route: '/registry/configparameter',
+            icon: 'bi-gear',
+            description: 'Registry Config Parameter',
+            isPremium: true
+        },
+        {
+            id: 'idregistryreposequence',
+            name: t('registry.repoSequence'),
+            route: '/registry/repo/sequence',
+            icon: 'bi-list-ol',
+            description: 'Registry Repository Sequence',
+            isPremium: true
         }
     ])
 

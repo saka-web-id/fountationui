@@ -57,3 +57,62 @@ export interface LanguagePageDTO {
     repoLanguagePage: number;
     repoLanguageSize: number;
 }
+
+export interface UoMDTO {
+    registryUomId?: number;
+    registryUomCategoryId: number;
+    registryUomName: string;
+    registryUomType: string;
+    registryUomFactor: number;
+    registryUomActive: boolean;
+}
+
+export interface UoMPageDTO {
+    repoUomData: UoMDTO[];
+    repoUomTotalItems: number;
+    repoUomPage: number;
+    repoUomSize: number;
+}
+
+export interface UoMCategoryDTO {
+    registryUomCategoryId?: number;
+    registryUomCategoryName: string;
+}
+
+export interface UoMCategoryPageDTO {
+    repoUomCategoryData: UoMCategoryDTO[];
+    repoUomCategoryTotalItems: number;
+    repoUomCategoryPage: number;
+    repoUomCategorySize: number;
+}
+
+export interface ConfigParameterDTO {
+    configParamId?: number;
+    configParamKey: string;
+    configParamValue: string;
+}
+
+export interface ConfigParameterPageDTO {
+    repoConfigParamData: ConfigParameterDTO[];
+    repoConfigParamTotalItems: number;
+    repoConfigParamPage: number;
+    repoConfigParamSize: number;
+}
+
+export interface RepoSequenceDTO {
+    repoSequenceId?: number;
+    repoSequenceCompanyId: number;
+    repoSequenceCode: string;
+    repoSequenceName: string;
+    repoSequencePrefix: string;
+    repoSequenceSuffix: string;
+    repoSequencePadding: number;
+    repoSequenceNextNumber: number;
+}
+
+export interface RepoSequencePageDTO {
+    repoSequenceData: RepoSequenceDTO[];
+    repoSequenceTotalItems: number;
+    repoSequencePage: number;
+    repoSequenceSize: number;
+}

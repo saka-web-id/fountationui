@@ -433,6 +433,36 @@ const routes: RouteRecordRaw[] = [
         meta: { requiresAuth: true, requiresPremium: false, roleAccess: "SUPER_ADMIN, ADMIN, MANAGER, USER, GUEST" }
     },
     {
+        path: '/registry/uom',
+        name: 'registryuom',
+        component: () => import("~/views/registry/uom/UomView.vue"),
+        meta: { requiresAuth: true, requiresPremium: false, roleAccess: "SUPER_ADMIN, ADMIN, MANAGER, USER, GUEST" }
+    },
+    {
+        path: '/registry/uomcategory',
+        name: 'registryuomcategory',
+        component: () => import("~/views/registry/uomcategory/UomCategoryView.vue"),
+        meta: { requiresAuth: true, requiresPremium: false, roleAccess: "SUPER_ADMIN, ADMIN, MANAGER, USER, GUEST" }
+    },
+    {
+        path: '/registry/configparameter',
+        name: 'registryconfigparameter',
+        component: () => import("~/views/registry/config-parameter/ConfigParameterView.vue"),
+        meta: { requiresAuth: true, requiresPremium: false, roleAccess: "SUPER_ADMIN, ADMIN, MANAGER, USER, GUEST" }
+    },
+    {
+        path: '/registry/repo/sequence',
+        name: 'registryRepoSequence',
+        component: () => import("~/views/registry/repo-sequence/RepoSequenceCompanyView.vue"),
+        meta: { requiresAuth: true, requiresPremium: false, roleAccess: "SUPER_ADMIN, ADMIN, MANAGER, USER, GUEST" }
+    },
+    {
+        path: '/registry/repo/sequence/list/:valueCompanyId',
+        name: 'registryRepoSequenceList',
+        component: () => import("~/views/registry/repo-sequence/RepoSequenceListView.vue"),
+        meta: { requiresAuth: true, requiresPremium: false, roleAccess: "SUPER_ADMIN, ADMIN, MANAGER, USER, GUEST" }
+    },
+    {
         path: '/unauthorized',
         name: 'unauthorized',
         component: () => import("../views/error/UnauthorizedView.vue")
