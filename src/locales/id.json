@@ -300,7 +300,12 @@
     "prefix": "Awalan (Prefix)",
     "suffix": "Akhiran (Suffix)",
     "padding": "Padding",
-    "nextNumber": "Nomor Berikutnya"
+    "nextNumber": "Nomor Berikutnya",
+    "storageProvider": "Penyedia Penyimpanan | Penyedia Penyimpanan",
+    "endpoint": "Endpoint",
+    "region": "Wilayah",
+    "accessKey": "Kunci Akses",
+    "secretKey": "Kunci Rahasia"
   },
   "campaign": {
     "title": "Judul Kampanye",

@@ -300,7 +300,12 @@
     "prefix": "前缀",
     "suffix": "后缀",
     "padding": "填充",
-    "nextNumber": "下一个编号"
+    "nextNumber": "下一个编号",
+    "storageProvider": "存储提供商 | 存储提供商",
+    "endpoint": "终端节点",
+    "region": "区域",
+    "accessKey": "访问密钥",
+    "secretKey": "私钥"
   },
   "campaign": {
     "title": "营销标题",

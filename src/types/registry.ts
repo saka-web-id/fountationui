@@ -116,3 +116,22 @@ export interface RepoSequencePageDTO {
     repoSequencePage: number;
     repoSequenceSize: number;
 }
+
+export interface ObjectStorageProviderDTO {
+    objectStorageProviderId?: number;
+    objectStorageProviderCode: string;
+    objectStorageProviderType: string;
+    objectStorageProviderEndpoint: string;
+    objectStorageProviderRegion: string;
+    objectStorageProviderAccessKey: string;
+    objectStorageProviderSecretKey: string;
+    objectStorageProviderIsActive: boolean;
+    objectStorageProviderCreatedAt?: string;
+}
+
+export interface ObjectStorageProviderPageDTO {
+    objectStorageProviderData: ObjectStorageProviderDTO[];
+    objectStorageProviderTotalItems: number;
+    objectStorageProviderPage: number;
+    objectStorageProviderSize: number;
+}

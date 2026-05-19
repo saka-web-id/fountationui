@@ -145,6 +145,11 @@ const isPremium = import.meta.env.VITE_APP_PLAN === 'PREMIUM';
             <i class="bi bi-key me-1"></i> {{ t('textLabel.permissionSetting') }}
           </router-link>
         </li>
+        <li>
+          <router-link to="/object/storage/provider" class="dropdown-item" data-bs-dismiss="dropdown">
+            <i class="bi bi-cloud me-1"></i> {{ t('registry.storageProvider') }}
+          </router-link>
+        </li>
       </ul>
     </li>
   </ul>

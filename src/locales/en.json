@@ -301,7 +301,12 @@
     "prefix": "Prefix",
     "suffix": "Suffix",
     "padding": "Padding",
-    "nextNumber": "Next Number"
+    "nextNumber": "Next Number",
+    "storageProvider": "Storage Provider | Storage Providers",
+    "endpoint": "Endpoint",
+    "region": "Region",
+    "accessKey": "Access Key",
+    "secretKey": "Secret Key"
   },
   "campaign": {
     "title": "Campaign Title",

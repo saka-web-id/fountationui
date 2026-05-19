@@ -463,6 +463,12 @@ const routes: RouteRecordRaw[] = [
         meta: { requiresAuth: true, requiresPremium: false, roleAccess: "SUPER_ADMIN, ADMIN, MANAGER, USER, GUEST" }
     },
     {
+        path: '/object/storage/provider',
+        name: 'objectstorageprovider',
+        component: () => import("~/views/registry/storage-provider/StorageProviderView.vue"),
+        meta: { requiresAuth: true, requiresPremium: false, roleAccess: "SUPER_ADMIN, ADMIN, MANAGER, USER, GUEST" }
+    },
+    {
         path: '/unauthorized',
         name: 'unauthorized',
         component: () => import("../views/error/UnauthorizedView.vue")
