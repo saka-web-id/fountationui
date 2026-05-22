@@ -1,10 +1,10 @@
 import { ref } from 'vue';
-import { useAuthStore } from '~/stores/auth';
-import { objectStorageProviderService } from '~/services/registry/objectStorageProviderService';
-import type { ObjectStorageProviderDTO } from '~/types/registry';
-import { setGlobalSuccess } from '~/stores/globalSuccess';
-import { setGlobalError } from '~/stores/globalError';
-import { setGlobalLoading } from '~/stores/globalLoading';
+import { useAuthStore } from '~/stores/auth.ts';
+import { objectStorageProviderService } from '~/services/registry/objectStorageProviderService.ts';
+import type { ObjectStorageProviderDTO } from '~/types/registry.ts';
+import { setGlobalSuccess } from '~/stores/globalSuccess.ts';
+import { setGlobalError } from '~/stores/globalError.ts';
+import { setGlobalLoading } from '~/stores/globalLoading.ts';
 
 export function useStorageProvider() {
     const authStore = useAuthStore();

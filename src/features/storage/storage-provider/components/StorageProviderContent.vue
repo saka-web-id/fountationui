@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import { onMounted, ref } from "vue";
-import { useStorageProviderTable } from '../hooks/useStorageProviderTable';
-import { useStorageProvider } from '../hooks/useStorageProvider';
+import { useStorageProviderTable } from '../hooks/useStorageProviderTable.ts';
+import { useStorageProvider } from '../hooks/useStorageProvider.ts';
 import BaseTable from '~/components/table/BaseTable.vue';
 import BaseGridView from '~/components/table/BaseGridView.vue';
 import { Form, Field, ErrorMessage } from 'vee-validate';
 import * as yup from 'yup';
-import type { ObjectStorageProviderDTO } from "~/types/registry";
+import type { ObjectStorageProviderDTO } from "~/types/registry.ts";
 import { Offcanvas } from 'bootstrap';
 
 const { addStorageProvider, loading: isSaving } = useStorageProvider();

@@ -302,6 +302,8 @@
     "padding": "Padding",
     "nextNumber": "Nomor Berikutnya",
     "storageProvider": "Penyedia Penyimpanan | Penyedia Penyimpanan",
+    "storageBucket": "Ember Penyimpanan | Ember Penyimpanan",
+    "storageSetting": "Pengaturan Penyimpanan | Pengaturan Penyimpanan",
     "endpoint": "Endpoint",
     "region": "Wilayah",
     "accessKey": "Kunci Akses",

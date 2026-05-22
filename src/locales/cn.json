@@ -302,6 +302,8 @@
     "padding": "填充",
     "nextNumber": "下一个编号",
     "storageProvider": "存储提供商 | 存储提供商",
+    "storageBucket": "存储桶 | 存储桶",
+    "storageSetting": "存储设置 | 存储设置",
     "endpoint": "终端节点",
     "region": "区域",
     "accessKey": "访问密钥",

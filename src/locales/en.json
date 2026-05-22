@@ -303,6 +303,8 @@
     "padding": "Padding",
     "nextNumber": "Next Number",
     "storageProvider": "Storage Provider | Storage Providers",
+    "storageBucket": "Storage Bucket | Storage Buckets",
+    "storageSetting": "Storage Setting | Storage Settings",
     "endpoint": "Endpoint",
     "region": "Region",
     "accessKey": "Access Key",

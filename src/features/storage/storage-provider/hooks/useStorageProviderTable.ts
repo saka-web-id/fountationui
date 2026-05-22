@@ -1,10 +1,10 @@
 import { ref, computed, watch, h } from 'vue';
 import { createColumnHelper } from '@tanstack/vue-table';
 import { useI18n } from 'vue-i18n';
-import { useAuthStore } from '~/stores/auth';
-import { objectStorageProviderService } from '~/services/registry/objectStorageProviderService';
-import { useDataTable } from '~/composables/useDataTable';
-import type { ObjectStorageProviderDTO } from '~/types/registry';
+import { useAuthStore } from '~/stores/auth.ts';
+import { objectStorageProviderService } from '~/services/registry/objectStorageProviderService.ts';
+import { useDataTable } from '~/composables/useDataTable.ts';
+import type { ObjectStorageProviderDTO } from '~/types/registry.ts';
 
 export function useStorageProviderTable(onEdit?: (provider: ObjectStorageProviderDTO) => void) {
     const { t } = useI18n();

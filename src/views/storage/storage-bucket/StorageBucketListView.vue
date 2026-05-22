@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import SidebarDashboard from "~/layouts/sidebar/SidebarDashboard.vue";
 import HeaderDashboard from "~/layouts/headers/HeaderDashboard.vue";
-import StorageProviderContent from "~/features/registry/storage-provider/components/StorageProviderContent.vue";
+import StorageBucketContent from "~/features/storage/storage-bucket/components/StorageBucketContent.vue";
 </script>
 
 <template>
@@ -9,7 +9,7 @@ import StorageProviderContent from "~/features/registry/storage-provider/compone
     <SidebarDashboard />
     <HeaderDashboard />
   </div>
-  <StorageProviderContent />
+  <StorageBucketContent />
 </template>
 
 <style scoped>

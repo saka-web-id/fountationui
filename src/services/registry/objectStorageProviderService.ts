@@ -10,5 +10,9 @@ export const objectStorageProviderService = {
         return api.get<ObjectStorageProviderPageDTO>(`/v0/objects/storage/provider/list/companyId/${companyId}/userId/${userId}`, {
             params
         });
+    },
+
+    getAllStorageProviders(companyId: number, userId: number) {
+        return api.get<ObjectStorageProviderDTO[]>(`/v0/objects/storage/provider/list/all/companyId/${companyId}/userId/${userId}`);
     }
 };

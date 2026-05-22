@@ -135,3 +135,20 @@ export interface ObjectStorageProviderPageDTO {
     objectStorageProviderPage: number;
     objectStorageProviderSize: number;
 }
+
+export interface ObjectBucketDTO {
+    objectBucketId?: number;
+    objectBucketProviderId: number;
+    objectBucketCompanyId: number;
+    objectBucketCode: string;
+    objectBucketName: string;
+    objectBucketIsExposed: boolean;
+    objectBucketCreatedAt?: string;
+}
+
+export interface ObjectBucketPageDTO {
+    objectBucketData: ObjectBucketDTO[];
+    objectBucketTotalItems: number;
+    objectBucketPage: number;
+    objectBucketSize: number;
+}
