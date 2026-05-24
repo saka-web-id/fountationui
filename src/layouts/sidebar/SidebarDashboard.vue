@@ -106,6 +106,15 @@ const isPremium = import.meta.env.VITE_APP_PLAN === 'PREMIUM';
       </router-link>
     </li>
 
+    <li class="nav-item" id="idobjectstorage">
+      <router-link to="/object/storage/setting" class="nav-link">
+        <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-cloud-fill me-1 mb-1" style="color: var(--bs-primary);">
+          <path d="M4.406 3.342A5.53 5.53 0 0 1 8 2c2.69 0 4.923 2 5.466 4.63A4.474 4.474 0 0 1 15.5 10 4.5 4.5 0 0 1 11 14.5h-7A4.5 4.5 0 0 1 0 10c0-2.223 1.62-4.07 3.73-4.445.1-.01.2-.016.3-.016a5.5 5.5 0 0 1 .376-2.203Z"/>
+        </svg>
+        {{t('registry.objectStorage')}}
+      </router-link>
+    </li>
+
     <li class="nav-item dropdown" id="idsetting">
       <a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" data-bs-display="static" href="#" role="button">
         <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-gear-fill me-1 mb-1" style="color: var(--bs-primary);">
@@ -143,11 +152,6 @@ const isPremium = import.meta.env.VITE_APP_PLAN === 'PREMIUM';
         <li>
           <router-link to="/permissionsetting" class="dropdown-item" data-bs-dismiss="dropdown">
             <i class="bi bi-key me-1"></i> {{ t('textLabel.permissionSetting') }}
-          </router-link>
-        </li>
-        <li>
-          <router-link to="/object/storage/setting" class="dropdown-item" data-bs-dismiss="dropdown">
-            <i class="bi bi-cloud me-1"></i> {{ t('registry.storageSetting') }}
           </router-link>
         </li>
       </ul>

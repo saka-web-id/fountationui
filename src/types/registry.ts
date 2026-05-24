@@ -152,3 +152,30 @@ export interface ObjectBucketPageDTO {
     objectBucketPage: number;
     objectBucketSize: number;
 }
+
+export interface ObjectsDTO {
+    objectId?: number;
+    bucketId: number;
+    objectKey: string;
+    objectOriginalName: string;
+    objectMimeType: string;
+    objectExtension: string;
+    objectSizeBytes: number;
+    objectCheckSum: string;
+    objectStatus: string;
+    objectCreatedAt?: string;
+}
+
+export interface ObjectsPageDTO {
+    objectsData: ObjectsDTO[];
+    objectsTotalItems: number;
+    objectsPage: number;
+    objectsSize: number;
+}
+
+export interface ObjectMetadataDTO {
+    objectMetaId?: number;
+    objectId: number;
+    objectMetaKey: string;
+    objectMetaValue: string;
+}

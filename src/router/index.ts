@@ -487,6 +487,18 @@ const routes: RouteRecordRaw[] = [
         meta: { requiresAuth: true, requiresPremium: false, roleAccess: "SUPER_ADMIN, ADMIN, MANAGER, USER, GUEST" }
     },
     {
+        path: '/object/storage/upload',
+        name: 'objectstorageupload',
+        component: () => import("~/views/storage/object-upload/ObjectUploadCompanyView.vue"),
+        meta: { requiresAuth: true, requiresPremium: false, roleAccess: "SUPER_ADMIN, ADMIN, MANAGER, USER, GUEST" }
+    },
+    {
+        path: '/object/storage/upload/list/:valueCompanyId',
+        name: 'objectstorageuploadlist',
+        component: () => import("~/views/storage/object-upload/ObjectUploadListView.vue"),
+        meta: { requiresAuth: true, requiresPremium: false, roleAccess: "SUPER_ADMIN, ADMIN, MANAGER, USER, GUEST" }
+    },
+    {
         path: '/unauthorized',
 
         name: 'unauthorized',

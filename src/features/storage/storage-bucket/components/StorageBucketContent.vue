@@ -22,6 +22,7 @@ const providers = ref<ObjectStorageProviderDTO[]>([]);
 const offcanvasElement = ref<HTMLElement | null>(null);
 const offcanvasInstance = ref<Offcanvas | null>(null);
 const isEditing = ref(false);
+const isViewing = ref(false);
 const formValues = ref<ObjectBucketDTO>({
   objectBucketProviderId: 0,
   objectBucketCompanyId: valueCompanyId,
@@ -36,15 +37,20 @@ const fetchProviders = async () => {
   if (!companyId || !userId) return;
 
   try {
-    const response = await objectStorageProviderService.getAllStorageProviders(companyId, userId);
-    providers.value = response.data || [];
+    // Use the paginated list API with a large size to get all providers for the dropdown
+    const response = await objectStorageProviderService.getStorageProviders(companyId, userId, {
+      page: 0,
+      size: 1000 // Request a large number to ensure all are included
+    });
+    providers.value = response.data?.objectStorageProviderData || [];
   } catch (error) {
     console.error("Failed to fetch storage providers", error);
   }
 };
 
-const handleEdit = (bucket: ObjectBucketDTO) => {
-  isEditing.value = true;
+const handleView = (bucket: ObjectBucketDTO) => {
+  isEditing.value = false;
+  isViewing.value = true;
   formValues.value = { ...bucket };
   openOffcanvas();
 };
@@ -54,7 +60,7 @@ const {
   searchName,
   fetchBuckets,
   t
-} = useStorageBucketTable(valueCompanyId, handleEdit);
+} = useStorageBucketTable(valueCompanyId, handleView);
 
 const viewMode = ref<'list' | 'grid'>('list');
 
@@ -82,6 +88,7 @@ const closeOffcanvas = () => {
 
 const handleAdd = () => {
   isEditing.value = false;
+  isViewing.value = false;
   formValues.value = {
     objectBucketProviderId: providers.value.length > 0 ? providers.value[0].objectStorageProviderId || 0 : 0,
     objectBucketCompanyId: valueCompanyId,
@@ -93,6 +100,8 @@ const handleAdd = () => {
 };
 
 const onSubmit = async (values: any, { resetForm }: any) => {
+  if (isViewing.value) return;
+
   const payload = { ...values, objectBucketCompanyId: valueCompanyId };
   if (isEditing.value) {
       payload.objectBucketId = formValues.value.objectBucketId;
@@ -122,7 +131,7 @@ onMounted(() => {
         <li class="breadcrumb-item"><router-link to="/dashboard"><span>{{ t('textLabel.dashboard') }}</span></router-link></li>
         <li class="breadcrumb-item"><router-link to="/object/storage/setting"><span>{{ t('registry.storageSetting') }}</span></router-link></li>
         <li class="breadcrumb-item"><router-link to="/object/storage/bucket"><span>{{ t('registry.storageBucket') }}</span></router-link></li>
-        <li class="breadcrumb-item active"><span class="active">{{ t('registry.list') }}</span></li>
+        <li class="breadcrumb-item active"><span class="active">{{ t('textLabel.list') }}</span></li>
       </ol>
 
       <div class="card mb-3 bg-gradient-dark">
@@ -174,15 +183,15 @@ onMounted(() => {
     <div ref="offcanvasElement" class="offcanvas offcanvas-end bg-dark text-white border-start border-secondary" tabindex="-1" id="offcanvasStorageBucket" aria-labelledby="offcanvasStorageBucketLabel">
       <div class="offcanvas-header border-bottom border-secondary">
         <h5 class="offcanvas-title" id="offcanvasStorageBucketLabel">
-          {{ isEditing ? t('button.edit') : t('button.add') }} {{ t('registry.storageBucket') }}
+          {{ isViewing ? t('button.view') : (isEditing ? t('button.edit') : t('button.add')) }} {{ t('registry.storageBucket') }}
         </h5>
         <button type="button" class="btn-close btn-close-white" @click="closeOffcanvas" aria-label="Close"></button>
       </div>
       <div class="offcanvas-body">
-        <Form :key="isEditing ? formValues.objectBucketId : 'new'" :validation-schema="schema" :initial-values="formValues" @submit="onSubmit">
+        <Form :key="isViewing ? formValues.objectBucketId : (isEditing ? formValues.objectBucketId : 'new')" :validation-schema="schema" :initial-values="formValues" @submit="onSubmit">
           <div class="mb-3">
             <label class="form-label text-secondary small">{{ t('provider.name') }}</label>
-            <Field name="objectBucketProviderId" as="select" class="form-select bg-dark text-white border-secondary">
+            <Field name="objectBucketProviderId" as="select" class="form-select bg-dark text-white border-secondary" :disabled="isViewing">
               <option value="0" disabled>{{ t('button.search') }} {{ t('provider.name') }}...</option>
               <option v-for="provider in providers" :key="provider.objectStorageProviderId" :value="provider.objectStorageProviderId">
                 {{ provider.objectStorageProviderCode }}
@@ -192,27 +201,27 @@ onMounted(() => {
           </div>
           <div class="mb-3">
             <label class="form-label text-secondary small">{{ t('registry.code') }}</label>
-            <Field name="objectBucketCode" type="text" class="form-control bg-dark text-white border-secondary" />
+            <Field name="objectBucketCode" type="text" class="form-control bg-dark text-white border-secondary" :disabled="isViewing" />
             <ErrorMessage name="objectBucketCode" class="text-danger small" />
           </div>
           <div class="mb-3">
             <label class="form-label text-secondary small">{{ t('registry.name') }}</label>
-            <Field name="objectBucketName" type="text" class="form-control bg-dark text-white border-secondary" />
+            <Field name="objectBucketName" type="text" class="form-control bg-dark text-white border-secondary" :disabled="isViewing" />
             <ErrorMessage name="objectBucketName" class="text-danger small" />
           </div>
           <div class="mb-3">
              <div class="form-check">
-              <Field name="objectBucketIsExposed" type="checkbox" :value="true" class="form-check-input" id="isExposedCheck" />
+              <Field name="objectBucketIsExposed" type="checkbox" :value="true" class="form-check-input" id="isExposedCheck" :disabled="isViewing" />
               <label class="form-check-label text-white" for="isExposedCheck">{{ t('registry.active') }} (Exposed)</label>
             </div>
             <ErrorMessage name="objectBucketIsExposed" class="text-danger small" />
           </div>
           
           <div class="mt-4 d-flex gap-2">
-            <button type="submit" class="btn btn-primary flex-grow-1" :disabled="isSaving">
+            <button v-if="!isViewing" type="submit" class="btn btn-primary flex-grow-1" :disabled="isSaving">
               {{ isSaving ? t('button.saving') : t('button.save') }}
             </button>
-            <button type="button" class="btn btn-outline-secondary" @click="closeOffcanvas">{{ t('button.cancel') }}</button>
+            <button type="button" class="btn btn-outline-secondary flex-grow-1" @click="closeOffcanvas">{{ isViewing ? t('button.close') : t('button.cancel') }}</button>
           </div>
         </Form>
       </div>

@@ -89,7 +89,14 @@ const onSubmit = handleSubmit(async (values) => {
             </div>
             <div class="mb-3">
               <label class="form-label text-white">{{ t('textLabel.action') }}</label>
-              <Field name="action" class="form-control" />
+              <Field name="action" as="select" class="form-select">
+                <option value="" disabled>Select {{ t('textLabel.action') }}</option>
+                <option value="GET">GET</option>
+                <option value="POST">POST</option>
+                <option value="PUT">PUT</option>
+                <option value="DELETE">DELETE</option>
+                <option value="PATCH">PATCH</option>
+              </Field>
               <ErrorMessage name="action" class="text-danger" />
             </div>
             <div class="mb-3">

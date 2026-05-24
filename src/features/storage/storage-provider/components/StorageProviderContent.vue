@@ -100,7 +100,7 @@ onMounted(fetchStorageProviders);
     <div class="container">
       <ol class="breadcrumb ms-2 me-2">
         <li class="breadcrumb-item"><router-link to="/dashboard"><span>{{ t('textLabel.dashboard') }}</span></router-link></li>
-        <li class="breadcrumb-item"><router-link to="/submenu/registries"><span>{{ t('textLabel.registry', 2) }}</span></router-link></li>
+        <li class="breadcrumb-item"><router-link to="/object/storage/setting"><span>{{ t('registry.objectStorage') }}</span></router-link></li>
         <li class="breadcrumb-item active"><span class="active">{{ t('registry.storageProvider', 2) }}</span></li>
       </ol>
 
@@ -165,8 +165,24 @@ onMounted(fetchStorageProviders);
             <ErrorMessage name="objectStorageProviderCode" class="text-danger small" />
           </div>
           <div class="mb-3">
-            <label class="form-label text-secondary small">{{ t('registry.type') }}</label>
-            <Field name="objectStorageProviderType" type="text" class="form-control bg-dark text-white border-secondary" />
+            <label class="form-label text-secondary small">{{ t('textLabel.type') }}</label>
+            <Field name="objectStorageProviderType" as="select" class="form-select bg-dark text-white border-secondary">
+              <option value="" disabled selected>Select {{ t('textLabel.type') }}...</option>
+              <option value="MINIO">MinIO</option>
+              <option value="AWS">Amazon S3</option>
+              <option value="SEAWEEDFS">Seaweed FS</option>
+              <option value="WASABI">Wasabi</option>
+              <option value="RUSTFS">Rust FS</option>
+              <option value="CR2">Cloudflare R2</option>
+              <option value="GARAGE">Garage S3</option>
+              <option value="GCS">GCS</option>
+              <option value="GCS_NATIVE">GCS Native</option>
+              <option value="DO_SPACES">DigitalOcean</option>
+              <option value="BACKBLAZE_B2">Backblaze B2</option>
+              <option value="LINODE_OBJECT">Linode / Akamai</option>
+              <option value="CEPH_RGW">Ceph / RADOS</option>
+              <option value="ALIYUN_OSS">Alibaba OSS</option>
+            </Field>
             <ErrorMessage name="objectStorageProviderType" class="text-danger small" />
           </div>
           <div class="mb-3">
@@ -180,13 +196,6 @@ onMounted(fetchStorageProviders);
             <ErrorMessage name="objectStorageProviderRegion" class="text-danger small" />
           </div>
           <div class="mb-3">
-             <div class="form-check">
-              <Field name="objectStorageProviderIsActive" type="checkbox" :value="true" class="form-check-input" id="isActiveCheckOff" />
-              <label class="form-check-label text-white" for="isActiveCheckOff">{{ t('registry.active') }}</label>
-            </div>
-            <ErrorMessage name="objectStorageProviderIsActive" class="text-danger small" />
-          </div>
-          <div class="mb-3">
             <label class="form-label text-secondary small">{{ t('registry.accessKey') }}</label>
             <Field name="objectStorageProviderAccessKey" type="password" class="form-control bg-dark text-white border-secondary" />
             <ErrorMessage name="objectStorageProviderAccessKey" class="text-danger small" />
@@ -195,6 +204,13 @@ onMounted(fetchStorageProviders);
             <label class="form-label text-secondary small">{{ t('registry.secretKey') }}</label>
             <Field name="objectStorageProviderSecretKey" type="password" class="form-control bg-dark text-white border-secondary" />
             <ErrorMessage name="objectStorageProviderSecretKey" class="text-danger small" />
+          </div>
+          <div class="mb-3">
+             <div class="form-check">
+              <Field name="objectStorageProviderIsActive" type="checkbox" :value="true" class="form-check-input" id="isActiveCheckOff" />
+              <label class="form-check-label text-white" for="isActiveCheckOff">{{ t('registry.active') }}</label>
+            </div>
+            <ErrorMessage name="objectStorageProviderIsActive" class="text-danger small" />
           </div>
           <div class="mt-4 d-flex gap-2">
             <button type="submit" class="btn btn-primary flex-grow-1" :disabled="isSaving">

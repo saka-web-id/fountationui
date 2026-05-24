@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import SidebarDashboard from "~/layouts/sidebar/SidebarDashboard.vue";
 import HeaderDashboard from "~/layouts/headers/HeaderDashboard.vue";
-import ObjectStorageGrid from "~/features/storage/ObjectStorageGrid.vue";
+import ObjectUploadContent from "~/features/storage/object-upload/components/ObjectUploadContent.vue";
 </script>
 
 <template>
@@ -9,9 +9,8 @@ import ObjectStorageGrid from "~/features/storage/ObjectStorageGrid.vue";
     <SidebarDashboard />
     <HeaderDashboard />
   </div>
-  <ObjectStorageGrid />
+  <ObjectUploadContent />
 </template>
-
 
 <style scoped>
 </style>

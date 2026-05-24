@@ -305,6 +305,8 @@
     "storageProvider": "Storage Provider | Storage Providers",
     "storageBucket": "Storage Bucket | Storage Buckets",
     "storageSetting": "Storage Setting | Storage Settings",
+    "objectStorage": "Object Storage",
+    "objectUpload": "Object Upload | Object Uploads",
     "endpoint": "Endpoint",
     "region": "Region",
     "accessKey": "Access Key",

@@ -304,6 +304,8 @@
     "storageProvider": "Penyedia Penyimpanan | Penyedia Penyimpanan",
     "storageBucket": "Ember Penyimpanan | Ember Penyimpanan",
     "storageSetting": "Pengaturan Penyimpanan | Pengaturan Penyimpanan",
+    "objectStorage": "Penyimpanan Objek",
+    "objectUpload": "Unggah Objek | Unggah Objek",
     "endpoint": "Endpoint",
     "region": "Wilayah",
     "accessKey": "Kunci Akses",

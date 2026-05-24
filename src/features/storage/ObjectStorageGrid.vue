@@ -30,6 +30,13 @@ const settings = ref<StorageSettingItem[]>([
     icon: 'bi-bucket',
     route: { name: 'objectstoragebucket' },
     isPremium: false
+  },
+  {
+    id: 'upload',
+    name: t('registry.objectUpload'),
+    icon: 'bi-cloud-upload',
+    route: { name: 'objectstorageupload' },
+    isPremium: false
   }
 ]);
 
@@ -59,14 +66,14 @@ const handleNavigation = (item: StorageSettingItem) => {
     <div class="container">
       <ol class="breadcrumb ms-4">
         <li class="breadcrumb-item"><router-link to="/dashboard"><span>{{ t('textLabel.dashboard') }}</span></router-link></li>
-        <li class="breadcrumb-item active"><span class="active">{{ t('registry.storageSetting') }}</span></li>
+        <li class="breadcrumb-item active"><span class="active">{{ t('registry.objectStorage') }}</span></li>
       </ol>
       <div class="card mb-3 bg-gradient-dark border-secondary shadow-lg">
         <div class="card-body p-4">
           <div class="row d-flex justify-content-between align-items-center mb-4">
             <div class="col-auto">
               <h3 class="fw-bold text-white mb-0">
-                {{ t('registry.storageSetting') }}
+                {{ t('registry.objectStorage') }}
               </h3>
             </div>
             <div class="col-12 col-md-4 mt-3 mt-md-0">

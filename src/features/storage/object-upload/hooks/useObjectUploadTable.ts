@@ -1,16 +1,16 @@
 import { ref, computed, watch, h } from 'vue';
 import { createColumnHelper } from '@tanstack/vue-table';
 import { useI18n } from 'vue-i18n';
-import { useAuthStore } from '~/stores/auth.ts';
-import { objectStorageProviderService } from '~/services/registry/objectStorageProviderService.ts';
-import { useDataTable } from '~/composables/useDataTable.ts';
-import type { ObjectStorageProviderDTO } from '~/types/registry.ts';
+import { useAuthStore } from '~/stores/auth';
+import { objectUploadService } from '~/services/storage/objectUploadService';
+import { useDataTable } from '~/composables/useDataTable';
+import type { ObjectsDTO } from '~/types/registry';
 
-export function useStorageProviderTable(onEdit?: (provider: ObjectStorageProviderDTO) => void) {
+export function useObjectUploadTable(valueCompanyId: number, onShowMetadata?: (obj: ObjectsDTO) => void) {
     const { t } = useI18n();
     const authStore = useAuthStore();
     
-    const data = ref<ObjectStorageProviderDTO[]>([]);
+    const data = ref<ObjectsDTO[]>([]);
     const totalItems = ref(0);
     const searchName = ref("");
     
@@ -19,61 +19,69 @@ export function useStorageProviderTable(onEdit?: (provider: ObjectStorageProvide
         pageSize: 100, // Default 100
     });
 
-    const sorting = ref([{ id: 'objectStorageProviderCode', desc: false }]);
+    const sorting = ref([{ id: 'objectCreatedAt', desc: true }]);
 
-    const fetchStorageProviders = async () => {
+    const fetchObjects = async () => {
         const companyId = authStore.user?.company?.companyId;
         const userId = authStore.user?.id;
-        if (!companyId || !userId) return;
+        if (!companyId || !userId || !valueCompanyId) return;
 
         try {
-            const response = await objectStorageProviderService.getStorageProviders(companyId, userId, {
+            const response = await objectUploadService.getObjects(companyId, userId, valueCompanyId, {
                 name: searchName.value,
                 page: pagination.value.pageIndex,
                 size: pagination.value.pageSize
             });
 
             if (response.data) {
-                data.value = response.data.objectStorageProviderData || [];
-                totalItems.value = response.data.objectStorageProviderTotalItems || 0;
+                data.value = response.data.objectsData || [];
+                totalItems.value = response.data.objectsTotalItems || 0;
             }
         } catch (error) {
-            console.error("Failed to fetch storage providers", error);
+            console.error("Failed to fetch objects", error);
         }
     };
 
-    const columnHelper = createColumnHelper<ObjectStorageProviderDTO>();
+    const columnHelper = createColumnHelper<ObjectsDTO>();
     const columns = [
-        columnHelper.accessor('objectStorageProviderCode', {
-            header: () => t('registry.code'),
+        columnHelper.accessor('objectOriginalName', {
+            header: () => t('textLabel.name'),
             cell: info => info.getValue(),
         }),
-        columnHelper.accessor('objectStorageProviderType', {
+        columnHelper.accessor('objectKey', {
+            header: () => t('textLabel.key'),
+            cell: info => info.getValue(),
+            meta: { className: 'd-none d-md-table-cell' }
+        }),
+        columnHelper.accessor('objectMimeType', {
             header: () => t('textLabel.type'),
-            cell: info => info.getValue(),
-            meta: { className: 'd-none d-md-table-cell' }
-        }),
-        columnHelper.accessor('objectStorageProviderEndpoint', {
-            header: () => t('registry.endpoint'),
-            cell: info => info.getValue(),
-            meta: { className: 'd-none d-md-table-cell' }
-        }),
-        columnHelper.accessor('objectStorageProviderRegion', {
-            header: () => t('registry.region'),
             cell: info => info.getValue(),
             meta: { className: 'd-none d-lg-table-cell' }
         }),
-        columnHelper.accessor('objectStorageProviderIsActive', {
-            header: () => t('registry.active'),
-            cell: info => info.getValue() ? t('textLabel.true') : t('textLabel.false'),
+        columnHelper.accessor('objectSizeBytes', {
+            header: () => 'Size (Bytes)',
+            cell: info => info.getValue()?.toLocaleString(),
+            meta: { className: 'd-none d-md-table-cell' }
+        }),
+        columnHelper.accessor('objectStatus', {
+            header: () => t('textLabel.status'),
+            cell: info => info.getValue(),
+        }),
+        columnHelper.accessor('objectCreatedAt', {
+            header: () => t('textLabel.createdAt'),
+            cell: info => info.getValue() ? new Date(info.getValue()!).toLocaleString() : '-',
+            meta: { className: 'd-none d-lg-table-cell' }
         }),
         columnHelper.display({
             id: 'actions',
             header: () => t('textLabel.action'),
             cell: info => h('button', {
-                class: 'btn btn-sm btn-outline-primary',
-                onClick: () => onEdit?.(info.row.original)
-            }, t('button.edit'))
+                class: 'btn btn-sm btn-outline-info',
+                onClick: () => onShowMetadata?.(info.row.original)
+            }, [
+                h('i', { class: 'bi bi-info-circle me-1' }),
+                'Metadata'
+            ])
         }),
     ];
 
@@ -92,7 +100,7 @@ export function useStorageProviderTable(onEdit?: (provider: ObjectStorageProvide
             } else {
                 sorting.value = updater;
             }
-            fetchStorageProviders();
+            fetchObjects();
         },
         onPaginationChange: (updater) => {
             if (typeof updater === 'function') {
@@ -100,14 +108,14 @@ export function useStorageProviderTable(onEdit?: (provider: ObjectStorageProvide
             } else {
                 pagination.value = updater;
             }
-            fetchStorageProviders();
+            fetchObjects();
         }
     });
 
     // Watch for search changes
     watch(searchName, () => {
         pagination.value.pageIndex = 0;
-        fetchStorageProviders();
+        fetchObjects();
     });
 
     return {
@@ -115,7 +123,7 @@ export function useStorageProviderTable(onEdit?: (provider: ObjectStorageProvide
         globalFilter,
         searchName,
         pagination,
-        fetchStorageProviders,
+        fetchObjects,
         t
     };
 }

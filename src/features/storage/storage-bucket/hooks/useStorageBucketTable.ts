@@ -67,7 +67,7 @@ export function useStorageBucketTable(valueCompanyId: number, onEdit?: (bucket: 
             cell: info => h('button', {
                 class: 'btn btn-sm btn-outline-primary',
                 onClick: () => onEdit?.(info.row.original)
-            }, t('button.edit'))
+            }, t('button.view'))
         }),
     ];
 
