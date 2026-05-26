@@ -257,7 +257,12 @@
     "history": "Riwayat",
     "watched": "Sudah Dilihat",
     "campaign": "Kampanye | Kampanye",
-    "registry": "Registri | Daftar Registri"
+    "registry": "Registri | Daftar Registri",
+    "cognitive": "Kognitif"
+  },
+  "cognitive": {
+    "title": "Kognitif",
+    "aiProvider": "Penyedia AI | Penyedia AI"
   },
   "history": {
     "detailTitle": "Detail Riwayat Notifikasi",

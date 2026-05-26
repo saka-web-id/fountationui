@@ -257,7 +257,12 @@
     "history": "历史记录",
     "watched": "已观看",
     "campaign": "Campaign | Campaigns",
-    "registry": "注册表 | 注册表"
+    "registry": "注册表 | 注册表",
+    "cognitive": "认知"
+  },
+  "cognitive": {
+    "title": "认知",
+    "aiProvider": "AI 供应商 | AI 供应商"
   },
   "history": {
     "detailTitle": "通知历史详情",

@@ -115,6 +115,15 @@ const isPremium = import.meta.env.VITE_APP_PLAN === 'PREMIUM';
       </router-link>
     </li>
 
+    <li class="nav-item" id="idcognitive">
+      <router-link to="/cognitive/ai/settings" class="nav-link">
+        <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-robot me-1 mb-1" style="color: var(--bs-primary);">
+          <path d="M6 12.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5ZM3 8.062C3 6.76 4.235 5.765 5.53 5.881A7.105 7.105 0 0 1 11 12.5V13h2.5a.5.5 0 0 1 0 1h-11a.5.5 0 0 1 0-1H5v-.5a6.105 6.105 0 0 0-4.745-5.938A.5.5 0 1 1 1 6.062ZM8 0a.5.5 0 0 1 .5.5v1.3a6 6 0 0 1 4.146 1.707l.919-.918a.5.5 0 1 1 .707.707l-.918.919A6 6 0 0 1 15 8.5h1.3a.5.5 0 0 1 0 1H15a6 6 0 0 1-1.707 4.146l.918.919a.5.5 0 0 1-.707.707l-.919-.918A6 6 0 0 1 8.5 15H8v1.3a.5.5 0 0 1-1 0V15a6 6 0 0 1-4.146-1.707l-.919.918a.5.5 0 0 1-.707-.707l.918-.919A6 6 0 0 1 1 8.5H0a.5.5 0 0 1 0-1h1.3a6 6 0 0 1 1.707-4.146l-.918-.919a.5.5 0 0 1 .707-.707l.919.918A6 6 0 0 1 7.5 1.8V.5a.5.5 0 0 1 .5-.5Z"/>
+        </svg>
+        {{t('cognitive.title')}}
+      </router-link>
+    </li>
+
     <li class="nav-item dropdown" id="idsetting">
       <a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" data-bs-display="static" href="#" role="button">
         <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-gear-fill me-1 mb-1" style="color: var(--bs-primary);">

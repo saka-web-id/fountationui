@@ -179,3 +179,22 @@ export interface ObjectMetadataDTO {
     objectMetaKey: string;
     objectMetaValue: string;
 }
+
+export interface AiProviderDTO {
+    aiProviderId?: number;
+    aiProviderName: string;
+    aiProviderApiKeySecret: string;
+    aiProviderApiBaseUrl: string;
+    aiProviderEmbeddingModel: string;
+    aiProviderChatModel: string;
+    aiProviderActive: boolean;
+    aiProviderCreatedAt?: string;
+    aiProviderUpdatedAt?: string;
+}
+
+export interface AiProviderPageDTO {
+    aiProviderData: AiProviderDTO[];
+    aiProviderTotalItems: number;
+    aiProviderPage: number;
+    aiProviderSize: number;
+}

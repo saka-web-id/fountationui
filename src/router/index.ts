@@ -499,6 +499,18 @@ const routes: RouteRecordRaw[] = [
         meta: { requiresAuth: true, requiresPremium: false, roleAccess: "SUPER_ADMIN, ADMIN, MANAGER, USER, GUEST" }
     },
     {
+        path: '/cognitive/ai/settings',
+        name: 'cognitiveaisettings',
+        component: () => import("~/views/cognitive/ai-provider/AiProviderSettingView.vue"),
+        meta: { requiresAuth: true, requiresPremium: false, roleAccess: "SUPER_ADMIN, ADMIN, MANAGER, USER, GUEST" }
+    },
+    {
+        path: '/cognitive/ai/provider',
+        name: 'cognitiveaiprovider',
+        component: () => import("~/views/cognitive/ai-provider/AiProviderListView.vue"),
+        meta: { requiresAuth: true, requiresPremium: false, roleAccess: "SUPER_ADMIN, ADMIN, MANAGER, USER, GUEST" }
+    },
+    {
         path: '/unauthorized',
 
         name: 'unauthorized',

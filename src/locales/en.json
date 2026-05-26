@@ -258,7 +258,12 @@
     "history": "History",
     "watched": "Watched",
     "campaign": "Campaign | Campaigns",
-    "registry": "Registry | Registries"
+    "registry": "Registry | Registries",
+    "cognitive": "Cognitive"
+  },
+  "cognitive": {
+    "title": "Cognitive",
+    "aiProvider": "AI Provider | AI Providers"
   },
   "history": {
     "detailTitle": "Notification History Details",
