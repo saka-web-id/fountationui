@@ -27,8 +27,8 @@ const fetchHistory = async (notificationId: number) => {
 </script>
 
 <template>
-    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasHistoryDetail" aria-labelledby="offcanvasHistoryDetailLabel">
-        <div class="offcanvas-header border-bottom">
+    <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasHistoryDetail" aria-labelledby="offcanvasHistoryDetailLabel">
+        <div class="offcanvas-header bg-light border-bottom">
             <h5 id="offcanvasHistoryDetailLabel">{{ t('history.detailTitle') }}</h5>
             <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>

@@ -45,8 +45,32 @@ export function useNotificationSettingTable() {
             id: 'category',
             name: t('textLabel.category'),
             route: '/notification/category',
-            icon: 'bi-whatsapp',
+            icon: 'bi-tags',
             description: t('textLabel.categorySettingDescription') || 'Configure Category notification settings',
+            isPremium: true
+        },
+        {
+            id: 'templates',
+            name: t('textLabel.template', 2),
+            route: '/notification/templates',
+            icon: 'bi-layout-text-window-reverse',
+            description: 'Manage notification message templates',
+            isPremium: true
+        },
+        {
+            id: 'campaign',
+            name: t('textLabel.campaign', 2),
+            route: '/notification/campaign',
+            icon: 'bi-megaphone',
+            description: 'Manage and track notification campaigns',
+            isPremium: true
+        },
+        {
+            id: 'history',
+            name: t('textLabel.history'),
+            route: '/notification/history',
+            icon: 'bi-clock-history',
+            description: 'View notification delivery history',
             isPremium: true
         }
         /*{

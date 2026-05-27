@@ -37,6 +37,12 @@ const routes: RouteRecordRaw[] = [
         meta: { requiresAuth: true, roleAccess: "SUPER_ADMIN, ADMIN, MANAGER, USER, GUEST" }
     },
     {
+        path: '/organization/setting',
+        name: 'organizationsetting',
+        component: () => import("~/views/dashboard/OrganizationSettingView.vue"),
+        meta: { requiresAuth: true, requiresPremium: false, roleAccess: "SUPER_ADMIN, ADMIN, MANAGER, USER, GUEST" }
+    },
+    {
         path: '/company',
         name: 'company',
         component: () => import("../views/company/CompanyView.vue"),
@@ -142,6 +148,12 @@ const routes: RouteRecordRaw[] = [
         path: '/membershipadd/:companyIdParam',
         name: 'membershipadd',
         component: () => import("../views/membership/MembershipEditView.vue"),
+        meta: { requiresAuth: true, requiresPremium: false, roleAccess: "SUPER_ADMIN, ADMIN, MANAGER" }
+    },
+    {
+        path: '/setting/list',
+        name: 'settinglist',
+        component: () => import("~/views/dashboard/SettingListView.vue"),
         meta: { requiresAuth: true, requiresPremium: false, roleAccess: "SUPER_ADMIN, ADMIN, MANAGER" }
     },
     {

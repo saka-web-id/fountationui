@@ -76,8 +76,8 @@ const beautifyJson = () => {
 </script>
 
 <template>
-  <div class="offcanvas offcanvas-end" tabindex="-1" id="templateOffcanvas" aria-labelledby="templateOffcanvasLabel" style="width: 500px;">
-    <div class="offcanvas-header border-bottom">
+  <div class="offcanvas offcanvas-start" tabindex="-1" id="templateOffcanvas" aria-labelledby="templateOffcanvasLabel" style="width: 500px;">
+    <div class="offcanvas-header bg-light border-bottom">
       <h5 id="templateOffcanvasLabel">{{ notiTemplateId > 0 ? t('button.edit') : t('button.add') }} {{ t('textLabel.template') }}</h5>
       <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close" @click="$emit('close')"></button>
     </div>

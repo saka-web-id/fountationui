@@ -53,7 +53,7 @@ const onFormSubmit = async () => {
 </script>
 
 <template>
-  <div ref="root" class="offcanvas offcanvas-end bg-dark text-white" tabindex="-1" id="notificationCategoryOffcanvas" aria-labelledby="notificationCategoryOffcanvasLabel">
+  <div ref="root" class="offcanvas offcanvas-start bg-dark text-white" tabindex="-1" id="notificationCategoryOffcanvas" aria-labelledby="notificationCategoryOffcanvasLabel">
     <div class="offcanvas-header">
       <h5 id="notificationCategoryOffcanvasLabel">{{ isEditing ? 'Update' : 'Add' }} Notification Category</h5>
       <button type="button" class="btn-close btn-close-white text-reset" data-bs-dismiss="offcanvas" aria-label="Close" @click="$emit('close')"></button>

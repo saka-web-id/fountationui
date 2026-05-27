@@ -2,8 +2,12 @@ import api from "~/services/api";
 import type { AiProviderDTO, AiProviderPageDTO } from "~/types/registry";
 
 export const aiProviderService = {
-    addUpdateAiProvider(companyId: number, userId: number, provider: AiProviderDTO) {
+    addAiProvider(companyId: number, userId: number, provider: AiProviderDTO) {
         return api.post<AiProviderDTO>(`/v0/cognitive/ai/provider/add/companyId/${companyId}/userId/${userId}`, provider);
+    },
+
+    updateAiProvider(companyId: number, userId: number, provider: AiProviderDTO) {
+        return api.put<AiProviderDTO>(`/v0/cognitive/ai/provider/update/companyId/${companyId}/userId/${userId}/valueProviderId/${provider.aiProviderId}`, provider);
     },
 
     getAiProviders(companyId: number, userId: number, params: { name?: string; page?: number; size?: number }) {

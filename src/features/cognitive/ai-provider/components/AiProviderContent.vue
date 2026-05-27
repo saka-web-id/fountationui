@@ -9,7 +9,7 @@ import * as yup from 'yup';
 import type { AiProviderDTO } from "~/types/registry";
 import { Offcanvas } from 'bootstrap';
 
-const { addUpdateAiProvider, loading: isSaving } = useAiProvider();
+const { addAiProvider, updateAiProvider, loading: isSaving } = useAiProvider();
 
 const offcanvasElement = ref<HTMLElement | null>(null);
 const offcanvasInstance = ref<Offcanvas | null>(null);
@@ -43,6 +43,7 @@ const toggleViewMode = (mode: 'list' | 'grid') => {
 };
 
 const schema = yup.object({
+  aiProviderId: yup.number().nullable().optional(),
   aiProviderName: yup.string().required(),
   aiProviderApiKeySecret: yup.string().required(),
   aiProviderApiBaseUrl: yup.string().url().required(),
@@ -77,10 +78,13 @@ const handleAdd = () => {
 
 const onSubmit = async (values: any, { resetForm }: any) => {
   const payload = isEditing.value 
-    ? { ...values, aiProviderId: formValues.value.aiProviderId }
+    ? { ...values, aiProviderId: values.aiProviderId || formValues.value.aiProviderId }
     : values;
 
-  const success = await addUpdateAiProvider(payload as AiProviderDTO);
+  const success = isEditing.value 
+    ? await updateAiProvider(payload as AiProviderDTO)
+    : await addAiProvider(payload as AiProviderDTO);
+
   if (success) {
     closeOffcanvas();
     resetForm();
@@ -146,15 +150,17 @@ onMounted(fetchAiProviders);
     </div>
 
     <!-- Offcanvas Add/Update -->
-    <div ref="offcanvasElement" class="offcanvas offcanvas-end bg-dark text-white border-start border-secondary" tabindex="-1" id="offcanvasAiProvider" aria-labelledby="offcanvasAiProviderLabel">
+    <div ref="offcanvasElement" class="offcanvas offcanvas-start bg-dark text-white border-end border-secondary" tabindex="-1" id="offcanvasAiProvider" aria-labelledby="offcanvasAiProviderLabel">
       <div class="offcanvas-header border-bottom border-secondary">
         <h5 class="offcanvas-title" id="offcanvasAiProviderLabel">
           {{ isEditing ? t('button.edit') : t('button.add') }} {{ t('cognitive.aiProvider') }}
+          <span v-if="isEditing" class="badge bg-secondary ms-2">ID: {{ formValues.aiProviderId }}</span>
         </h5>
         <button type="button" class="btn-close btn-close-white" @click="closeOffcanvas" aria-label="Close"></button>
       </div>
       <div class="offcanvas-body">
         <Form :key="isEditing ? formValues.aiProviderId : 'new'" :validation-schema="schema" :initial-values="formValues" @submit="onSubmit">
+          <Field name="aiProviderId" type="hidden" />
           <div class="mb-3">
             <label class="form-label text-secondary small">{{ t('textLabel.name') }}</label>
             <Field name="aiProviderName" type="text" class="form-control bg-dark text-white border-secondary" />

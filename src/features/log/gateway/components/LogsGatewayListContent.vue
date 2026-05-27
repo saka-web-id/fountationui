@@ -66,7 +66,7 @@ onMounted(fetchLogs);
     </div>
 
     <!-- Detail Offcanvas -->
-    <div class="offcanvas offcanvas-end w-50" tabindex="-1" id="logDetailOffcanvas" aria-labelledby="logDetailOffcanvasLabel">
+    <div class="offcanvas offcanvas-start w-50" tabindex="-1" id="logDetailOffcanvas" aria-labelledby="logDetailOffcanvasLabel">
       <div class="offcanvas-header bg-light border-bottom">
         <h5 class="offcanvas-title" id="logDetailOffcanvasLabel">{{ t('textLabel.logDetail') }}</h5>
         <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>

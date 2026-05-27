@@ -11,7 +11,7 @@ const { t } = useI18n();
 </script>
 
 <template>
-  <div class="offcanvas offcanvas-end w-50" tabindex="-1" id="logNotificationProviderDetailOffcanvas" aria-labelledby="logNotificationProviderDetailOffcanvasLabel">
+  <div class="offcanvas offcanvas-start w-50" tabindex="-1" id="logNotificationProviderDetailOffcanvas" aria-labelledby="logNotificationProviderDetailOffcanvasLabel">
     <div class="offcanvas-header bg-light border-bottom">
       <h5 class="offcanvas-title" id="logNotificationProviderDetailOffcanvasLabel">{{ t('textLabel.logDetail') }}</h5>
       <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>

@@ -10,7 +10,7 @@ export function useAiProvider() {
     const authStore = useAuthStore();
     const loading = ref(false);
 
-    const addUpdateAiProvider = async (provider: AiProviderDTO) => {
+    const addAiProvider = async (provider: AiProviderDTO) => {
         loading.value = true;
         setGlobalLoading(true);
         try {
@@ -18,11 +18,31 @@ export function useAiProvider() {
             const userId = authStore.user?.id;
             if (!companyId || !userId) throw new Error("User or Company not found");
 
-            await aiProviderService.addUpdateAiProvider(companyId, userId, provider);
-            setGlobalSuccess("AI Provider saved successfully");
+            await aiProviderService.addAiProvider(companyId, userId, provider);
+            setGlobalSuccess("AI Provider added successfully");
             return true;
         } catch (error: any) {
-            setGlobalError(error.message || "Failed to save AI provider");
+            setGlobalError(error.message || "Failed to add AI provider");
+            return false;
+        } finally {
+            loading.value = false;
+            setGlobalLoading(false);
+        }
+    };
+
+    const updateAiProvider = async (provider: AiProviderDTO) => {
+        loading.value = true;
+        setGlobalLoading(true);
+        try {
+            const companyId = authStore.user?.company?.companyId;
+            const userId = authStore.user?.id;
+            if (!companyId || !userId) throw new Error("User or Company not found");
+
+            await aiProviderService.updateAiProvider(companyId, userId, provider);
+            setGlobalSuccess("AI Provider updated successfully");
+            return true;
+        } catch (error: any) {
+            setGlobalError(error.message || "Failed to update AI provider");
             return false;
         } finally {
             loading.value = false;
@@ -32,6 +52,7 @@ export function useAiProvider() {
 
     return {
         loading,
-        addUpdateAiProvider
+        addAiProvider,
+        updateAiProvider
     };
 }

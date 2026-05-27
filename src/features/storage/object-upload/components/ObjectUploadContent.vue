@@ -187,7 +187,7 @@ onMounted(() => {
     </div>
 
     <!-- Offcanvas Upload -->
-    <div ref="offcanvasElement" class="offcanvas offcanvas-end bg-dark text-white border-start border-secondary" tabindex="-1" id="offcanvasObjectUpload" aria-labelledby="offcanvasObjectUploadLabel">
+    <div ref="offcanvasElement" class="offcanvas offcanvas-start bg-dark text-white border-end border-secondary" tabindex="-1" id="offcanvasObjectUpload" aria-labelledby="offcanvasObjectUploadLabel">
       <div class="offcanvas-header border-bottom border-secondary">
         <h5 class="offcanvas-title" id="offcanvasObjectUploadLabel">
           {{ t('button.add') }} {{ t('registry.objectUpload') }}
@@ -249,7 +249,7 @@ onMounted(() => {
     </div>
 
     <!-- Offcanvas Metadata -->
-    <div ref="metadataOffcanvasElement" class="offcanvas offcanvas-end bg-dark text-white border-start border-secondary" tabindex="-1" id="offcanvasObjectMetadata" aria-labelledby="offcanvasObjectMetadataLabel">
+    <div ref="metadataOffcanvasElement" class="offcanvas offcanvas-start bg-dark text-white border-end border-secondary" tabindex="-1" id="offcanvasObjectMetadata" aria-labelledby="offcanvasObjectMetadataLabel">
       <div class="offcanvas-header border-bottom border-secondary">
         <h5 class="offcanvas-title" id="offcanvasObjectMetadataLabel">
           Object Metadata

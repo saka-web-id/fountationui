@@ -180,7 +180,7 @@ onMounted(() => {
     </div>
 
     <!-- Offcanvas Add/Update -->
-    <div ref="offcanvasElement" class="offcanvas offcanvas-end bg-dark text-white border-start border-secondary" tabindex="-1" id="offcanvasStorageBucket" aria-labelledby="offcanvasStorageBucketLabel">
+    <div ref="offcanvasElement" class="offcanvas offcanvas-start bg-dark text-white border-end border-secondary" tabindex="-1" id="offcanvasStorageBucket" aria-labelledby="offcanvasStorageBucketLabel">
       <div class="offcanvas-header border-bottom border-secondary">
         <h5 class="offcanvas-title" id="offcanvasStorageBucketLabel">
           {{ isViewing ? t('button.view') : (isEditing ? t('button.edit') : t('button.add')) }} {{ t('registry.storageBucket') }}

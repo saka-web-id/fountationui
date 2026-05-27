@@ -355,8 +355,8 @@ const onSubmit = handleSubmit(async (values) => {
         </form>
 
         <!-- Recipient Add/Edit Offcanvas -->
-        <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRecipientForm" aria-labelledby="offcanvasRecipientFormLabel">
-            <div class="offcanvas-header border-bottom">
+        <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasRecipientForm" aria-labelledby="offcanvasRecipientFormLabel">
+          <div class="offcanvas-header bg-light border-bottom">
                 <h5 id="offcanvasRecipientFormLabel">
                     {{ (isCampaignViewOnly || ['FAILED', 'CANCELED', 'COMPLETED'].includes(recipientForm.notiStatus || '')) ? t('campaign.viewRecipient') : (editingRecipientIndex >= 0 ? t('campaign.editRecipient') : t('campaign.addRecipient')) }}
                 </h5>

@@ -315,7 +315,7 @@ const submitForm = handleSubmit((values) => {
     </div>
 
     <!-- Detail Offcanvas -->
-    <div class="offcanvas offcanvas-end bg-dark text-white" tabindex="-1" id="notificationProviderConfigDetailOffcanvas" >
+    <div class="offcanvas offcanvas-start bg-dark text-white" tabindex="-1" id="notificationProviderConfigDetailOffcanvas" >
       <div class="offcanvas-header">
         <h5 class="offcanvas-title">{{ isEditConfig ? t('button.edit') : t('button.add') }}</h5>
         <button type="button" class="btn-close btn-close-white text-reset" data-bs-dismiss="offcanvas"></button>
