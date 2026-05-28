@@ -4,6 +4,7 @@ import { useAuthStore } from '~/stores/auth';
 import { aiChatService } from '~/services/cognitive/aiChatService';
 import { aiProviderService } from '~/services/cognitive/aiProviderService';
 import { aiSessionService } from '~/services/cognitive/aiSessionService';
+import { aiMessageService } from '~/services/cognitive/aiMessageService';
 import type { AiMessageDTO, AiSessionDTO } from '~/types/cognitive';
 import type { AiProviderDTO } from '~/types/registry';
 import { Offcanvas } from 'bootstrap';
@@ -13,6 +14,8 @@ const authStore = useAuthStore();
 const messages = ref<AiMessageDTO[]>([]);
 const newMessage = ref('');
 const isLoading = ref(false);
+const isLoadingHistory = ref(false);
+const isLoadingMore = ref(false);
 const chatContainer = ref<HTMLElement | null>(null);
 
 // Session state
@@ -22,6 +25,10 @@ const newSessionTitle = ref('');
 const sessionOffcanvasElement = ref<HTMLElement | null>(null);
 const sessionOffcanvas = ref<Offcanvas | null>(null);
 
+// Pagination state
+const messagePage = ref(0);
+const hasMoreMessages = ref(false);
+
 // Provider state
 const providers = ref<AiProviderDTO[]>([]);
 const selectedProvider = ref<AiProviderDTO | null>(null);
@@ -29,7 +36,71 @@ const selectedProvider = ref<AiProviderDTO | null>(null);
 const scrollToBottom = async () => {
   await nextTick();
   if (chatContainer.value) {
-    chatContainer.value.scrollTop = chatContainer.value.scrollHeight;
+    const targetScroll = chatContainer.value.scrollHeight;
+    chatContainer.value.scrollTop = targetScroll;
+    
+    // Fallback for slower rendering or images
+    setTimeout(() => {
+      if (chatContainer.value) {
+        chatContainer.value.scrollTop = chatContainer.value.scrollHeight;
+      }
+    }, 50);
+    setTimeout(() => {
+      if (chatContainer.value) {
+        chatContainer.value.scrollTop = chatContainer.value.scrollHeight;
+      }
+    }, 200);
+  }
+};
+
+const fetchMessageHistory = async (isLoadMore = false) => {
+  if (!authStore.user || !authStore.user.company.companyId || !selectedSession.value) return;
+
+  if (isLoadMore) {
+    isLoadingMore.value = true;
+    messagePage.value++;
+  } else {
+    isLoadingHistory.value = true;
+    messagePage.value = 0;
+    messages.value = [];
+  }
+
+  try {
+    const response = await aiMessageService.getMessages(
+      authStore.user.company.companyId,
+      authStore.user.id,
+      {
+        sessionId: selectedSession.value.aiSessionId,
+        page: messagePage.value,
+        size: 100
+      }
+    );
+
+    const newMessages = response.data.aiMessageData;
+    // API already returns messages in correct order (Oldest -> Newest)
+    // No need to reverse.
+
+    if (isLoadMore) {
+      // Prepend older messages
+      const currentScrollHeight = chatContainer.value?.scrollHeight || 0;
+      messages.value = [...newMessages, ...messages.value];
+      
+      // Maintain scroll position after prepending older messages
+      await nextTick();
+      if (chatContainer.value) {
+        chatContainer.value.scrollTop = chatContainer.value.scrollHeight - currentScrollHeight;
+      }
+    } else {
+      messages.value = newMessages;
+      await scrollToBottom();
+    }
+
+    hasMoreMessages.value = (messagePage.value + 1) * 100 < response.data.aiMessageTotalItems;
+  } catch (error) {
+    console.error('Failed to fetch message history', error);
+  } finally {
+    isLoadingHistory.value = false;
+    isLoadingMore.value = false;
   }
 };
 
@@ -53,8 +124,7 @@ const openSessionOffcanvas = () => {
 
 const selectSession = (session: AiSessionDTO) => {
   selectedSession.value = session;
-  messages.value = []; // Clear current chat display when switching sessions
-  // In a real app, you might want to fetch message history for this session here
+  fetchMessageHistory();
   sessionOffcanvas.value?.hide();
 };
 
@@ -220,37 +290,59 @@ const formatDate = (dateString: string | null) => {
               <button @click="openSessionOffcanvas" class="btn btn-primary mt-3">Manage Sessions</button>
             </div>
 
+            <div v-else-if="isLoadingHistory" class="d-flex flex-column align-items-center justify-content-center h-100 opacity-50">
+              <div class="spinner-border text-primary mb-3" role="status"></div>
+              <p>Loading chat history...</p>
+            </div>
+
             <div v-else-if="messages.length === 0" class="d-flex flex-column align-items-center justify-content-center h-100 opacity-50">
               <i class="fa fa-robot fa-4x mb-3"></i>
               <p>How can I help you in "{{ selectedSession.aiSessionTitle }}"?</p>
             </div>
 
-            <template v-for="(msg, index) in messages" :key="msg.aiMessageId || index">
-              <!-- Assistant Message -->
-              <div v-if="msg.aiMessageRole === 'assistant'" class="d-flex flex-row justify-content-start mb-4">
-                <div class="bg-primary rounded-circle me-3 d-flex align-items-center justify-content-center shadow-sm align-self-start mt-1" width="45" height="45" style="min-width: 45px; min-height: 45px;">
-                  <i class="fa fa-robot text-white"></i>
-                </div>
-                <div style="max-width: 75%;">
-                  <div class="p-3 bg-secondary bg-opacity-25 rounded-4 mb-1" style="border-top-left-radius: 4px !important;">
-                    <p class="small mb-0" style="line-height: 1.5; white-space: pre-wrap;">{{ msg.aiMessageContent }}</p>
-                  </div>
-                  <p class="small text-muted mb-0 ms-1 opacity-75">{{ formatTime(msg.aiMessageCreatedAt) }} | {{ formatDate(msg.aiMessageCreatedAt) }}</p>
-                </div>
+            <template v-else>
+              <!-- Read More Button -->
+              <div v-if="hasMoreMessages" class="d-flex justify-content-center mb-4 mt-2">
+                <button 
+                  @click="fetchMessageHistory(true)" 
+                  class="btn btn-sm btn-link text-decoration-none text-muted opacity-75"
+                  :disabled="isLoadingMore"
+                >
+                  <i class="fa fa-history me-1" v-if="!isLoadingMore"></i>
+                  <span class="spinner-border spinner-border-sm me-1" v-else></span>
+                  {{ isLoadingMore ? 'Loading...' : 'Read More' }}
+                </button>
               </div>
 
-              <!-- User Message -->
-              <div v-else class="d-flex flex-row justify-content-end mb-4">
-                <div class="text-end" style="max-width: 75%;">
-                  <div class="p-3 text-white rounded-4 mb-1" style="background-color: #0d6efd; border-top-right-radius: 4px !important;">
-                    <p class="small mb-0" style="line-height: 1.5;">{{ msg.aiMessageContent }}</p>
+              <template v-for="(msg, index) in messages" :key="msg.aiMessageId || index">
+                <!-- Assistant Message -->
+                <div v-if="msg.aiMessageRole === 'assistant'" class="d-flex flex-row justify-content-start mb-4">
+                  <div class="bg-primary rounded-circle me-3 d-flex align-items-center justify-content-center shadow-sm align-self-start mt-1" width="45" height="45" style="min-width: 45px; min-height: 45px;">
+                    <i class="fa fa-robot text-white"></i>
                   </div>
-                  <p class="small text-muted mb-0 me-1 opacity-75">{{ formatTime(msg.aiMessageCreatedAt) }} | {{ formatDate(msg.aiMessageCreatedAt) }}</p>
+                  <div style="max-width: 75%;">
+                    <div class="p-3 bg-secondary bg-opacity-25 rounded-4 mb-1" style="border-top-left-radius: 4px !important;">
+                      <p class="small mb-0" style="line-height: 1.5; white-space: pre-wrap;">{{ msg.aiMessageContent }}</p>
+                    </div>
+                    <p class="small text-muted mb-0 ms-1 opacity-75">
+                      {{ msg.aiMessageCreatedAt ? formatTime(msg.aiMessageCreatedAt) + ' | ' + formatDate(msg.aiMessageCreatedAt) : 'Streaming...' }}
+                    </p>
+                  </div>
                 </div>
-                <div class="bg-secondary rounded-circle ms-3 d-flex align-items-center justify-content-center shadow-sm align-self-start mt-1" width="45" height="45" style="min-width: 45px; min-height: 45px;">
-                  <i class="fa fa-user text-white"></i>
+
+                <!-- User Message -->
+                <div v-else class="d-flex flex-row justify-content-end mb-4">
+                  <div class="text-end" style="max-width: 75%;">
+                    <div class="p-3 text-white rounded-4 mb-1" style="background-color: #0d6efd; border-top-right-radius: 4px !important;">
+                      <p class="small mb-0" style="line-height: 1.5;">{{ msg.aiMessageContent }}</p>
+                    </div>
+                    <p class="small text-muted mb-0 me-1 opacity-75">{{ formatTime(msg.aiMessageCreatedAt) }} | {{ formatDate(msg.aiMessageCreatedAt) }}</p>
+                  </div>
+                  <div class="bg-secondary rounded-circle ms-3 d-flex align-items-center justify-content-center shadow-sm align-self-start mt-1" width="45" height="45" style="min-width: 45px; min-height: 45px;">
+                    <i class="fa fa-user text-white"></i>
+                  </div>
                 </div>
-              </div>
+              </template>
             </template>
 
             <div v-if="isLoading && (!messages.length || messages[messages.length-1].aiMessageRole !== 'assistant')" class="d-flex flex-row justify-content-start mb-4">

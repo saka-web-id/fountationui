@@ -23,6 +23,13 @@ const settings = ref<CognitiveSettingItem[]>([
     icon: 'bi-robot',
     route: { name: 'cognitiveaiprovider' },
     isPremium: false
+  },
+  {
+    id: 'ai-datasource',
+    name: 'AI Datasource',
+    icon: 'bi-database-add',
+    route: { name: 'cognitiveaidatasource-company' },
+    isPremium: false
   }
 ]);
 
@@ -81,7 +88,7 @@ const handleNavigation = (item: CognitiveSettingItem) => {
                   style="cursor: pointer"
                 >
                   <div class="card-body text-center d-flex flex-column align-items-center justify-content-center py-5 position-relative">
-                    <div class="icon-wrapper mb-4 p-3 rounded-circle bg-gradient-primary">
+                    <div class="icon-wrapper mb-4 rounded-circle bg-gradient-primary">
                       <i :class="['bi', row.original.icon, 'fs-1 text-white']"></i>
                     </div>
                     

@@ -511,6 +511,18 @@ const routes: RouteRecordRaw[] = [
         meta: { requiresAuth: true, requiresPremium: false, roleAccess: "SUPER_ADMIN, ADMIN, MANAGER, USER, GUEST" }
     },
     {
+        path: '/cognitive/ai/datasource',
+        name: 'cognitiveaidatasource-company',
+        component: () => import("~/views/cognitive/ai-datasource/AiDatasourceCompanyFilterView.vue"),
+        meta: { requiresAuth: true, requiresPremium: false, roleAccess: "SUPER_ADMIN, ADMIN, MANAGER" }
+    },
+    {
+        path: '/cognitive/ai/datasource/valueCompanyId/:valueCompanyId',
+        name: 'cognitiveaidatasource',
+        component: () => import("~/views/cognitive/ai-datasource/AiDatasourceView.vue"),
+        meta: { requiresAuth: true, requiresPremium: false, roleAccess: "SUPER_ADMIN, ADMIN, MANAGER" }
+    },
+    {
         path: '/cognitive/ai/settings',
         name: 'cognitiveaisettings',
         component: () => import("~/views/cognitive/ai-provider/AiProviderSettingView.vue"),

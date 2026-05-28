@@ -64,7 +64,7 @@ const handleNavigation = (item: any) => {
                       </span>
                     </div>
                     
-                    <div class="icon-wrapper mb-4 p-3 rounded-circle" :class="row.original.isPremium && !isPremiumPlan ? 'bg-secondary' : 'bg-gradient-primary'">
+                    <div class="icon-wrapper mb-4 rounded-circle" :class="row.original.isPremium && !isPremiumPlan ? 'bg-secondary' : 'bg-gradient-primary'">
                       <i :class="['bi', row.original.icon, 'fs-1 text-white']"></i>
                     </div>
                     

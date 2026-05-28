@@ -60,21 +60,21 @@ const { t } = useI18n();
       </router-link>
     </li>
 
+    <li class="nav-item" id="idcognitive">
+      <router-link :to="{ name: 'cognitiveaisettings' }" class="nav-link">
+        <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-cpu-fill me-1 mb-1" style="color: var(--bs-primary);">
+          <path d="M6.5 6a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5z"/>
+          <path d="M5.5.5a.5.5 0 0 0-1 0V2A2.5 2.5 0 0 0 2 4.5H.5a.5.5 0 0 0 0 1H2v1H.5a.5.5 0 0 0 0 1H2v1H.5a.5.5 0 0 0 0 1H2v1H.5a.5.5 0 0 0 0 1H2A2.5 2.5 0 0 0 4.5 14v1.5a.5.5 0 0 0 1 0V14h1v1.5a.5.5 0 0 0 1 0V14h1v1.5a.5.5 0 0 0 1 0V14h1v1.5a.5.5 0 0 0 1 0V14a2.5 2.5 0 0 0 2.5-2.5h1.5a.5.5 0 0 0 0-1H14v-1h1.5a.5.5 0 0 0 0-1H14v-1h1.5a.5.5 0 0 0 0-1H14v-1h1.5a.5.5 0 0 0 0-1H14A2.5 2.5 0 0 0 11.5 2V.5a.5.5 0 0 0-1 0V2h-1V.5a.5.5 0 0 0-1 0V2h-1V.5a.5.5 0 0 0-1 0V2h-1zm1 4.5h3A1.5 1.5 0 0 1 11 6.5v3A1.5 1.5 0 0 1 9.5 11h-3A1.5 1.5 0 0 1 5 9.5v-3A1.5 1.5 0 0 1 6.5 5"/>
+        </svg>
+        {{ t('cognitive.title') }}
+      </router-link>
+    </li>
     <li class="nav-item" id="idobjectstorage">
       <router-link to="/object/storage/setting" class="nav-link">
         <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-cloud-fill me-1 mb-1" style="color: var(--bs-primary);">
           <path d="M4.406 3.342A5.53 5.53 0 0 1 8 2c2.69 0 4.923 2 5.466 4.63A4.474 4.474 0 0 1 15.5 10 4.5 4.5 0 0 1 11 14.5h-7A4.5 4.5 0 0 1 0 10c0-2.223 1.62-4.07 3.73-4.445.1-.01.2-.016.3-.016a5.5 5.5 0 0 1 .376-2.203Z"/>
         </svg>
         {{t('registry.objectStorage')}}
-      </router-link>
-    </li>
-
-    <li class="nav-item" id="idcognitive">
-      <router-link to="/cognitive/ai/settings" class="nav-link">
-        <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-robot me-1 mb-1" style="color: var(--bs-primary);">
-          <path d="M6 12.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5ZM3 8.062C3 6.76 4.235 5.765 5.53 5.881A7.105 7.105 0 0 1 11 12.5V13h2.5a.5.5 0 0 1 0 1h-11a.5.5 0 0 1 0-1H5v-.5a6.105 6.105 0 0 0-4.745-5.938A.5.5 0 1 1 1 6.062ZM8 0a.5.5 0 0 1 .5.5v1.3a6 6 0 0 1 4.146 1.707l.919-.918a.5.5 0 1 1 .707.707l-.918.919A6 6 0 0 1 15 8.5h1.3a.5.5 0 0 1 0 1H15a6 6 0 0 1-1.707 4.146l.918.919a.5.5 0 0 1-.707.707l-.919-.918A6 6 0 0 1 8.5 15H8v1.3a.5.5 0 0 1-1 0V15a6 6 0 0 1-4.146-1.707l-.919.918a.5.5 0 0 1-.707-.707l.918-.919A6 6 0 0 1 1 8.5H0a.5.5 0 0 1 0-1h1.3a6 6 0 0 1 1.707-4.146l-.918-.919a.5.5 0 0 1 .707-.707l.919.918A6 6 0 0 1 7.5 1.8V.5a.5.5 0 0 1 .5-.5Z"/>
-        </svg>
-        {{t('cognitive.title')}}
       </router-link>
     </li>
 

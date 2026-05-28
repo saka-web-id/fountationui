@@ -262,7 +262,21 @@
   },
   "cognitive": {
     "title": "认知",
-    "aiProvider": "AI 供应商 | AI 供应商"
+    "aiProvider": "AI 供应商 | AI 供应商",
+    "aiDatasource": "AI 数据源 | AI 数据源",
+    "aiDatasourceManagement": "AI 数据源管理",
+    "datasourceName": "数据源名称",
+    "sourceService": "源服务",
+    "kafkaTopic": "Kafka 主题",
+    "ingestedRecords": "已摄取记录",
+    "addDatasource": "添加数据源",
+    "saveDatasource": "保存数据源",
+    "searchByName": "按名称搜索...",
+    "selectCompany": "选择公司",
+    "pleaseSelectCompany": "请选择一家公司以管理其 AI 数据源",
+    "companyCode": "公司代码",
+    "active": "有效",
+    "monitorDescription": "管理和监控 AI 数据摄取源"
   },
   "history": {
     "detailTitle": "通知历史详情",

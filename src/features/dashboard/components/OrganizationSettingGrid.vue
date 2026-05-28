@@ -53,7 +53,7 @@ const handleNavigation = (item: any) => {
                   style="cursor: pointer;"
                 >
                   <div class="card-body text-center d-flex flex-column align-items-center justify-content-center py-5">
-                    <div class="icon-wrapper mb-4 p-3 rounded-circle bg-gradient-primary">
+                    <div class="icon-wrapper mb-4 rounded-circle bg-gradient-primary">
                       <i :class="['bi', row.original.icon, 'fs-1 text-white']"></i>
                     </div>
                     

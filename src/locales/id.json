@@ -262,7 +262,21 @@
   },
   "cognitive": {
     "title": "Kognitif",
-    "aiProvider": "Penyedia AI | Penyedia AI"
+    "aiProvider": "Penyedia AI | Penyedia AI",
+    "aiDatasource": "Sumber Data AI | Sumber Data AI",
+    "aiDatasourceManagement": "Manajemen Sumber Data AI",
+    "datasourceName": "Nama Sumber Data",
+    "sourceService": "Layanan Sumber",
+    "kafkaTopic": "Topik Kafka",
+    "ingestedRecords": "Catatan Terintegrasi",
+    "addDatasource": "Tambah Sumber Data",
+    "saveDatasource": "Simpan Sumber Data",
+    "searchByName": "Cari berdasarkan nama...",
+    "selectCompany": "Pilih Perusahaan",
+    "pleaseSelectCompany": "Silakan pilih perusahaan untuk mengelola Sumber Data AI-nya",
+    "companyCode": "Kode Perusahaan",
+    "active": "Aktif",
+    "monitorDescription": "Kelola dan pantau sumber integrasi data AI"
   },
   "history": {
     "detailTitle": "Detail Riwayat Notifikasi",

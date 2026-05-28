@@ -263,7 +263,21 @@
   },
   "cognitive": {
     "title": "Cognitive",
-    "aiProvider": "AI Provider | AI Providers"
+    "aiProvider": "AI Provider | AI Providers",
+    "aiDatasource": "AI Datasource | AI Datasources",
+    "aiDatasourceManagement": "AI Datasource Management",
+    "datasourceName": "Datasource Name",
+    "sourceService": "Source Service",
+    "kafkaTopic": "Kafka Topic",
+    "ingestedRecords": "Ingested Records",
+    "addDatasource": "Add Datasource",
+    "saveDatasource": "Save Datasource",
+    "searchByName": "Search by name...",
+    "selectCompany": "Select Company",
+    "pleaseSelectCompany": "Please select a company to manage its AI Datasources",
+    "companyCode": "Company Code",
+    "active": "Active",
+    "monitorDescription": "Manage and monitor AI data ingestion sources"
   },
   "history": {
     "detailTitle": "Notification History Details",

@@ -12,6 +12,13 @@ export interface AiMessageDTO {
     aiMessageCreatedAt: string | null;
 }
 
+export interface AiMessagePageDTO {
+    aiMessageData: AiMessageDTO[];
+    aiMessageTotalItems: number;
+    aiMessagePage: number;
+    aiMessageSize: number;
+}
+
 export interface AiSessionDTO {
     aiSessionId?: number;
     aiSessionTitle: string;
