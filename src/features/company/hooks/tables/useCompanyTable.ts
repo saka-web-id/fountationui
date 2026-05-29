@@ -34,6 +34,10 @@ export function useCompanyTable() {
             cell: info => info.getValue(),
             meta: { className: 'd-none d-md-table-cell' }
         }),
+        columnHelper.accessor('companyCode', {
+            header: () => t('cognitive.companyCode'),
+            cell: info => info.getValue(),
+        }),
         columnHelper.accessor('companyName', {
             header: () => t('textLabel.company', 2),
             cell: info => info.getValue(),

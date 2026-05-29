@@ -1,4 +1,4 @@
-import type { Company, CompanyCreatePayload } from "~/features/company/interfaces/company.interfaces";
+import type { Company } from "~/features/company/interfaces/company.interfaces";
 import type { Department, DepartmentSimplePayload } from "~/features/department/interfaces/department.interfaces";
 
 export interface Authority {
@@ -91,7 +91,7 @@ export interface UserCreatePayload {
 export interface UserRegisterPayload {
     user: UserCreatePayload;
     account: AccountPayload;
-    company: CompanyCreatePayload;
+    company: Company;
     department: DepartmentSimplePayload;
 }
 

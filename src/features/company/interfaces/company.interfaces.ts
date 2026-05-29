@@ -1,40 +1,49 @@
-
+export interface Company {
+    companyId?: number;
+    companyCode: string;
+    companyName: string;
+    companyAddress: string;
+    companyPhone: string;
+    companyEmail: string;
+    companyWebsite: string;
+    companyDescription: string;
+    companyLogoUrl: string;
+    companyTaxId: string;
+    companyRegistrationId: string;
+    companyStatus: string;
+    companyIndustry: string;
+    companyType: string;
+    companyCreatedAt?: string;
+    companyUpdatedAt?: string;
+    companyIsDefault?: boolean;
+}
 
 export interface CompanySimplePayload {
     companyId: number;
+    companyCode: string;
     companyName: string;
     companyEmail: string;
 }
 
-export interface Company {
-    companyId?: number; // Made optional for creation scenarios
+export interface OrganizationDTO {
+    companyCode: string;
     companyName: string;
     companyAddress: string;
     companyPhone: string;
     companyEmail: string;
     companyWebsite: string;
     companyDescription: string;
-    companyLogoUrl: string;
-    companyTaxId: string;
-    companyRegistrationId: string;
-    companyStatus: string;
-    companyIndustry: string;
-    companyType: string;
-    companyCreatedAt?: string; // Made optional for creation scenarios
-    companyUpdatedAt?: string; // Made optional for creation scenarios
+    departmentName: string;
+    departmentDescription: string;
 }
 
-export interface CompanyCreatePayload {
+export interface OrganizationStructureDTO {
+    companyCode: string;
     companyName: string;
+    companyAddress: string;
     companyPhone: string;
     companyEmail: string;
-    companyAddress: string;
     companyWebsite: string;
-    companyStatus: string;
-    companyLogoUrl: string;
-    companyTaxId: string;
-    companyRegistrationId: string;
-    companyIndustry: string;
-    companyType: string;
     companyDescription: string;
+    departments: any[]; // Use actual DepartmentDTO if available, otherwise any
 }

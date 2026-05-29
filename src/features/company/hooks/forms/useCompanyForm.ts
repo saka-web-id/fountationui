@@ -4,6 +4,7 @@ import type { Company } from "~/features/company/interfaces/company.interfaces.t
 
 export const mapCompanyFromApi = (apiData: any): Company => ({
     companyId: apiData.companyId,
+    companyCode: apiData.companyCode,
     companyName: apiData.companyName,
     companyAddress: apiData.companyAddress,
     companyPhone: apiData.companyPhone,
@@ -18,6 +19,7 @@ export const mapCompanyFromApi = (apiData: any): Company => ({
     companyType: apiData.companyType,
     companyCreatedAt: apiData.companyCreatedAt,
     companyUpdatedAt: apiData.companyUpdatedAt,
+    companyIsDefault: apiData.companyIsDefault,
 });
 
 
@@ -25,11 +27,30 @@ export function useCompanyForm() {
     // useForm with schema
     const {  defineField, handleSubmit, setValues } = useForm<Company>({
         validationSchema: useCompanySchema,
-        initialValues: {companyId: 0, companyName: "", companyAddress: "", companyPhone: "", companyEmail: "", companyWebsite: "", companyDescription: "", companyLogoUrl:"",  companyTaxId:"", companyRegistrationId:"", companyStatus:"", companyIndustry:"", companyType:"", companyCreatedAt:"", companyUpdatedAt:""}
+        initialValues: {
+            companyId: 0, 
+            companyCode: "", 
+            companyName: "", 
+            companyAddress: "", 
+            companyPhone: "", 
+            companyEmail: "", 
+            companyWebsite: "", 
+            companyDescription: "", 
+            companyLogoUrl:"",  
+            companyTaxId:"", 
+            companyRegistrationId:"", 
+            companyStatus:"", 
+            companyIndustry:"", 
+            companyType:"", 
+            companyCreatedAt:"", 
+            companyUpdatedAt:"",
+            companyIsDefault: false
+        }
     })
 
     // define fields
     const [companyId, companyIdAttrs] = defineField('companyId');
+    const [companyCode, companyCodeAttrs] = defineField('companyCode');
     const [companyName, companyNameAttrs] = defineField('companyName');
     const [companyAddress, companyAddressAttrs] = defineField('companyAddress');
     const [companyPhone, companyPhoneAttrs] = defineField('companyPhone');
@@ -44,12 +65,15 @@ export function useCompanyForm() {
     const [companyType, companyTypeAttrs] = defineField('companyType');
     const [companyCreatedAt, companyCreatedAtAttrs] = defineField('companyCreatedAt');
     const [companyUpdatedAt, companyUpdatedAtAttrs] = defineField('companyUpdatedAt');
+    const [companyIsDefault, companyIsDefaultAttrs] = defineField('companyIsDefault');
 
     return {
         handleSubmit,
         setValues,
         companyId,
         companyIdAttrs,
+        companyCode,
+        companyCodeAttrs,
         companyName,
         companyNameAttrs,
         companyAddress,
@@ -77,6 +101,8 @@ export function useCompanyForm() {
         companyCreatedAt,
         companyCreatedAtAttrs,
         companyUpdatedAt,
-        companyUpdatedAtAttrs
+        companyUpdatedAtAttrs,
+        companyIsDefault,
+        companyIsDefaultAttrs
     }
 }

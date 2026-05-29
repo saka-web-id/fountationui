@@ -14,7 +14,7 @@ const { data, loading, get, post } = useApi();
 const route = useRoute();
 const { t } = useI18n();
 const companySchema = useCompanySchema();
-const { handleSubmit, setValues, companyId, companyIdAttrs, companyName, companyNameAttrs, companyAddress, companyAddressAttrs, companyPhone, companyPhoneAttrs, companyEmail, companyEmailAttrs, companyWebsite, companyWebsiteAttrs, companyDescription, companyDescriptionAttrs, companyLogoUrl, companyLogoUrlAttrs, companyTaxId, companyTaxIdAttrs, companyRegistrationId, companyRegistrationIdAttrs, companyStatus, companyStatusAttrs, companyIndustry, companyIndustryAttrs, companyType, companyTypeAttrs } = useCompanyForm();
+const { handleSubmit, setValues, companyId, companyIdAttrs, companyCode, companyCodeAttrs, companyName, companyNameAttrs, companyAddress, companyAddressAttrs, companyPhone, companyPhoneAttrs, companyEmail, companyEmailAttrs, companyWebsite, companyWebsiteAttrs, companyDescription, companyDescriptionAttrs, companyLogoUrl, companyLogoUrlAttrs, companyTaxId, companyTaxIdAttrs, companyRegistrationId, companyRegistrationIdAttrs, companyStatus, companyStatusAttrs, companyIndustry, companyIndustryAttrs, companyType, companyTypeAttrs } = useCompanyForm();
 
 const isEdit = computed(() => !!route.params.companyIdParam)
 
@@ -55,6 +55,11 @@ const submitForm = handleSubmit( async (values: Company) => {
             <form @submit="submitForm" >
               <h4 class="text-start ms-2">{{ isEdit ? t('textLabel.companyEdit') : t('textLabel.companyAdd')  }}</h4>
               <input type="hidden" v-model="companyId" v-bind="companyIdAttrs" >
+              <div class="input-group mb-2">
+                <span class="d-flex w-25 ms-2 input-group-text" style="font-size: calc(0.6em + 0.5vw);">{{ t('cognitive.companyCode') }}</span>
+                <Field as="input" type="text" name="companyCode" v-model="companyCode" v-bind="companyCodeAttrs"  class="form-control d-flex ms-0 ps-2 me-2 pe-4" ></Field>
+                <ErrorMessage name="companyCode" class="text-start text-danger d-flex ms-0 ps-2 me-2 pe-4" />
+              </div>
               <div class="input-group mb-2">
                 <span class="d-flex w-25 ms-2 input-group-text" style="font-size: calc(0.6em + 0.5vw);">{{ t('textLabel.name') }}</span>
                 <Field as="input" type="text" name="companyName" v-model="companyName" v-bind="companyNameAttrs"  class="form-control d-flex ms-0 ps-2 me-2 pe-4" ></Field>

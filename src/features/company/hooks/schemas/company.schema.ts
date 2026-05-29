@@ -5,6 +5,8 @@ export function useCompanySchema() {
     const { t } = useI18n();
 
     return yup.object({
+        companyCode: yup.string()
+            .required(),
         companyName: yup.string()
             .min(8)
             .required(),
